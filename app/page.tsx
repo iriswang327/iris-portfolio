@@ -154,7 +154,7 @@ export default function DreamsPage() {
           ══════════════════════════════════════════ */}
       <section
         className="relative overflow-hidden"
-        style={{ paddingTop: 72, paddingBottom: 64 }}
+        style={{ paddingTop: 44, paddingBottom: 16 }}
       >
         {/* Layered watercolor radial blobs */}
         <div
@@ -226,7 +226,7 @@ export default function DreamsPage() {
         <div className="content-wrap">
           <p
             className="section-label"
-            style={{ color: "#BBBBBB", marginBottom: 16, marginTop: 64 }}
+            style={{ color: "#BBBBBB", marginBottom: 14, marginTop: 28 }}
           >
             MOCK PROJECTS
           </p>
@@ -249,7 +249,7 @@ export default function DreamsPage() {
         <div className="content-wrap">
           <p
             className="section-label"
-            style={{ color: "#BBBBBB", marginBottom: 16, marginTop: 64 }}
+            style={{ color: "#BBBBBB", marginBottom: 14, marginTop: 48 }}
           >
             FOR FUN
           </p>
