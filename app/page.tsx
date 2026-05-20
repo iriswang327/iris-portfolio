@@ -146,8 +146,7 @@ const FUN_CARDS = [
 
 export default function DreamsPage() {
   return (
-    // pt-14 offsets the fixed nav (56px / h-14)
-    <div className="pt-14">
+    <div>
 
       {/* ══════════════════════════════════════════
           HERO
