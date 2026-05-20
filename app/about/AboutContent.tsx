@@ -230,7 +230,7 @@ export default function AboutContent() {
           width: 220,
           alignSelf: "flex-start",
           position: "sticky",
-          top: 64,
+          top: 80,
           height: "fit-content",
           zIndex: 1,
         }}
@@ -257,7 +257,7 @@ export default function AboutContent() {
             </span>
           </div>
 
-          <p style={{ fontSize: 11, fontWeight: 300, color: "#888888", marginBottom: 28, lineHeight: 1.5 }}>
+          <p style={{ fontSize: 11, fontWeight: 300, color: "#AAAAAA", marginBottom: 28, lineHeight: 1.5, maxWidth: 160 }}>
             design, strategy, &amp; everything in between.
           </p>
 
@@ -294,14 +294,14 @@ export default function AboutContent() {
       </aside>
 
       {/* ── Right content ────────────────────────────────── */}
-      <main
+      <div
         className="flex-1 min-w-0"
         style={{ paddingTop: 80, paddingRight: 48, paddingBottom: 100, maxWidth: 700, position: "relative", zIndex: 1 }}
       >
 
         {/* ── HI SECTION ── */}
         <section id="hi" style={{ marginBottom: 72 }}>
-          <div className="flex gap-10 items-start">
+          <div className="flex items-start" style={{ gap: 32 }}>
             {/* Polaroid photo */}
             <div
               className="flex-shrink-0"
@@ -315,8 +315,8 @@ export default function AboutContent() {
             >
               <div
                 style={{
-                  width: 160,
-                  height: 200,
+                  width: 200,
+                  height: 240,
                   background: "linear-gradient(135deg, #F0EEFF 0%, #E8F0FF 100%)",
                   borderRadius: 1,
                 }}
@@ -331,7 +331,7 @@ export default function AboutContent() {
                   marginTop: 10,
                   textAlign: "center",
                   lineHeight: 1.4,
-                  maxWidth: 160,
+                  maxWidth: 200,
                 }}
               >
                 austin, tx — somewhere between a law brief and a sketchbook
@@ -342,28 +342,27 @@ export default function AboutContent() {
             <div className="flex-1 min-w-0">
               <h2
                 className="font-[300] leading-tight"
-                style={{ fontSize: 28, color: "var(--foreground)", marginBottom: 14 }}
+                style={{ fontSize: 22, color: "var(--foreground)", marginBottom: 14 }}
               >
                 Hi, I&apos;m Iris!
               </h2>
 
-              {/* Location tags */}
-              <div className="flex flex-wrap items-center gap-2" style={{ marginBottom: 16 }}>
+              {/* Location tags — two stacked lines */}
+              <div className="flex flex-col" style={{ gap: 4, marginBottom: 16 }}>
                 <span style={{ fontSize: 12, fontWeight: 300, color: "#888888" }}>
-                  📍 Austin, TX · NYC · CA
+                  📍 Austin, TX · NYC soon
                 </span>
-                <span style={{ fontSize: 12, fontWeight: 300, color: "#BBBBBB" }}>·</span>
                 <span style={{ fontSize: 12, fontWeight: 300, color: "#888888" }}>
-                  🎓 UT Austin · Advertising + more · 2027
+                  🎓 UT Austin · Advertising + CS · 2027
                 </span>
               </div>
 
-              <p style={{ fontSize: 15, fontWeight: 300, color: "#444444", lineHeight: 1.9, marginBottom: 16 }}>
+              <p style={{ fontSize: 14, fontWeight: 300, color: "#444444", lineHeight: 1.8, marginBottom: 16 }}>
                 With a diverse span of work, I lead with one desire. The ultimate goal to bridge
                 complex systems to intuitive understanding.
               </p>
 
-              <p style={{ fontSize: 15, fontWeight: 300, color: "#444444", lineHeight: 1.9, marginBottom: 20 }}>
+              <p style={{ fontSize: 14, fontWeight: 300, color: "#444444", lineHeight: 1.8, marginBottom: 20 }}>
                 I&apos;m an Advertising student at UT Austin with minors in CS, design strategies,
                 &amp; entrepreneurship. I spend my time building products, writing about healthcare
                 law, photographing race cars, and illustrating for a newspaper. Each tells a story
@@ -568,7 +567,7 @@ export default function AboutContent() {
           </div>
         </section>
 
-      </main>
+      </div>
     </div>
   );
 }
