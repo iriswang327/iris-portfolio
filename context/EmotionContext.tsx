@@ -78,9 +78,10 @@ const STORAGE_KEY = "museum-of-iris-emotion";
 
 export function EmotionProvider({ children }: { children: React.ReactNode }) {
   const [emotion, setEmotionState] = useState<Emotion>(null);
-  // Start TRUE — picker is the first thing users see.
-  // We suppress it immediately in useEffect if a prior emotion is stored.
-  const [showPicker, setShowPicker] = useState(true);
+  // Start false — EmotionPicker is loaded with ssr:false (client-only),
+  // so there is no hydration mismatch. useEffect sets this to true on
+  // first visit, or restores the prior emotion for returning visitors.
+  const [showPicker, setShowPicker] = useState(false);
   const [hasChosen, setHasChosen] = useState(false);
 
   const applyTheme = useCallback((e: Emotion) => {
@@ -93,16 +94,17 @@ export function EmotionProvider({ children }: { children: React.ReactNode }) {
     if (config?.isDark) html.setAttribute("data-theme", "dark");
   }, []);
 
-  // On mount: restore prior emotion from localStorage, or leave picker open.
+  // On mount: restore prior emotion, or show picker for new visitors.
   useEffect(() => {
     const stored = localStorage.getItem(STORAGE_KEY) as Emotion;
     if (stored && EMOTIONS.find((e) => e.id === stored)) {
       setEmotionState(stored);
       setHasChosen(true);
       applyTheme(stored);
-      setShowPicker(false); // returning user — skip the picker
+      // showPicker stays false — returning user skips the picker
+    } else {
+      setShowPicker(true); // new visitor — show the picker
     }
-    // New visitor: showPicker stays true (already set above)
   }, [applyTheme]);
 
   const setEmotion = useCallback(

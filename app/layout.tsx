@@ -4,7 +4,6 @@ import "./globals.css";
 import { EmotionProvider } from "@/context/EmotionContext";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import EmotionPicker from "@/components/EmotionPicker";
 
 export const metadata: Metadata = {
   title: "Museum of Iris",
@@ -31,7 +30,6 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={GeistSans.variable}>
         <EmotionProvider>
-          <EmotionPicker />
           <Nav />
           <main>{children}</main>
           <Footer />
