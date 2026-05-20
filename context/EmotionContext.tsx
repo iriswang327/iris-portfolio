@@ -78,48 +78,46 @@ const STORAGE_KEY = "museum-of-iris-emotion";
 
 export function EmotionProvider({ children }: { children: React.ReactNode }) {
   const [emotion, setEmotionState] = useState<Emotion>(null);
-  const [showPicker, setShowPicker] = useState(false);
+  // Start TRUE — picker is the first thing users see.
+  // We suppress it immediately in useEffect if a prior emotion is stored.
+  const [showPicker, setShowPicker] = useState(true);
   const [hasChosen, setHasChosen] = useState(false);
 
-  // Restore from localStorage on mount and show picker if first visit
+  const applyTheme = useCallback((e: Emotion) => {
+    const html = document.documentElement;
+    html.removeAttribute("data-emotion");
+    html.removeAttribute("data-theme");
+    if (!e) return;
+    html.setAttribute("data-emotion", e);
+    const config = EMOTIONS.find((c) => c.id === e);
+    if (config?.isDark) html.setAttribute("data-theme", "dark");
+  }, []);
+
+  // On mount: restore prior emotion from localStorage, or leave picker open.
   useEffect(() => {
     const stored = localStorage.getItem(STORAGE_KEY) as Emotion;
     if (stored && EMOTIONS.find((e) => e.id === stored)) {
       setEmotionState(stored);
       setHasChosen(true);
       applyTheme(stored);
-    } else {
-      setShowPicker(true);
+      setShowPicker(false); // returning user — skip the picker
     }
-  }, []);
+    // New visitor: showPicker stays true (already set above)
+  }, [applyTheme]);
 
-  const applyTheme = (e: Emotion) => {
-    const html = document.documentElement;
-    html.removeAttribute("data-emotion");
-    html.removeAttribute("data-theme");
-
-    if (!e) return;
-
-    html.setAttribute("data-emotion", e);
-
-    const config = EMOTIONS.find((c) => c.id === e);
-    if (config?.isDark) {
-      html.setAttribute("data-theme", "dark");
-    }
-  };
-
-  const setEmotion = useCallback((e: Emotion) => {
-    setEmotionState(e);
-    setHasChosen(true);
-
-    if (e) {
-      localStorage.setItem(STORAGE_KEY, e);
-    } else {
-      localStorage.removeItem(STORAGE_KEY);
-    }
-
-    applyTheme(e);
-  }, []);
+  const setEmotion = useCallback(
+    (e: Emotion) => {
+      setEmotionState(e);
+      setHasChosen(true);
+      if (e) {
+        localStorage.setItem(STORAGE_KEY, e);
+      } else {
+        localStorage.removeItem(STORAGE_KEY);
+      }
+      applyTheme(e);
+    },
+    [applyTheme]
+  );
 
   const emotionConfig = emotion
     ? (EMOTIONS.find((e) => e.id === emotion) ?? null)
