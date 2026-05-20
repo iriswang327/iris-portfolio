@@ -4,6 +4,7 @@ import "./globals.css";
 import { EmotionProvider } from "@/context/EmotionContext";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import EmotionPickerClient from "@/components/EmotionPickerClient";
 
 const geistSans = Geist({
   subsets: ["latin"],
@@ -37,6 +38,8 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} font-sans antialiased`}>
         <EmotionProvider>
+          {/* Emotion picker — global fixed overlay, client-only */}
+          <EmotionPickerClient />
           <Nav />
           <main>{children}</main>
           <Footer />

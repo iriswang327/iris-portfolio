@@ -77,12 +77,19 @@ const EmotionContext = createContext<EmotionContextValue | null>(null);
 const STORAGE_KEY = "museum-of-iris-emotion";
 
 export function EmotionProvider({ children }: { children: React.ReactNode }) {
+  // emotion/hasChosen start null/false on both server and client to avoid
+  // hydration mismatches (Nav reads emotionConfig which derives from emotion).
+  // They are restored from localStorage in useEffect after hydration.
   const [emotion, setEmotionState] = useState<Emotion>(null);
-  // Start false — EmotionPicker is loaded with ssr:false (client-only),
-  // so there is no hydration mismatch. useEffect sets this to true on
-  // first visit, or restores the prior emotion for returning visitors.
-  const [showPicker, setShowPicker] = useState(false);
   const [hasChosen, setHasChosen] = useState(false);
+
+  // showPicker uses lazy init: it only affects EmotionPicker (ssr:false),
+  // so it's safe to read localStorage synchronously here — no hydration mismatch.
+  const [showPicker, setShowPicker] = useState(() => {
+    if (typeof window === "undefined") return false;
+    const stored = localStorage.getItem(STORAGE_KEY) as Emotion;
+    return !(stored && EMOTIONS.find((e) => e.id === stored));
+  });
 
   const applyTheme = useCallback((e: Emotion) => {
     const html = document.documentElement;
@@ -94,16 +101,13 @@ export function EmotionProvider({ children }: { children: React.ReactNode }) {
     if (config?.isDark) html.setAttribute("data-theme", "dark");
   }, []);
 
-  // On mount: restore prior emotion, or show picker for new visitors.
+  // Restore emotion from localStorage after hydration (keeps SSR in sync).
   useEffect(() => {
     const stored = localStorage.getItem(STORAGE_KEY) as Emotion;
     if (stored && EMOTIONS.find((e) => e.id === stored)) {
       setEmotionState(stored);
       setHasChosen(true);
       applyTheme(stored);
-      // showPicker stays false — returning user skips the picker
-    } else {
-      setShowPicker(true); // new visitor — show the picker
     }
   }, [applyTheme]);
 
