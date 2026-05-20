@@ -511,10 +511,10 @@ Quote blocks with IHWN gradient left border (2px):
 
 Real quotes from Iris:
 "The most powerful person in the world is the storyteller."
-— attribution TBD
+— Steve Jobs
 
 "Be intentional. Be consistent. Be bored."
-— attribution TBD
+— What I believe in, because without stimulation, boredom sparks creativity :)
 
 Entertainment Section:
 Header: "Entertainment"
@@ -569,11 +569,11 @@ Subtitle: "things that don't fit anywhere else"
 
 Items (emoji + punchy line):
 🎾 played & coached competitive tennis in high school
-📸 the fastest thing i've photographed: 187mph
-⚖️ has read more legal briefs than novels this year
-🎨 illustrated something 50,000 people saw without knowing
+📸 aspiring vlogger (CapCut is my best friend!)
+⚖️ avg 12k steps a day, preferably outdoor walks
+🎨 illustrated something 50,000 people saw without knowing it was me
 🐾 squirrel & otter lover
-🏊🏼‍♀️ lifeguard certified!
+🏊🏼‍♀️ lifeguard & water park safety certified!
 ☕ approximately 847 americanos w/ cinnamon since freshman year
 
 ---
