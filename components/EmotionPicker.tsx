@@ -5,27 +5,18 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useEmotion, EMOTIONS, type Emotion } from "@/context/EmotionContext";
 import IHWNLotus from "@/components/IHWNLotus";
 
-// ─── Design tokens ────────────────────────────────────────────────────────────
+// ─── Constants ────────────────────────────────────────────────────────────────
 
 const SESSION_KEY = "museum-of-iris-picker-shown";
 
-// Iris's sunset — radial horizon glow, inspired by 6am tennis sunrises and
-// 7-10pm practice sunsets in Texas. Warm cream/gold at the center (the horizon),
-// bleeding out through coral → rose → violet → deep indigo night at the edges.
-// The center stays light so text is always readable.
-const SUNSET =
-  "radial-gradient(ellipse 110% 90% at 50% 56%, " +
-  "#fff8e7 0%, " +
-  "#fde68a 16%, " +
-  "#fb923c 33%, " +
-  "#e11d48 51%, " +
-  "#7c3aed 69%, " +
-  "#1e1b4b 85%, " +
-  "#0f0a1e 100%)";
+// Sunrise gradient (bottom to top): warm coral → golden yellow → soft pink → dreamy lavender
+// Radial overlay softens edges into the white canvas for an organic watercolor feel.
+const SUNRISE_BG =
+  "radial-gradient(ellipse 95% 80% at 50% 68%, transparent 48%, rgba(250,249,255,0.65) 100%), " +
+  "linear-gradient(to top, #F4845F 0%, #F9C784 38%, #FCB4A5 66%, #D4C5F9 100%)";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
-/** Reveal page + mark picker as shown for this session. */
 function revealPage() {
   document.documentElement.removeAttribute("data-picker-active");
   try {
@@ -96,7 +87,7 @@ function LoadingScreen({ message, color, isDark, onDone }: LoadingScreenProps) {
   );
 }
 
-// ─── Pill styles (Figma exact — filled soft pastel + pill shape) ──────────────
+// ─── Pill styles (filled soft pastel + pill shape) ────────────────────────────
 
 function getPillStyle(color: string, isDark: boolean): React.CSSProperties {
   return {
@@ -111,7 +102,6 @@ function getPillStyle(color: string, isDark: boolean): React.CSSProperties {
     cursor: "pointer",
     whiteSpace: "nowrap" as const,
     fontFamily: "var(--font-geist-sans)",
-    // soft glass layer so pills read clearly against the warm sunset
     backdropFilter: "blur(12px)",
     WebkitBackdropFilter: "blur(12px)",
   };
@@ -128,7 +118,6 @@ export default function EmotionPicker() {
   const handleSelect = (id: NonNullable<Emotion>) => {
     setSelectedEmotion(id);
     setPhase("loading");
-    // revealPage() is called by handleLoadingDone after the 2.5s screen
   };
 
   const handleSkip = () => {
@@ -141,7 +130,7 @@ export default function EmotionPicker() {
     if (selectedEmotion) setEmotion(selectedEmotion);
     setPhase("done");
     setShowPicker(false);
-    revealPage(); // CSS fade-in of page syncs with loading screen exit (0.6s)
+    revealPage();
   };
 
   const selectedConfig = selectedEmotion
@@ -150,136 +139,156 @@ export default function EmotionPicker() {
 
   return (
     <>
-      {/* ─── Picker screen — z-[100] ─────────────────────────────────────── */}
+      {/* ─── Picker screen ───────────────────────────────────────────────── */}
       <AnimatePresence>
         {phase === "picker" && showPicker && (
           <motion.div
             key="picker"
             className="fixed inset-0 z-[100] overflow-hidden"
-            // White canvas — sunset floods in on top
             style={{ background: "#ffffff" }}
             initial={{ opacity: 1 }}
             exit={{ opacity: 0, transition: { duration: 0.5, ease: "easeInOut" } }}
           >
-            {/* ── Water drop ──
-                A small teardrop materializes and falls to center (0–0.55s),
-                hits the canvas, then shrinks away as the sunset floods in.    */}
+            {/* ── Step 2 (0.5s): Water droplet arcs from upper-left to bottom-center ──
+                Small (8px), soft white/translucent, ease-in 0.8s.
+                Positioned at landing point; x/y translate it back to upper-left,
+                then arc forward via a curved midpoint. */}
             <motion.div
               className="absolute pointer-events-none"
               style={{
-                top: "50%",
+                bottom: "15%",
                 left: "50%",
-                width: 13,
-                height: 17,
-                marginTop: -8,
-                marginLeft: -6,
+                marginLeft: -4,
+                width: 8,
+                height: 10,
                 borderRadius: "50% 50% 50% 50% / 60% 60% 40% 40%",
                 background:
-                  "radial-gradient(circle at 38% 32%, #fb923c, #e11d48 55%, #7c3aed)",
-                boxShadow: "0 3px 14px rgba(251,146,60,0.45)",
+                  "radial-gradient(circle at 40% 35%, rgba(255,255,255,0.95), rgba(255,255,255,0.45))",
+                boxShadow:
+                  "0 0 8px rgba(255,255,255,0.5), inset 0 1px 2px rgba(255,255,255,0.9)",
               }}
-              // keyframe: falls → impact → shrinks away
               animate={{
-                y: [-72, 0, 0],
-                opacity: [0, 1, 0],
-                scale: [0.5, 1, 0.25],
+                // Arc: upper-left → curved midpoint → bottom-center landing
+                x: ["-44vw", "-18vw", "0vw", "0vw"],
+                y: ["-75vh", "-33vh", "0vh", "0vh"],
+                opacity: [0, 0.9, 0.9, 0],
+                scale: [0.5, 0.8, 1, 0.15],
               }}
               transition={{
-                duration: 0.82,
-                times: [0, 0.58, 1],
+                delay: 0.5,
+                duration: 0.8,
+                times: [0, 0.37, 0.66, 1],
                 ease: "easeIn",
               }}
               aria-hidden="true"
             />
 
-            {/* ── Impact ripple ──
-                Brief ring expands from the impact point and fades.           */}
-            <motion.div
-              className="absolute pointer-events-none rounded-full"
-              style={{
-                top: "50%",
-                left: "50%",
-                width: 10,
-                height: 10,
-                marginTop: -5,
-                marginLeft: -5,
-                border: "1.5px solid rgba(251,146,60,0.55)",
-              }}
-              initial={{ scale: 1, opacity: 0 }}
-              animate={{ scale: 55, opacity: [0, 0.65, 0] }}
-              transition={{ duration: 0.85, delay: 0.5, ease: "easeOut" }}
-              aria-hidden="true"
-            />
+            {/* ── Step 3 (1.0s): 3 ripple rings expand from landing point ──
+                rgba(244,132,95,0.3), expand to 120px radius, staggered 180ms. */}
+            {[0, 1, 2].map((i) => (
+              <motion.div
+                key={`ripple-${i}`}
+                className="absolute pointer-events-none rounded-full"
+                style={{
+                  // Centered on the landing point (bottom: 15%, left: 50%)
+                  bottom: "calc(15% - 120px)",
+                  left: "calc(50% - 120px)",
+                  width: 240,
+                  height: 240,
+                  border: "1.5px solid rgba(244,132,95,0.3)",
+                }}
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{
+                  scale: [0, 1, 1.04],
+                  opacity: [0, 0.75, 0],
+                }}
+                transition={{
+                  delay: 1.0 + i * 0.18,
+                  duration: 0.62,
+                  times: [0, 0.42, 1],
+                  ease: "easeOut",
+                }}
+                aria-hidden="true"
+              />
+            ))}
 
-            {/* ── Sunset flood ──
-                Radial gradient expands from the impact point like watercolor
-                bleeding into paper — the horizon glow of a Texas sky.        */}
+            {/* ── Step 4 (1.2s): Warm sunrise fills upward from bottom ──
+                clip-path polygon reveals from bottom edge to top over 2.0s.
+                Radial gradient overlay keeps edges soft and organic.          */}
             <motion.div
               className="absolute inset-0 pointer-events-none"
-              style={{ background: SUNSET }}
-              initial={{ clipPath: "circle(0% at 50% 50%)" }}
-              animate={{ clipPath: "circle(150% at 50% 50%)" }}
+              style={{ background: SUNRISE_BG }}
+              initial={{ clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)" }}
+              animate={{ clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
               transition={{
-                duration: 2.1,
-                delay: 0.62,
-                ease: [0.4, 0, 0.15, 1],
+                delay: 1.2,
+                duration: 2.0,
+                ease: "easeInOut",
               }}
               aria-hidden="true"
             />
 
-            {/* ── Content ── */}
+            {/* ── Content layer ── */}
             <div className="relative z-10 flex flex-col items-center justify-center h-full gap-5 px-5 text-center">
 
-              {/* IHWN lotus — draws itself after sunset settles */}
+              {/* Step 5 (3.0s): IHWN lotus fades in above the question, floats gently */}
               <motion.div
-                initial={{ opacity: 0, scale: 0.85 }}
-                animate={{
-                  opacity: 1,
-                  scale: 1,
-                  transition: { delay: 2.3, duration: 0.7, ease: "easeOut" },
-                }}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 3.0, duration: 0.6, ease: "easeOut" }}
               >
-                <IHWNLotus size={64} animated />
+                <motion.div
+                  animate={{ y: [0, -5, 0] }}
+                  transition={{
+                    duration: 4,
+                    ease: "easeInOut",
+                    repeat: Infinity,
+                    repeatType: "loop",
+                    delay: 3.6,
+                  }}
+                  style={{ display: "inline-flex" }}
+                >
+                  <IHWNLotus size={52} />
+                </motion.div>
               </motion.div>
 
-              {/* "hi, how are you?" — 28px weight 200 */}
+              {/* Step 5 (3.2s): "hi, how are you?" — 26px weight 200 */}
               <motion.h1
                 style={{
-                  fontSize: 28,
+                  fontSize: 26,
                   fontWeight: 200,
-                  color: "#1a1625",
+                  color: "#1A1625",
                   letterSpacing: "-0.02em",
                   lineHeight: 1.5,
                   fontFamily: "var(--font-geist-sans)",
+                  margin: 0,
                 }}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{
-                  opacity: 1,
-                  y: 0,
-                  transition: { delay: 2.75, duration: 0.6 },
-                }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 3.2, duration: 0.5, ease: "easeOut" }}
               >
                 hi, how are you?
               </motion.h1>
 
-              {/* Emotion pills */}
-              <motion.div
+              {/* Step 6 (3.7s): Emotion pills — each slides up 12px + fades in, 50ms stagger */}
+              <div
                 className="flex flex-wrap items-center justify-center"
                 style={{ gap: 10 }}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{
-                  opacity: 1,
-                  y: 0,
-                  transition: { delay: 3.1, duration: 0.6 },
-                }}
                 role="group"
                 aria-label="Choose your mood"
               >
-                {EMOTIONS.map((e) => (
+                {EMOTIONS.map((e, i) => (
                   <motion.button
                     key={e.id}
                     onClick={() => handleSelect(e.id)}
                     style={getPillStyle(e.color, e.isDark)}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      delay: 3.7 + i * 0.05,
+                      duration: 0.4,
+                      ease: "easeOut",
+                    }}
                     whileHover={{ scale: 1.04, transition: { duration: 0.15 } }}
                     whileTap={{ scale: 0.97 }}
                     className="focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400"
@@ -288,42 +297,58 @@ export default function EmotionPicker() {
                     {e.label}
                   </motion.button>
                 ))}
-              </motion.div>
+              </div>
 
-              {/* SKIP FOR NOW → */}
-              <motion.button
-                onClick={handleSkip}
-                style={{
-                  fontSize: 10,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.16em",
-                  color: "#a0807a",
-                  background: "none",
-                  border: "none",
-                  cursor: "pointer",
-                  padding: "6px 8px",
-                  minHeight: 44,
-                  display: "flex",
-                  alignItems: "center",
-                  fontFamily: "var(--font-geist-sans)",
-                }}
-                initial={{ opacity: 0 }}
-                animate={{
-                  opacity: 1,
-                  transition: { delay: 3.5, duration: 0.5 },
-                }}
-                whileHover={{ opacity: 0.55 }}
-                className="focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 rounded"
-                aria-label="Skip emotion selection"
-              >
-                SKIP FOR NOW →
-              </motion.button>
+              {/* Step 7 (4.2s): caption + SKIP FOR NOW → */}
+              <div className="flex flex-col items-center gap-0.5">
+                <motion.p
+                  style={{
+                    fontSize: 11,
+                    color: "rgba(26,22,37,0.5)",
+                    letterSpacing: "0.03em",
+                    fontFamily: "var(--font-geist-sans)",
+                    fontWeight: 300,
+                    margin: 0,
+                  }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 4.2, duration: 0.5 }}
+                >
+                  your choice colors the experience
+                </motion.p>
+
+                <motion.button
+                  onClick={handleSkip}
+                  style={{
+                    fontSize: 10,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.16em",
+                    color: "#a0807a",
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    padding: "6px 8px",
+                    minHeight: 44,
+                    display: "flex",
+                    alignItems: "center",
+                    fontFamily: "var(--font-geist-sans)",
+                  }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 4.2, duration: 0.5 }}
+                  whileHover={{ opacity: 0.55 }}
+                  className="focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 rounded"
+                  aria-label="Skip emotion selection"
+                >
+                  SKIP FOR NOW →
+                </motion.button>
+              </div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* ─── Loading screen — z-[200], mounts instantly over picker ─────── */}
+      {/* ─── Loading screen — z-[200] ─────────────────────────────────────── */}
       <AnimatePresence>
         {phase === "loading" && selectedConfig && (
           <LoadingScreen
