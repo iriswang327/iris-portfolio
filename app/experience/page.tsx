@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ProjectCard from "@/components/ProjectCard";
+import ParallaxHeroGradient from "@/components/ParallaxHeroGradient";
 
 export const metadata: Metadata = {
   title: "Experience — Museum of Iris",
@@ -118,17 +119,7 @@ export default function ExperiencePage() {
         className="relative overflow-hidden"
         style={{ paddingTop: 140, paddingBottom: 0 }}
       >
-        {/* Watercolor blobs — same palette as homepage */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(ellipse 75% 55% at 18% -5%, var(--blob-lavender) 0%, transparent 60%), " +
-              "radial-gradient(ellipse 60% 50% at 85% -8%, var(--blob-blush) 0%, transparent 60%), " +
-              "radial-gradient(ellipse 55% 65% at 50% 15%, var(--blob-periwinkle) 0%, transparent 70%)",
-          }}
-          aria-hidden="true"
-        />
+        <ParallaxHeroGradient />
 
         <div className="relative z-10" style={{ maxWidth: 680, paddingLeft: 24, paddingRight: 24 }}>
           {/* Section label */}

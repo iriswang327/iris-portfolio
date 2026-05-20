@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import VinylPlayer from "@/components/VinylPlayer";
+import ParallaxHeroGradient from "@/components/ParallaxHeroGradient";
 
 // ─── Types ─────────────────────────────────────────────────────────────────
 
@@ -211,19 +212,31 @@ export default function AboutContent() {
   };
 
   return (
-    <div className="flex" style={{ minHeight: "100vh" }}>
+    <div className="flex relative" style={{ minHeight: "100vh" }}>
+      {/* Watercolor gradient drifts behind the full page */}
+      <div className="absolute pointer-events-none" style={{ inset: 0, height: "70vh", zIndex: 0 }}>
+        <ParallaxHeroGradient />
+      </div>
 
       {/* ── Sidebar ─────────────────────────────────────── */}
+      {/*
+        alignSelf: flex-start is REQUIRED for position:sticky to work inside
+        a flex container — without it the aside stretches to full container
+        height and sticky never triggers.
+      */}
       <aside
         className="hidden md:block flex-shrink-0"
-        style={{ width: 220 }}
+        style={{
+          width: 220,
+          alignSelf: "flex-start",
+          position: "sticky",
+          top: 64,
+          height: "fit-content",
+          zIndex: 1,
+        }}
       >
         <div
           style={{
-            position: "sticky",
-            top: 56,
-            height: "calc(100vh - 56px)",
-            overflowY: "auto",
             paddingTop: 48,
             paddingLeft: 24,
             paddingRight: 16,
@@ -254,20 +267,22 @@ export default function AboutContent() {
               <button
                 key={id}
                 onClick={() => scrollTo(id)}
-                className="text-left transition-all duration-200 focus:outline-none"
+                className="text-left focus:outline-none"
                 style={{
                   fontSize: 13,
                   fontWeight: activeSection === id ? 400 : 300,
                   color: activeSection === id ? "transparent" : "#888888",
                   background: activeSection === id
                     ? "linear-gradient(135deg, #f0abfc 0%, #a78bfa 50%, #7dd3fc 100%)"
-                    : "none",
+                    : "transparent",
                   WebkitBackgroundClip: activeSection === id ? "text" : "unset",
                   backgroundClip: activeSection === id ? "text" : "unset",
                   WebkitTextFillColor: activeSection === id ? "transparent" : "unset",
                   padding: 0,
                   border: "none",
                   cursor: "pointer",
+                  transition: "font-weight 200ms ease, opacity 200ms ease",
+                  opacity: activeSection === id ? 1 : 0.7,
                 }}
                 aria-current={activeSection === id ? "location" : undefined}
               >
@@ -281,7 +296,7 @@ export default function AboutContent() {
       {/* ── Right content ────────────────────────────────── */}
       <main
         className="flex-1 min-w-0"
-        style={{ paddingTop: 80, paddingRight: 48, paddingBottom: 100, maxWidth: 700 }}
+        style={{ paddingTop: 80, paddingRight: 48, paddingBottom: 100, maxWidth: 700, position: "relative", zIndex: 1 }}
       >
 
         {/* ── HI SECTION ── */}
