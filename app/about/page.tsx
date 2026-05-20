@@ -1,14 +1,12 @@
 import type { Metadata } from "next";
+import AboutContent from "./AboutContent";
 
 export const metadata: Metadata = {
   title: "About — Museum of Iris",
-  description: "Design, strategy, & everything in between.",
+  description:
+    "Design, strategy, & everything in between. Iris Wang — UT Austin · Advertising + CS · 2027.",
 };
 
 export default function AboutPage() {
-  return (
-    <div className="pt-14">
-      {/* About page — content coming next */}
-    </div>
-  );
+  return <AboutContent />;
 }
