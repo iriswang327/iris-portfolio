@@ -6,19 +6,26 @@ import { useEmotion, EMOTIONS, type Emotion } from "@/context/EmotionContext";
 import IHWNLotus from "@/components/IHWNLotus";
 
 // ─── Watercolor ink-drop blobs ────────────────────────────────────────────────
-// Three blobs spread in from scale 0 like ink dropping into water,
-// then drift slowly. Colors exactly per spec.
+// Three oversized blobs burst from scale 0 (ink drops into water),
+// then drift slowly. More saturated than the rest of the site.
 
 interface InkBlobProps {
   color: string;
   size: number;
   posStyle: React.CSSProperties;
-  spreadDelay: number; // when this blob starts spreading
+  spreadDelay: number;
   drift: { x: number[]; y: number[] };
   driftDuration: number;
 }
 
-function InkBlob({ color, size, posStyle, spreadDelay, drift, driftDuration }: InkBlobProps) {
+function InkBlob({
+  color,
+  size,
+  posStyle,
+  spreadDelay,
+  drift,
+  driftDuration,
+}: InkBlobProps) {
   return (
     <motion.div
       className="absolute pointer-events-none rounded-full"
@@ -26,22 +33,37 @@ function InkBlob({ color, size, posStyle, spreadDelay, drift, driftDuration }: I
         width: size,
         height: size,
         background: color,
-        filter: "blur(88px)",
+        filter: "blur(80px)",
         ...posStyle,
       }}
-      // Ink-drop: expand from 0 → 1, then gently drift
       initial={{ scale: 0, opacity: 0 }}
       animate={{
-        scale: [0, 1.05, 1],
+        scale: [0, 1.08, 1],
         opacity: [0, 1, 1],
         x: drift.x,
         y: drift.y,
       }}
       transition={{
-        scale: { duration: 1.4, ease: [0.22, 1, 0.36, 1], delay: spreadDelay },
-        opacity: { duration: 0.9, ease: "easeOut", delay: spreadDelay },
-        x: { duration: driftDuration, repeat: Infinity, repeatType: "mirror", ease: "easeInOut", delay: spreadDelay + 1.4 },
-        y: { duration: driftDuration * 0.85, repeat: Infinity, repeatType: "mirror", ease: "easeInOut", delay: spreadDelay + 1.4 },
+        scale: {
+          duration: 1.2,
+          ease: [0.22, 1, 0.36, 1],
+          delay: spreadDelay,
+        },
+        opacity: { duration: 0.8, ease: "easeOut", delay: spreadDelay },
+        x: {
+          duration: driftDuration,
+          repeat: Infinity,
+          repeatType: "mirror",
+          ease: "easeInOut",
+          delay: spreadDelay + 1.2,
+        },
+        y: {
+          duration: driftDuration * 0.83,
+          repeat: Infinity,
+          repeatType: "mirror",
+          ease: "easeInOut",
+          delay: spreadDelay + 1.2,
+        },
       }}
       aria-hidden="true"
     />
@@ -57,14 +79,21 @@ interface LoadingScreenProps {
   onDone: () => void;
 }
 
-function LoadingScreen({ message, color, isDark, onDone }: LoadingScreenProps) {
+function LoadingScreen({
+  message,
+  color,
+  isDark,
+  onDone,
+}: LoadingScreenProps) {
   useEffect(() => {
     const t = setTimeout(onDone, 2500);
     return () => clearTimeout(t);
   }, [onDone]);
 
   const textColor = isDark ? "#f5f0e8" : "#1a1625";
-  const dotColor = isDark ? "rgba(245,240,232,0.5)" : "rgba(26,22,37,0.3)";
+  const dotColor = isDark
+    ? "rgba(245,240,232,0.5)"
+    : "rgba(26,22,37,0.3)";
 
   return (
     <motion.div
@@ -76,7 +105,7 @@ function LoadingScreen({ message, color, isDark, onDone }: LoadingScreenProps) {
     >
       <motion.p
         className="text-[15px] font-light text-center px-6"
-        style={{ color: textColor }}
+        style={{ color: textColor, fontFamily: "var(--font-geist-sans)" }}
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0, transition: { delay: 0.15 } }}
       >
@@ -103,11 +132,48 @@ function LoadingScreen({ message, color, isDark, onDone }: LoadingScreenProps) {
   );
 }
 
+// ─── Emotion pill styles (Figma exact) ───────────────────────────────────────
+// Filled soft pastel background (80% opacity) + matching border + pill shape.
+// "ready for bed" is dark-filled with white text.
+
+function getPillStyle(color: string, isDark: boolean) {
+  const bg = isDark
+    ? "rgba(26,26,26,0.85)"
+    : color
+        .replace("rgb(", "rgba(")
+        .replace(")", ", 0.8)")
+        // color values come in as hex — convert inline:
+        .replace(/^#/, "");
+
+  return {
+    background: hexToRgba(color, isDark ? 0.85 : 0.8),
+    border: `1px solid ${color}`,
+    color: isDark ? "#ffffff" : "#1a1a1a",
+    borderRadius: 999,
+    padding: "9px 20px",
+    fontSize: 13,
+    fontWeight: 300,
+    letterSpacing: "0.01em",
+    cursor: "pointer",
+    whiteSpace: "nowrap" as const,
+    fontFamily: "var(--font-geist-sans)",
+  };
+}
+
+function hexToRgba(hex: string, alpha: number): string {
+  const h = hex.replace("#", "");
+  const r = parseInt(h.substring(0, 2), 16);
+  const g = parseInt(h.substring(2, 4), 16);
+  const b = parseInt(h.substring(4, 6), 16);
+  return `rgba(${r},${g},${b},${alpha})`;
+}
+
 // ─── Emotion Picker ───────────────────────────────────────────────────────────
 
 export default function EmotionPicker() {
   const { showPicker, setShowPicker, setEmotion } = useEmotion();
-  const [selectedEmotion, setSelectedEmotion] = useState<NonNullable<Emotion> | null>(null);
+  const [selectedEmotion, setSelectedEmotion] =
+    useState<NonNullable<Emotion> | null>(null);
   const [phase, setPhase] = useState<"picker" | "loading" | "done">("picker");
 
   const handleSelect = (id: NonNullable<Emotion>) => {
@@ -130,7 +196,6 @@ export default function EmotionPicker() {
     ? EMOTIONS.find((e) => e.id === selectedEmotion)
     : null;
 
-  // Always render the AnimatePresence wrapper so exit animations fire correctly
   return (
     <AnimatePresence mode="wait">
       {/* ── Picker screen ── */}
@@ -139,75 +204,98 @@ export default function EmotionPicker() {
           key="picker"
           className="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden"
           style={{
-            // Soft base: lavender-white → blush-white gradient
-            background: "linear-gradient(135deg, #f0eeff 0%, #fce8f8 55%, #eef4ff 100%)",
+            // Rich, saturated watercolor wash — more vibrant than the site bg
+            background:
+              "linear-gradient(145deg, #e8d5ff 0%, #f5c8f0 30%, #ffd6e0 55%, #c8e8ff 80%, #d4f0ff 100%)",
           }}
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1, transition: { duration: 0.3 } }}
+          animate={{ opacity: 1, transition: { duration: 0.35 } }}
           exit={{ opacity: 0, transition: { duration: 0.5, ease: "easeInOut" } }}
         >
-          {/* ── Ink-drop blobs — spread in staggered, then drift ── */}
+          {/* ── Ink-drop blobs — burst in staggered, then drift slowly ── */}
 
-          {/* Lavender blob — top-left */}
+          {/* Lavender — top-left */}
           <InkBlob
-            color="rgba(196,181,253,0.4)"
-            size={520}
-            posStyle={{ top: "-8%", left: "-6%" }}
+            color="rgba(196,150,255,0.55)"
+            size={560}
+            posStyle={{ top: "-12%", left: "-8%" }}
             spreadDelay={0}
-            drift={{ x: [0, 22, -10, 0], y: [0, 14, -8, 0] }}
+            drift={{ x: [0, 24, -12, 0], y: [0, 16, -10, 0] }}
+            driftDuration={24}
+          />
+          {/* Blush — top-right */}
+          <InkBlob
+            color="rgba(255,180,210,0.5)"
+            size={500}
+            posStyle={{ top: "-6%", right: "-10%" }}
+            spreadDelay={0.15}
+            drift={{ x: [0, -18, 14, 0], y: [0, 20, -8, 0] }}
+            driftDuration={20}
+          />
+          {/* Sky-blue — bottom-left */}
+          <InkBlob
+            color="rgba(140,200,255,0.45)"
+            size={480}
+            posStyle={{ bottom: "-10%", left: "10%" }}
+            spreadDelay={0.3}
+            drift={{ x: [0, 16, -20, 0], y: [0, -14, 10, 0] }}
+            driftDuration={28}
+          />
+          {/* Peach — bottom-right */}
+          <InkBlob
+            color="rgba(255,200,160,0.4)"
+            size={420}
+            posStyle={{ bottom: "-8%", right: "5%" }}
+            spreadDelay={0.45}
+            drift={{ x: [0, -10, 18, 0], y: [0, -18, 12, 0] }}
             driftDuration={22}
           />
-          {/* Blush blob — top-right */}
-          <InkBlob
-            color="rgba(251,207,232,0.35)"
-            size={460}
-            posStyle={{ top: "-4%", right: "-8%" }}
-            spreadDelay={0.18}
-            drift={{ x: [0, -16, 12, 0], y: [0, 18, -6, 0] }}
-            driftDuration={19}
-          />
-          {/* Periwinkle blob — center */}
-          <InkBlob
-            color="rgba(165,180,252,0.3)"
-            size={500}
-            posStyle={{ top: "28%", left: "50%", transform: "translateX(-50%)" }}
-            spreadDelay={0.35}
-            drift={{ x: [0, 12, -14, 0], y: [0, -12, 16, 0] }}
-            driftDuration={26}
-          />
 
-          {/* ── Content — staggered fade-up after ink settles ── */}
-          <div className="relative z-10 flex flex-col items-center gap-6 px-5 text-center">
+          {/* ── Content — staggered fade-up ── */}
+          <div className="relative z-10 flex flex-col items-center gap-5 px-5 text-center">
 
-            {/* Lotus draws itself after ink drop (delay 1.1s) */}
+            {/* Lotus — draws itself, then floats */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.85 }}
-              animate={{ opacity: 1, scale: 1, transition: { delay: 1.1, duration: 0.5, ease: "easeOut" } }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{
+                opacity: 1,
+                scale: 1,
+                transition: { delay: 0.6, duration: 0.6, ease: "easeOut" },
+              }}
             >
               <IHWNLotus size={64} animated />
             </motion.div>
 
-            {/* Question — 26px weight 200 */}
+            {/* "hi, how are you?" — 28px weight 200 */}
             <motion.h1
               style={{
-                fontSize: 26,
+                fontSize: 28,
                 fontWeight: 200,
                 color: "#1a1625",
                 letterSpacing: "-0.02em",
-                lineHeight: 1.3,
+                lineHeight: 1.5,
+                fontFamily: "var(--font-geist-sans)",
               }}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0, transition: { delay: 1.4, duration: 0.5 } }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                transition: { delay: 1.0, duration: 0.5 },
+              }}
             >
-              hi, how are you today?
+              hi, how are you?
             </motion.h1>
 
-            {/* Emotion pills */}
+            {/* Emotion pills — filled pastel, pill shape */}
             <motion.div
               className="flex flex-wrap items-center justify-center"
-              style={{ gap: 20 }}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0, transition: { delay: 1.65, duration: 0.5 } }}
+              style={{ gap: 10 }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                transition: { delay: 1.3, duration: 0.5 },
+              }}
               role="group"
               aria-label="Choose your mood"
             >
@@ -215,89 +303,53 @@ export default function EmotionPicker() {
                 <motion.button
                   key={e.id}
                   onClick={() => handleSelect(e.id)}
-                  className="flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400"
-                  style={{
-                    // Transparent bg, 1.5px solid border in emotion color
-                    padding: "8px 16px",
-                    border: `1.5px solid ${e.color}`,
-                    borderRadius: 10,       // rectangular — not pill
-                    background: "transparent",
-                    cursor: "pointer",
-                    // Geist Sans 12px weight 300 lowercase
-                    fontSize: 12,
-                    fontWeight: 300,
-                    letterSpacing: "0.06em",
-                    color: "#1a1625",
-                    textTransform: "lowercase",
-                  }}
+                  style={getPillStyle(e.color, e.isDark)}
                   whileHover={{
-                    scale: 1.02,
-                    backgroundColor: `${e.color}26`, // 15% opacity on hover
+                    scale: 1.04,
                     transition: { duration: 0.15 },
                   }}
+                  whileTap={{ scale: 0.97 }}
+                  className="focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400"
                   aria-label={`I'm feeling ${e.label}`}
                 >
-                  {/* 8px square color swatch — LEFT of text */}
-                  <span
-                    aria-hidden="true"
-                    style={{
-                      display: "block",
-                      flexShrink: 0,
-                      width: 8,
-                      height: 8,
-                      background: e.color,
-                      borderRadius: 1,
-                    }}
-                  />
                   {e.label}
                 </motion.button>
               ))}
             </motion.div>
 
-            {/* Subtitle — 9px uppercase #BBBBBB tracking 0.1em */}
-            <motion.p
-              style={{
-                fontSize: 9,
-                textTransform: "uppercase",
-                letterSpacing: "0.1em",
-                color: "#bbbbbb",
-                fontWeight: 400,
-              }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1, transition: { delay: 1.85, duration: 0.4 } }}
-            >
-              your choice colors the experience
-            </motion.p>
-
-            {/* SKIP → — 10px uppercase #BBBBBB */}
+            {/* SKIP FOR NOW → */}
             <motion.button
               onClick={handleSkip}
               style={{
                 fontSize: 10,
                 textTransform: "uppercase",
-                letterSpacing: "0.08em",
+                letterSpacing: "0.16em",
                 color: "#bbbbbb",
                 background: "none",
                 border: "none",
                 cursor: "pointer",
-                padding: "4px 8px",
+                padding: "6px 8px",
                 minHeight: 44,
                 display: "flex",
                 alignItems: "center",
+                fontFamily: "var(--font-geist-sans)",
               }}
               initial={{ opacity: 0 }}
-              animate={{ opacity: 1, transition: { delay: 2.0, duration: 0.4 } }}
+              animate={{
+                opacity: 1,
+                transition: { delay: 1.6, duration: 0.4 },
+              }}
               whileHover={{ opacity: 0.6 }}
               className="focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 rounded"
               aria-label="Skip emotion selection"
             >
-              SKIP →
+              SKIP FOR NOW →
             </motion.button>
           </div>
         </motion.div>
       )}
 
-      {/* ── Loading screen (2.5s) → homepage ── */}
+      {/* ── Loading screen (2.5s) → site ── */}
       {phase === "loading" && selectedConfig && (
         <LoadingScreen
           key="loading"
