@@ -223,176 +223,208 @@ export default function AboutContent() {
   };
 
   return (
-    <div
-      className="flex relative"
-      style={{ minHeight: "100vh", alignItems: "flex-start", gap: 48 }}
-    >
-      {/* Watercolor gradient drifts behind the full page */}
-      <div className="absolute pointer-events-none" style={{ inset: 0, height: "70vh", zIndex: 0 }}>
+    // Outer wrapper — gradient lives here as true background, never inside the flex row
+    <div style={{ position: "relative" }}>
+
+      {/* ── Watercolor gradient background ─────────────────
+          Kept outside the flex container so it never becomes
+          a flex item and cannot overlap the columns.         */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: "70vh",
+          zIndex: 0,
+          pointerEvents: "none",
+          overflow: "hidden",
+        }}
+      >
         <ParallaxHeroGradient />
       </div>
 
-      {/* ── Sidebar ─────────────────────────────────────── */}
-      {/*
-        alignSelf: flex-start is REQUIRED for position:sticky to work inside
-        a flex container — without it the aside stretches to full container
-        height and sticky never triggers.
-      */}
-      <aside
-        className="hidden md:block flex-shrink-0"
+      {/* ── Two-column layout ─────────────────────────────
+          Spec: display flex · flex-direction row · gap 48px
+                padding 24px · min-height 100vh              */}
+      <div
         style={{
-          width: 220,
-          flexShrink: 0,
-          alignSelf: "flex-start",
-          position: "sticky",
-          top: 80,
+          display: "flex",
+          flexDirection: "row",
+          gap: 48,
+          padding: 24,
+          minHeight: "100vh",
+          position: "relative",
           zIndex: 1,
         }}
       >
-        <div
+
+        {/* ── Column 1: Sidebar ─────────────────────────── */}
+        <aside
+          className="hidden md:block"
           style={{
-            paddingTop: 48,
-            paddingLeft: 24,
-            paddingRight: 16,
-            paddingBottom: 24,
+            width: 200,
+            flexShrink: 0,
+            position: "sticky",
+            top: 80,
+            alignSelf: "flex-start",
+            height: "fit-content",
           }}
         >
-          {/* Logo + name */}
-          <div className="flex items-center gap-2" style={{ marginBottom: 6 }}>
-            <Image
-              src="/images/lotus-logo.png"
-              alt="Iris Wang logo"
-              height={32}
-              width={32}
-              className="h-8 w-auto flex-shrink-0"
-            />
-            <span style={{ fontSize: 13, fontWeight: 400, color: "var(--foreground)" }}>
-              iris wang
-            </span>
+          <div style={{ paddingTop: 56, paddingBottom: 24 }}>
+
+            {/* Logo + name */}
+            <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
+              <Image
+                src="/images/lotus-logo.png"
+                alt="Iris Wang logo"
+                height={32}
+                width={32}
+                style={{ height: 32, width: "auto", flexShrink: 0 }}
+              />
+              <span style={{ fontSize: 13, fontWeight: 400, color: "var(--foreground)" }}>
+                iris wang
+              </span>
+            </div>
+
+            <p style={{ fontSize: 11, fontWeight: 300, color: "#AAAAAA", marginBottom: 28, lineHeight: 1.5, maxWidth: 160 }}>
+              design, strategy, &amp; everything in between.
+            </p>
+
+            {/* Anchor nav — active link gets IHWN gradient text */}
+            <nav
+              style={{ display: "flex", flexDirection: "column", gap: 14 }}
+              aria-label="About page sections"
+            >
+              {NAV_ITEMS.map(({ id, label }) => (
+                <button
+                  key={id}
+                  onClick={() => scrollTo(id)}
+                  aria-current={activeSection === id ? "location" : undefined}
+                  style={{
+                    textAlign: "left",
+                    background: activeSection === id
+                      ? "linear-gradient(135deg, #F0ABFC, #A78BFA, #7DD3FC)"
+                      : "none",
+                    WebkitBackgroundClip: activeSection === id ? "text" : "unset",
+                    backgroundClip: activeSection === id ? "text" : "unset",
+                    WebkitTextFillColor: activeSection === id ? "transparent" : "unset",
+                    color: activeSection === id ? "transparent" : "#888888",
+                    fontSize: 13,
+                    fontWeight: activeSection === id ? 400 : 300,
+                    border: "none",
+                    padding: 0,
+                    cursor: "pointer",
+                    transition: "color 200ms ease, font-weight 200ms ease",
+                    lineHeight: 1.4,
+                  }}
+                >
+                  {label}
+                </button>
+              ))}
+            </nav>
+
           </div>
+        </aside>
 
-          <p style={{ fontSize: 11, fontWeight: 300, color: "#AAAAAA", marginBottom: 28, lineHeight: 1.5, maxWidth: 160 }}>
-            design, strategy, &amp; everything in between.
-          </p>
+        {/* ── Column 2: Main content ────────────────────── */}
+        <div
+          style={{
+            flex: 1,
+            minWidth: 0,
+            paddingLeft: 24,
+            paddingTop: 80,
+            paddingBottom: 120,
+          }}
+        >
 
-          {/* Anchor nav */}
-          <nav className="flex flex-col" style={{ gap: 14 }} aria-label="About page sections">
-            {NAV_ITEMS.map(({ id, label }) => (
-              <button
-                key={id}
-                onClick={() => scrollTo(id)}
-                className="text-left focus:outline-none"
-                style={{
-                  fontSize: 13,
-                  fontWeight: activeSection === id ? 400 : 300,
-                  color: activeSection === id ? "transparent" : "#888888",
-                  background: activeSection === id
-                    ? "linear-gradient(135deg, #f0abfc 0%, #a78bfa 50%, #7dd3fc 100%)"
-                    : "transparent",
-                  WebkitBackgroundClip: activeSection === id ? "text" : "unset",
-                  backgroundClip: activeSection === id ? "text" : "unset",
-                  WebkitTextFillColor: activeSection === id ? "transparent" : "unset",
-                  padding: 0,
-                  border: "none",
-                  cursor: "pointer",
-                  transition: "font-weight 200ms ease, opacity 200ms ease",
-                  opacity: activeSection === id ? 1 : 0.7,
-                }}
-                aria-current={activeSection === id ? "location" : undefined}
-              >
-                {label}
-              </button>
-            ))}
-          </nav>
-        </div>
-      </aside>
-
-      {/* ── Right content ────────────────────────────────── */}
-      <div
-        className="flex-1 min-w-0"
-        style={{ paddingTop: 80, paddingRight: 48, paddingBottom: 100, maxWidth: 700, zIndex: 1 }}
-      >
-
-        {/* ── HI SECTION ── */}
-        <section id="hi" style={{ marginBottom: 72 }}>
-          <div className="flex items-start" style={{ gap: 32 }}>
-            {/* Polaroid photo */}
+          {/* ── HI SECTION ── */}
+          <section id="hi" style={{ marginBottom: 72 }}>
+            {/* Photo + bio row */}
             <div
-              className="flex-shrink-0"
               style={{
-                transform: "rotate(1.5deg)",
-                background: "#ffffff",
-                padding: 8,
-                boxShadow: "0 8px 32px rgba(0,0,0,0.08)",
-                borderRadius: 2,
+                display: "flex",
+                flexDirection: "row",
+                gap: 32,
+                alignItems: "flex-start",
               }}
             >
+              {/* Polaroid photo */}
               <div
                 style={{
-                  width: 200,
-                  height: 240,
-                  background: "linear-gradient(135deg, #F0EEFF 0%, #E8F0FF 100%)",
-                  borderRadius: 1,
-                }}
-                aria-label="Photo of Iris"
-              />
-              <p
-                style={{
-                  fontSize: 10,
-                  fontWeight: 300,
-                  fontStyle: "italic",
-                  color: "#BBBBBB",
-                  marginTop: 10,
-                  textAlign: "center",
-                  lineHeight: 1.4,
-                  maxWidth: 200,
+                  width: 180,
+                  flexShrink: 0,
+                  transform: "rotate(1.5deg)",
+                  background: "#ffffff",
+                  padding: 8,
+                  boxShadow: "0 8px 32px rgba(0,0,0,0.08)",
+                  borderRadius: 2,
                 }}
               >
-                austin, tx — somewhere between a law brief and a sketchbook
-              </p>
-            </div>
-
-            {/* Bio text */}
-            <div className="flex-1 min-w-0">
-              <h2
-                className="font-[300] leading-tight"
-                style={{ fontSize: 22, color: "var(--foreground)", marginBottom: 14 }}
-              >
-                Hi, I&apos;m Iris!
-              </h2>
-
-              {/* Location tags — two stacked lines */}
-              <div className="flex flex-col" style={{ gap: 4, marginBottom: 16 }}>
-                <span style={{ fontSize: 12, fontWeight: 300, color: "#888888" }}>
-                  📍 Austin, TX · NYC soon
-                </span>
-                <span style={{ fontSize: 12, fontWeight: 300, color: "#888888" }}>
-                  🎓 UT Austin · Advertising + CS · 2027
-                </span>
+                <div
+                  style={{
+                    width: "100%",
+                    height: 220,
+                    background: "linear-gradient(135deg, #F0EEFF 0%, #E8F0FF 100%)",
+                    borderRadius: 1,
+                  }}
+                  aria-label="Photo of Iris"
+                />
+                <p
+                  style={{
+                    fontSize: 10,
+                    fontWeight: 300,
+                    fontStyle: "italic",
+                    color: "#BBBBBB",
+                    marginTop: 10,
+                    textAlign: "center",
+                    lineHeight: 1.4,
+                  }}
+                >
+                  austin, tx — somewhere between a law brief and a sketchbook
+                </p>
               </div>
 
-              <p style={{ fontSize: 14, fontWeight: 300, color: "#444444", lineHeight: 1.8, marginBottom: 16 }}>
-                With a diverse span of work, I lead with one desire. The ultimate goal to bridge
-                complex systems to intuitive understanding.
-              </p>
+              {/* Bio text */}
+              <div style={{ flex: 1 }}>
+                <h2
+                  style={{ fontSize: 22, fontWeight: 300, color: "var(--foreground)", marginBottom: 14, lineHeight: 1.3 }}
+                >
+                  Hi, I&apos;m Iris!
+                </h2>
 
-              <p style={{ fontSize: 14, fontWeight: 300, color: "#444444", lineHeight: 1.8, marginBottom: 20 }}>
-                I&apos;m an Advertising student at UT Austin with minors in CS, design strategies,
-                &amp; entrepreneurship. I spend my time building products, writing about healthcare
-                law, photographing race cars, and illustrating for a newspaper. Each tells a story
-                that deserves to be heard.
-              </p>
+                <div style={{ display: "flex", flexDirection: "column", gap: 4, marginBottom: 16 }}>
+                  <span style={{ fontSize: 12, fontWeight: 300, color: "#888888" }}>
+                    📍 Austin, TX · NYC soon
+                  </span>
+                  <span style={{ fontSize: 12, fontWeight: 300, color: "#888888" }}>
+                    🎓 UT Austin · Advertising + CS · 2027
+                  </span>
+                </div>
 
-              <a
-                href="mailto:iriswang32@gmail.com"
-                className="text-gradient-ihwn font-[300] hover:opacity-80 transition-opacity"
-                style={{ fontSize: 14 }}
-              >
-                Working on something cool? Let&apos;s talk! →
-              </a>
+                <p style={{ fontSize: 14, fontWeight: 300, color: "#444444", lineHeight: 1.8, marginBottom: 16 }}>
+                  With a diverse span of work, I lead with one desire. The ultimate goal to bridge
+                  complex systems to intuitive understanding.
+                </p>
+
+                <p style={{ fontSize: 14, fontWeight: 300, color: "#444444", lineHeight: 1.8, marginBottom: 20 }}>
+                  I&apos;m an Advertising student at UT Austin with minors in CS, design strategies,
+                  &amp; entrepreneurship. I spend my time building products, writing about healthcare
+                  law, photographing race cars, and illustrating for a newspaper. Each tells a story
+                  that deserves to be heard.
+                </p>
+
+                <a
+                  href="mailto:iriswang32@gmail.com"
+                  className="text-gradient-ihwn hover:opacity-80 transition-opacity"
+                  style={{ fontSize: 14, fontWeight: 300 }}
+                >
+                  Working on something cool? Let&apos;s talk! →
+                </a>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
 
         {/* ── WORK SECTION ── */}
         <section id="work" style={{ marginBottom: 72 }}>
@@ -581,6 +613,7 @@ export default function AboutContent() {
           </div>
         </section>
 
+        </div>
       </div>
     </div>
   );
