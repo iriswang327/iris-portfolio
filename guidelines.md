@@ -209,20 +209,18 @@ Like stepping into a painting before entering the gallery
 
 ## Navigation
 - Height: 56px
-- Background: rgba(250,249,255,0.82) + blur(24px)
-  Dark mode: rgba(10,10,10,0.85) + blur(24px)
-- Border bottom: 0.5px solid rgba(0,0,0,0.06)
+- Background: transparent — no background, no blur, no border
+- Dark mode: transparent
+- Nav floats over the hero gradient
+- Logo: NOT in nav — footer only
+- Emotion dot: removed from nav
 
-Left: iris wang logo (public/images/lotus-logo.png,
-32px tall, next/image, auto width) +
-"iris wang" Geist Sans 14px weight 400 #1A1625
-
-Right: DREAMS · EXPERIENCE · ABOUT
-- 13px weight 300 #888888 default
-- Active: weight 400 #1A1625 + 1px IHWN gradient underline
+Right-aligned: DREAMS · EXPERIENCE · ABOUT
+- 13px weight 300 #1A1625
+- Active: IHWN gradient underline (1px)
 - 28px gap between links
-- Emotion color dot (8px) after ABOUT
-- NO contact button, NO hamburger on desktop
+- 24px padding-right
+- NO logo, NO emotion dot, NO contact button, NO hamburger on desktop
 
 ---
 
