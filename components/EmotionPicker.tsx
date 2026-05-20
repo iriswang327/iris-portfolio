@@ -5,21 +5,20 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useEmotion, EMOTIONS, type Emotion } from "@/context/EmotionContext";
 import IHWNLotus from "@/components/IHWNLotus";
 
-// ─── Watercolor blobs ────────────────────────────────────────────────────────
-// Three slow-drifting radial blobs per guidelines:
-// Lavender rgba(196,181,253,0.4) top-left
-// Blush   rgba(251,207,232,0.35) top-right
-// Periwinkle rgba(165,180,252,0.3) center
+// ─── Watercolor ink-drop blobs ────────────────────────────────────────────────
+// Three blobs spread in from scale 0 like ink dropping into water,
+// then drift slowly. Colors exactly per spec.
 
-interface BlobProps {
+interface InkBlobProps {
   color: string;
   size: number;
-  style: React.CSSProperties;
+  posStyle: React.CSSProperties;
+  spreadDelay: number; // when this blob starts spreading
   drift: { x: number[]; y: number[] };
-  duration: number;
+  driftDuration: number;
 }
 
-function WatercolorBlob({ color, size, style, drift, duration }: BlobProps) {
+function InkBlob({ color, size, posStyle, spreadDelay, drift, driftDuration }: InkBlobProps) {
   return (
     <motion.div
       className="absolute pointer-events-none rounded-full"
@@ -27,22 +26,29 @@ function WatercolorBlob({ color, size, style, drift, duration }: BlobProps) {
         width: size,
         height: size,
         background: color,
-        filter: "blur(90px)",
-        ...style,
+        filter: "blur(88px)",
+        ...posStyle,
       }}
-      animate={{ x: drift.x, y: drift.y }}
+      // Ink-drop: expand from 0 → 1, then gently drift
+      initial={{ scale: 0, opacity: 0 }}
+      animate={{
+        scale: [0, 1.05, 1],
+        opacity: [0, 1, 1],
+        x: drift.x,
+        y: drift.y,
+      }}
       transition={{
-        duration,
-        repeat: Infinity,
-        repeatType: "mirror",
-        ease: "easeInOut",
+        scale: { duration: 1.4, ease: [0.22, 1, 0.36, 1], delay: spreadDelay },
+        opacity: { duration: 0.9, ease: "easeOut", delay: spreadDelay },
+        x: { duration: driftDuration, repeat: Infinity, repeatType: "mirror", ease: "easeInOut", delay: spreadDelay + 1.4 },
+        y: { duration: driftDuration * 0.85, repeat: Infinity, repeatType: "mirror", ease: "easeInOut", delay: spreadDelay + 1.4 },
       }}
       aria-hidden="true"
     />
   );
 }
 
-// ─── Loading screen ───────────────────────────────────────────────────────────
+// ─── Loading transition screen ────────────────────────────────────────────────
 
 interface LoadingScreenProps {
   message: string;
@@ -97,7 +103,7 @@ function LoadingScreen({ message, color, isDark, onDone }: LoadingScreenProps) {
   );
 }
 
-// ─── Main component ───────────────────────────────────────────────────────────
+// ─── Emotion Picker ───────────────────────────────────────────────────────────
 
 export default function EmotionPicker() {
   const { showPicker, setShowPicker, setEmotion } = useEmotion();
@@ -124,57 +130,62 @@ export default function EmotionPicker() {
     ? EMOTIONS.find((e) => e.id === selectedEmotion)
     : null;
 
-  if (!showPicker && phase !== "loading") return null;
-
+  // Always render the AnimatePresence wrapper so exit animations fire correctly
   return (
     <AnimatePresence mode="wait">
+      {/* ── Picker screen ── */}
       {phase === "picker" && showPicker && (
         <motion.div
           key="picker"
           className="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden"
-          // Base: lavender #F0EEFF → blush #FCE8F8 — soft gradient wash, not white
           style={{
-            background:
-              "linear-gradient(135deg, #f0eeff 0%, #fce8f8 55%, #eef4ff 100%)",
+            // Soft base: lavender-white → blush-white gradient
+            background: "linear-gradient(135deg, #f0eeff 0%, #fce8f8 55%, #eef4ff 100%)",
           }}
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0, transition: { duration: 0.4 } }}
+          animate={{ opacity: 1, transition: { duration: 0.3 } }}
+          exit={{ opacity: 0, transition: { duration: 0.5, ease: "easeInOut" } }}
         >
-          {/* ── Watercolor blobs (exact spec colors + positions) ── */}
+          {/* ── Ink-drop blobs — spread in staggered, then drift ── */}
 
-          {/* Lavender rgba(196,181,253,0.4) — top-left */}
-          <WatercolorBlob
+          {/* Lavender blob — top-left */}
+          <InkBlob
             color="rgba(196,181,253,0.4)"
             size={520}
-            style={{ top: "-10%", left: "-8%" }}
-            drift={{ x: [0, 18, -10, 0], y: [0, 12, -8, 0] }}
-            duration={22}
+            posStyle={{ top: "-8%", left: "-6%" }}
+            spreadDelay={0}
+            drift={{ x: [0, 22, -10, 0], y: [0, 14, -8, 0] }}
+            driftDuration={22}
           />
-
-          {/* Blush rgba(251,207,232,0.35) — top-right */}
-          <WatercolorBlob
+          {/* Blush blob — top-right */}
+          <InkBlob
             color="rgba(251,207,232,0.35)"
             size={460}
-            style={{ top: "-5%", right: "-10%" }}
-            drift={{ x: [0, -14, 10, 0], y: [0, 16, -6, 0] }}
-            duration={18}
+            posStyle={{ top: "-4%", right: "-8%" }}
+            spreadDelay={0.18}
+            drift={{ x: [0, -16, 12, 0], y: [0, 18, -6, 0] }}
+            driftDuration={19}
           />
-
-          {/* Periwinkle rgba(165,180,252,0.3) — center */}
-          <WatercolorBlob
+          {/* Periwinkle blob — center */}
+          <InkBlob
             color="rgba(165,180,252,0.3)"
-            size={480}
-            style={{ top: "30%", left: "50%", transform: "translateX(-50%)" }}
-            drift={{ x: [0, 10, -12, 0], y: [0, -10, 14, 0] }}
-            duration={25}
+            size={500}
+            posStyle={{ top: "28%", left: "50%", transform: "translateX(-50%)" }}
+            spreadDelay={0.35}
+            drift={{ x: [0, 12, -14, 0], y: [0, -12, 16, 0] }}
+            driftDuration={26}
           />
 
-          {/* ── Content ── */}
+          {/* ── Content — staggered fade-up after ink settles ── */}
           <div className="relative z-10 flex flex-col items-center gap-6 px-5 text-center">
 
-            {/* Lotus — draws itself on load, then floats */}
-            <IHWNLotus size={64} animated />
+            {/* Lotus draws itself after ink drop (delay 1.1s) */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.85 }}
+              animate={{ opacity: 1, scale: 1, transition: { delay: 1.1, duration: 0.5, ease: "easeOut" } }}
+            >
+              <IHWNLotus size={64} animated />
+            </motion.div>
 
             {/* Question — 26px weight 200 */}
             <motion.h1
@@ -185,10 +196,10 @@ export default function EmotionPicker() {
                 letterSpacing: "-0.02em",
                 lineHeight: 1.3,
               }}
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0, transition: { delay: 0.5 } }}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0, transition: { delay: 1.4, duration: 0.5 } }}
             >
-              how are you arriving today?
+              hi, how are you today?
             </motion.h1>
 
             {/* Emotion pills */}
@@ -196,7 +207,7 @@ export default function EmotionPicker() {
               className="flex flex-wrap items-center justify-center"
               style={{ gap: 20 }}
               initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0, transition: { delay: 0.65 } }}
+              animate={{ opacity: 1, y: 0, transition: { delay: 1.65, duration: 0.5 } }}
               role="group"
               aria-label="Choose your mood"
             >
@@ -206,10 +217,10 @@ export default function EmotionPicker() {
                   onClick={() => handleSelect(e.id)}
                   className="flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400"
                   style={{
-                    // Transparent bg, 1.5px solid in emotion color, 10px radius
+                    // Transparent bg, 1.5px solid border in emotion color
                     padding: "8px 16px",
                     border: `1.5px solid ${e.color}`,
-                    borderRadius: 10,
+                    borderRadius: 10,       // rectangular — not pill
                     background: "transparent",
                     cursor: "pointer",
                     // Geist Sans 12px weight 300 lowercase
@@ -221,7 +232,7 @@ export default function EmotionPicker() {
                   }}
                   whileHover={{
                     scale: 1.02,
-                    backgroundColor: `${e.color}26`, // 15% opacity fill on hover
+                    backgroundColor: `${e.color}26`, // 15% opacity on hover
                     transition: { duration: 0.15 },
                   }}
                   aria-label={`I'm feeling ${e.label}`}
@@ -243,7 +254,7 @@ export default function EmotionPicker() {
               ))}
             </motion.div>
 
-            {/* Subtitle — 9px uppercase #BBBBBB letter-spacing 0.1em */}
+            {/* Subtitle — 9px uppercase #BBBBBB tracking 0.1em */}
             <motion.p
               style={{
                 fontSize: 9,
@@ -253,12 +264,12 @@ export default function EmotionPicker() {
                 fontWeight: 400,
               }}
               initial={{ opacity: 0 }}
-              animate={{ opacity: 1, transition: { delay: 0.8 } }}
+              animate={{ opacity: 1, transition: { delay: 1.85, duration: 0.4 } }}
             >
               your choice colors the experience
             </motion.p>
 
-            {/* Skip — 10px uppercase #BBBBBB */}
+            {/* SKIP → — 10px uppercase #BBBBBB */}
             <motion.button
               onClick={handleSkip}
               style={{
@@ -275,8 +286,8 @@ export default function EmotionPicker() {
                 alignItems: "center",
               }}
               initial={{ opacity: 0 }}
-              animate={{ opacity: 1, transition: { delay: 0.95 } }}
-              whileHover={{ opacity: 0.7 }}
+              animate={{ opacity: 1, transition: { delay: 2.0, duration: 0.4 } }}
+              whileHover={{ opacity: 0.6 }}
               className="focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 rounded"
               aria-label="Skip emotion selection"
             >
@@ -286,6 +297,7 @@ export default function EmotionPicker() {
         </motion.div>
       )}
 
+      {/* ── Loading screen (2.5s) → homepage ── */}
       {phase === "loading" && selectedConfig && (
         <LoadingScreen
           key="loading"
