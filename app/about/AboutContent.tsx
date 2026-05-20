@@ -223,7 +223,10 @@ export default function AboutContent() {
   };
 
   return (
-    <div className="flex relative" style={{ minHeight: "100vh" }}>
+    <div
+      className="flex relative"
+      style={{ minHeight: "100vh", alignItems: "flex-start", gap: 48 }}
+    >
       {/* Watercolor gradient drifts behind the full page */}
       <div className="absolute pointer-events-none" style={{ inset: 0, height: "70vh", zIndex: 0 }}>
         <ParallaxHeroGradient />
@@ -239,11 +242,10 @@ export default function AboutContent() {
         className="hidden md:block flex-shrink-0"
         style={{
           width: 220,
+          flexShrink: 0,
           alignSelf: "flex-start",
           position: "sticky",
           top: 80,
-          height: "calc(100vh - 80px)",
-          overflowY: "auto",
           zIndex: 1,
         }}
       >
@@ -308,7 +310,7 @@ export default function AboutContent() {
       {/* ── Right content ────────────────────────────────── */}
       <div
         className="flex-1 min-w-0"
-        style={{ paddingTop: 80, paddingRight: 48, paddingBottom: 100, maxWidth: 700, position: "relative", zIndex: 1 }}
+        style={{ paddingTop: 80, paddingRight: 48, paddingBottom: 100, maxWidth: 700, zIndex: 1 }}
       >
 
         {/* ── HI SECTION ── */}
