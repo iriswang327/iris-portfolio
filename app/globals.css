@@ -251,6 +251,42 @@ html[data-picker-active="1"] footer {
 }
 
 /* ─────────────────────────────────────────────
+   Fun Cards — dark-mode aware purple tint
+   ───────────────────────────────────────────── */
+
+.fun-card {
+  background: rgba(167, 139, 250, 0.06);
+  border: 0.5px solid rgba(167, 139, 250, 0.15);
+  transition: background 200ms ease;
+}
+
+.fun-card:hover {
+  background: rgba(167, 139, 250, 0.10);
+}
+
+[data-theme="dark"] .fun-card {
+  background: rgba(167, 139, 250, 0.08);
+  border: 0.5px solid rgba(167, 139, 250, 0.20);
+}
+
+[data-theme="dark"] .fun-card:hover {
+  background: rgba(167, 139, 250, 0.13);
+}
+
+/* ─────────────────────────────────────────────
+   Green status dot pulse
+   ───────────────────────────────────────────── */
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.55; transform: scale(0.8); }
+}
+
+.pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+/* ─────────────────────────────────────────────
    Scrollbar (subtle)
    ───────────────────────────────────────────── */
 

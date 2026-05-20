@@ -1,5 +1,5 @@
 import Link from "next/link";
-import IHWNLotus from "@/components/IHWNLotus";
+import Image from "next/image";
 
 const FOOTER_LINKS = [
   { href: "/", label: "Dreams" },
@@ -23,7 +23,13 @@ export default function Footer() {
           {/* Left — Brand */}
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-2">
-              <IHWNLotus size={20} />
+              <Image
+                src="/images/lotus-logo.png"
+                alt="Iris Wang logo"
+                height={20}
+                width={20}
+                className="h-5 w-auto"
+              />
               <span
                 className="text-sm font-normal"
                 style={{ color: "var(--foreground)" }}
@@ -41,7 +47,8 @@ export default function Footer() {
               className="text-[10px] font-light"
               style={{ color: "#cccccc" }}
             >
-              Built with Next.js &amp; americanos ☕
+              Built with Next.js &amp;{" "}
+              <span className="text-gradient-ihwn">americanos</span> ☕
             </p>
           </div>
 

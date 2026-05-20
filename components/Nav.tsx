@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEmotion } from "@/context/EmotionContext";
-import IHWNLotus from "@/components/IHWNLotus";
 
 const NAV_LINKS = [
   { href: "/", label: "DREAMS" },
@@ -37,7 +37,14 @@ export default function Nav() {
           className="flex items-center gap-2 group"
           aria-label="Museum of Iris — Home"
         >
-          <IHWNLotus size={28} />
+          <Image
+            src="/images/lotus-logo.png"
+            alt="Iris Wang logo"
+            height={32}
+            width={32}
+            className="h-8 w-auto"
+            priority
+          />
           <span
             className="text-sm font-normal tracking-tight"
             style={{ color: "var(--foreground)" }}
