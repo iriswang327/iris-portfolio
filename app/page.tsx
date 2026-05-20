@@ -192,25 +192,20 @@ export default function DreamsPage() {
             iris wang
           </h1>
 
-          {/* Row 3: Product [rotating] */}
+          {/* Row 3: Product [role] for [audience] — all on one line, both words rotate independently */}
           <div
-            className="flex items-baseline gap-[10px] text-[40px] font-[200] tracking-[-0.025em]"
+            className="flex items-baseline gap-[10px] text-[40px] font-[200] tracking-[-0.025em] flex-wrap"
             style={{ color: "var(--foreground)" }}
           >
             <span>Product</span>
             <RotatingWords
               words={["designer", "thinker", "innovator", "lover"]}
+              interval={4000}
             />
-          </div>
-
-          {/* Row 4: for [rotating] */}
-          <div
-            className="flex items-baseline gap-[10px] text-[40px] font-[200] tracking-[-0.025em]"
-            style={{ color: "var(--foreground)" }}
-          >
             <span>for</span>
             <RotatingWords
               words={["humans", "AI startups", "dog lovers", "friends", "the future"]}
+              interval={2500}
             />
           </div>
 
