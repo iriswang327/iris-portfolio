@@ -11,149 +11,87 @@ interface IHWNLotusProps {
 const GRADIENT_ID_BASE = "ihwn-lotus-gradient";
 
 /**
- * IHWN Lotus — fineline SVG with IHWN gradient stroke.
- * Layered petals, pointed inner, wide outer, teardrop stem.
- * Optional draw animation on mount.
+ * IHWN Lotus — fineline SVG, IHWN gradient stroke.
+ * 5 petals radiating upward/outward from a central base + teardrop stem.
+ * viewBox 0 0 40 48 — base point at (20,30), tip of stem at (20,45).
  */
 export default function IHWNLotus({
   size = 28,
   animated = false,
   className = "",
 }: IHWNLotusProps) {
-  const gradientId = `${GRADIENT_ID_BASE}-${size}`;
+  // Unique gradient id per size to avoid SVG id collisions on the same page
+  const gid = `${GRADIENT_ID_BASE}-${size}`;
 
-  const strokeProps = {
-    stroke: `url(#${gradientId})`,
-    strokeWidth: 1.5,
+  const stroke = {
+    stroke: `url(#${gid})`,
+    strokeWidth: 1.4,
     strokeLinecap: "round" as const,
     strokeLinejoin: "round" as const,
     fill: "none",
   };
 
-  const pathVariants = animated
-    ? {
-        hidden: { pathLength: 0, opacity: 0 },
-        visible: {
-          pathLength: 1,
-          opacity: 1,
-          transition: { duration: 2, ease: "easeInOut" },
-        },
-      }
-    : undefined;
-
-  const floatVariants = animated
-    ? {
-        float: {
-          y: [0, -4, 0],
-          transition: {
-            duration: 4,
-            ease: "easeInOut",
-            repeat: Infinity,
-            delay: 2.1,
+  // Draw-on animation variants (pathLength 0→1)
+  const draw = (delay: number) =>
+    animated
+      ? {
+          hidden: { pathLength: 0, opacity: 0 },
+          visible: {
+            pathLength: 1,
+            opacity: 1,
+            transition: { duration: 1.8, ease: "easeInOut", delay },
           },
-        },
-      }
-    : undefined;
+        }
+      : undefined;
 
-  const svgContent = (
+  // All petals radiate from base point (20,30).
+  // Stem hangs below as a slim teardrop to (20,45).
+  const paths = [
+    // 1. Center petal — straight up, slim and pointed
+    { d: "M 20,30 C 17,22 17,12 20,5 C 23,12 23,22 20,30 Z", delay: 0 },
+    // 2. Left inner petal — ~38° from vertical
+    { d: "M 20,30 C 15,24 9,18 7,11 C 12,10 17,21 20,30 Z", delay: 0.25 },
+    // 3. Right inner petal — mirror
+    { d: "M 20,30 C 25,24 31,18 33,11 C 28,10 23,21 20,30 Z", delay: 0.5 },
+    // 4. Left outer petal — ~65°, broader and lower
+    { d: "M 20,30 C 13,27 5,25 2,19 C 5,15 13,24 20,30 Z", delay: 0.75 },
+    // 5. Right outer petal — mirror
+    { d: "M 20,30 C 27,27 35,25 38,19 C 35,15 27,24 20,30 Z", delay: 1.0 },
+    // 6. Teardrop stem — tapers from base down to a soft point
+    { d: "M 20,30 C 19,35 18,40 20,45 C 22,40 21,35 20,30 Z", delay: 1.25 },
+  ];
+
+  const svgEl = (
     <svg
       width={size}
-      height={size}
-      viewBox="0 0 32 36"
+      height={size * (48 / 40)}
+      viewBox="0 0 40 48"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       aria-hidden="true"
     >
       <defs>
-        <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="100%">
+        <linearGradient id={gid} x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#f0abfc" />
           <stop offset="50%" stopColor="#a78bfa" />
           <stop offset="100%" stopColor="#7dd3fc" />
         </linearGradient>
       </defs>
 
-      {/* Center inner petal */}
-      {animated ? (
-        <motion.path
-          d="M16 24 C14 19 12 14 16 8 C20 14 18 19 16 24Z"
-          {...strokeProps}
-          variants={pathVariants}
-          initial="hidden"
-          animate="visible"
-        />
-      ) : (
-        <path d="M16 24 C14 19 12 14 16 8 C20 14 18 19 16 24Z" {...strokeProps} />
-      )}
-
-      {/* Left inner petal */}
-      {animated ? (
-        <motion.path
-          d="M16 24 C12 20 7 17 7 11 C11 11 15 16 16 24Z"
-          {...strokeProps}
-          variants={pathVariants}
-          initial="hidden"
-          animate="visible"
-          transition={{ duration: 2, ease: "easeInOut", delay: 0.2 }}
-        />
-      ) : (
-        <path d="M16 24 C12 20 7 17 7 11 C11 11 15 16 16 24Z" {...strokeProps} />
-      )}
-
-      {/* Right inner petal */}
-      {animated ? (
-        <motion.path
-          d="M16 24 C20 20 25 17 25 11 C21 11 17 16 16 24Z"
-          {...strokeProps}
-          variants={pathVariants}
-          initial="hidden"
-          animate="visible"
-          transition={{ duration: 2, ease: "easeInOut", delay: 0.4 }}
-        />
-      ) : (
-        <path d="M16 24 C20 20 25 17 25 11 C21 11 17 16 16 24Z" {...strokeProps} />
-      )}
-
-      {/* Far left outer petal */}
-      {animated ? (
-        <motion.path
-          d="M16 26 C10 22 3 21 2 14 C6 12 13 18 16 26Z"
-          {...strokeProps}
-          variants={pathVariants}
-          initial="hidden"
-          animate="visible"
-          transition={{ duration: 2, ease: "easeInOut", delay: 0.6 }}
-        />
-      ) : (
-        <path d="M16 26 C10 22 3 21 2 14 C6 12 13 18 16 26Z" {...strokeProps} />
-      )}
-
-      {/* Far right outer petal */}
-      {animated ? (
-        <motion.path
-          d="M16 26 C22 22 29 21 30 14 C26 12 19 18 16 26Z"
-          {...strokeProps}
-          variants={pathVariants}
-          initial="hidden"
-          animate="visible"
-          transition={{ duration: 2, ease: "easeInOut", delay: 0.8 }}
-        />
-      ) : (
-        <path d="M16 26 C22 22 29 21 30 14 C26 12 19 18 16 26Z" {...strokeProps} />
-      )}
-
-      {/* Teardrop stem */}
-      {animated ? (
-        <motion.path
-          d="M16 26 C15 29 14 31 16 34 C18 31 17 29 16 26Z"
-          {...strokeProps}
-          variants={pathVariants}
-          initial="hidden"
-          animate="visible"
-          transition={{ duration: 2, ease: "easeInOut", delay: 1.0 }}
-        />
-      ) : (
-        <path d="M16 26 C15 29 14 31 16 34 C18 31 17 29 16 26Z" {...strokeProps} />
+      {paths.map(({ d, delay }, i) =>
+        animated ? (
+          <motion.path
+            key={i}
+            d={d}
+            {...stroke}
+            variants={draw(delay)}
+            initial="hidden"
+            animate="visible"
+          />
+        ) : (
+          <path key={i} d={d} {...stroke} />
+        )
       )}
     </svg>
   );
@@ -161,14 +99,19 @@ export default function IHWNLotus({
   if (animated) {
     return (
       <motion.div
-        variants={floatVariants}
-        animate="float"
+        animate={{ y: [0, -4, 0] }}
+        transition={{
+          duration: 4,
+          ease: "easeInOut",
+          repeat: Infinity,
+          delay: 2.2,
+        }}
         style={{ display: "inline-flex" }}
       >
-        {svgContent}
+        {svgEl}
       </motion.div>
     );
   }
 
-  return svgContent;
+  return svgEl;
 }
