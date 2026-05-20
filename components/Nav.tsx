@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
 
 const NAV_LINKS = [
   { href: "/", label: "DREAMS" },
@@ -11,6 +12,13 @@ const NAV_LINKS = [
 
 export default function Nav() {
   const pathname = usePathname();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const isActive = (href: string) => {
     if (href === "/") return pathname === "/";
@@ -18,7 +26,15 @@ export default function Nav() {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 h-14 flex items-center justify-end">
+    <header
+      className="fixed top-0 left-0 right-0 z-[100] h-14 flex items-center justify-end"
+      style={{
+        background: scrolled ? "rgba(250,249,255,0.85)" : "transparent",
+        backdropFilter: scrolled ? "blur(20px)" : "none",
+        WebkitBackdropFilter: scrolled ? "blur(20px)" : "none",
+        transition: "background 300ms ease, backdrop-filter 300ms ease, -webkit-backdrop-filter 300ms ease",
+      }}
+    >
       <nav
         className="flex items-center"
         style={{ gap: "28px", paddingRight: 24 }}
