@@ -179,7 +179,7 @@ export default function ExperiencePage() {
           CURRENTLY
           ══════════════════════════════════════════ */}
       <section style={{ paddingBottom: 80 }}>
-        <div style={{ paddingLeft: 24, paddingRight: 24 }}>
+        <div style={{ paddingLeft: 24, paddingRight: 24, maxWidth: 720, margin: "0 auto" }}>
           <p
             className="section-label"
             style={{ color: "#BBBBBB", marginBottom: 0, marginTop: 64 }}
@@ -192,7 +192,7 @@ export default function ExperiencePage() {
               <div key={item.name}>
                 <div
                   className="flex items-center"
-                  style={{ gap: 16, paddingTop: 16, paddingBottom: 16 }}
+                  style={{ gap: 14, paddingTop: 10, paddingBottom: 10 }}
                 >
                   {/* Logo circle */}
                   <div
