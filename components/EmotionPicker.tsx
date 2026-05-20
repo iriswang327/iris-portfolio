@@ -45,24 +45,24 @@ function InkBlob({
       }}
       transition={{
         scale: {
-          duration: 1.2,
+          duration: 1.6,
           ease: [0.22, 1, 0.36, 1],
           delay: spreadDelay,
         },
-        opacity: { duration: 0.8, ease: "easeOut", delay: spreadDelay },
+        opacity: { duration: 1.0, ease: "easeOut", delay: spreadDelay },
         x: {
           duration: driftDuration,
           repeat: Infinity,
           repeatType: "mirror",
           ease: "easeInOut",
-          delay: spreadDelay + 1.2,
+          delay: spreadDelay + 1.6,
         },
         y: {
           duration: driftDuration * 0.83,
           repeat: Infinity,
           repeatType: "mirror",
           ease: "easeInOut",
-          delay: spreadDelay + 1.2,
+          delay: spreadDelay + 1.6,
         },
       }}
       aria-hidden="true"
@@ -97,7 +97,7 @@ function LoadingScreen({
 
   return (
     <motion.div
-      className="fixed inset-0 z-[200] flex flex-col items-center justify-center gap-4"
+      className="fixed inset-0 z-[200] flex flex-col items-center justify-center gap-4 overflow-hidden"
       style={{ background: color }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1, transition: { duration: 0.4, ease: "easeOut" } }}
@@ -168,6 +168,13 @@ function hexToRgba(hex: string, alpha: number): string {
   return `rgba(${r},${g},${b},${alpha})`;
 }
 
+// ─── helpers ─────────────────────────────────────────────────────────────────
+
+/** Remove data-picker-active from <html> so CSS transition fades the page in. */
+function revealPage() {
+  document.documentElement.removeAttribute("data-picker-active");
+}
+
 // ─── Emotion Picker ───────────────────────────────────────────────────────────
 
 export default function EmotionPicker() {
@@ -179,26 +186,32 @@ export default function EmotionPicker() {
   const handleSelect = (id: NonNullable<Emotion>) => {
     setSelectedEmotion(id);
     setPhase("loading");
+    // Don't reveal page yet — loading screen will do it when it exits.
   };
 
   const handleSkip = () => {
     setEmotion(null);
     setShowPicker(false);
+    revealPage(); // no loading screen, reveal immediately
   };
 
   const handleLoadingDone = () => {
     if (selectedEmotion) setEmotion(selectedEmotion);
     setPhase("done");
     setShowPicker(false);
+    revealPage(); // CSS fade-in of page syncs with loading screen exit
   };
 
   const selectedConfig = selectedEmotion
     ? EMOTIONS.find((e) => e.id === selectedEmotion)
     : null;
 
+  // Two separate AnimatePresence blocks at different z-indexes so the loading
+  // screen mounts IMMEDIATELY on top of the picker — no gap where homepage shows.
   return (
-    <AnimatePresence mode="wait">
-      {/* ── Picker screen ── */}
+    <>
+      {/* ── Picker screen — z-[100] ── */}
+      <AnimatePresence>
       {phase === "picker" && showPicker && (
         <motion.div
           key="picker"
@@ -260,7 +273,7 @@ export default function EmotionPicker() {
               animate={{
                 opacity: 1,
                 scale: 1,
-                transition: { delay: 0.6, duration: 0.6, ease: "easeOut" },
+                transition: { delay: 0.8, duration: 0.7, ease: "easeOut" },
               }}
             >
               <IHWNLotus size={64} animated />
@@ -280,7 +293,7 @@ export default function EmotionPicker() {
               animate={{
                 opacity: 1,
                 y: 0,
-                transition: { delay: 1.0, duration: 0.5 },
+                transition: { delay: 1.3, duration: 0.6 },
               }}
             >
               hi, how are you?
@@ -294,7 +307,7 @@ export default function EmotionPicker() {
               animate={{
                 opacity: 1,
                 y: 0,
-                transition: { delay: 1.3, duration: 0.5 },
+                transition: { delay: 1.65, duration: 0.6 },
               }}
               role="group"
               aria-label="Choose your mood"
@@ -337,7 +350,7 @@ export default function EmotionPicker() {
               initial={{ opacity: 0 }}
               animate={{
                 opacity: 1,
-                transition: { delay: 1.6, duration: 0.4 },
+                transition: { delay: 2.0, duration: 0.5 },
               }}
               whileHover={{ opacity: 0.6 }}
               className="focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 rounded"
@@ -348,17 +361,20 @@ export default function EmotionPicker() {
           </div>
         </motion.div>
       )}
+      </AnimatePresence>
 
-      {/* ── Loading screen (2.5s) → site ── */}
-      {phase === "loading" && selectedConfig && (
-        <LoadingScreen
-          key="loading"
-          message={selectedConfig.loadingMessage}
-          color={selectedConfig.color}
-          isDark={selectedConfig.isDark}
-          onDone={handleLoadingDone}
-        />
-      )}
-    </AnimatePresence>
+      {/* ── Loading screen — z-[200], mounts instantly on top of picker ── */}
+      <AnimatePresence>
+        {phase === "loading" && selectedConfig && (
+          <LoadingScreen
+            key="loading"
+            message={selectedConfig.loadingMessage}
+            color={selectedConfig.color}
+            isDark={selectedConfig.isDark}
+            onDone={handleLoadingDone}
+          />
+        )}
+      </AnimatePresence>
+    </>
   );
 }

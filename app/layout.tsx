@@ -36,6 +36,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        {/*
+          No-flash script — runs synchronously before React hydration.
+          Hides page content for new visitors so the emotion picker is the
+          very first thing they see. Removed by EmotionPicker when done.
+        */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var k=['happy','calm','curious','frustrated','ready-for-bed'];var s=localStorage.getItem('museum-of-iris-emotion');if(!s||k.indexOf(s)<0)document.documentElement.setAttribute('data-picker-active','1');}catch(e){}})();`,
+          }}
+        />
+      </head>
       <body className={`${geistSans.variable} font-sans antialiased`}>
         <EmotionProvider>
           {/* Emotion picker — global fixed overlay, client-only */}

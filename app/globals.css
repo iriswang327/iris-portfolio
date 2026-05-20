@@ -233,6 +233,24 @@ a {
 }
 
 /* ─────────────────────────────────────────────
+   Emotion Picker — no-flash page reveal
+   Inline script sets data-picker-active="1" before React hydration
+   for new visitors. EmotionPicker removes it when done, triggering
+   the CSS transition that fades the page in.
+   ───────────────────────────────────────────── */
+
+main,
+footer {
+  transition: opacity 0.55s ease;
+}
+
+html[data-picker-active="1"] main,
+html[data-picker-active="1"] footer {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ─────────────────────────────────────────────
    Scrollbar (subtle)
    ───────────────────────────────────────────── */
 
