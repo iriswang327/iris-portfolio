@@ -143,7 +143,7 @@ IHWN lotus mark (NOT a heart, NOT any other shape):
   translateY 0 → -4px → 0, 4s infinite ease
 
 Question text:
-"how are you arriving today?"
+"hi, how are you today?"
 Geist Sans 26px weight 200 #1A1625
 Letter-spacing: -0.02em
 Fade in after lotus draws, 0.5s delay
