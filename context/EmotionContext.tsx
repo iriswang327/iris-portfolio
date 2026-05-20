@@ -75,6 +75,9 @@ interface EmotionContextValue {
 const EmotionContext = createContext<EmotionContextValue | null>(null);
 
 const STORAGE_KEY = "museum-of-iris-emotion";
+// sessionStorage key — clears on hard reload/new tab, persists during SPA navigation.
+// This makes the picker re-appear on every page reload but not on route changes.
+const SESSION_KEY = "museum-of-iris-picker-shown";
 
 export function EmotionProvider({ children }: { children: React.ReactNode }) {
   // emotion/hasChosen start null/false on both server and client to avoid
@@ -83,12 +86,11 @@ export function EmotionProvider({ children }: { children: React.ReactNode }) {
   const [emotion, setEmotionState] = useState<Emotion>(null);
   const [hasChosen, setHasChosen] = useState(false);
 
-  // showPicker uses lazy init: it only affects EmotionPicker (ssr:false),
-  // so it's safe to read localStorage synchronously here — no hydration mismatch.
+  // showPicker uses lazy init: only affects EmotionPicker (ssr:false), no hydration mismatch.
+  // Uses sessionStorage so picker re-appears on hard reload/new tab but not SPA navigation.
   const [showPicker, setShowPicker] = useState(() => {
     if (typeof window === "undefined") return false;
-    const stored = localStorage.getItem(STORAGE_KEY) as Emotion;
-    return !(stored && EMOTIONS.find((e) => e.id === stored));
+    return !sessionStorage.getItem(SESSION_KEY);
   });
 
   const applyTheme = useCallback((e: Emotion) => {
