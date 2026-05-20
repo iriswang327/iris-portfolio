@@ -227,9 +227,12 @@ Right: DREAMS · EXPERIENCE · ABOUT
 ---
 
 ## Layout
-- Max content width: 960px centered
-- Horizontal padding: 32px desktop / 20px mobile
-- Section gaps: 64px standard / 96px large
+- Hero content max-width: 680px left-aligned
+- Cards max-width: full viewport, 24px side padding only
+- Hero padding top: 180px
+- Hero padding left: 24px
+- Section gaps: 80px standard / 96px large
+- NOT centered — left-aligned content
 
 ---
 
@@ -297,8 +300,8 @@ Bottom: "CHANGELOG: [date]" 10px uppercase #DDDDDD
 Hero (left-aligned, watercolor wash):
 - Padding top: 120px, sides: 64px
 - Status line: green dot + "open to summer 2026 internships · anywhere" 12px weight 300 #888888, sits 16px above name
-- "iris wang": 42px weight 200 tracking -0.02em + watercolor splash behind
-- Rotating text (ONE LINE, 20px weight 300):
+- "iris wang": 36px weight 200 tracking -0.02em + watercolor splash behind
+- Rotating text (ONE LINE, 18px weight 300):
   "Product [designer/thinker/innovator/lover] for [humans/AI startups/dog lovers/friends/the future]"
   Fixed words in #1A1625, rotating words in IHWN gradient
   Each word rotates INDEPENDENTLY on different timers:

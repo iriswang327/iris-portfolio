@@ -154,7 +154,7 @@ export default function DreamsPage() {
           ══════════════════════════════════════════ */}
       <section
         className="relative overflow-hidden"
-        style={{ paddingTop: 120, paddingBottom: 0 }}
+        style={{ paddingTop: 180, paddingBottom: 0 }}
       >
         {/* Layered watercolor radial blobs */}
         <div
@@ -168,7 +168,8 @@ export default function DreamsPage() {
           aria-hidden="true"
         />
 
-        <div className="content-wrap relative z-10" style={{ maxWidth: 800, paddingLeft: 64, paddingRight: 64 }}>
+        {/* Left-aligned, max 680px, hugs left edge */}
+        <div className="relative z-10" style={{ maxWidth: 680, paddingLeft: 24, paddingRight: 24 }}>
           {/* Row 1: Status indicator */}
           <div className="flex items-center gap-2">
             <span
@@ -177,25 +178,25 @@ export default function DreamsPage() {
               aria-hidden="true"
             />
             <span
-              className="text-[12px] font-light"
-              style={{ color: "#888888" }}
+              className="font-[300]"
+              style={{ fontSize: 12, color: "#888888" }}
             >
               open to summer 2026 internships · anywhere
             </span>
           </div>
 
-          {/* Row 2: Name with watercolor splash — 16px below status line */}
+          {/* Row 2: Name with watercolor splash */}
           <h1
             className="name-splash font-[200] leading-tight"
-            style={{ color: "var(--foreground)", marginTop: 16, fontSize: 42, letterSpacing: "-0.02em" }}
+            style={{ color: "var(--foreground)", marginTop: 16, fontSize: 36, letterSpacing: "-0.02em" }}
           >
             iris wang
           </h1>
 
-          {/* Row 3: Product [role] for [audience] — one line, 6px below name, smaller quieter text */}
+          {/* Row 3: Product [role] for [audience] — 4px below name */}
           <div
-            className="flex items-baseline gap-[8px] font-[300] flex-wrap"
-            style={{ color: "var(--foreground)", marginTop: 6, fontSize: 20 }}
+            className="flex items-baseline gap-[7px] font-[300] flex-wrap"
+            style={{ color: "var(--foreground)", marginTop: 4, fontSize: 18 }}
           >
             <span>Product</span>
             <RotatingWords
@@ -212,7 +213,7 @@ export default function DreamsPage() {
           {/* Row 4: Tagline */}
           <p
             className="font-[300]"
-            style={{ color: "#888888", marginTop: 20, fontSize: 14 }}
+            style={{ color: "#888888", marginTop: 12, fontSize: 15, lineHeight: 1.6 }}
           >
             Working at the edges of law, tech, and people.
           </p>
@@ -220,7 +221,7 @@ export default function DreamsPage() {
           {/* Row 5: School info */}
           <p
             className="font-[300]"
-            style={{ color: "#BBBBBB", marginTop: 6, fontSize: 12 }}
+            style={{ color: "#BBBBBB", marginTop: 4, fontSize: 13 }}
           >
             UT Austin · Advertising + CS · 2027
           </p>
@@ -231,17 +232,17 @@ export default function DreamsPage() {
           MOCK PROJECTS
           ══════════════════════════════════════════ */}
       <section style={{ marginTop: 0, paddingBottom: 16 }}>
-        <div className="content-wrap" style={{ maxWidth: 800, paddingLeft: 64, paddingRight: 64 }}>
+        <div style={{ paddingLeft: 24, paddingRight: 24 }}>
           <p
             className="section-label"
-            style={{ color: "#BBBBBB", marginBottom: 14, marginTop: 80 }}
+            style={{ color: "#BBBBBB", marginBottom: 14, marginTop: 64 }}
           >
             MOCK PROJECTS
           </p>
 
           <div
             className="grid grid-cols-1 sm:grid-cols-2"
-            style={{ gap: 16 }}
+            style={{ gap: 12 }}
           >
             {MOCK_PROJECTS.map((card) => (
               <ProjectCard key={card.href} {...card} />
@@ -254,7 +255,7 @@ export default function DreamsPage() {
           FOR FUN
           ══════════════════════════════════════════ */}
       <section style={{ paddingBottom: 80 }}>
-        <div className="content-wrap" style={{ maxWidth: 800, paddingLeft: 64, paddingRight: 64 }}>
+        <div style={{ paddingLeft: 24, paddingRight: 24 }}>
           <p
             className="section-label"
             style={{ color: "#BBBBBB", marginBottom: 14, marginTop: 48 }}

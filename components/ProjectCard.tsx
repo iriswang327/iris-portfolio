@@ -74,21 +74,19 @@ export default function ProjectCard({
             </div>
           )}
 
-          {/* ── Frosted pill — bottom-left ── */}
+          {/* ── Pill — bottom-left ── */}
           <div
             className="absolute bottom-3 left-3"
             style={{
-              background: pillDark ? "rgba(0,0,0,0.55)" : "rgba(255,255,255,0.12)",
-              backdropFilter: "blur(20px)",
-              WebkitBackdropFilter: "blur(20px)",
-              border: `1px solid ${pillDark ? "rgba(255,255,255,0.10)" : "rgba(255,255,255,0.18)"}`,
+              background: pillDark ? "rgba(0,0,0,0.72)" : "rgba(255,255,255,0.9)",
               borderRadius: 999,
-              padding: "8px 14px",
+              padding: "6px 14px",
               fontSize: 11,
               fontWeight: 400,
-              color: "#ffffff",
+              color: pillDark ? "#ffffff" : "#1A1625",
               whiteSpace: "nowrap",
               lineHeight: 1,
+              boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
             }}
           >
             {pill}
