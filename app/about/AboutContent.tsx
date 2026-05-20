@@ -186,25 +186,36 @@ export default function AboutContent() {
   const [activeSection, setActiveSection] = useState("hi");
   const [activeTab, setActiveTab] = useState<"books" | "music">("books");
 
-  // Intersection Observer for active nav tracking
+  // Single Intersection Observer — tracks all sections, sets the topmost visible one active
   useEffect(() => {
     const sectionIds = ["hi", "work", "community", "philosophy", "entertainment", "funfacts"];
-    const observers: IntersectionObserver[] = [];
+    const intersecting = new Set<string>();
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            intersecting.add(entry.target.id);
+          } else {
+            intersecting.delete(entry.target.id);
+          }
+        });
+
+        // Pick the first section (DOM order = top-to-bottom) that is currently intersecting
+        const active = sectionIds.find((id) => intersecting.has(id));
+        if (active) setActiveSection(active);
+      },
+      // Top band: below the fixed nav (80px). Bottom band: cut off lower half so only
+      // the section near the top of the viewport counts as "active".
+      { rootMargin: "-80px 0px -50% 0px", threshold: 0 }
+    );
 
     sectionIds.forEach((id) => {
       const el = document.getElementById(id);
-      if (!el) return;
-      const obs = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) setActiveSection(id);
-        },
-        { rootMargin: "-20% 0px -65% 0px", threshold: 0 }
-      );
-      obs.observe(el);
-      observers.push(obs);
+      if (el) observer.observe(el);
     });
 
-    return () => observers.forEach((obs) => obs.disconnect());
+    return () => observer.disconnect();
   }, []);
 
   const scrollTo = (id: string) => {
@@ -231,7 +242,8 @@ export default function AboutContent() {
           alignSelf: "flex-start",
           position: "sticky",
           top: 80,
-          height: "fit-content",
+          height: "calc(100vh - 80px)",
+          overflowY: "auto",
           zIndex: 1,
         }}
       >
