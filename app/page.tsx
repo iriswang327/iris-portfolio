@@ -218,13 +218,6 @@ export default function DreamsPage() {
             Working at the edges of law, tech, and people.
           </p>
 
-          {/* Row 5: School info */}
-          <p
-            className="font-[300]"
-            style={{ color: "#BBBBBB", marginTop: 4, fontSize: 13 }}
-          >
-            UT Austin · Advertising + CS · 2027
-          </p>
         </div>
       </section>
 
