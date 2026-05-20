@@ -44,7 +44,7 @@ export default function RootLayout({
         */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var k=['happy','calm','curious','frustrated','ready-for-bed'];var s=localStorage.getItem('museum-of-iris-emotion');if(!s||k.indexOf(s)<0)document.documentElement.setAttribute('data-picker-active','1');}catch(e){}})();`,
+            __html: `(function(){try{if(!sessionStorage.getItem('museum-of-iris-picker-shown'))document.documentElement.setAttribute('data-picker-active','1');}catch(e){}})();`,
           }}
         />
       </head>
