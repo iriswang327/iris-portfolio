@@ -1,13 +1,20 @@
 import type { Metadata } from "next";
-import { GeistSans } from "geist/font/sans";
+import { Geist } from "next/font/google";
 import "./globals.css";
 import { EmotionProvider } from "@/context/EmotionContext";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 
+const geistSans = Geist({
+  subsets: ["latin"],
+  variable: "--font-geist-sans",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "Museum of Iris",
-  description: "Working at the edges of law, tech, and people. — Iris Wang, UT Austin · Advertising + CS · 2027",
+  description:
+    "Working at the edges of law, tech, and people. — Iris Wang, UT Austin · Advertising + CS · 2027",
   openGraph: {
     title: "Museum of Iris",
     description: "Working at the edges of law, tech, and people.",
@@ -28,7 +35,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={GeistSans.variable}>
+      <body className={`${geistSans.variable} font-sans antialiased`}>
         <EmotionProvider>
           <Nav />
           <main>{children}</main>
