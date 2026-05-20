@@ -1,6 +1,7 @@
 import RotatingWords from "@/components/RotatingWords";
 import ProjectCard from "@/components/ProjectCard";
 import FunCard from "@/components/FunCard";
+import ParallaxHeroGradient from "@/components/ParallaxHeroGradient";
 
 // ─── Company logo SVGs (ghost watermarks, rendered at low opacity inside cards) ──
 
@@ -155,17 +156,7 @@ export default function DreamsPage() {
         className="relative overflow-hidden"
         style={{ paddingTop: 180, paddingBottom: 0 }}
       >
-        {/* Layered watercolor radial blobs */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(ellipse 75% 55% at 18% -5%, var(--blob-lavender) 0%, transparent 60%), " +
-              "radial-gradient(ellipse 60% 50% at 85% -8%, var(--blob-blush) 0%, transparent 60%), " +
-              "radial-gradient(ellipse 55% 65% at 50% 15%, var(--blob-periwinkle) 0%, transparent 70%)",
-          }}
-          aria-hidden="true"
-        />
+        <ParallaxHeroGradient />
 
         {/* Left-aligned, max 680px, hugs left edge */}
         <div className="relative z-10" style={{ maxWidth: 680, paddingLeft: 24, paddingRight: 24 }}>
