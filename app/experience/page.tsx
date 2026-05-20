@@ -179,7 +179,7 @@ export default function ExperiencePage() {
           CURRENTLY
           ══════════════════════════════════════════ */}
       <section style={{ paddingBottom: 80 }}>
-        <div style={{ paddingLeft: 24, paddingRight: 24, maxWidth: 800 }}>
+        <div style={{ paddingLeft: 24, paddingRight: 24 }}>
           <p
             className="section-label"
             style={{ color: "#BBBBBB", marginBottom: 0, marginTop: 64 }}
