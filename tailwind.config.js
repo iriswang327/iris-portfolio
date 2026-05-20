@@ -1,16 +1,22 @@
-import type { Config } from "tailwindcss";
-
-const config: Config = {
+/** @type {import('tailwindcss').Config} */
+module.exports = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./context/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  darkMode: ["class", '[data-theme="dark"]'],
+  // Dark mode via data-theme="dark" on <html> (set by EmotionContext for "ready for bed")
+  darkMode: ["selector", '[data-theme="dark"]'],
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-geist-sans)", "-apple-system", "BlinkMacSystemFont", "system-ui", "sans-serif"],
+        sans: [
+          "var(--font-geist-sans)",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "system-ui",
+          "sans-serif",
+        ],
       },
       colors: {
         background: "var(--background)",
@@ -18,7 +24,6 @@ const config: Config = {
         muted: "var(--muted)",
         label: "var(--label)",
         card: "var(--card)",
-        border: "var(--border)",
       },
       maxWidth: {
         content: "960px",
@@ -26,12 +31,7 @@ const config: Config = {
       borderRadius: {
         pill: "999px",
       },
-      backdropBlur: {
-        nav: "24px",
-      },
     },
   },
   plugins: [],
 };
-
-export default config;
