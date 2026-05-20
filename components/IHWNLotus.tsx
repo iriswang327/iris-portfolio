@@ -4,7 +4,10 @@ import { motion } from "framer-motion";
 
 interface IHWNLotusProps {
   size?: number;
+  /** When true, paths draw themselves in with a stagger + float loop begins. */
   animated?: boolean;
+  /** Delay (seconds) before the float loop begins. Only used when animated=true. */
+  floatDelay?: number;
   className?: string;
 }
 
@@ -23,6 +26,7 @@ const GRADIENT_ID_BASE = "ihwn-lotus-gradient";
 export default function IHWNLotus({
   size = 28,
   animated = false,
+  floatDelay = 2.8,
   className = "",
 }: IHWNLotusProps) {
   const gid = `${GRADIENT_ID_BASE}-${size}`;
@@ -94,13 +98,13 @@ export default function IHWNLotus({
   if (animated) {
     return (
       <motion.div
-        // Float starts after the draw animation finishes (~2.7s)
+        // Float begins after draw animation finishes; floatDelay controls timing.
         animate={{ y: [0, -5, 0] }}
         transition={{
           duration: 4,
           ease: "easeInOut",
           repeat: Infinity,
-          delay: 2.8,
+          delay: floatDelay,
         }}
         style={{ display: "inline-flex" }}
       >
