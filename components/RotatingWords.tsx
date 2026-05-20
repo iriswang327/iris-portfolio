@@ -35,10 +35,10 @@ export default function RotatingWords({
       <AnimatePresence mode="popLayout" initial={false}>
         <motion.span
           key={words[index]}
-          initial={{ opacity: 0, y: 14 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -14 }}
-          transition={{ duration: 0.32, ease: [0.4, 0, 0.2, 1] }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
           className={`inline-block ${gradient ? "text-gradient-ihwn" : ""} ${className}`}
           style={{ whiteSpace: "nowrap" }}
         >

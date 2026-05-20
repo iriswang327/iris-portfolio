@@ -39,9 +39,8 @@ export default function ProjectCard({
     >
       <Link href={href} className="block">
         <motion.div
-          className="relative overflow-hidden min-h-[320px] rounded-[18px] cursor-pointer"
-          // Mobile: 280px min-height
-          style={{ minHeight: "clamp(280px, 30vw, 320px)" }}
+          className="relative overflow-hidden rounded-[16px] cursor-pointer w-full"
+          style={{ aspectRatio: "2.15 / 1" }}
           animate={{ scale: hovered ? 0.97 : 1 }}
           transition={{ duration: 0.3, ease: [0.34, 1.56, 0.64, 1] }}
           aria-label={pill}
