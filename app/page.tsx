@@ -154,7 +154,7 @@ export default function DreamsPage() {
           ══════════════════════════════════════════ */}
       <section
         className="relative overflow-hidden"
-        style={{ paddingTop: 44, paddingBottom: 16 }}
+        style={{ paddingTop: 120, paddingBottom: 0 }}
       >
         {/* Layered watercolor radial blobs */}
         <div
@@ -168,7 +168,7 @@ export default function DreamsPage() {
           aria-hidden="true"
         />
 
-        <div className="content-wrap relative z-10">
+        <div className="content-wrap relative z-10" style={{ maxWidth: 800, paddingLeft: 64, paddingRight: 64 }}>
           {/* Row 1: Status indicator */}
           <div className="flex items-center gap-2">
             <span
@@ -184,18 +184,18 @@ export default function DreamsPage() {
             </span>
           </div>
 
-          {/* Row 2: Name with watercolor splash */}
+          {/* Row 2: Name with watercolor splash — 16px below status line */}
           <h1
-            className="name-splash text-[52px] font-[200] tracking-[-0.028em] leading-tight"
-            style={{ color: "var(--foreground)", marginTop: 12 }}
+            className="name-splash font-[200] leading-tight"
+            style={{ color: "var(--foreground)", marginTop: 16, fontSize: 42, letterSpacing: "-0.02em" }}
           >
             iris wang
           </h1>
 
-          {/* Row 3: Product [role] for [audience] — all on one line, both words rotate independently */}
+          {/* Row 3: Product [role] for [audience] — one line, 6px below name, smaller quieter text */}
           <div
-            className="flex items-baseline gap-[10px] text-[40px] font-[200] tracking-[-0.025em] flex-wrap"
-            style={{ color: "var(--foreground)" }}
+            className="flex items-baseline gap-[8px] font-[300] flex-wrap"
+            style={{ color: "var(--foreground)", marginTop: 6, fontSize: 20 }}
           >
             <span>Product</span>
             <RotatingWords
@@ -209,12 +209,20 @@ export default function DreamsPage() {
             />
           </div>
 
-          {/* Row 5: Tagline */}
+          {/* Row 4: Tagline */}
           <p
-            className="text-[13px] font-light"
-            style={{ color: "#888888", marginTop: 16 }}
+            className="font-[300]"
+            style={{ color: "#888888", marginTop: 20, fontSize: 14 }}
           >
             Working at the edges of law, tech, and people.
+          </p>
+
+          {/* Row 5: School info */}
+          <p
+            className="font-[300]"
+            style={{ color: "#BBBBBB", marginTop: 6, fontSize: 12 }}
+          >
+            UT Austin · Advertising + CS · 2027
           </p>
         </div>
       </section>
@@ -223,17 +231,17 @@ export default function DreamsPage() {
           MOCK PROJECTS
           ══════════════════════════════════════════ */}
       <section style={{ marginTop: 0, paddingBottom: 16 }}>
-        <div className="content-wrap">
+        <div className="content-wrap" style={{ maxWidth: 800, paddingLeft: 64, paddingRight: 64 }}>
           <p
             className="section-label"
-            style={{ color: "#BBBBBB", marginBottom: 14, marginTop: 28 }}
+            style={{ color: "#BBBBBB", marginBottom: 14, marginTop: 80 }}
           >
             MOCK PROJECTS
           </p>
 
           <div
             className="grid grid-cols-1 sm:grid-cols-2"
-            style={{ gap: 12 }}
+            style={{ gap: 16 }}
           >
             {MOCK_PROJECTS.map((card) => (
               <ProjectCard key={card.href} {...card} />
@@ -246,7 +254,7 @@ export default function DreamsPage() {
           FOR FUN
           ══════════════════════════════════════════ */}
       <section style={{ paddingBottom: 80 }}>
-        <div className="content-wrap">
+        <div className="content-wrap" style={{ maxWidth: 800, paddingLeft: 64, paddingRight: 64 }}>
           <p
             className="section-label"
             style={{ color: "#BBBBBB", marginBottom: 14, marginTop: 48 }}
