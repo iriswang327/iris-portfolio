@@ -39,20 +39,6 @@ function SpotifyLogo() {
   );
 }
 
-function MetaLogo() {
-  return (
-    <svg
-      width="64"
-      height="36"
-      viewBox="0 0 120 68"
-      fill="white"
-      style={{ opacity: 0.08 }}
-      aria-hidden="true"
-    >
-      <path d="M30,34 C30,20 40,12 50,12 C57,12 62,16 68,24 C74,16 80,10 90,10 C100,10 110,18 110,34 C110,50 100,58 90,58 C80,58 74,52 68,44 C62,52 57,56 50,56 C40,56 30,48 30,34 Z M50,24 C44,24 42,29 42,34 C42,39 44,44 50,44 C55,44 60,40 66,34 C60,28 55,24 50,24 Z M90,22 C84,22 78,28 72,34 C78,40 84,46 90,46 C96,46 98,41 98,34 C98,27 96,22 90,22 Z" />
-    </svg>
-  );
-}
 
 function GeminiLogo() {
   return (
@@ -181,14 +167,6 @@ const CARDS: CardDef[] = [
     logo: <SpotifyLogo />,
     pill: "Spotify · Product Design",
     hoverDescription: "Discover what local businesses are listening to.",
-    locked: true,
-  },
-  {
-    id: "meta",
-    gradient: "linear-gradient(148deg, #1B2C5B 0%, #090F2E 100%)",
-    logo: <MetaLogo />,
-    pill: "Meta · Product Design",
-    hoverDescription: "A social-first approach to everyday wellness.",
     locked: true,
   },
 ];
