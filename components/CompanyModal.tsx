@@ -20,6 +20,8 @@ export interface CompanyModalProps {
   companyLogo: string;
   whyCompanyText: string;
   projects: ModalProject[];
+  /** Optional override for the ↗ expand button. Omit to hide the button. */
+  expandHref?: string;
 }
 
 // ─── Animation variants ──────────────────────────────────────────────────────
@@ -45,6 +47,7 @@ export default function CompanyModal({
   companyLogo,
   whyCompanyText,
   projects,
+  expandHref,
 }: CompanyModalProps) {
 
   // Close on Escape
@@ -66,7 +69,6 @@ export default function CompanyModal({
     return () => { document.body.style.overflow = ""; };
   }, [isOpen]);
 
-  const expandHref = `/dreams/${companyName.toLowerCase()}`;
 
   return (
     <AnimatePresence>
@@ -111,21 +113,25 @@ export default function CompanyModal({
               {/* ── Top action row ────────────────────────────────────── */}
               <div className="flex items-center justify-between" style={{ marginBottom: 28 }}>
 
-                {/* Expand ↗ — goes to full company page */}
-                <Link
-                  href={expandHref}
-                  className="flex items-center justify-center rounded-full transition-colors hover:bg-black/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A78BFA]"
-                  style={{
-                    width: 32,
-                    height: 32,
-                    border: "0.5px solid rgba(0,0,0,0.1)",
-                    fontSize: 14,
-                    color: "#AAAAAA",
-                  }}
-                  aria-label={`Expand ${companyName} full page`}
-                >
-                  ↗
-                </Link>
+                {/* Expand ↗ — only shown when an expandHref is provided */}
+                {expandHref ? (
+                  <Link
+                    href={expandHref}
+                    className="flex items-center justify-center rounded-full transition-colors hover:bg-black/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A78BFA]"
+                    style={{
+                      width: 32,
+                      height: 32,
+                      border: "0.5px solid rgba(0,0,0,0.1)",
+                      fontSize: 14,
+                      color: "#AAAAAA",
+                    }}
+                    aria-label={`Expand ${companyName} full page`}
+                  >
+                    ↗
+                  </Link>
+                ) : (
+                  <div style={{ width: 32 }} aria-hidden="true" />
+                )}
 
                 {/* Close × */}
                 <button
