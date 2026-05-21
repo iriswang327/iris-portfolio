@@ -28,7 +28,7 @@ export interface ReflectionColumn {
 export interface DesignCaseStudyProps {
   /** e.g. "Dreams → Apple → Maps Redesign" */
   breadcrumb: string;
-  /** Back link href — e.g. "/dreams/apple" */
+  /** Back link href — e.g. "/design" */
   backHref?: string;
   /** Back link label — e.g. "← Back to Apple" */
   backLabel?: string;
@@ -94,8 +94,8 @@ function Hairline({ style }: { style?: React.CSSProperties }) {
 
 export default function DesignCaseStudyTemplate({
   breadcrumb,
-  backHref = "/dreams",
-  backLabel = "← Back to Dreams",
+  backHref = "/design",
+  backLabel = "← Back to Design",
   title,
   subtitle,
   metadata,
