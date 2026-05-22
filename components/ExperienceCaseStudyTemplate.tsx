@@ -95,29 +95,35 @@ function SolutionTile({
   placeholderLabel,
   placeholderGradient,
 }: CaseStudySolutionTile) {
-  const [imageFailed, setImageFailed] = useState(false);
+  const [imageReady, setImageReady] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    const probe = new window.Image();
+    probe.onload = () => {
+      if (!cancelled) setImageReady(true);
+    };
+    probe.src = image;
+    return () => {
+      cancelled = true;
+    };
+  }, [image]);
 
   return (
     <div className="case-solution-tile">
       <div
         className="case-solution-tile-img"
-        style={
-          imageFailed
-            ? { background: placeholderGradient }
-            : undefined
-        }
+        style={!imageReady ? { background: placeholderGradient } : undefined}
       >
-        {!imageFailed && (
+        {imageReady ? (
           <Image
             src={image}
             alt={imageAlt}
             fill
             className="object-cover"
             sizes="(max-width: 768px) 100vw, 50vw"
-            onError={() => setImageFailed(true)}
           />
-        )}
-        {imageFailed && (
+        ) : (
           <span className="case-solution-placeholder-label">{placeholderLabel}</span>
         )}
       </div>
