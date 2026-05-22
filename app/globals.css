@@ -466,3 +466,39 @@ html[data-picker-active="1"] footer {
     padding-top: 0;
   }
 }
+
+/* ─────────────────────────────────────────────
+   Experience page — hero grid
+   ───────────────────────────────────────────── */
+
+.experience-hero {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 96px 40px 64px;
+  display: grid;
+  grid-template-columns: 1fr 440px;
+  gap: 80px;
+  align-items: start;
+}
+
+.looking-card {
+  margin-top: 12px;
+  background: #fff;
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow:
+    0 20px 60px -30px rgba(14, 14, 16, 0.15),
+    0 1px 3px rgba(14, 14, 16, 0.04);
+}
+
+@media (max-width: 960px) {
+  .experience-hero {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 96px 24px 64px;
+  }
+
+  .looking-card {
+    margin-top: 0;
+  }
+}
