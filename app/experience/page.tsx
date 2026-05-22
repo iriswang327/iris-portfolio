@@ -35,7 +35,7 @@ const TOWER_BRIDGE_MODAL: ModalConfig = {
       title: "Analytics Orchestration",
       subtitle:
         "Performance metrics, visibility tracking, and executive pitch decks for real client accounts.",
-      route: "/experience/tower-bridge/analytics-orchestration",
+      route: "/experience/tower-and-bridge",
     },
   ],
 };
