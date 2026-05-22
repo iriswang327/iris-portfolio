@@ -40,7 +40,7 @@ const TOWER_BRIDGE_MODAL: ModalConfig = {
 };
 
 const INTEGRATED_DESIGN_MODAL: ModalConfig = {
-  companyName: "Integrated Design",
+  companyName: "Integrated Design Project",
   companyLogo: "ID",
   whyCompanyText:
     "Orchestrated a full-semester user research process across student demographics and local businesses. Utilized rapid prototyping to evaluate friction points, successfully pivoting from retail merchandise systems to an integrated stadium jumbotron video framework coupled with a custom-coded responsive QR data-collection landing page.",
@@ -79,7 +79,7 @@ const STRATEGIC_IMPACT_CARDS: ImpactCardDef[] = [
     modal: TOWER_BRIDGE_MODAL,
   },
   {
-    id: "integrated-design",
+    id: "integrated-design-thinking",
     gradient: "linear-gradient(148deg, #FCE8F0 0%, #F4C8DC 100%)",
     pill: "Integrated Design · UX Research",
     pillDark: false,
@@ -116,15 +116,15 @@ const ANALYTICAL_LEDGER = [
     id: "tulj",
     organizationName: "Texas Undergraduate Law Journal",
     roleName: "staff writer",
-    timeline: "2023–2025",
+    timeline: "2025-present",
     icon: "⚖",
     papers: LAW_PAPERS,
   },
   {
     id: "daily-texan",
     organizationName: "The Daily Texan",
-    roleName: "editorial illustrator",
-    timeline: "2024–present",
+    roleName: "opinion illustrator",
+    timeline: "2024–2025",
     icon: "✎",
     linkHref: "#",
     linkLabel: "view illustration archive →",
@@ -152,13 +152,6 @@ const OPERATIONAL_LEDGER = [
     roleTitle: "Office Manager & Teaching Assistant",
     dateRange: "2022–2025",
     icon: "S",
-  },
-  {
-    id: "daily-texan",
-    companyName: "The Daily Texan",
-    roleTitle: "Opinion Illustrator",
-    dateRange: "2024–2025",
-    icon: "✎",
   },
   {
     id: "asuci",
@@ -303,7 +296,7 @@ export default function ExperiencePage() {
 
         {/* ── Pillar 1: Strategic Impact Cases ────────────────────────── */}
         <section style={{ marginTop: 64, marginBottom: 80 }}>
-          <SectionLabel>Strategic Impact Cases</SectionLabel>
+          <SectionLabel>Selected Projects</SectionLabel>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto px-6 mb-16">
             {STRATEGIC_IMPACT_CARDS.map((card) => (
@@ -323,7 +316,7 @@ export default function ExperiencePage() {
 
         {/* ── Pillar 2: Analytical & Publication Ledger ────────────────── */}
         <section style={{ marginTop: 64, marginBottom: 80 }}>
-          <SectionLabel>Analytical Ledger &amp; Public Media</SectionLabel>
+          <SectionLabel>Publications &amp; Illustrations</SectionLabel>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto px-6 mt-6 w-full items-start">
             {ANALYTICAL_LEDGER.map((entry) => (
@@ -366,7 +359,7 @@ export default function ExperiencePage() {
 
         {/* ── Pillar 3: Operational Archive ───────────────────────────── */}
         <section style={{ marginTop: 64 }}>
-          <SectionLabel>Operational Archive</SectionLabel>
+          <SectionLabel>Marketing &amp; Operations</SectionLabel>
 
           <div className="flex w-full flex-col">
             {OPERATIONAL_LEDGER.map((entry) => (
