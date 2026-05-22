@@ -114,7 +114,7 @@ const LAW_PAPERS = [
 const ANALYTICAL_LEDGER = [
   {
     id: "tulj",
-    organizationName: "texas undergraduate law journal",
+    organizationName: "Texas Undergraduate Law Journal",
     roleName: "staff writer",
     timeline: "2023–2025",
     icon: "⚖",
@@ -122,7 +122,7 @@ const ANALYTICAL_LEDGER = [
   },
   {
     id: "daily-texan",
-    organizationName: "the daily texan",
+    organizationName: "The Daily Texan",
     roleName: "editorial illustrator",
     timeline: "2024–present",
     icon: "✎",
@@ -133,32 +133,39 @@ const ANALYTICAL_LEDGER = [
 
 const OPERATIONAL_LEDGER = [
   {
-    id: "sparro",
-    organizationName: "sparrowriting services",
-    roleName: "office manager & teaching assistant",
-    timeline: "2022–2025",
-    icon: "S",
-  },
-  {
-    id: "asuci",
-    organizationName: "asuci student government",
-    roleName: "outreach executive intern",
-    timeline: "2023–2024",
-    icon: "A",
+    id: "letters-of-gold",
+    companyName: "Letters of Gold",
+    roleTitle: "Director of Special Projects",
+    dateRange: "2025–Present",
+    icon: "G",
   },
   {
     id: "longhorn-racing",
-    organizationName: "longhorn racing",
-    roleName: "design contributor",
-    timeline: "2024–2025",
+    companyName: "Longhorn Racing",
+    roleTitle: "Operations Team · Designer",
+    dateRange: "2025–Present",
     icon: "L",
   },
   {
-    id: "letters-of-gold",
-    organizationName: "letters of gold",
-    roleName: "editorial contributor",
-    timeline: "2023–2024",
-    icon: "G",
+    id: "sparro",
+    companyName: "SparroWriting Services",
+    roleTitle: "Office Manager & Teaching Assistant",
+    dateRange: "2022–2025",
+    icon: "S",
+  },
+  {
+    id: "daily-texan",
+    companyName: "The Daily Texan",
+    roleTitle: "Opinion Illustrator",
+    dateRange: "2024–2025",
+    icon: "✎",
+  },
+  {
+    id: "asuci",
+    companyName: "ASUCI Student Government",
+    roleTitle: "Design & Outreach Intern",
+    dateRange: "2023–2024",
+    icon: "A",
   },
 ] as const;
 
@@ -192,10 +199,7 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   );
 }
 
-// ─── Ledger row ───────────────────────────────────────────────────────────────
-
-const LEDGER_ROW_CLASS =
-  "flex items-center justify-between py-5 border-b border-black/[0.04] w-full max-w-6xl mx-auto px-6 group transition-colors duration-300 hover:bg-neutral-50/40 rounded-xl";
+// ─── Shared badge ─────────────────────────────────────────────────────────────
 
 function LedgerBadge({ icon }: { icon: string }) {
   return (
@@ -205,26 +209,41 @@ function LedgerBadge({ icon }: { icon: string }) {
   );
 }
 
-function LedgerTextStack({
-  organizationName,
-  roleName,
-  timeline,
+// ─── Operational archive row ──────────────────────────────────────────────────
+
+function OperationalArchiveRow({
+  icon,
+  companyName,
+  roleTitle,
+  dateRange,
 }: {
-  organizationName: string;
-  roleName: string;
-  timeline: string;
+  icon: string;
+  companyName: string;
+  roleTitle: string;
+  dateRange: string;
 }) {
   return (
-    <div className="ml-4 flex flex-grow flex-col gap-0.5">
-      <p className="text-[13px] font-medium text-neutral-800">{organizationName}</p>
-      <p className="text-[12px] font-light text-neutral-400">
-        {roleName} &middot; {timeline}
-      </p>
+    <div className="flex items-center justify-between py-4 border-b border-black/[0.04] w-full max-w-6xl mx-auto px-6 group transition-colors duration-300 hover:bg-neutral-50/30 rounded-xl">
+      <div className="flex items-center gap-4">
+        <LedgerBadge icon={icon} />
+        <div className="flex flex-col gap-0.5">
+          <p className="text-[14px] font-semibold tracking-normal text-neutral-900">
+            {companyName}
+          </p>
+          <p className="text-[12px] font-light text-neutral-400">{roleTitle}</p>
+        </div>
+      </div>
+      <span className="text-[12px] font-light text-neutral-400/80 tracking-normal tabular-nums text-right select-none">
+        {dateRange}
+      </span>
     </div>
   );
 }
 
-function LedgerRow({
+const ANALYTICAL_LINK_CLASS =
+  "mt-1 inline-flex items-center gap-1 text-[11px] font-medium lowercase tracking-wide text-indigo-500/90 transition-all duration-300 hover:text-indigo-600 hover:underline";
+
+function AnalyticalColumnHeader({
   icon,
   organizationName,
   roleName,
@@ -236,21 +255,19 @@ function LedgerRow({
   timeline: string;
 }) {
   return (
-    <div className={LEDGER_ROW_CLASS}>
-      <div className="flex min-w-0 flex-1 items-center">
-        <LedgerBadge icon={icon} />
-        <LedgerTextStack
-          organizationName={organizationName}
-          roleName={roleName}
-          timeline={timeline}
-        />
+    <div className="flex items-center">
+      <LedgerBadge icon={icon} />
+      <div className="ml-4 flex flex-col">
+        <p className="text-[14px] font-semibold tracking-normal text-neutral-900">
+          {organizationName}
+        </p>
+        <p className="mt-0.5 text-[12px] font-light text-neutral-400">
+          {roleName} &middot; {timeline}
+        </p>
       </div>
     </div>
   );
 }
-
-const LINK_CLASS =
-  "mt-1 block text-[11px] font-normal lowercase tracking-wide text-indigo-400/80 transition-all duration-300 hover:text-indigo-500 hover:underline";
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
@@ -308,31 +325,34 @@ export default function ExperiencePage() {
         <section style={{ marginTop: 64, marginBottom: 80 }}>
           <SectionLabel>Analytical Ledger &amp; Public Media</SectionLabel>
 
-          <div className="flex w-full flex-col">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto px-6 mt-6 w-full items-start">
             {ANALYTICAL_LEDGER.map((entry) => (
               <div key={entry.id}>
-                <LedgerRow
+                <AnalyticalColumnHeader
                   icon={entry.icon}
                   organizationName={entry.organizationName}
                   roleName={entry.roleName}
                   timeline={entry.timeline}
                 />
 
-                {"papers" in entry &&
-                  entry.papers.map((paper) => (
-                    <div key={paper.title} className="px-6 pb-4">
-                      <p className="mt-2 pl-15 text-[13px] font-light text-neutral-600">
-                        {paper.title}
-                      </p>
-                      <Link href={paper.href} className={`${LINK_CLASS} pl-15`}>
-                        read research paper →
-                      </Link>
-                    </div>
-                  ))}
+                {"papers" in entry && (
+                  <div className="mt-4 flex flex-col gap-4 pl-[60px]">
+                    {entry.papers.map((paper) => (
+                      <div key={paper.title}>
+                        <p className="text-[13px] font-normal leading-relaxed text-neutral-600">
+                          {paper.title}
+                        </p>
+                        <Link href={paper.href} className={ANALYTICAL_LINK_CLASS}>
+                          read research paper →
+                        </Link>
+                      </div>
+                    ))}
+                  </div>
+                )}
 
                 {"linkHref" in entry && (
-                  <div className="px-6 pb-4">
-                    <Link href={entry.linkHref} className={`${LINK_CLASS} pl-15`}>
+                  <div className="mt-4 flex flex-col gap-4 pl-[60px]">
+                    <Link href={entry.linkHref} className={ANALYTICAL_LINK_CLASS}>
                       {entry.linkLabel}
                     </Link>
                   </div>
@@ -350,12 +370,12 @@ export default function ExperiencePage() {
 
           <div className="flex w-full flex-col">
             {OPERATIONAL_LEDGER.map((entry) => (
-              <LedgerRow
+              <OperationalArchiveRow
                 key={entry.id}
                 icon={entry.icon}
-                organizationName={entry.organizationName}
-                roleName={entry.roleName}
-                timeline={entry.timeline}
+                companyName={entry.companyName}
+                roleTitle={entry.roleTitle}
+                dateRange={entry.dateRange}
               />
             ))}
           </div>
