@@ -40,23 +40,6 @@ const TOWER_BRIDGE_MODAL: ModalConfig = {
   ],
 };
 
-const TEXAS_CONVERGENT_MODAL: ModalConfig = {
-  companyName: "Texas Convergent",
-  companyLogo: "TC",
-  companyLogoImage: "/images/convergent-logo.png",
-  whyCompanyText:
-    "Built Ripple solo — Best Presentation, Fall 2024. Bridging the gap between UX designers and high-intent research participants.",
-  projects: [
-    {
-      title: "Ripple",
-      subtitle:
-        "A product design sprint connecting designers with research participants at speed.",
-      route: "/design/ripple",
-      preview: "/images/ripple-modal-preview.png",
-    },
-  ],
-};
-
 const INTEGRATED_DESIGN_MODAL: ModalConfig = {
   companyName: "Integrated Design",
   companyLogo: "ID",
@@ -95,14 +78,6 @@ const STRATEGIC_IMPACT_CARDS: ImpactCardDef[] = [
     pillDark: false,
     hoverDescription: "Real clients, real strategy, real stakes.",
     modal: TOWER_BRIDGE_MODAL,
-  },
-  {
-    id: "texas-convergent",
-    gradient: "linear-gradient(148deg, #EEEAFF 0%, #C8BFFF 100%)",
-    pill: "Texas Convergent · Product Design",
-    pillDark: false,
-    hoverDescription: "Built Ripple solo — Best Presentation, Fall 2024.",
-    modal: TEXAS_CONVERGENT_MODAL,
   },
   {
     id: "integrated-design",
@@ -350,7 +325,7 @@ export default function ExperiencePage() {
         <section style={{ marginTop: 64, marginBottom: 80 }}>
           <SectionLabel>Strategic Impact Cases</SectionLabel>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto px-6 mb-16">
             {STRATEGIC_IMPACT_CARDS.map((card) => (
               <ProjectCard
                 key={card.id}
