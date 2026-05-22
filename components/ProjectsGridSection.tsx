@@ -181,7 +181,7 @@ const CARDS: CardDef[] = [
     pillDark: true,
     hoverDescription: "Contextual crypto news in the trading experience.",
     videoUrl: "/videos/gemini-thumbnail.mp4",
-    frameClassName: "w-full h-full aspect-[16/10] bg-gradient-to-tr from-slate-900 via-blue-950/40 to-slate-900 rounded-2xl p-6 border border-black/[0.03] shadow-[0_15px_40px_rgba(0,0,0,0.03)] flex items-center justify-center overflow-hidden",
+    frameClassName: "w-full h-full aspect-[16/10] bg-gradient-to-tr from-sky-100/40 via-blue-50/20 to-slate-50/60 rounded-2xl p-6 border border-blue-200/20 shadow-[0_15px_40px_rgba(0,0,0,0.02)] flex items-center justify-center overflow-hidden transition-all duration-500 hover:shadow-[0_20px_50px_rgba(14,165,233,0.05)]",
     modal: GEMINI_MODAL,
   },
   {

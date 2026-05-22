@@ -71,7 +71,7 @@ export default function ProjectCard({
                 muted
                 loop
                 playsInline
-                className="rounded-xl shadow-md border border-black/[0.02] max-h-[85%] object-contain"
+                className="max-h-[85%] w-auto object-contain rounded-xl shadow-sm border border-black/[0.01]"
                 src={videoUrl}
                 aria-hidden="true"
               />
@@ -80,7 +80,7 @@ export default function ProjectCard({
               <img
                 src={imageUrl}
                 alt=""
-                className="rounded-xl shadow-md border border-black/[0.02] max-h-[85%] object-contain"
+                className="max-h-[85%] w-auto object-contain rounded-xl shadow-sm border border-black/[0.01]"
                 aria-hidden="true"
               />
             )}
