@@ -354,39 +354,33 @@ export default function DesignCaseStudyTemplate({
               {processSteps.map((ps, idx) => (
                 <div key={ps.step}>
                   {/* Process image / coloured placeholder */}
-                  <div
-                    style={{
-                      height: 160,
-                      borderRadius: 12,
-                      background: ps.image ? "transparent" : STEP_COLORS[idx % STEP_COLORS.length],
-                      border: "1px solid rgba(0,0,0,0.06)",
-                      overflow: "hidden",
-                      marginBottom: 12,
-                    }}
-                    aria-label={ps.step}
-                  >
-                    {ps.image ? (
-                      <img
-                        src={ps.image}
-                        alt={ps.step}
-                        className="w-full h-full object-cover rounded-lg"
-                      />
-                    ) : (
-                      <div
-                        style={{
-                          width: "100%",
-                          height: "100%",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                        }}
-                      >
-                        <span style={{ fontSize: 12, fontWeight: 300, color: "rgba(26,22,37,0.3)" }}>
-                          [ image ]
-                        </span>
-                      </div>
-                    )}
-                  </div>
+                  {ps.image ? (
+                    <img
+                      src={ps.image}
+                      alt={ps.step}
+                      className="w-full h-auto object-cover rounded-xl border border-black/[0.03] shadow-sm"
+                      style={{ marginBottom: 12 }}
+                    />
+                  ) : (
+                    <div
+                      style={{
+                        height: 160,
+                        borderRadius: 12,
+                        background: STEP_COLORS[idx % STEP_COLORS.length],
+                        border: "1px solid rgba(0,0,0,0.06)",
+                        overflow: "hidden",
+                        marginBottom: 12,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                      aria-label={ps.step}
+                    >
+                      <span style={{ fontSize: 12, fontWeight: 300, color: "rgba(26,22,37,0.3)" }}>
+                        [ image ]
+                      </span>
+                    </div>
+                  )}
 
                   {/* Step label */}
                   <p

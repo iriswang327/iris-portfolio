@@ -29,11 +29,13 @@ export default function GeminiPage() {
       processSteps={[
         { 
           step: "01 / Structural Audit", 
-          text: "Redesigning the blog homepage with a unified tagging system, a consistent rounded-card architecture, and explicit breaking news markers for high-impact headlines." 
+          text: "Redesigning the blog homepage with a unified tagging system, a consistent rounded-card architecture, and explicit breaking news markers for high-impact headlines.",
+          image: "/images/gemini-process-1.png",
         },
         { 
           step: "02 / The Designer Critique", 
-          text: "A Gemini Product Designer pushed my strategy further, challenging me to bridge the layout directly to business volume metrics and explore non-persistent banner entry points." 
+          text: "A Gemini Product Designer pushed my strategy further, challenging me to bridge the layout directly to business volume metrics and explore non-persistent banner entry points.",
+          image: "/images/gemini-process-2.png",
         }
       ]}
       reflectionColumns={[
@@ -51,34 +53,45 @@ export default function GeminiPage() {
         }
       ]}
     >
-      {/* Media Block Slot: Showcases your light & dark phone layouts side-by-side */}
-      <div className="space-y-8 w-full mt-12">
+      {/* ── Final Design: Tiered desktop + mobile layout ── */}
+      <div className="space-y-12 w-full mt-12">
 
-        {/* Final Design Centerpiece Container */}
-        <div className="rounded-2xl overflow-hidden border border-black/5 shadow-sm bg-gradient-to-tr from-[#1E1030] to-[#0B0718] p-6 sm:p-12">
-          <img
-            src="/images/gemini-hero-frame.jpg"
-            alt="Gemini Native Mobile Interface Final Light Mode Design"
-            className="w-full h-auto object-contain block mx-auto rounded-xl drop-shadow-xl"
-          />
+        {/* Tier 1: Dual desktop wireframe grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto mb-12 px-4">
+          {[
+            { src: "/images/gemini-desktop-all.png",     label: "01 / Platform Hub — Core Blog News Layout" },
+            { src: "/images/gemini-desktop-markets.png", label: "02 / Platform Hub — Integrated Financial Markets Stream" },
+          ].map(({ src, label }) => (
+            <div key={src} className="flex flex-col gap-3">
+              <img
+                src={src}
+                alt={label}
+                className="w-full h-auto object-contain rounded-2xl border border-black/[0.04] shadow-[0_20px_50px_rgba(0,0,0,0.03)] bg-white"
+              />
+              <p className="text-[10px] font-normal tracking-[0.14em] uppercase text-[#BBBBBB]">
+                {label}
+              </p>
+            </div>
+          ))}
         </div>
 
-        {/* Supporting Process & Operational States Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-[#0A0A0A] rounded-xl overflow-hidden border border-white/5 p-4">
-            <img
-              src="/images/gemini-dark-mockup.png"
-              alt="Low-Light Responsive Mobile News Feed Component Layout"
-              className="w-full h-auto object-contain block mx-auto rounded-xl"
-            />
-          </div>
-          <div className="bg-white rounded-xl overflow-hidden border border-black/5 p-4">
-            <img
-              src="/images/gemini-web-audit.jpg"
-              alt="Gemini Platform Desktop Web Reference Integration"
-              className="w-full h-auto object-contain block mx-auto rounded-xl"
-            />
-          </div>
+        {/* Tier 2: Split flat mobile UI grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-4xl mx-auto px-4">
+          {[
+            { src: "/images/gemini-mobile-dark.png",  label: "03 / Native Mobile Flow (Dark UI Token Ecosystem)" },
+            { src: "/images/gemini-mobile-light.png", label: "04 / Native Mobile Flow (Light UI Token Ecosystem)" },
+          ].map(({ src, label }) => (
+            <div key={src} className="flex flex-col gap-3">
+              <img
+                src={src}
+                alt={label}
+                className="w-full h-auto object-contain rounded-xl border border-black/[0.04] shadow-[0_15px_40px_rgba(0,0,0,0.04)] bg-white transition-transform duration-300 hover:scale-[1.01]"
+              />
+              <p className="text-[10px] font-normal tracking-[0.14em] uppercase text-[#BBBBBB]">
+                {label}
+              </p>
+            </div>
+          ))}
         </div>
 
       </div>
