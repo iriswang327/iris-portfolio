@@ -10,9 +10,9 @@ export interface ProjectCardProps {
   href?: string;
   /** When provided the card renders as a button and fires this callback on click. */
   onClick?: () => void;
-  /** When true the card shows a "currently building 🔒" overlay on hover and does not navigate. */
+  /** When true the card shows a lock emblem overlay on hover and does not navigate. */
   locked?: boolean;
-  /** CSS gradient string used when no videoUrl is provided */
+  /** CSS gradient string used when no videoUrl or imageUrl is provided */
   gradient: string;
   /** Optional center logo / icon — ReactNode for flexibility */
   logo?: ReactNode;
@@ -24,6 +24,8 @@ export interface ProjectCardProps {
   hoverDescription: string;
   /** If provided, a looping muted autoplay video fills the card instead of the gradient */
   videoUrl?: string;
+  /** If provided, a static image fills the card instead of the gradient */
+  imageUrl?: string;
 }
 
 export default function ProjectCard({
@@ -36,32 +38,54 @@ export default function ProjectCard({
   pillDark = false,
   hoverDescription,
   videoUrl,
+  imageUrl,
 }: ProjectCardProps) {
   const [hovered, setHovered] = useState(false);
 
   const cardInner = (
-    <motion.div
+      <motion.div
       className="relative overflow-hidden rounded-[20px] w-full bg-white border border-black/[0.02] shadow-[0_20px_50px_-12px_rgba(0,0,0,0.04),0_0_1px_rgba(0,0,0,0.12)]"
-      style={{ height: 340, cursor: locked ? "default" : "pointer" }}
+      style={{ height: 340, cursor: onClick || (!locked && href) ? "pointer" : "default" }}
       animate={{ scale: hovered && !locked ? 0.97 : 1 }}
       transition={{ duration: 0.3, ease: [0.34, 1.56, 0.64, 1] }}
       aria-label={pill}
     >
-      {/* ── Background: video or gradient ── */}
+      {/* ── Background: video, image, or gradient ── */}
       {videoUrl ? (
         <video
           autoPlay
           muted
           loop
           playsInline
-          className="absolute inset-0 object-contain p-8 w-full h-full bg-white transition-transform duration-500 hover:scale-[1.02]"
+          className="absolute inset-0 object-contain p-8 w-full h-full bg-white"
+          style={{
+            filter: locked && hovered ? "blur(8px)" : "none",
+            transform: locked && hovered ? "scale(1.06)" : "scale(1)",
+            transition: "filter 500ms ease, transform 500ms ease",
+          }}
           src={videoUrl}
+          aria-hidden="true"
+        />
+      ) : imageUrl ? (
+        <img
+          src={imageUrl}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{
+            filter: locked && hovered ? "blur(8px)" : "none",
+            transform: locked && hovered ? "scale(1.06)" : "scale(1)",
+            transition: "filter 500ms ease, transform 500ms ease",
+          }}
           aria-hidden="true"
         />
       ) : (
         <div
           className="absolute inset-0"
-          style={{ background: gradient }}
+          style={{
+            background: gradient,
+            filter: locked && hovered ? "blur(8px)" : "none",
+            transition: "filter 500ms ease",
+          }}
           aria-hidden="true"
         />
       )}
@@ -76,32 +100,21 @@ export default function ProjectCard({
         </div>
       )}
 
-      {/* ── Locked overlay — fades in on hover ── */}
-      <motion.div
-        className="absolute inset-0 flex items-center justify-center"
-        style={{
-          background: "rgba(0,0,0,0.52)",
-          backdropFilter: "blur(6px)",
-          WebkitBackdropFilter: "blur(6px)",
-          borderRadius: 20,
-          pointerEvents: "none",
-        }}
-        initial={false}
-        animate={{ opacity: locked && hovered ? 1 : 0 }}
-        transition={{ duration: 0.2, ease: "easeOut" }}
-        aria-hidden="true"
-      >
-        <span
-          style={{
-            fontSize: 13,
-            fontWeight: 300,
-            color: "rgba(255,255,255,0.85)",
-            letterSpacing: "0.03em",
-          }}
+      {/* ── Locked overlay — lock emblem fades in on hover ── */}
+      {locked && (
+        <motion.div
+          className="absolute inset-0 flex items-center justify-center"
+          style={{ borderRadius: 20, pointerEvents: "none" }}
+          initial={false}
+          animate={{ opacity: hovered ? 1 : 0 }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
+          aria-hidden="true"
         >
-          currently building 🔒
-        </span>
-      </motion.div>
+          <div className="bg-black/40 backdrop-blur-md text-white p-3 rounded-full border border-white/10 shadow-lg text-xl">
+            🔒
+          </div>
+        </motion.div>
+      )}
 
       {/* ── Pill — bottom-left ── */}
       <div

@@ -166,6 +166,7 @@ interface CardDef {
   pillDark?: boolean;
   hoverDescription: string;
   videoUrl?: string;
+  imageUrl?: string;
   locked?: boolean;
   modal?: ModalConfig;
 }
@@ -197,6 +198,7 @@ const CARDS: CardDef[] = [
     logo: <AppleLogo />,
     pill: "Apple · Product Design",
     hoverDescription: "Rethinking how Maps connects people to context.",
+    imageUrl: "/images/apple-thumbnail.png",
     locked: true,
     modal: APPLE_MODAL,
   },
@@ -206,6 +208,7 @@ const CARDS: CardDef[] = [
     logo: <SpotifyLogo />,
     pill: "Spotify · Product Design",
     hoverDescription: "Discover what local businesses are listening to.",
+    imageUrl: "/images/spotify-thumbnail.png",
     locked: true,
     modal: SPOTIFY_MODAL,
   },
@@ -232,6 +235,7 @@ export default function ProjectsGridSection() {
             pillDark={card.pillDark}
             hoverDescription={card.hoverDescription}
             videoUrl={card.videoUrl}
+            imageUrl={card.imageUrl}
             locked={card.locked}
             onClick={card.modal ? () => setActiveModal(card.modal!) : undefined}
           />
