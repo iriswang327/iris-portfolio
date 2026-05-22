@@ -167,6 +167,7 @@ interface CardDef {
   hoverDescription: string;
   videoUrl?: string;
   imageUrl?: string;
+  frameClassName?: string;
   locked?: boolean;
   modal?: ModalConfig;
 }
@@ -180,6 +181,7 @@ const CARDS: CardDef[] = [
     pillDark: true,
     hoverDescription: "Contextual crypto news in the trading experience.",
     videoUrl: "/videos/gemini-thumbnail.mp4",
+    frameClassName: "w-full h-full aspect-[16/10] bg-gradient-to-tr from-slate-900 via-blue-950/40 to-slate-900 rounded-2xl p-6 border border-black/[0.03] shadow-[0_15px_40px_rgba(0,0,0,0.03)] flex items-center justify-center overflow-hidden",
     modal: GEMINI_MODAL,
   },
   {
@@ -190,6 +192,7 @@ const CARDS: CardDef[] = [
     pillDark: true,
     hoverDescription: "Bridging designers and research participants at speed.",
     videoUrl: "/videos/ripple-thumbnail.mp4",
+    frameClassName: "w-full h-full aspect-[16/10] bg-gradient-to-tr from-purple-950/20 via-indigo-500/5 to-slate-50 rounded-2xl p-6 border border-black/[0.03] shadow-[0_15px_40px_rgba(0,0,0,0.03)] flex items-center justify-center overflow-hidden",
     modal: TC_MODAL,
   },
   {
@@ -244,6 +247,7 @@ export default function ProjectsGridSection() {
                 hoverDescription={card.hoverDescription}
                 videoUrl={card.videoUrl}
                 imageUrl={card.imageUrl}
+                frameClassName={card.frameClassName}
                 locked={card.locked}
                 onClick={card.modal ? () => setActiveModal(card.modal!) : undefined}
               />

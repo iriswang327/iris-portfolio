@@ -216,28 +216,19 @@ function ArchiveRow({
 export default function ExperiencePage() {
   return (
     <div
+      className="relative overflow-hidden"
       style={{
         backgroundColor: "var(--background)",
         paddingTop: 56,
         paddingBottom: 100,
       }}
     >
+      {/* Signature watercolor gradient — right-margin accent */}
+      <div className="absolute top-[15%] right-[-10%] w-[700px] h-[700px] bg-gradient-to-br from-purple-400/5 via-pink-400/[0.04] to-cyan-400/5 rounded-full blur-[140px] pointer-events-none -z-10" aria-hidden="true" />
       <div className="mx-auto w-full" style={{ maxWidth: 960, padding: "0 32px" }}>
 
         {/* ── Hero header ─────────────────────────────────────────────── */}
         <div style={{ paddingTop: 64, marginBottom: 72 }}>
-          <p
-            style={{
-              fontSize: 10,
-              fontWeight: 400,
-              color: "#BBBBBB",
-              letterSpacing: "0.16em",
-              textTransform: "uppercase",
-              marginBottom: 16,
-            }}
-          >
-            Executive Dossier
-          </p>
           <h1
             style={{
               fontSize: 40,
