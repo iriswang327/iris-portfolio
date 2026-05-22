@@ -26,6 +26,8 @@ export interface ProjectCardProps {
   videoUrl?: string;
   /** If provided, a static image fills the card instead of the gradient */
   imageUrl?: string;
+  /** If provided, renders the video/image inside a styled backdrop frame instead of full-bleed */
+  frameClassName?: string;
 }
 
 export default function ProjectCard({
@@ -39,6 +41,7 @@ export default function ProjectCard({
   hoverDescription,
   videoUrl,
   imageUrl,
+  frameClassName,
 }: ProjectCardProps) {
   const [hovered, setHovered] = useState(false);
 
@@ -50,8 +53,40 @@ export default function ProjectCard({
       transition={{ duration: 0.3, ease: [0.34, 1.56, 0.64, 1] }}
       aria-label={pill}
     >
-      {/* ── Background: video, image, or gradient ── */}
-      {videoUrl ? (
+      {/* ── Background: framed, video, image, or gradient ── */}
+      {frameClassName ? (
+        <div
+          className="absolute inset-0"
+          style={{
+            filter: locked && hovered ? "blur(8px)" : "none",
+            transform: locked && hovered ? "scale(1.06)" : "scale(1)",
+            transition: "filter 500ms ease, transform 500ms ease",
+          }}
+          aria-hidden="true"
+        >
+          <div className={frameClassName}>
+            {videoUrl && (
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="rounded-xl shadow-md border border-black/[0.02] max-h-[85%] object-contain"
+                src={videoUrl}
+                aria-hidden="true"
+              />
+            )}
+            {!videoUrl && imageUrl && (
+              <img
+                src={imageUrl}
+                alt=""
+                className="rounded-xl shadow-md border border-black/[0.02] max-h-[85%] object-contain"
+                aria-hidden="true"
+              />
+            )}
+          </div>
+        </div>
+      ) : videoUrl ? (
         <video
           autoPlay
           muted

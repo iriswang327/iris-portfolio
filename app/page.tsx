@@ -40,8 +40,8 @@ export default function DreamsPage() {
       >
         <ParallaxHeroGradient />
 
-        {/* Left-aligned, max 680px, hugs left edge */}
-        <div className="relative z-10" style={{ maxWidth: 680, paddingLeft: 24, paddingRight: 24 }}>
+        {/* Left-aligned, max 680px */}
+        <div className="relative z-10" style={{ maxWidth: 680, paddingLeft: 32, paddingRight: 32 }}>
           {/* Row 1: Status indicator */}
           <div className="flex items-center gap-2">
             <span
@@ -57,18 +57,25 @@ export default function DreamsPage() {
             </span>
           </div>
 
-          {/* Row 2: Name with watercolor splash */}
+          {/* Row 2: Name */}
           <h1
-            className="name-splash font-[200] leading-tight"
-            style={{ color: "var(--foreground)", marginTop: 16, fontSize: 36, letterSpacing: "-0.02em" }}
+            className="name-splash font-[200]"
+            style={{
+              color: "var(--foreground)",
+              marginTop: 16,
+              marginBottom: 14,
+              fontSize: 40,
+              letterSpacing: "-0.025em",
+              lineHeight: 1.15,
+            }}
           >
             iris wang
           </h1>
 
-          {/* Row 3: Product [role] for [audience] — 4px below name */}
+          {/* Row 3: Product [role] for [audience] */}
           <div
             className="flex items-baseline gap-[7px] font-[300] flex-wrap"
-            style={{ color: "var(--foreground)", marginTop: 4, fontSize: 18 }}
+            style={{ color: "var(--foreground)", fontSize: 18 }}
           >
             <span>Product</span>
             <RotatingWords
@@ -85,7 +92,7 @@ export default function DreamsPage() {
           {/* Row 4: Tagline */}
           <p
             className="font-[300]"
-            style={{ color: "#888888", marginTop: 12, fontSize: 15, lineHeight: 1.6 }}
+            style={{ color: "#888888", marginTop: 12, fontSize: 14, lineHeight: 1.7 }}
           >
             Working at the edges of law, tech, and people.
           </p>
@@ -113,18 +120,15 @@ export default function DreamsPage() {
           FOR FUN
           ══════════════════════════════════════════ */}
       <section style={{ paddingBottom: 80 }}>
-        <div style={{ paddingLeft: 24, paddingRight: 24 }}>
+        <div className="w-full max-w-6xl mx-auto px-6 my-16 block">
           <p
             className="section-label"
-            style={{ color: "#BBBBBB", marginBottom: 14, marginTop: 48 }}
+            style={{ color: "#BBBBBB", marginBottom: 14 }}
           >
             FOR FUN
           </p>
 
-          <div
-            className="grid grid-cols-1 sm:grid-cols-3"
-            style={{ gap: 10 }}
-          >
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {FUN_CARDS.map((card) => (
               <FunCard key={card.href} {...card} />
             ))}
