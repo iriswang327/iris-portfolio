@@ -95,6 +95,7 @@ interface ModalConfig {
 const GEMINI_MODAL: ModalConfig = {
   companyName: "Gemini",
   companyLogo: "G",
+  companyLogoImage: "/images/gemini-logo.png",
   whyCompanyText:
     "Crypto is intimidating because the information is scattered and hard to trust. I want to bring contextual, reliable news into the trading experience.",
   projects: [
@@ -103,6 +104,7 @@ const GEMINI_MODAL: ModalConfig = {
       subtitle:
         "Turning a siloed content blog into an integrated intelligence layer inside the active trading flow.",
       route: "/design/gemini",
+      preview: "/images/gemini-modal-preview.png",
     },
   ],
 };
