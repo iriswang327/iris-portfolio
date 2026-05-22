@@ -273,20 +273,18 @@ export default function ExperiencePage() {
       style={{ backgroundColor: "transparent", paddingBottom: 100 }}
     >
       {/* Watercolor gradient orbs */}
-      <div className="absolute top-[-8%] left-[-8%] w-[650px] h-[650px] bg-pink-400/20 rounded-full blur-[120px] pointer-events-none -z-10" aria-hidden="true" />
-      <div className="absolute top-[15%] right-[-10%] w-[700px] h-[700px] bg-purple-400/20 rounded-full blur-[110px] pointer-events-none -z-10" aria-hidden="true" />
-      <div className="absolute bottom-[5%] right-[-5%] w-[500px] h-[500px] bg-cyan-400/15 rounded-full blur-[100px] pointer-events-none -z-10" aria-hidden="true" />
-      <div className="absolute bottom-[20%] left-[-5%] w-[500px] h-[500px] bg-blue-300/15 rounded-full blur-[110px] pointer-events-none -z-10" aria-hidden="true" />
+      <div className="absolute top-[-15%] right-[-10%] w-[650px] h-[650px] bg-indigo-300/6 rounded-full blur-[120px] pointer-events-none -z-10" aria-hidden="true" />
+      <div className="absolute top-[10%] right-[-5%] w-[600px] h-[600px] bg-purple-400/4 rounded-full blur-[130px] pointer-events-none -z-10" aria-hidden="true" />
       <div className="w-full max-w-6xl mx-auto px-6 pt-36 pb-12 block">
 
         {/* ── Hero header ─────────────────────────────────────────────── */}
-        <h1 className="text-[56px] font-thin tracking-tight text-neutral-800 lowercase mb-6 select-none">
+        <h1 className="text-[44px] font-thin tracking-tight text-neutral-800 lowercase mb-5 select-none">
           experience
         </h1>
-        <p className="text-[18px] font-normal tracking-normal text-neutral-800">
+        <p className="text-[16px] font-normal tracking-normal text-neutral-500/90">
           Advertising + Business + Design + Law.
         </p>
-        <p className="text-[15px] font-normal text-neutral-400 tracking-normal mt-4">
+        <p className="text-[15px] font-normal text-neutral-400 tracking-normal mt-3">
           All with the goal of making complex things human.
         </p>
 
