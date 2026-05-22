@@ -280,17 +280,15 @@ export default function ExperiencePage() {
       <div className="w-full max-w-6xl mx-auto px-6 pt-36 pb-12 block">
 
         {/* ── Hero header ─────────────────────────────────────────────── */}
-        <div className="mb-[72px] mt-9 w-full max-w-6xl">
-          <h1 className="mb-4 text-5xl font-light lowercase tracking-tight text-neutral-900">
-            experience
-          </h1>
-          <p className="mt-2 text-[15px] font-normal tracking-normal text-neutral-400">
-            Advertising + Business + Design + Law.
-          </p>
-          <p className="mt-1 text-[15px] font-light tracking-normal text-neutral-400">
-            All with the goal of making complex things human.
-          </p>
-        </div>
+        <h1 className="text-[56px] font-thin tracking-tight text-neutral-800 lowercase mb-6 select-none">
+          experience
+        </h1>
+        <p className="text-[18px] font-normal tracking-normal text-neutral-800">
+          Advertising + Business + Design + Law.
+        </p>
+        <p className="text-[15px] font-normal text-neutral-400 tracking-normal mt-4">
+          All with the goal of making complex things human.
+        </p>
 
         <Hairline />
 
