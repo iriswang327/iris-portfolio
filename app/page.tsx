@@ -10,18 +10,21 @@ const FUN_CARDS = [
     title: "The Booth",
     description: "vintage film photobooth — drop a photo, get a strip",
     tag: "try it out ↗",
+    comingSoon: true,
   },
   {
     href: "/coffee",
     title: "What's Your Order?",
     description: "build your coffee · submit the order",
     tag: "place an order ↗",
+    comingSoon: true,
   },
   {
     href: "/museum",
     title: "Museum of Art",
     description: "illustrations, oils, watercolors",
     tag: "view gallery ↗",
+    comingSoon: true,
   },
 ] as const;
 
@@ -116,7 +119,7 @@ export default function DreamsPage() {
           FOR FUN
           ══════════════════════════════════════════ */}
       <section style={{ paddingBottom: 80 }}>
-        <div className="w-full max-w-6xl mx-auto px-6 my-16 block">
+        <div className="design-section-label" style={{ marginTop: 64 }}>
           <p
             className="section-label"
             style={{ color: "#BBBBBB", marginBottom: 14 }}
