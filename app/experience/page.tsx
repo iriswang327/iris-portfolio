@@ -217,11 +217,11 @@ export default function ExperiencePage() {
   return (
     <div
       className="relative overflow-hidden"
-      style={{ backgroundColor: "var(--background)", paddingBottom: 100 }}
+      style={{ backgroundColor: "transparent", paddingBottom: 100 }}
     >
       {/* Signature watercolor gradient — right-margin accent */}
       <div className="absolute top-[15%] right-[-10%] w-[700px] h-[700px] bg-gradient-to-br from-purple-400/5 via-pink-400/[0.04] to-cyan-400/5 rounded-full blur-[140px] pointer-events-none -z-10" aria-hidden="true" />
-      <div className="w-full max-w-6xl mx-auto px-8 md:px-12 pt-24 pb-12 block">
+      <div className="w-full max-w-6xl mx-auto px-8 md:px-12 pt-36 pb-12 block">
 
         {/* ── Hero header ─────────────────────────────────────────────── */}
         <div style={{ marginBottom: 72 }}>
@@ -235,7 +235,7 @@ export default function ExperiencePage() {
               marginBottom: 14,
             }}
           >
-            experience &amp; impact
+            experience
           </h1>
           <p
             style={{
