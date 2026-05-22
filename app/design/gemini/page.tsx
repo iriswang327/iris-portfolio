@@ -57,9 +57,9 @@ export default function GeminiPage() {
         {/* Final Design Centerpiece Container */}
         <div className="rounded-2xl overflow-hidden border border-black/5 shadow-sm bg-gradient-to-tr from-[#1E1030] to-[#0B0718] p-6 sm:p-12">
           <img
-            src="/images/gemini-hero-frame.png"
+            src="/images/gemini-hero-frame.jpg"
             alt="Gemini Native Mobile Interface Final Light Mode Design"
-            className="w-full h-auto object-contain block mx-auto drop-shadow-xl"
+            className="w-full h-auto object-contain block mx-auto rounded-xl drop-shadow-xl"
           />
         </div>
 
@@ -69,14 +69,14 @@ export default function GeminiPage() {
             <img
               src="/images/gemini-dark-mockup.png"
               alt="Low-Light Responsive Mobile News Feed Component Layout"
-              className="w-full h-auto object-contain block mx-auto"
+              className="w-full h-auto object-contain block mx-auto rounded-xl"
             />
           </div>
           <div className="bg-white rounded-xl overflow-hidden border border-black/5 p-4">
             <img
-              src="/images/gemini-web-audit.png"
+              src="/images/gemini-web-audit.jpg"
               alt="Gemini Platform Desktop Web Reference Integration"
-              className="w-full h-auto object-contain block mx-auto"
+              className="w-full h-auto object-contain block mx-auto rounded-xl"
             />
           </div>
         </div>

@@ -216,6 +216,10 @@ export default function ProjectsGridSection() {
 
   return (
     <>
+      <div className="relative z-10">
+        {/* Ambient gradient hum behind the grid */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[600px] bg-gradient-to-tr from-purple-500/5 via-indigo-400/5 to-transparent rounded-full blur-[120px] pointer-events-none -z-10" />
+
       <div className="grid grid-cols-1 sm:grid-cols-2" style={{ gap: 12 }}>
         {CARDS.map((card) => (
           <ProjectCard
@@ -230,6 +234,8 @@ export default function ProjectsGridSection() {
             onClick={card.modal ? () => setActiveModal(card.modal!) : undefined}
           />
         ))}
+      </div>
+
       </div>
 
       <CompanyModal

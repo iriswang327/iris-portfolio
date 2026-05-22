@@ -41,7 +41,7 @@ export default function ProjectCard({
 
   const cardInner = (
     <motion.div
-      className="relative overflow-hidden rounded-[20px] w-full border border-black/[0.04] shadow-[0_12px_40px_rgba(0,0,0,0.03)]"
+      className="relative overflow-hidden rounded-[20px] w-full bg-white border border-black/[0.02] shadow-[0_20px_50px_-12px_rgba(0,0,0,0.04),0_0_1px_rgba(0,0,0,0.12)]"
       style={{ height: 340, cursor: locked ? "default" : "pointer" }}
       animate={{ scale: hovered && !locked ? 0.97 : 1 }}
       transition={{ duration: 0.3, ease: [0.34, 1.56, 0.64, 1] }}
