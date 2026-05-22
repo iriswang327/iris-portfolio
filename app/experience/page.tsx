@@ -233,7 +233,7 @@ function OperationalArchiveRow({
   dateRange: string;
 }) {
   return (
-    <div className="flex items-center justify-between py-4 border-b border-black/[0.04] w-full group transition-colors duration-300 hover:bg-neutral-50/30 rounded-xl">
+    <div className="flex items-center justify-between py-4 border-b border-black/[0.04] w-full group transition-colors duration-300 hover:bg-white/40 rounded-xl last:border-b-0">
       <div className="flex items-center gap-4">
         <LedgerBadge icon={icon} />
         <div className="flex flex-col gap-0.5">
@@ -428,40 +428,42 @@ export default function ExperiencePage() {
         <section style={{ marginTop: 64, marginBottom: 80 }}>
           <SectionLabel>Publications &amp; Illustrations</SectionLabel>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-6 w-full items-start">
-            {ANALYTICAL_LEDGER.map((entry) => (
-              <div key={entry.id}>
-                <AnalyticalColumnHeader
-                  icon={entry.icon}
-                  organizationName={entry.organizationName}
-                  roleName={entry.roleName}
-                  timeline={entry.timeline}
-                />
+          <div className="experience-glass-panel experience-glass-panel--wide">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 w-full items-start">
+              {ANALYTICAL_LEDGER.map((entry) => (
+                <div key={entry.id}>
+                  <AnalyticalColumnHeader
+                    icon={entry.icon}
+                    organizationName={entry.organizationName}
+                    roleName={entry.roleName}
+                    timeline={entry.timeline}
+                  />
 
-                {"papers" in entry && (
-                  <div className="mt-4 flex flex-col gap-4 pl-[60px]">
-                    {entry.papers.map((paper) => (
-                      <div key={paper.title}>
-                        <p className="text-[13px] font-normal leading-relaxed text-neutral-600">
-                          {paper.title}
-                        </p>
-                        <Link href={paper.href} className={ANALYTICAL_LINK_CLASS}>
-                          read research paper →
-                        </Link>
-                      </div>
-                    ))}
-                  </div>
-                )}
+                  {"papers" in entry && (
+                    <div className="mt-4 flex flex-col gap-4 pl-[60px]">
+                      {entry.papers.map((paper) => (
+                        <div key={paper.title}>
+                          <p className="text-[13px] font-normal leading-relaxed text-neutral-600">
+                            {paper.title}
+                          </p>
+                          <Link href={paper.href} className={ANALYTICAL_LINK_CLASS}>
+                            read research paper →
+                          </Link>
+                        </div>
+                      ))}
+                    </div>
+                  )}
 
-                {"linkHref" in entry && (
-                  <div className="mt-4 flex flex-col gap-4 pl-[60px]">
-                    <Link href={entry.linkHref} className={ANALYTICAL_LINK_CLASS}>
-                      {entry.linkLabel}
-                    </Link>
-                  </div>
-                )}
-              </div>
-            ))}
+                  {"linkHref" in entry && (
+                    <div className="mt-4 flex flex-col gap-4 pl-[60px]">
+                      <Link href={entry.linkHref} className={ANALYTICAL_LINK_CLASS}>
+                        {entry.linkLabel}
+                      </Link>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -471,16 +473,18 @@ export default function ExperiencePage() {
         <section style={{ marginTop: 64 }}>
           <SectionLabel>Marketing &amp; Operations</SectionLabel>
 
-          <div className="flex w-full flex-col">
-            {OPERATIONAL_LEDGER.map((entry) => (
-              <OperationalArchiveRow
-                key={entry.id}
-                icon={entry.icon}
-                companyName={entry.companyName}
-                roleTitle={entry.roleTitle}
-                dateRange={entry.dateRange}
-              />
-            ))}
+          <div className="experience-glass-panel experience-glass-panel--wide">
+            <div className="flex w-full flex-col">
+              {OPERATIONAL_LEDGER.map((entry) => (
+                <OperationalArchiveRow
+                  key={entry.id}
+                  icon={entry.icon}
+                  companyName={entry.companyName}
+                  roleTitle={entry.roleTitle}
+                  dateRange={entry.dateRange}
+                />
+              ))}
+            </div>
           </div>
         </section>
 
