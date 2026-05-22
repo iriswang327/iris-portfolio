@@ -69,15 +69,6 @@ export default function RipplePage() {
       {/* ── Media blocks ── */}
       <div className="space-y-4 w-full mt-12">
 
-        {/* Hero frame — wide transparent device layout */}
-        <div className="rounded-2xl overflow-hidden border border-black/5 shadow-sm bg-gradient-to-tr from-[#0A1628] to-[#1155A0] p-6 sm:p-12">
-          <img
-            src="/images/ripple-hero-frame.png"
-            alt="Ripple platform hero interface"
-            className="w-full h-auto object-contain max-w-4xl mx-auto block drop-shadow-2xl"
-          />
-        </div>
-
         {/* Demo video — browser controls for recruiter playback */}
         <div className="rounded-2xl overflow-hidden border border-black/5 bg-[#0A1628]">
           <video
@@ -89,61 +80,61 @@ export default function RipplePage() {
           </video>
         </div>
 
-        {/* ── Final Result: 5-screen user journey map + trophy ── */}
-        <div className="rounded-2xl overflow-hidden border border-black/5 bg-white p-6 sm:p-10 space-y-8">
+        {/* ── Final Result: Asymmetrical split-hero layout ── */}
 
-          {/* 5-screen wireframe grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto px-4 w-full">
-            {[
-              { src: "/images/ripple-flow-1.png", label: "01 / Brand Discovery Hub (Landing Page Ecosystem)" },
-              { src: "/images/ripple-flow-2.png", label: "02 / Professional Network Directory (Social Layer)" },
-              { src: "/images/ripple-flow-3.png", label: "03 / High-Density Visual Index (Project Finding)" },
-              { src: "/images/ripple-flow-4.png", label: "04 / Interactive Matching Engine (Designer View Flow)" },
-              { src: "/images/ripple-flow-5.png", label: "05 / Interactive Matching Engine (Project Recruiter Flow)" },
-            ].map(({ src, label }) => (
-              <div key={src} className="flex flex-col gap-3">
-                <img
-                  src={src}
-                  alt={label}
-                  className="w-full h-auto object-contain rounded-xl border border-black/[0.04] shadow-[0_15px_40px_-10px_rgba(0,0,0,0.05),0_0_1px_rgba(0,0,0,0.1)] bg-white transition-transform duration-300 hover:scale-[1.01]"
-                />
-                <p
-                  style={{
-                    fontSize: 10,
-                    fontWeight: 400,
-                    color: "#BBBBBB",
-                    letterSpacing: "0.14em",
-                    textTransform: "uppercase",
-                  }}
-                >
-                  {label}
-                </p>
-              </div>
-            ))}
-          </div>
+        {/* Master asymmetrical grid */}
+        <div className="w-full max-w-6xl mx-auto my-12 px-4 lg:grid lg:grid-cols-12 lg:gap-12 items-start">
 
-          {/* Trophy flag — pinned below all screens */}
-          <div
-            className="flex items-center gap-4 rounded-2xl px-6 py-5"
-            style={{
-              background: "linear-gradient(135deg, #F0EEFF 0%, #E8F4FF 100%)",
-              border: "1px solid rgba(167,139,250,0.2)",
-            }}
-          >
-            <span style={{ fontSize: 28, lineHeight: 1 }} aria-hidden="true">🏆</span>
-            <p
-              style={{
-                fontSize: 15,
-                fontWeight: 400,
-                color: "var(--foreground)",
-                letterSpacing: "-0.01em",
-                lineHeight: 1.4,
-              }}
-            >
-              Winner, Best Presentation out of 18 cross-functional engineering teams.
+          {/* Left side hero — columns 1–5 */}
+          <div className="lg:col-span-5 flex flex-col gap-3 mb-10 lg:mb-0">
+            <img
+              src="/images/ripple-flow-1.png"
+              alt="01 / Core Entry Hub & User Onboarding Canvas"
+              className="w-full h-auto object-contain rounded-2xl border border-black/[0.04] shadow-[0_20px_50px_rgba(0,0,0,0.06)] bg-white"
+            />
+            <p className="text-[10px] font-normal tracking-[0.14em] uppercase text-[#BBBBBB]">
+              01 / Core Entry Hub &amp; User Onboarding Canvas
             </p>
           </div>
 
+          {/* Right side sub-systems — columns 6–12 */}
+          <div className="lg:col-span-7">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+              {[
+                { src: "/images/ripple-flow-2.png", label: "02 / Professional Network Directory" },
+                { src: "/images/ripple-flow-3.png", label: "03 / Visual Interface Index" },
+                { src: "/images/ripple-flow-4.png", label: "04 / Matching Loop (Designer Perspective)" },
+                { src: "/images/ripple-flow-5.png", label: "05 / Matching Loop (Recruiter Perspective)" },
+              ].map(({ src, label }) => (
+                <div key={src} className="flex flex-col gap-3">
+                  <img
+                    src={src}
+                    alt={label}
+                    className="w-full h-auto object-contain rounded-xl border border-black/[0.04] shadow-[0_10px_30px_rgba(0,0,0,0.04)] bg-white transition-transform duration-300 hover:scale-[1.01]"
+                  />
+                  <p className="text-[10px] font-normal tracking-[0.14em] uppercase text-[#BBBBBB]">
+                    {label}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+        </div>
+
+        {/* Trophy victory footer block */}
+        <div className="w-full max-w-4xl mx-auto mt-16 border-t border-black/[0.06] pt-12 text-center">
+          <img
+            src="/images/ripple-victory.png"
+            alt="Ripple team victory — Best Presentation award"
+            className="max-w-md mx-auto w-full h-auto rounded-xl shadow-sm border border-black/5 block mb-6"
+          />
+          <p
+            className="text-sm font-normal leading-relaxed"
+            style={{ color: "var(--foreground)", letterSpacing: "-0.01em" }}
+          >
+            🏆 Winner, Best Presentation out of 18 cross-functional engineering teams.
+          </p>
         </div>
 
       </div>
