@@ -219,8 +219,11 @@ export default function ExperiencePage() {
       className="relative overflow-hidden"
       style={{ backgroundColor: "transparent", paddingBottom: 100 }}
     >
-      {/* Signature watercolor gradient — right-margin accent */}
-      <div className="absolute top-[15%] right-[-10%] w-[700px] h-[700px] bg-gradient-to-br from-purple-400/5 via-pink-400/[0.04] to-cyan-400/5 rounded-full blur-[140px] pointer-events-none -z-10" aria-hidden="true" />
+      {/* Watercolor gradient orbs */}
+      <div className="absolute top-[-8%] left-[-8%] w-[650px] h-[650px] bg-violet-300/[0.07] rounded-full blur-[130px] pointer-events-none -z-10" aria-hidden="true" />
+      <div className="absolute top-[15%] right-[-10%] w-[700px] h-[700px] bg-gradient-to-br from-purple-400/[0.06] via-violet-300/[0.05] to-sky-300/[0.05] rounded-full blur-[140px] pointer-events-none -z-10" aria-hidden="true" />
+      <div className="absolute bottom-[5%] right-[-5%] w-[600px] h-[600px] bg-sky-300/[0.06] rounded-full blur-[120px] pointer-events-none -z-10" aria-hidden="true" />
+      <div className="absolute bottom-[20%] left-[-5%] w-[500px] h-[500px] bg-blue-300/[0.05] rounded-full blur-[110px] pointer-events-none -z-10" aria-hidden="true" />
       <div className="w-full max-w-6xl mx-auto px-8 md:px-12 pt-36 pb-12 block">
 
         {/* ── Hero header ─────────────────────────────────────────────── */}
