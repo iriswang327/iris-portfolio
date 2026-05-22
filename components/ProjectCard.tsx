@@ -41,7 +41,7 @@ export default function ProjectCard({
 
   const cardInner = (
     <motion.div
-      className="relative overflow-hidden rounded-[20px] w-full"
+      className="relative overflow-hidden rounded-[20px] w-full border border-black/[0.04] shadow-[0_12px_40px_rgba(0,0,0,0.03)]"
       style={{ height: 340, cursor: locked ? "default" : "pointer" }}
       animate={{ scale: hovered && !locked ? 0.97 : 1 }}
       transition={{ duration: 0.3, ease: [0.34, 1.56, 0.64, 1] }}
@@ -54,7 +54,7 @@ export default function ProjectCard({
           muted
           loop
           playsInline
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 object-contain p-8 w-full h-full bg-white transition-transform duration-500 hover:scale-[1.02]"
           src={videoUrl}
           aria-hidden="true"
         />

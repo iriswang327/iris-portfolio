@@ -74,38 +74,34 @@ export default function RipplePage() {
           />
         </div>
 
-        {/* Process grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-[#F7F8FA] rounded-xl overflow-hidden border border-black/5 p-4">
+        {/* 4-column process track */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="rounded-xl overflow-hidden border border-black/5 aspect-square">
             <img
-              src="/images/ripple-user-flow.png"
-              alt="Ripple user flow diagram"
-              className="w-full h-auto object-contain block mx-auto"
+              src="/images/ripple-process-1.png"
+              alt="Ripple process step 1"
+              className="w-full h-full object-cover rounded-lg"
             />
           </div>
-          <div className="bg-white rounded-xl overflow-hidden border border-black/5 p-4">
+          <div className="rounded-xl overflow-hidden border border-black/5 aspect-square">
             <img
-              src="/images/ripple-old-v1.png"
-              alt="Ripple v1 early explorations"
-              className="w-full h-auto object-contain block mx-auto"
+              src="/images/ripple-process-2.png"
+              alt="Ripple process step 2"
+              className="w-full h-full object-cover rounded-lg"
             />
           </div>
-        </div>
-
-        {/* Interface screens */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-white rounded-xl overflow-hidden border border-black/5 p-4">
+          <div className="rounded-xl overflow-hidden border border-black/5 aspect-square">
             <img
-              src="/images/ripple-interface-designers.png"
-              alt="Ripple designer-side interface"
-              className="w-full h-auto object-contain block mx-auto"
+              src="/images/ripple-process-3.png"
+              alt="Ripple process step 3"
+              className="w-full h-full object-cover rounded-lg"
             />
           </div>
-          <div className="bg-white rounded-xl overflow-hidden border border-black/5 p-4">
+          <div className="rounded-xl overflow-hidden border border-black/5 aspect-square">
             <img
-              src="/images/ripple-interface-projects.png"
-              alt="Ripple projects browse interface"
-              className="w-full h-auto object-contain block mx-auto"
+              src="/images/ripple-proccess-4.png"
+              alt="Ripple process step 4"
+              className="w-full h-full object-cover rounded-lg"
             />
           </div>
         </div>
@@ -125,11 +121,13 @@ export default function RipplePage() {
         <div className="rounded-2xl overflow-hidden border border-black/5 bg-white p-6 sm:p-10 space-y-6">
 
           {/* Victory photo */}
-          <img
-            src="/images/ripple-victory.png"
-            alt="Ripple team on Demo Day — Best Presentation award"
-            className="w-full h-auto object-contain block mx-auto rounded-xl"
-          />
+          <div className="max-w-xl mx-auto w-full aspect-[4/3] rounded-xl overflow-hidden border border-black/5 my-6 shadow-sm block">
+            <img
+              src="/images/ripple-victory.png"
+              alt="Ripple team on Demo Day — Best Presentation award"
+              className="w-full h-full object-cover"
+            />
+          </div>
 
           {/* Trophy flag */}
           <div
