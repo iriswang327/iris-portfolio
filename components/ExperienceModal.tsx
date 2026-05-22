@@ -20,6 +20,7 @@ export interface ExperienceModalProps {
   orgName: string;
   orgInitial: string;
   orgSubtitle: string;
+  description: string;
   timeline: string;
   role: string;
   type: string;
@@ -49,6 +50,7 @@ export default function ExperienceModal({
   orgName,
   orgInitial,
   orgSubtitle,
+  description,
   timeline,
   role,
   type,
@@ -75,10 +77,10 @@ export default function ExperienceModal({
   }, [isOpen]);
 
   const metadata = [
-    { label: "Timeline", value: timeline },
-    { label: "Role", value: role },
-    { label: "Type", value: type },
-    { label: "With", value: withLabel },
+    { label: "timeline", value: timeline },
+    { label: "role", value: role },
+    { label: "type", value: type },
+    { label: "with", value: withLabel },
   ] as const;
 
   return (
@@ -104,12 +106,7 @@ export default function ExperienceModal({
             onClick={onClose}
           >
             <motion.div
-              className="relative bg-white rounded-[20px] w-full pointer-events-auto"
-              style={{
-                maxWidth: 580,
-                padding: 36,
-                boxShadow: "0 24px 80px rgba(0, 0, 0, 0.16)",
-              }}
+              className="bg-white rounded-[24px] border border-black/[0.03] shadow-[0_30px_70px_rgba(0,0,0,0.1)] p-8 max-w-[540px] w-full mx-auto relative z-50 text-center flex flex-col items-center pointer-events-auto"
               variants={cardVariants}
               initial="hidden"
               animate="visible"
@@ -118,88 +115,48 @@ export default function ExperienceModal({
               onClick={(e) => e.stopPropagation()}
             >
               {/* ── Close ──────────────────────────────────────────────── */}
-              <div className="flex justify-end" style={{ marginBottom: 28 }}>
+              <div className="flex w-full justify-end mb-7">
                 <button
                   onClick={onClose}
-                  className="flex items-center justify-center rounded-full transition-colors hover:bg-black/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A78BFA]"
-                  style={{
-                    width: 32,
-                    height: 32,
-                    border: "0.5px solid rgba(0,0,0,0.1)",
-                    fontSize: 18,
-                    color: "#AAAAAA",
-                    background: "none",
-                    cursor: "pointer",
-                    lineHeight: 1,
-                  }}
-                  aria-label="Close modal"
+                  className="flex h-8 w-8 items-center justify-center rounded-full border border-black/10 text-[18px] leading-none text-[#AAAAAA] transition-colors hover:bg-black/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A78BFA]"
+                  aria-label="close modal"
                 >
                   ×
                 </button>
               </div>
 
               {/* ── Org identity ─────────────────────────────────────── */}
-              <div className="flex flex-col items-center" style={{ gap: 10, marginBottom: 24 }}>
+              <div className="flex w-full flex-col items-center gap-2.5">
                 <div
-                  className="flex items-center justify-center rounded-full"
-                  style={{
-                    width: 44,
-                    height: 44,
-                    background: "rgba(167,139,250,0.16)",
-                    fontSize: 16,
-                    fontWeight: 400,
-                    color: "#A78BFA",
-                    letterSpacing: "-0.01em",
-                  }}
+                  className="flex h-11 w-11 items-center justify-center rounded-full bg-[rgba(167,139,250,0.16)] text-base font-normal tracking-tight text-[#A78BFA]"
                   aria-hidden="true"
                 >
                   {orgInitial}
                 </div>
 
-                <h2
-                  style={{
-                    fontSize: 26,
-                    fontWeight: 200,
-                    color: "var(--foreground)",
-                    letterSpacing: "-0.015em",
-                    lineHeight: 1.2,
-                  }}
-                >
+                <h2 className="text-[26px] font-extralight tracking-tight text-[var(--foreground)]">
                   {orgName}
                 </h2>
 
-                <p style={{ fontSize: 13, fontWeight: 300, color: "#888888" }}>
+                <p className="text-[13px] font-light text-neutral-500">
                   {orgSubtitle}
                 </p>
               </div>
 
+              <div className="mt-4 mb-6 w-full max-w-[440px] mx-auto text-center">
+                <p className="text-[13px] font-light leading-relaxed text-neutral-500 tracking-normal text-center select-none">
+                  {description}
+                </p>
+              </div>
+
               {/* ── Metadata row ─────────────────────────────────────── */}
-              <div
-                className="grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-5"
-                style={{ marginBottom: 28 }}
-              >
+              <div className="mb-7 grid w-full grid-cols-2 gap-x-4 gap-y-5 sm:grid-cols-4">
                 {metadata.map(({ label, value }) => (
-                  <div key={label}>
-                    <p
-                      style={{
-                        fontSize: 10,
-                        fontWeight: 400,
-                        color: "#BBBBBB",
-                        letterSpacing: "0.14em",
-                        textTransform: "uppercase",
-                        marginBottom: 6,
-                      }}
-                    >
+                  <div key={label} className="text-center sm:text-left">
+                    <p className="mb-1.5 text-[10px] font-normal uppercase tracking-[0.14em] text-[#BBBBBB]">
                       {label}
                     </p>
-                    <p
-                      style={{
-                        fontSize: 13,
-                        fontWeight: 400,
-                        color: "#1A1A1A",
-                        lineHeight: 1.4,
-                      }}
-                    >
+                    <p className="text-[13px] font-normal leading-snug text-[#1A1A1A]">
                       {value}
                     </p>
                   </div>
@@ -207,69 +164,36 @@ export default function ExperienceModal({
               </div>
 
               <div
-                style={{ height: "0.5px", background: "rgba(0,0,0,0.06)", marginBottom: 28 }}
+                className="mb-7 h-px w-full bg-black/[0.06]"
                 aria-hidden="true"
               />
 
               {/* ── Clients ──────────────────────────────────────────── */}
-              <div style={{ display: "flex", flexDirection: "column" }}>
+              <div className="flex w-full flex-col text-left">
                 {clients.map((client, idx) => (
                   <div key={`${client.label}-${client.route}`}>
-                    <div style={{ display: "flex", alignItems: "flex-start", gap: 20 }}>
-                      <div style={{ flex: 1 }}>
-                        <p
-                          style={{
-                            fontSize: 10,
-                            fontWeight: 400,
-                            color: "#BBBBBB",
-                            letterSpacing: "0.14em",
-                            textTransform: "uppercase",
-                            marginBottom: 7,
-                          }}
-                        >
+                    <div className="flex items-start gap-5">
+                      <div className="min-w-0 flex-1">
+                        <p className="mb-1.5 text-[10px] font-normal uppercase tracking-[0.14em] text-[#BBBBBB]">
                           {client.label}
                         </p>
 
-                        <p
-                          style={{
-                            fontSize: 18,
-                            fontWeight: 300,
-                            color: "var(--foreground)",
-                            lineHeight: 1.35,
-                            marginBottom: 6,
-                          }}
-                        >
+                        <p className="mb-1.5 text-[18px] font-light leading-snug text-[var(--foreground)]">
                           {client.title}
                         </p>
 
-                        <p
-                          style={{
-                            fontSize: 13,
-                            fontWeight: 300,
-                            color: "#888888",
-                            lineHeight: 1.6,
-                            marginBottom: 14,
-                          }}
-                        >
+                        <p className="mb-3.5 text-[13px] font-light leading-relaxed text-neutral-500">
                           {client.description}
                         </p>
 
                         {client.locked ? (
-                          <span
-                            style={{
-                              fontSize: 12,
-                              fontWeight: 300,
-                              color: "#BBBBBB",
-                              letterSpacing: "0.04em",
-                            }}
-                          >
+                          <span className="text-xs font-light tracking-wide text-[#BBBBBB]">
                             coming soon 🔒
                           </span>
                         ) : (
                           <Link
                             href={client.route}
-                            className="text-gradient-ihwn hover:opacity-70 transition-opacity"
-                            style={{ fontSize: 13, fontWeight: 300 }}
+                            className="text-gradient-ihwn text-[13px] font-light transition-opacity hover:opacity-70"
                           >
                             view case study →
                           </Link>
@@ -277,26 +201,10 @@ export default function ExperienceModal({
                       </div>
 
                       <div
-                        style={{
-                          width: 60,
-                          height: 60,
-                          borderRadius: 10,
-                          flexShrink: 0,
-                          background: "#F5F0E8",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                        }}
+                        className="flex h-[60px] w-[60px] shrink-0 items-center justify-center rounded-[10px] bg-[#F5F0E8]"
                         aria-hidden="true"
                       >
-                        <span
-                          style={{
-                            fontSize: 18,
-                            fontWeight: 200,
-                            color: "rgba(167,139,250,0.55)",
-                            lineHeight: 1,
-                          }}
-                        >
+                        <span className="text-lg font-extralight text-[rgba(167,139,250,0.55)]">
                           ✦
                         </span>
                       </div>
@@ -304,11 +212,7 @@ export default function ExperienceModal({
 
                     {idx < clients.length - 1 && (
                       <div
-                        style={{
-                          height: "0.5px",
-                          background: "rgba(0,0,0,0.05)",
-                          margin: "22px 0",
-                        }}
+                        className="my-[22px] h-px bg-black/[0.05]"
                         aria-hidden="true"
                       />
                     )}
