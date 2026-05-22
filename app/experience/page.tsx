@@ -279,51 +279,58 @@ export default function ExperiencePage() {
                 : "rgba(0,0,0,0.06)";
 
               return (
-                <div
+                <Link
                   key={card.id}
-                  style={{
-                    background: card.bg,
-                    border: `1px solid ${borderColor}`,
-                    borderRadius: 16,
-                    padding: "28px 24px 24px",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: 14,
-                  }}
+                  href={`#${card.id}`}
+                  className="block transition-opacity duration-200 hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A78BFA] rounded-2xl"
+                  style={{ cursor: "pointer" }}
                 >
-                  <p
+                  <div
                     style={{
-                      fontSize: 9,
-                      fontWeight: 400,
-                      color: tagColor,
-                      letterSpacing: "0.18em",
-                      textTransform: "uppercase",
+                      background: card.bg,
+                      border: `1px solid ${borderColor}`,
+                      borderRadius: 16,
+                      padding: "28px 24px 24px",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: 14,
+                      height: "100%",
                     }}
                   >
-                    {card.tag}
-                  </p>
-                  <p
-                    style={{
-                      fontSize: 15,
-                      fontWeight: 300,
-                      color: fg,
-                      letterSpacing: "-0.015em",
-                      lineHeight: 1.35,
-                    }}
-                  >
-                    {card.title}
-                  </p>
-                  <p
-                    style={{
-                      fontSize: 11,
-                      fontWeight: 300,
-                      color: bodyColor,
-                      lineHeight: 1.75,
-                    }}
-                  >
-                    {card.body}
-                  </p>
-                </div>
+                    <p
+                      style={{
+                        fontSize: 9,
+                        fontWeight: 400,
+                        color: tagColor,
+                        letterSpacing: "0.18em",
+                        textTransform: "uppercase",
+                      }}
+                    >
+                      {card.tag}
+                    </p>
+                    <p
+                      style={{
+                        fontSize: 15,
+                        fontWeight: 300,
+                        color: fg,
+                        letterSpacing: "-0.015em",
+                        lineHeight: 1.35,
+                      }}
+                    >
+                      {card.title}
+                    </p>
+                    <p
+                      style={{
+                        fontSize: 11,
+                        fontWeight: 300,
+                        color: bodyColor,
+                        lineHeight: 1.75,
+                      }}
+                    >
+                      {card.body}
+                    </p>
+                  </div>
+                </Link>
               );
             })}
           </div>
