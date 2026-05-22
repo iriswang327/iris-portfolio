@@ -89,19 +89,40 @@ export default function RipplePage() {
           </video>
         </div>
 
-        {/* ── Final Result: Demo Day win ── */}
-        <div className="rounded-2xl overflow-hidden border border-black/5 bg-white p-6 sm:p-10 space-y-6">
+        {/* ── Final Result: 5-screen user journey map + trophy ── */}
+        <div className="rounded-2xl overflow-hidden border border-black/5 bg-white p-6 sm:p-10 space-y-8">
 
-          {/* Victory photo */}
-          <div className="max-w-xl mx-auto w-full aspect-[4/3] rounded-xl overflow-hidden border border-black/5 my-6 shadow-sm block">
-            <img
-              src="/images/ripple-victory.png"
-              alt="Ripple team on Demo Day — Best Presentation award"
-              className="w-full h-full object-cover"
-            />
+          {/* 5-screen wireframe grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto px-4 w-full">
+            {[
+              { src: "/images/ripple-flow-1.png", label: "01 / Brand Discovery Hub (Landing Page Ecosystem)" },
+              { src: "/images/ripple-flow-2.png", label: "02 / Professional Network Directory (Social Layer)" },
+              { src: "/images/ripple-flow-3.png", label: "03 / High-Density Visual Index (Project Finding)" },
+              { src: "/images/ripple-flow-4.png", label: "04 / Interactive Matching Engine (Designer View Flow)" },
+              { src: "/images/ripple-flow-5.png", label: "05 / Interactive Matching Engine (Project Recruiter Flow)" },
+            ].map(({ src, label }) => (
+              <div key={src} className="flex flex-col gap-3">
+                <img
+                  src={src}
+                  alt={label}
+                  className="w-full h-auto object-contain rounded-xl border border-black/[0.04] shadow-[0_15px_40px_-10px_rgba(0,0,0,0.05),0_0_1px_rgba(0,0,0,0.1)] bg-white transition-transform duration-300 hover:scale-[1.01]"
+                />
+                <p
+                  style={{
+                    fontSize: 10,
+                    fontWeight: 400,
+                    color: "#BBBBBB",
+                    letterSpacing: "0.14em",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  {label}
+                </p>
+              </div>
+            ))}
           </div>
 
-          {/* Trophy flag */}
+          {/* Trophy flag — pinned below all screens */}
           <div
             className="flex items-center gap-4 rounded-2xl px-6 py-5"
             style={{
