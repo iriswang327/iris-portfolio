@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import ProjectCard from "@/components/ProjectCard";
 import CompanyModal, { type ModalProject } from "@/components/CompanyModal";
@@ -101,40 +100,65 @@ const STRATEGIC_IMPACT_CARDS: ImpactCardDef[] = [
 
 const LAW_PAPERS = [
   {
-    title: "The Dune Franchise: Copyright Disputes & Entertainment Ownership Frameworks",
+    title:
+      "The Dune Franchise: Copyright Disputes & Entertainment Ownership Frameworks",
     href: "#",
-    cta: "Read Legal Analysis Paper",
   },
   {
-    title: "Medspa Regulations: Algorithmic Policy Analysis within Consumer Healthcare",
+    title:
+      "Medspa Regulations: Algorithmic Policy Analysis within Consumer Healthcare",
     href: "#",
-    cta: "Read Publication",
   },
 ] as const;
 
-// ─── Pillar 3: Operational Archive ────────────────────────────────────────────
+const ANALYTICAL_LEDGER = [
+  {
+    id: "tulj",
+    organizationName: "texas undergraduate law journal",
+    roleName: "staff writer",
+    timeline: "2023–2025",
+    icon: "⚖",
+    papers: LAW_PAPERS,
+  },
+  {
+    id: "daily-texan",
+    organizationName: "the daily texan",
+    roleName: "editorial illustrator",
+    timeline: "2024–present",
+    icon: "✎",
+    linkHref: "#",
+    linkLabel: "view illustration archive →",
+  },
+] as const;
 
-const ARCHIVE = [
+const OPERATIONAL_LEDGER = [
   {
-    org: "SparroWriting Services",
-    role: "Office Manager & Teaching Assistant",
-    dates: "2022–2025",
-    detail:
-      "Designed enterprise web landing interfaces, customer business card structures, and brand flyers. Managed cross-functional operational scheduling spreadsheets detailing 300+ competitive academic scholarship pathways while co-leading student workshops centered on creative problem-solving metrics.",
+    id: "sparro",
+    organizationName: "sparrowriting services",
+    roleName: "office manager & teaching assistant",
+    timeline: "2022–2025",
+    icon: "S",
   },
   {
-    org: "ASUCI Student Government",
-    role: "Outreach Executive Intern",
-    dates: "2023–2024",
-    detail:
-      "Managed promotional social layouts across food security and campus climate commissions. Spearheaded, designed, and executed a live on-campus matchmaking engagement event hosting over 200+ concurrent students.",
+    id: "asuci",
+    organizationName: "asuci student government",
+    roleName: "outreach executive intern",
+    timeline: "2023–2024",
+    icon: "A",
   },
   {
-    org: "Service Industry Foundations",
-    role: "Operational Workflow Tracker",
-    dates: "2021–2023",
-    detail:
-      "Bella Italia Hostess & TP Tea Barista. Managed inventory log registers, assisted management staff in generating weekly employee scheduling matrix sheets, and structured client seat assignments for optimal room turnover flow during high-volume rush periods.",
+    id: "longhorn-racing",
+    organizationName: "longhorn racing",
+    roleName: "design contributor",
+    timeline: "2024–2025",
+    icon: "L",
+  },
+  {
+    id: "letters-of-gold",
+    organizationName: "letters of gold",
+    roleName: "editorial contributor",
+    timeline: "2023–2024",
+    icon: "G",
   },
 ] as const;
 
@@ -168,112 +192,65 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   );
 }
 
-// ─── Archive row (accordion) ──────────────────────────────────────────────────
+// ─── Ledger row ───────────────────────────────────────────────────────────────
 
-function ArchiveRow({
-  org,
-  role,
-  dates,
-  detail,
-  isLast,
-}: {
-  org: string;
-  role: string;
-  dates: string;
-  detail: string;
-  isLast: boolean;
-}) {
-  const [open, setOpen] = useState(false);
+const LEDGER_ROW_CLASS =
+  "flex items-center justify-between py-5 border-b border-black/[0.04] w-full max-w-6xl mx-auto px-6 group transition-colors duration-300 hover:bg-neutral-50/40 rounded-xl";
 
+function LedgerBadge({ icon }: { icon: string }) {
   return (
-    <div>
-      <button
-        onClick={() => setOpen((v) => !v)}
-        className="w-full text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A78BFA] rounded-sm"
-        aria-expanded={open}
-      >
-        <div className="flex items-center justify-between py-4 gap-4">
-          <div className="flex-1 min-w-0">
-            <span
-              style={{
-                fontSize: 13,
-                fontWeight: 400,
-                color: "var(--foreground)",
-                letterSpacing: "-0.01em",
-              }}
-            >
-              {org}
-            </span>
-            <span
-              style={{
-                fontSize: 12,
-                fontWeight: 300,
-                color: "#888888",
-                marginLeft: 10,
-              }}
-            >
-              {role}
-            </span>
-          </div>
-          <div className="flex items-center gap-3 flex-shrink-0">
-            <span
-              style={{
-                fontSize: 11,
-                fontWeight: 300,
-                color: "#BBBBBB",
-                letterSpacing: "0.02em",
-              }}
-            >
-              {dates}
-            </span>
-            <motion.span
-              animate={{ rotate: open ? 180 : 0 }}
-              transition={{ duration: 0.25, ease: "easeOut" }}
-              style={{
-                fontSize: 11,
-                color: "#BBBBBB",
-                display: "block",
-                lineHeight: 1,
-              }}
-              aria-hidden="true"
-            >
-              ↓
-            </motion.span>
-          </div>
-        </div>
-      </button>
-
-      <AnimatePresence initial={false}>
-        {open && (
-          <motion.div
-            key="drawer"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
-            style={{ overflow: "hidden" }}
-          >
-            <p
-              style={{
-                fontSize: 12,
-                fontWeight: 300,
-                color: "#888888",
-                lineHeight: 1.75,
-                paddingBottom: 16,
-                paddingLeft: 0,
-                maxWidth: 600,
-              }}
-            >
-              {detail}
-            </p>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {!isLast && <Hairline />}
+    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-black/[0.04] bg-white text-sm font-medium text-neutral-600 shadow-sm">
+      {icon}
     </div>
   );
 }
+
+function LedgerTextStack({
+  organizationName,
+  roleName,
+  timeline,
+}: {
+  organizationName: string;
+  roleName: string;
+  timeline: string;
+}) {
+  return (
+    <div className="ml-4 flex flex-grow flex-col gap-0.5">
+      <p className="text-[13px] font-medium text-neutral-800">{organizationName}</p>
+      <p className="text-[12px] font-light text-neutral-400">
+        {roleName} &middot; {timeline}
+      </p>
+    </div>
+  );
+}
+
+function LedgerRow({
+  icon,
+  organizationName,
+  roleName,
+  timeline,
+}: {
+  icon: string;
+  organizationName: string;
+  roleName: string;
+  timeline: string;
+}) {
+  return (
+    <div className={LEDGER_ROW_CLASS}>
+      <div className="flex min-w-0 flex-1 items-center">
+        <LedgerBadge icon={icon} />
+        <LedgerTextStack
+          organizationName={organizationName}
+          roleName={roleName}
+          timeline={timeline}
+        />
+      </div>
+    </div>
+  );
+}
+
+const LINK_CLASS =
+  "mt-1 block text-[11px] font-normal lowercase tracking-wide text-indigo-400/80 transition-all duration-300 hover:text-indigo-500 hover:underline";
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
@@ -293,29 +270,15 @@ export default function ExperiencePage() {
       <div className="w-full max-w-6xl mx-auto px-6 pt-36 pb-12 block">
 
         {/* ── Hero header ─────────────────────────────────────────────── */}
-        <div style={{ marginTop: 36, marginBottom: 72 }}>
-          <h1
-            style={{
-              fontSize: 40,
-              fontWeight: 200,
-              color: "var(--foreground)",
-              letterSpacing: "-0.025em",
-              lineHeight: 1.15,
-              marginBottom: 14,
-            }}
-          >
+        <div className="mb-[72px] mt-9 w-full max-w-6xl">
+          <h1 className="mb-4 text-5xl font-light lowercase tracking-tight text-neutral-900">
             experience
           </h1>
-          <p
-            style={{
-              fontSize: 14,
-              fontWeight: 300,
-              color: "#888888",
-              lineHeight: 1.7,
-              maxWidth: 580,
-            }}
-          >
-            Synthesizing AI systems architecture, user behavioral research, and analytics data to build high-utility product ecosystems.
+          <p className="mt-2 text-[15px] font-normal tracking-normal text-neutral-400">
+            Advertising + Business + Design + Law.
+          </p>
+          <p className="mt-1 text-[15px] font-light tracking-normal text-neutral-400">
+            All with the goal of making complex things human.
           </p>
         </div>
 
@@ -345,103 +308,37 @@ export default function ExperiencePage() {
         <section style={{ marginTop: 64, marginBottom: 80 }}>
           <SectionLabel>Analytical Ledger &amp; Public Media</SectionLabel>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div className="flex w-full flex-col">
+            {ANALYTICAL_LEDGER.map((entry) => (
+              <div key={entry.id}>
+                <LedgerRow
+                  icon={entry.icon}
+                  organizationName={entry.organizationName}
+                  roleName={entry.roleName}
+                  timeline={entry.timeline}
+                />
 
-            {/* Left: Law Journal */}
-            <div>
-              <p
-                style={{
-                  fontSize: 12,
-                  fontWeight: 400,
-                  color: "var(--foreground)",
-                  letterSpacing: "-0.01em",
-                  marginBottom: 20,
-                }}
-              >
-                Texas Undergraduate Law Journal — Staff Writer
-              </p>
-
-              <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
-                {LAW_PAPERS.map((paper, i) => (
-                  <div key={paper.cta}>
-                    <div style={{ paddingTop: 14, paddingBottom: 14 }}>
-                      <p
-                        style={{
-                          fontSize: 12,
-                          fontWeight: 300,
-                          color: "#444444",
-                          lineHeight: 1.6,
-                          marginBottom: 8,
-                        }}
-                      >
+                {"papers" in entry &&
+                  entry.papers.map((paper) => (
+                    <div key={paper.title} className="px-6 pb-4">
+                      <p className="mt-2 pl-15 text-[13px] font-light text-neutral-600">
                         {paper.title}
                       </p>
-                      <Link
-                        href={paper.href}
-                        style={{
-                          fontSize: 11,
-                          fontWeight: 300,
-                          color: "#A78BFA",
-                          letterSpacing: "0.01em",
-                        }}
-                        className="hover:opacity-70 transition-opacity"
-                      >
-                        [{paper.cta}]
+                      <Link href={paper.href} className={`${LINK_CLASS} pl-15`}>
+                        read research paper →
                       </Link>
                     </div>
-                    {i < LAW_PAPERS.length - 1 && <Hairline />}
+                  ))}
+
+                {"linkHref" in entry && (
+                  <div className="px-6 pb-4">
+                    <Link href={entry.linkHref} className={`${LINK_CLASS} pl-15`}>
+                      {entry.linkLabel}
+                    </Link>
                   </div>
-                ))}
+                )}
               </div>
-            </div>
-
-            {/* Right: Daily Texan */}
-            <div>
-              <p
-                style={{
-                  fontSize: 12,
-                  fontWeight: 400,
-                  color: "var(--foreground)",
-                  letterSpacing: "-0.01em",
-                  marginBottom: 20,
-                }}
-              >
-                The Daily Texan — Editorial Illustrator
-              </p>
-
-              <div
-                style={{
-                  background: "#FAFAFA",
-                  border: "1px solid rgba(0,0,0,0.06)",
-                  borderRadius: 12,
-                  padding: "20px 20px 18px",
-                }}
-              >
-                <p
-                  style={{
-                    fontSize: 10,
-                    fontWeight: 400,
-                    color: "#BBBBBB",
-                    letterSpacing: "0.14em",
-                    textTransform: "uppercase",
-                    marginBottom: 10,
-                  }}
-                >
-                  Editorial Visual Communications (2024–Present)
-                </p>
-                <p
-                  style={{
-                    fontSize: 12,
-                    fontWeight: 300,
-                    color: "#888888",
-                    lineHeight: 1.75,
-                  }}
-                >
-                  Produced 15+ custom hand-drawn editorial illustrations translating dense political, campus climate, and systemic news narratives into concise visual art layouts.
-                </p>
-              </div>
-            </div>
-
+            ))}
           </div>
         </section>
 
@@ -451,15 +348,14 @@ export default function ExperiencePage() {
         <section style={{ marginTop: 64 }}>
           <SectionLabel>Operational Archive</SectionLabel>
 
-          <div>
-            {ARCHIVE.map((item, i) => (
-              <ArchiveRow
-                key={item.org}
-                org={item.org}
-                role={item.role}
-                dates={item.dates}
-                detail={item.detail}
-                isLast={i === ARCHIVE.length - 1}
+          <div className="flex w-full flex-col">
+            {OPERATIONAL_LEDGER.map((entry) => (
+              <LedgerRow
+                key={entry.id}
+                icon={entry.icon}
+                organizationName={entry.organizationName}
+                roleName={entry.roleName}
+                timeline={entry.timeline}
               />
             ))}
           </div>
