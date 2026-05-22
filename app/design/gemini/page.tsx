@@ -6,6 +6,8 @@ export default function GeminiPage() {
   return (
     <DesignCaseStudyTemplate
       breadcrumb="Design → Gemini → News Integration"
+      backHref="/"
+      backLabel="← Back to Design"
       title="Gemini Crypto Integration"
       subtitle="Turning a siloed content blog into an integrated intelligence layer inside the active trading flow."
       metadata={[
