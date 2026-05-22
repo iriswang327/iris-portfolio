@@ -488,14 +488,33 @@ html[data-picker-active="1"] footer {
   padding-right: 40px;
 }
 
-.looking-card {
-  margin-top: 12px;
-  background: #fff;
+.looking-card,
+.experience-glass-panel {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.65);
   border-radius: 20px;
   padding: 32px;
   box-shadow:
     0 20px 60px -30px rgba(14, 14, 16, 0.15),
     0 1px 3px rgba(14, 14, 16, 0.04);
+}
+
+.looking-card {
+  margin-top: 12px;
+}
+
+.experience-glass-panel--wide {
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.experience-glass-panel--narrow {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media (max-width: 960px) {
@@ -512,6 +531,10 @@ html[data-picker-active="1"] footer {
 
   .looking-card {
     margin-top: 0;
+  }
+
+  .experience-glass-panel {
+    padding: 24px;
   }
 }
 
