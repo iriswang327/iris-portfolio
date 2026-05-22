@@ -12,6 +12,8 @@ export interface ModalProject {
   route: string;
   /** When true, replaces the "view case study" link with a coming-soon indicator */
   locked?: boolean;
+  /** Optional thumbnail image shown in the right accent slot */
+  preview?: string;
 }
 
 export interface CompanyModalProps {
@@ -20,6 +22,8 @@ export interface CompanyModalProps {
   companyName: string;
   /** Single letter or short string shown in the 60px badge circle */
   companyLogo: string;
+  /** Optional image path — when provided, renders an <img> in the badge instead of text */
+  companyLogoImage?: string;
   whyCompanyText: string;
   projects: ModalProject[];
   /** Optional override for the ↗ expand button. Omit to hide the button. */
@@ -47,6 +51,7 @@ export default function CompanyModal({
   onClose,
   companyName,
   companyLogo,
+  companyLogoImage,
   whyCompanyText,
   projects,
   expandHref,
@@ -160,11 +165,11 @@ export default function CompanyModal({
 
                 {/* 60px badge circle */}
                 <div
-                  className="flex items-center justify-center rounded-full"
+                  className="flex items-center justify-center rounded-full overflow-hidden"
                   style={{
                     width: 60,
                     height: 60,
-                    background: "rgba(167,139,250,0.16)",
+                    background: companyLogoImage ? "transparent" : "rgba(167,139,250,0.16)",
                     fontSize: 22,
                     fontWeight: 400,
                     color: "#A78BFA",
@@ -172,7 +177,15 @@ export default function CompanyModal({
                   }}
                   aria-hidden="true"
                 >
-                  {companyLogo}
+                  {companyLogoImage ? (
+                    <img
+                      src={companyLogoImage}
+                      alt={companyName}
+                      style={{ width: 60, height: 60, objectFit: "contain" }}
+                    />
+                  ) : (
+                    companyLogo
+                  )}
                 </div>
 
                 {/* Company name */}
@@ -283,31 +296,41 @@ export default function CompanyModal({
                         )}
                       </div>
 
-                      {/* Right: lavender thumbnail accent */}
+                      {/* Right: project thumbnail — image if preview provided, else lavender accent */}
                       <div
                         style={{
                           width: 88,
                           height: 68,
                           borderRadius: 10,
                           flexShrink: 0,
-                          background:
-                            "linear-gradient(135deg, rgba(196,181,253,0.35) 0%, rgba(167,139,250,0.22) 100%)",
+                          overflow: "hidden",
+                          background: project.preview
+                            ? "transparent"
+                            : "linear-gradient(135deg, rgba(196,181,253,0.35) 0%, rgba(167,139,250,0.22) 100%)",
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "center",
                         }}
                         aria-hidden="true"
                       >
-                        <span
-                          style={{
-                            fontSize: 22,
-                            fontWeight: 200,
-                            color: "rgba(167,139,250,0.55)",
-                            lineHeight: 1,
-                          }}
-                        >
-                          +
-                        </span>
+                        {project.preview ? (
+                          <img
+                            src={project.preview}
+                            alt=""
+                            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                          />
+                        ) : (
+                          <span
+                            style={{
+                              fontSize: 22,
+                              fontWeight: 200,
+                              color: "rgba(167,139,250,0.55)",
+                              lineHeight: 1,
+                            }}
+                          >
+                            +
+                          </span>
+                        )}
                       </div>
                     </div>
 

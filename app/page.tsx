@@ -29,7 +29,7 @@ const FUN_CARDS = [
 
 export default function DreamsPage() {
   return (
-    <div>
+    <div className="bg-[#F9F9FB]">
 
       {/* ══════════════════════════════════════════
           HERO

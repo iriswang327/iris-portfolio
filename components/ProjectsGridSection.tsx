@@ -87,6 +87,7 @@ function TCLogo() {
 interface ModalConfig {
   companyName: string;
   companyLogo: string;
+  companyLogoImage?: string;
   whyCompanyText: string;
   projects: ModalProject[];
 }
@@ -109,6 +110,7 @@ const GEMINI_MODAL: ModalConfig = {
 const TC_MODAL: ModalConfig = {
   companyName: "Texas Convergent",
   companyLogo: "TC",
+  companyLogoImage: "/images/convergent-logo.png",
   whyCompanyText:
     "Building user research tools alongside cross-functional product and tech teams to validate ideas at speed.",
   projects: [
@@ -117,6 +119,7 @@ const TC_MODAL: ModalConfig = {
       subtitle:
         "Bridging the gap between UX designers and high-intent research participants.",
       route: "/design/ripple",
+      preview: "/images/ripple-modal-preview.png",
     },
   ],
 };
@@ -234,6 +237,7 @@ export default function ProjectsGridSection() {
         onClose={() => setActiveModal(null)}
         companyName={activeModal?.companyName ?? ""}
         companyLogo={activeModal?.companyLogo ?? ""}
+        companyLogoImage={activeModal?.companyLogoImage}
         whyCompanyText={activeModal?.whyCompanyText ?? ""}
         projects={activeModal?.projects ?? []}
       />
