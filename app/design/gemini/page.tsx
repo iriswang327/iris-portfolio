@@ -77,21 +77,26 @@ export default function GeminiPage() {
 
         {/* Tier 2: Split flat mobile UI grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-4xl mx-auto px-4">
-          {[
-            { src: "/images/gemini-mobile-dark.png",  label: "03 / Native Mobile Flow (Dark UI Token Ecosystem)" },
-            { src: "/images/gemini-mobile-light.png", label: "04 / Native Mobile Flow (Light UI Token Ecosystem)" },
-          ].map(({ src, label }) => (
-            <div key={src} className="flex flex-col gap-3">
-              <img
-                src={src}
-                alt={label}
-                className="w-full h-auto object-contain rounded-xl border border-black/[0.04] shadow-[0_15px_40px_rgba(0,0,0,0.04)] bg-white transition-transform duration-300 hover:scale-[1.01]"
-              />
-              <p className="text-[10px] font-normal tracking-[0.14em] uppercase text-[#BBBBBB]">
-                {label}
-              </p>
-            </div>
-          ))}
+          <div className="flex flex-col gap-3">
+            <img
+              src="/images/gemini-mobile-dark.png"
+              alt="03 / Native Mobile Flow (Dark UI Token Ecosystem)"
+              className="w-full h-auto object-contain rounded-xl border border-black/[0.04] shadow-[0_15px_40px_rgba(0,0,0,0.04)] bg-white block mx-auto"
+            />
+            <p className="text-[10px] font-normal tracking-[0.14em] uppercase text-[#BBBBBB]">
+              03 / Native Mobile Flow (Dark UI Token Ecosystem)
+            </p>
+          </div>
+          <div className="flex flex-col gap-3">
+            <img
+              src="/images/gemini-mobile-light.png"
+              alt="04 / Native Mobile Flow (Light UI Token Ecosystem)"
+              className="w-full h-auto object-contain rounded-xl border border-black/[0.04] shadow-[0_15px_40px_rgba(0,0,0,0.04)] bg-white block mx-auto"
+            />
+            <p className="text-[10px] font-normal tracking-[0.14em] uppercase text-[#BBBBBB]">
+              04 / Native Mobile Flow (Light UI Token Ecosystem)
+            </p>
+          </div>
         </div>
 
       </div>
