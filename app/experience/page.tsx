@@ -3,35 +3,124 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import ProjectCard from "@/components/ProjectCard";
+import CompanyModal, { type ModalProject } from "@/components/CompanyModal";
 
 // ─── Pillar 1: Strategic Impact Cards ────────────────────────────────────────
 
-const IMPACT_CARDS = [
+interface ModalConfig {
+  companyName: string;
+  companyLogo: string;
+  companyLogoImage?: string;
+  whyCompanyText: string;
+  projects: ModalProject[];
+}
+
+interface ImpactCardDef {
+  id: string;
+  gradient: string;
+  pill: string;
+  pillDark?: boolean;
+  hoverDescription: string;
+  modal: ModalConfig;
+}
+
+const TOWER_BRIDGE_MODAL: ModalConfig = {
+  companyName: "Tower & Bridge",
+  companyLogo: "T&B",
+  whyCompanyText:
+    "Managed performance data metrics and consumer visibility tracking layouts across multiple accounts (Trinity CDC, Heartening Sustainability). Translated raw engagement data reports directly into pitching slide decks to secure executive project approvals.",
+  projects: [
+    {
+      title: "Analytics Orchestration",
+      subtitle:
+        "Performance metrics, visibility tracking, and executive pitch decks for real client accounts.",
+      route: "/experience/tower-bridge/analytics-orchestration",
+    },
+  ],
+};
+
+const TEXAS_CONVERGENT_MODAL: ModalConfig = {
+  companyName: "Texas Convergent",
+  companyLogo: "TC",
+  companyLogoImage: "/images/convergent-logo.png",
+  whyCompanyText:
+    "Built Ripple solo — Best Presentation, Fall 2024. Bridging the gap between UX designers and high-intent research participants.",
+  projects: [
+    {
+      title: "Ripple",
+      subtitle:
+        "A product design sprint connecting designers with research participants at speed.",
+      route: "/design/ripple",
+      preview: "/images/ripple-modal-preview.png",
+    },
+  ],
+};
+
+const INTEGRATED_DESIGN_MODAL: ModalConfig = {
+  companyName: "Integrated Design",
+  companyLogo: "ID",
+  whyCompanyText:
+    "Orchestrated a full-semester user research process across student demographics and local businesses. Utilized rapid prototyping to evaluate friction points, successfully pivoting from retail merchandise systems to an integrated stadium jumbotron video framework coupled with a custom-coded responsive QR data-collection landing page.",
+  projects: [
+    {
+      title: "Unhoused Advocacy Ecosystem",
+      subtitle:
+        "Full UX research cycle for unhoused community advocacy — from interviews to stadium-scale activation.",
+      route: "/experience/integrated-design/unhoused-advocacy",
+    },
+  ],
+};
+
+const RISK_RADAR_MODAL: ModalConfig = {
+  companyName: "Risk Radar",
+  companyLogo: "RR",
+  whyCompanyText:
+    "Designed front-end user experience architectures for predictive crisis models. Synthesized complex back-end architectures, mapping LLM tokenization pipelines, BERT classification loops, and vector embedding structures directly into low-friction design frameworks for non-technical enterprise executives.",
+  projects: [
+    {
+      title: "AI Crisis Engine",
+      subtitle:
+        "AI brand crisis prediction — BERT, RAG, Spring 2026.",
+      route: "/experience/risk-radar/ai-crisis-engine",
+    },
+  ],
+};
+
+const STRATEGIC_IMPACT_CARDS: ImpactCardDef[] = [
   {
-    id: "risk-radar",
-    tag: "AI PRODUCT STRATEGY",
-    title: "Risk Radar — AI Crisis Engine",
-    body: "Designed front-end user experience architectures for predictive crisis models. Synthesized complex back-end architectures, mapping LLM tokenization pipelines, BERT classification loops, and vector embedding structures directly into low-friction design frameworks for non-technical enterprise executives.",
-    bg: "linear-gradient(148deg, #0D0D14 0%, #1A1A2E 100%)",
-    dark: true,
+    id: "tower-bridge",
+    gradient: "linear-gradient(148deg, #F5EDD8 0%, #EDD9A3 100%)",
+    pill: "Tower & Bridge · Analytics Strategy",
+    pillDark: false,
+    hoverDescription: "Real clients, real strategy, real stakes.",
+    modal: TOWER_BRIDGE_MODAL,
+  },
+  {
+    id: "texas-convergent",
+    gradient: "linear-gradient(148deg, #EEEAFF 0%, #C8BFFF 100%)",
+    pill: "Texas Convergent · Product Design",
+    pillDark: false,
+    hoverDescription: "Built Ripple solo — Best Presentation, Fall 2024.",
+    modal: TEXAS_CONVERGENT_MODAL,
   },
   {
     id: "integrated-design",
-    tag: "BEHAVIORAL UX RESEARCH",
-    title: "Unhoused Advocacy Ecosystem",
-    body: "Orchestrated a full-semester user research process across student demographics and local businesses. Utilized rapid prototyping to evaluate friction points, successfully pivoting from retail merchandise systems to an integrated stadium jumbotron video framework coupled with a custom-coded responsive QR data-collection landing page.",
-    bg: "linear-gradient(148deg, #F5F0E8 0%, #EDE5D4 100%)",
-    dark: false,
+    gradient: "linear-gradient(148deg, #FCE8F0 0%, #F4C8DC 100%)",
+    pill: "Integrated Design · UX Research",
+    pillDark: false,
+    hoverDescription: "Full UX research cycle for unhoused community advocacy.",
+    modal: INTEGRATED_DESIGN_MODAL,
   },
   {
-    id: "tower-bridge",
-    tag: "DATA & ANALYTICS STRATEGY",
-    title: "Tower & Bridge — Analytics Orchestration",
-    body: "Managed performance data metrics and consumer visibility tracking layouts across multiple accounts (Trinity CDC, Heartening Sustainability). Translated raw engagement data reports directly into pitching slide decks to secure executive project approvals.",
-    bg: "linear-gradient(148deg, #0A1A0F 0%, #0F2A1A 100%)",
-    dark: true,
+    id: "risk-radar",
+    gradient: "linear-gradient(148deg, #0D0D14 0%, #1A1A2E 100%)",
+    pill: "Risk Radar · AI Product",
+    pillDark: true,
+    hoverDescription: "AI brand crisis prediction — BERT, RAG, Spring 2026.",
+    modal: RISK_RADAR_MODAL,
   },
-] as const;
+];
 
 // ─── Pillar 2: Publication Ledger ─────────────────────────────────────────────
 
@@ -214,6 +303,8 @@ function ArchiveRow({
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function ExperiencePage() {
+  const [activeModal, setActiveModal] = useState<ModalConfig | null>(null);
+
   return (
     <div
       className="relative overflow-hidden"
@@ -259,70 +350,17 @@ export default function ExperiencePage() {
         <section style={{ marginTop: 64, marginBottom: 80 }}>
           <SectionLabel>Strategic Impact Cases</SectionLabel>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {IMPACT_CARDS.map((card) => {
-              const fg = card.dark ? "rgba(255,255,255,0.85)" : "var(--foreground)";
-              const tagColor = card.dark ? "rgba(255,255,255,0.35)" : "#BBBBBB";
-              const bodyColor = card.dark ? "rgba(255,255,255,0.5)" : "#888888";
-              const borderColor = card.dark
-                ? "rgba(255,255,255,0.06)"
-                : "rgba(0,0,0,0.06)";
-
-              return (
-                <Link
-                  key={card.id}
-                  href={`#${card.id}`}
-                  className="block transition-opacity duration-200 hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A78BFA] rounded-2xl"
-                  style={{ cursor: "pointer" }}
-                >
-                  <div
-                    style={{
-                      background: card.bg,
-                      border: `1px solid ${borderColor}`,
-                      borderRadius: 16,
-                      padding: "28px 24px 24px",
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: 14,
-                      height: "100%",
-                    }}
-                  >
-                    <p
-                      style={{
-                        fontSize: 9,
-                        fontWeight: 400,
-                        color: tagColor,
-                        letterSpacing: "0.18em",
-                        textTransform: "uppercase",
-                      }}
-                    >
-                      {card.tag}
-                    </p>
-                    <p
-                      style={{
-                        fontSize: 15,
-                        fontWeight: 300,
-                        color: fg,
-                        letterSpacing: "-0.015em",
-                        lineHeight: 1.35,
-                      }}
-                    >
-                      {card.title}
-                    </p>
-                    <p
-                      style={{
-                        fontSize: 11,
-                        fontWeight: 300,
-                        color: bodyColor,
-                        lineHeight: 1.75,
-                      }}
-                    >
-                      {card.body}
-                    </p>
-                  </div>
-                </Link>
-              );
-            })}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {STRATEGIC_IMPACT_CARDS.map((card) => (
+              <ProjectCard
+                key={card.id}
+                gradient={card.gradient}
+                pill={card.pill}
+                pillDark={card.pillDark}
+                hoverDescription={card.hoverDescription}
+                onClick={() => setActiveModal(card.modal)}
+              />
+            ))}
           </div>
         </section>
 
@@ -453,6 +491,16 @@ export default function ExperiencePage() {
         </section>
 
       </div>
+
+      <CompanyModal
+        isOpen={!!activeModal}
+        onClose={() => setActiveModal(null)}
+        companyName={activeModal?.companyName ?? ""}
+        companyLogo={activeModal?.companyLogo ?? ""}
+        companyLogoImage={activeModal?.companyLogoImage}
+        whyCompanyText={activeModal?.whyCompanyText ?? ""}
+        projects={activeModal?.projects ?? []}
+      />
     </div>
   );
 }
