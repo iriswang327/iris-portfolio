@@ -96,11 +96,11 @@ export default function DreamsPage() {
       {/* ══════════════════════════════════════════
           DESIGN PROJECTS
           ══════════════════════════════════════════ */}
-      <section style={{ marginTop: 0, paddingBottom: 16 }}>
-        <div style={{ paddingLeft: 24, paddingRight: 24 }}>
+      <section style={{ paddingBottom: 16 }}>
+        <div className="w-full max-w-6xl mx-auto px-6 my-16">
           <p
             className="section-label"
-            style={{ color: "#BBBBBB", marginBottom: 14, marginTop: 64 }}
+            style={{ color: "#BBBBBB", marginBottom: 14 }}
           >
             DESIGN PROJECTS
           </p>

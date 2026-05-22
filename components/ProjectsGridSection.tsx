@@ -225,22 +225,31 @@ export default function ProjectsGridSection() {
         {/* Ambient gradient hum behind the grid */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[600px] bg-gradient-to-tr from-purple-500/5 via-indigo-400/5 to-transparent rounded-full blur-[120px] pointer-events-none -z-10" />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2" style={{ gap: 12 }}>
-        {CARDS.map((card) => (
-          <ProjectCard
-            key={card.id}
-            gradient={card.gradient}
-            logo={card.logo}
-            pill={card.pill}
-            pillDark={card.pillDark}
-            hoverDescription={card.hoverDescription}
-            videoUrl={card.videoUrl}
-            imageUrl={card.imageUrl}
-            locked={card.locked}
-            onClick={card.modal ? () => setActiveModal(card.modal!) : undefined}
-          />
-        ))}
-      </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+          {CARDS.map((card) => (
+            <div key={card.id} className="group relative overflow-visible">
+              {/* Chromatic ambient glow — Gemini */}
+              {card.id === "gemini" && (
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 to-blue-600/0 rounded-2xl blur-xl opacity-0 group-hover:opacity-40 group-hover:from-cyan-500/10 group-hover:to-blue-600/10 transition-all duration-500 -z-10" aria-hidden="true" />
+              )}
+              {/* Chromatic ambient glow — Ripple (TC) */}
+              {card.id === "tc" && (
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/0 to-indigo-600/0 rounded-2xl blur-xl opacity-0 group-hover:opacity-40 group-hover:from-purple-500/10 group-hover:to-indigo-600/10 transition-all duration-500 -z-10" aria-hidden="true" />
+              )}
+              <ProjectCard
+                gradient={card.gradient}
+                logo={card.logo}
+                pill={card.pill}
+                pillDark={card.pillDark}
+                hoverDescription={card.hoverDescription}
+                videoUrl={card.videoUrl}
+                imageUrl={card.imageUrl}
+                locked={card.locked}
+                onClick={card.modal ? () => setActiveModal(card.modal!) : undefined}
+              />
+            </div>
+          ))}
+        </div>
 
       </div>
 
