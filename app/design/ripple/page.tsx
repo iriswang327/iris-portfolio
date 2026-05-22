@@ -6,6 +6,8 @@ export default function RipplePage() {
   return (
     <DesignCaseStudyTemplate
       breadcrumb="Design → Texas Convergent → Ripple"
+      backHref="/"
+      backLabel="← Back to Design"
       finalSectionLabel="Final Result"
       title="Ripple"
       subtitle="Bridging the gap between UX designers and high-intent research participants."

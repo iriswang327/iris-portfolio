@@ -99,6 +99,7 @@ export default function CompanyModal({
             role="dialog"
             aria-modal="true"
             aria-label={`${companyName} project details`}
+            onClick={onClose}
           >
             {/* ── Modal card ───────────────────────────────────────────── */}
             <motion.div
