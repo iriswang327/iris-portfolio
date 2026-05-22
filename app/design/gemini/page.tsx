@@ -53,30 +53,30 @@ export default function GeminiPage() {
     >
       {/* Media Block Slot: Showcases your light & dark phone layouts side-by-side */}
       <div className="space-y-8 w-full mt-12">
-        
+
         {/* Final Design Centerpiece Container */}
-        <div className="relative rounded-2xl overflow-hidden border border-black/5 shadow-sm bg-gradient-to-tr from-[#1E1030] to-[#0B0718] aspect-[16/10] flex items-center justify-center p-6 sm:p-12">
-          <img 
-            src="/images/gemini-hero-frame.jpg" 
-            alt="Gemini Native Mobile Interface Final Light Mode Design" 
-            className="max-h-full w-auto object-contain drop-shadow-xl" 
+        <div className="rounded-2xl overflow-hidden border border-black/5 shadow-sm bg-gradient-to-tr from-[#1E1030] to-[#0B0718] p-6 sm:p-12">
+          <img
+            src="/images/gemini-hero-frame.png"
+            alt="Gemini Native Mobile Interface Final Light Mode Design"
+            className="w-full h-auto object-contain block mx-auto drop-shadow-xl"
           />
         </div>
 
         {/* Supporting Process & Operational States Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="relative aspect-[16/10] bg-[#0A0A0A] rounded-xl overflow-hidden border border-white/5 p-4 flex items-center justify-center">
-            <img 
-              src="/images/gemini-dark-mockup.png" 
-              alt="Low-Light Responsive Mobile News Feed Component Layout" 
-              className="max-h-full w-auto object-contain" 
+          <div className="bg-[#0A0A0A] rounded-xl overflow-hidden border border-white/5 p-4">
+            <img
+              src="/images/gemini-dark-mockup.png"
+              alt="Low-Light Responsive Mobile News Feed Component Layout"
+              className="w-full h-auto object-contain block mx-auto"
             />
           </div>
-          <div className="relative aspect-[16/10] bg-white rounded-xl overflow-hidden border border-black/5 p-2 flex items-center justify-center">
-            <img 
-              src="/images/gemini-web-audit.jpg" 
-              alt="Gemini Platform Desktop Web Reference Integration" 
-              className="max-h-full w-auto object-contain" 
+          <div className="bg-white rounded-xl overflow-hidden border border-black/5 p-4">
+            <img
+              src="/images/gemini-web-audit.png"
+              alt="Gemini Platform Desktop Web Reference Integration"
+              className="w-full h-auto object-contain block mx-auto"
             />
           </div>
         </div>

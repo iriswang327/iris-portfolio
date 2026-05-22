@@ -10,6 +10,8 @@ export interface ModalProject {
   title: string;
   subtitle: string;
   route: string;
+  /** When true, replaces the "view case study" link with a coming-soon indicator */
+  locked?: boolean;
 }
 
 export interface CompanyModalProps {
@@ -259,13 +261,26 @@ export default function CompanyModal({
                           {project.subtitle}
                         </p>
 
-                        <Link
-                          href={project.route}
-                          className="text-gradient-ihwn hover:opacity-70 transition-opacity"
-                          style={{ fontSize: 13, fontWeight: 300 }}
-                        >
-                          view case study →
-                        </Link>
+                        {project.locked ? (
+                          <span
+                            style={{
+                              fontSize: 12,
+                              fontWeight: 300,
+                              color: "#BBBBBB",
+                              letterSpacing: "0.04em",
+                            }}
+                          >
+                            currently building 🔒
+                          </span>
+                        ) : (
+                          <Link
+                            href={project.route}
+                            className="text-gradient-ihwn hover:opacity-70 transition-opacity"
+                            style={{ fontSize: 13, fontWeight: 300 }}
+                          >
+                            view case study →
+                          </Link>
+                        )}
                       </div>
 
                       {/* Right: lavender thumbnail accent */}

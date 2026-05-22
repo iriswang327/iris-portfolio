@@ -121,6 +121,36 @@ const TC_MODAL: ModalConfig = {
   ],
 };
 
+const APPLE_MODAL: ModalConfig = {
+  companyName: "Apple",
+  companyLogo: "⌘",
+  whyCompanyText:
+    "Apple sits at the intersection of technology and human experience better than anyone. This upcoming project explores transforming maps from a generic utility into an editorial companion that guides you through context, not just coordinates.",
+  projects: [
+    {
+      title: "PROJECT 01 / Maps Redesign",
+      subtitle: "Context-aware spatial navigation systems.",
+      route: "#",
+      locked: true,
+    },
+  ],
+};
+
+const SPOTIFY_MODAL: ModalConfig = {
+  companyName: "Spotify",
+  companyLogo: "♪",
+  whyCompanyText:
+    "Exploring high-density visual storytelling inside audio streaming architectures to bridge the gap between niche audio subcultures and mainstream social curation features.",
+  projects: [
+    {
+      title: "PROJECT 01 / Social Curation Layer",
+      subtitle: "Designing collaborative music ecosystems.",
+      route: "#",
+      locked: true,
+    },
+  ],
+};
+
 // ─── Card definitions ─────────────────────────────────────────────────────────
 
 interface CardDef {
@@ -130,6 +160,7 @@ interface CardDef {
   pill: string;
   pillDark?: boolean;
   hoverDescription: string;
+  videoUrl?: string;
   locked?: boolean;
   modal?: ModalConfig;
 }
@@ -142,6 +173,7 @@ const CARDS: CardDef[] = [
     pill: "Gemini · Product Design",
     pillDark: true,
     hoverDescription: "Contextual crypto news in the trading experience.",
+    videoUrl: "/videos/gemini-thumbnail.mp4",
     modal: GEMINI_MODAL,
   },
   {
@@ -151,6 +183,7 @@ const CARDS: CardDef[] = [
     pill: "Texas Convergent · Product Design",
     pillDark: true,
     hoverDescription: "Bridging designers and research participants at speed.",
+    videoUrl: "/videos/ripple-thumbnail.mp4",
     modal: TC_MODAL,
   },
   {
@@ -160,6 +193,7 @@ const CARDS: CardDef[] = [
     pill: "Apple · Product Design",
     hoverDescription: "Rethinking how Maps connects people to context.",
     locked: true,
+    modal: APPLE_MODAL,
   },
   {
     id: "spotify",
@@ -168,6 +202,7 @@ const CARDS: CardDef[] = [
     pill: "Spotify · Product Design",
     hoverDescription: "Discover what local businesses are listening to.",
     locked: true,
+    modal: SPOTIFY_MODAL,
   },
 ];
 
@@ -187,6 +222,7 @@ export default function ProjectsGridSection() {
             pill={card.pill}
             pillDark={card.pillDark}
             hoverDescription={card.hoverDescription}
+            videoUrl={card.videoUrl}
             locked={card.locked}
             onClick={card.modal ? () => setActiveModal(card.modal!) : undefined}
           />
