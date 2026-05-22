@@ -37,7 +37,7 @@ export default function DreamsPage() {
       <section className="relative overflow-hidden">
         <ParallaxHeroGradient />
 
-        <div className="relative z-10 w-full max-w-6xl mx-auto px-8 md:px-12 pt-24 pb-12 block">
+        <div className="relative z-10 w-full max-w-6xl mx-auto px-6 pt-36 pb-12 block">
           {/* Row 1: Status indicator */}
           <div className="flex items-center gap-2">
             <span
