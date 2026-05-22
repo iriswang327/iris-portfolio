@@ -34,14 +34,10 @@ export default function DreamsPage() {
       {/* ══════════════════════════════════════════
           HERO
           ══════════════════════════════════════════ */}
-      <section
-        className="relative overflow-hidden"
-        style={{ paddingTop: 180, paddingBottom: 0 }}
-      >
+      <section className="relative overflow-hidden">
         <ParallaxHeroGradient />
 
-        {/* Left-aligned, max 680px */}
-        <div className="relative z-10" style={{ maxWidth: 680, paddingLeft: 32, paddingRight: 32 }}>
+        <div className="relative z-10 w-full max-w-6xl mx-auto px-8 md:px-12 pt-24 pb-12 block">
           {/* Row 1: Status indicator */}
           <div className="flex items-center gap-2">
             <span
