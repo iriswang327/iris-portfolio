@@ -220,14 +220,14 @@ export default function ExperiencePage() {
       style={{ backgroundColor: "transparent", paddingBottom: 100 }}
     >
       {/* Watercolor gradient orbs */}
-      <div className="absolute top-[-8%] left-[-8%] w-[650px] h-[650px] bg-pink-400/10 rounded-full blur-[120px] pointer-events-none -z-10" aria-hidden="true" />
-      <div className="absolute top-[15%] right-[-10%] w-[700px] h-[700px] bg-purple-400/12 rounded-full blur-[110px] pointer-events-none -z-10" aria-hidden="true" />
-      <div className="absolute bottom-[5%] right-[-5%] w-[500px] h-[500px] bg-cyan-400/8 rounded-full blur-[100px] pointer-events-none -z-10" aria-hidden="true" />
-      <div className="absolute bottom-[20%] left-[-5%] w-[500px] h-[500px] bg-blue-300/[0.05] rounded-full blur-[110px] pointer-events-none -z-10" aria-hidden="true" />
+      <div className="absolute top-[-8%] left-[-8%] w-[650px] h-[650px] bg-pink-400/20 rounded-full blur-[120px] pointer-events-none -z-10" aria-hidden="true" />
+      <div className="absolute top-[15%] right-[-10%] w-[700px] h-[700px] bg-purple-400/20 rounded-full blur-[110px] pointer-events-none -z-10" aria-hidden="true" />
+      <div className="absolute bottom-[5%] right-[-5%] w-[500px] h-[500px] bg-cyan-400/15 rounded-full blur-[100px] pointer-events-none -z-10" aria-hidden="true" />
+      <div className="absolute bottom-[20%] left-[-5%] w-[500px] h-[500px] bg-blue-300/15 rounded-full blur-[110px] pointer-events-none -z-10" aria-hidden="true" />
       <div className="w-full max-w-6xl mx-auto px-6 pt-36 pb-12 block">
 
         {/* ── Hero header ─────────────────────────────────────────────── */}
-        <div style={{ marginBottom: 72 }}>
+        <div style={{ marginTop: 36, marginBottom: 72 }}>
           <h1
             style={{
               fontSize: 40,
