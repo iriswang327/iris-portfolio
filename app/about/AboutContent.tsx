@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Image from "next/image";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import VinylPlayer from "@/components/VinylPlayer";
@@ -15,8 +14,17 @@ const NAV_ITEMS = [
   { id: "community", label: "Community" },
   { id: "philosophy", label: "Philosophy" },
   { id: "entertainment", label: "Entertainment" },
-  { id: "funfacts", label: "Fun Facts ✦" },
+  { id: "fun", label: "Fun Facts", star: true },
 ] as const;
+
+const SECTION_THEMES: Record<(typeof NAV_ITEMS)[number]["id"], string> = {
+  hi: "#e9a7c4",
+  work: "#b5a8e8",
+  community: "#a8cdb5",
+  philosophy: "#9eb2e8",
+  entertainment: "#e0c79a",
+  fun: "#e9a7c4",
+};
 
 // ─── Work timeline ──────────────────────────────────────────────────────────
 
@@ -183,52 +191,55 @@ function WorkRow({ item, isLast }: { item: (typeof WORK_ITEMS)[number]; isLast: 
 // ─── Main component ─────────────────────────────────────────────────────────
 
 export default function AboutContent() {
-  const [activeSection, setActiveSection] = useState("hi");
+  const [activeSection, setActiveSection] = useState<(typeof NAV_ITEMS)[number]["id"]>("hi");
   const [activeTab, setActiveTab] = useState<"books" | "music">("books");
+  const pageRef = useRef<HTMLDivElement>(null);
 
-  // Single Intersection Observer — tracks all sections, sets the topmost visible one active
   useEffect(() => {
-    const sectionIds = ["hi", "work", "community", "philosophy", "entertainment", "funfacts"];
-    const intersecting = new Set<string>();
+    const sections = document.querySelectorAll<HTMLElement>("section[data-theme]");
+    const visibility = new Map<string, number>();
+    sections.forEach((section) => visibility.set(section.dataset.theme ?? "", 0));
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            intersecting.add(entry.target.id);
-          } else {
-            intersecting.delete(entry.target.id);
+          const theme = (entry.target as HTMLElement).dataset.theme;
+          if (theme) visibility.set(theme, entry.intersectionRatio);
+        });
+
+        let best: (typeof NAV_ITEMS)[number]["id"] | null = null;
+        let bestRatio = -1;
+        visibility.forEach((ratio, name) => {
+          if (ratio > bestRatio) {
+            bestRatio = ratio;
+            best = name as (typeof NAV_ITEMS)[number]["id"];
           }
         });
 
-        // Pick the first section (DOM order = top-to-bottom) that is currently intersecting
-        const active = sectionIds.find((id) => intersecting.has(id));
-        if (active) setActiveSection(active);
+        if (best) {
+          setActiveSection(best);
+          const accent = SECTION_THEMES[best];
+          pageRef.current?.style.setProperty("--accent", accent);
+        }
       },
-      // Top band: below the fixed nav (80px). Bottom band: cut off lower half so only
-      // the section near the top of the viewport counts as "active".
-      { rootMargin: "-80px 0px -50% 0px", threshold: 0 }
+      {
+        threshold: [0, 0.1, 0.25, 0.4, 0.6, 0.8, 1.0],
+        rootMargin: "-20% 0px -30% 0px",
+      }
     );
 
-    sectionIds.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-
+    sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
   }, []);
 
-  const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  const scrollTo = (id: (typeof NAV_ITEMS)[number]["id"]) => {
+    const target = document.getElementById(id);
+    if (!target) return;
+    window.scrollTo({ top: target.offsetTop - 40, behavior: "smooth" });
   };
 
   return (
-    // Outer wrapper — gradient lives here as true background, never inside the flex row
-    <div style={{ position: "relative" }}>
-
-      {/* ── Watercolor gradient background ─────────────────
-          Kept outside the flex container so it never becomes
-          a flex item and cannot overlap the columns.         */}
+    <div ref={pageRef} className="about-page" style={{ position: "relative" }}>
       <div
         aria-hidden="true"
         style={{
@@ -245,102 +256,40 @@ export default function AboutContent() {
         <ParallaxHeroGradient />
       </div>
 
-      {/* ── Two-column layout ─────────────────────────────
-          Spec: display flex · flex-direction row · gap 48px
-                padding 24px · min-height 100vh              */}
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          gap: 48,
-          padding: 24,
-          minHeight: "100vh",
-          position: "relative",
-          zIndex: 1,
-        }}
-      >
-
-        {/* ── Column 1: Sidebar ─────────────────────────── */}
-        <aside
-          className="hidden md:block"
-          style={{
-            width: 200,
-            flexShrink: 0,
-            position: "sticky",
-            top: 80,
-            alignSelf: "flex-start",
-            height: "fit-content",
-          }}
-        >
-          <div style={{ paddingTop: 56, paddingBottom: 24 }}>
-
-            {/* Logo + name */}
-            <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
-              <Image
-                src="/images/lotus-logo.png"
-                alt="Iris Wang logo"
-                height={32}
-                width={32}
-                style={{ height: 32, width: "auto", flexShrink: 0 }}
-              />
-              <span style={{ fontSize: 13, fontWeight: 400, color: "var(--foreground)" }}>
-                iris wang
-              </span>
+      <div className="about-shell">
+        <div className="about-rail-column">
+          <aside className="about-rail rail">
+            <div className="about-brand">
+              <div className="about-lotus" aria-hidden="true" />
+              <span className="about-name">iris wang</span>
             </div>
 
-            <p style={{ fontSize: 11, fontWeight: 300, color: "#AAAAAA", marginBottom: 28, lineHeight: 1.5, maxWidth: 160 }}>
-              design, strategy, &amp; everything in between.
-            </p>
+            <p className="about-tagline">design, strategy, &amp; everything in between.</p>
 
-            {/* Anchor nav — active link gets IHWN gradient text */}
-            <nav
-              style={{ display: "flex", flexDirection: "column", gap: 14 }}
-              aria-label="About page sections"
-            >
-              {NAV_ITEMS.map(({ id, label }) => (
-                <button
+            <nav className="toc" id="toc" aria-label="About page sections">
+              {NAV_ITEMS.map(({ id, label, star }) => (
+                <a
                   key={id}
-                  onClick={() => scrollTo(id)}
-                  aria-current={activeSection === id ? "location" : undefined}
-                  style={{
-                    textAlign: "left",
-                    background: activeSection === id
-                      ? "linear-gradient(135deg, #F0ABFC, #A78BFA, #7DD3FC)"
-                      : "none",
-                    WebkitBackgroundClip: activeSection === id ? "text" : "unset",
-                    backgroundClip: activeSection === id ? "text" : "unset",
-                    WebkitTextFillColor: activeSection === id ? "transparent" : "unset",
-                    color: activeSection === id ? "transparent" : "#888888",
-                    fontSize: 13,
-                    fontWeight: activeSection === id ? 400 : 300,
-                    border: "none",
-                    padding: 0,
-                    cursor: "pointer",
-                    transition: "color 200ms ease, font-weight 200ms ease",
-                    lineHeight: 1.4,
+                  href={`#${id}`}
+                  data-target={id}
+                  className={activeSection === id ? "active" : ""}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollTo(id);
                   }}
+                  aria-current={activeSection === id ? "location" : undefined}
                 >
                   {label}
-                </button>
+                  {star ? <span style={{ opacity: 0.7 }}> ✦</span> : null}
+                </a>
               ))}
             </nav>
+          </aside>
+        </div>
 
-          </div>
-        </aside>
-
-        {/* ── Column 2: Main content ────────────────────── */}
-        <div
-          style={{
-            flex: 1,
-            minWidth: 0,
-            paddingLeft: 24,
-            paddingTop: 80,
-            paddingBottom: 120,
-          }}
-        >
-
+        <div className="about-main">
           {/* ── HI SECTION ── */}
-          <section id="hi" style={{ marginBottom: 72 }}>
+          <section id="hi" data-theme="hi" style={{ marginBottom: 72 }}>
             {/* Photo + bio row */}
             <div
               style={{
@@ -427,7 +376,7 @@ export default function AboutContent() {
           </section>
 
         {/* ── WORK SECTION ── */}
-        <section id="work" style={{ marginBottom: 72 }}>
+        <section id="work" data-theme="work" style={{ marginBottom: 72 }}>
           <p className="section-label" style={{ color: "#BBBBBB", marginBottom: 20 }}>
             WORK
           </p>
@@ -448,7 +397,7 @@ export default function AboutContent() {
         </section>
 
         {/* ── COMMUNITY SECTION ── */}
-        <section id="community" style={{ marginBottom: 72 }}>
+        <section id="community" data-theme="community" style={{ marginBottom: 72 }}>
           <h2
             className="font-[300]"
             style={{ fontSize: 22, color: "var(--foreground)", marginBottom: 20 }}
@@ -480,7 +429,7 @@ export default function AboutContent() {
         </section>
 
         {/* ── PHILOSOPHY SECTION ── */}
-        <section id="philosophy" style={{ marginBottom: 72 }}>
+        <section id="philosophy" data-theme="philosophy" style={{ marginBottom: 72 }}>
           <h2
             className="font-[300]"
             style={{ fontSize: 22, color: "var(--foreground)", marginBottom: 8 }}
@@ -504,7 +453,7 @@ export default function AboutContent() {
         </section>
 
         {/* ── ENTERTAINMENT SECTION ── */}
-        <section id="entertainment" style={{ marginBottom: 72 }}>
+        <section id="entertainment" data-theme="entertainment" style={{ marginBottom: 72 }}>
           <h2
             className="font-[300]"
             style={{ fontSize: 22, color: "var(--foreground)", marginBottom: 24 }}
@@ -588,7 +537,7 @@ export default function AboutContent() {
         </section>
 
         {/* ── FUN FACTS SECTION ── */}
-        <section id="funfacts" style={{ marginBottom: 40 }}>
+        <section id="fun" data-theme="fun" style={{ marginBottom: 40 }}>
           <h2
             className="font-[300]"
             style={{ fontSize: 22, color: "var(--foreground)", marginBottom: 6 }}

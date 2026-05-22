@@ -121,10 +121,14 @@
   margin: 0;
 }
 
-html,
+html {
+  max-width: 100vw;
+  overflow-x: clip;
+  overflow-y: visible;
+}
+
 body {
   max-width: 100vw;
-  overflow-x: hidden;
   background-color: var(--background);
   color: var(--foreground);
   font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
@@ -306,4 +310,159 @@ html[data-picker-active="1"] footer {
 
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(167, 139, 250, 0.5);
+}
+
+/* ─────────────────────────────────────────────
+   About page — sticky rail + scroll-spy TOC
+   ───────────────────────────────────────────── */
+
+.about-page {
+  --accent: #e9a7c4;
+  --ink-soft: #888888;
+  --about-muted: #888888;
+  --about-muted-2: #bbbbbb;
+  --about-line-strong: rgba(0, 0, 0, 0.1);
+}
+
+.about-shell {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px;
+  gap: 96px;
+  align-items: start;
+  position: relative;
+  z-index: 1;
+}
+
+.about-rail-column {
+  grid-column: 1;
+  min-width: 0;
+  width: 240px;
+  align-self: stretch;
+}
+
+.about-rail,
+.rail {
+  position: sticky;
+  top: 3.5rem;
+  width: 240px;
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.about-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.about-lotus {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background:
+    radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.9) 0%, transparent 48%),
+    radial-gradient(circle at 68% 72%, rgba(196, 181, 232, 0.7) 0%, rgba(233, 180, 200, 0.65) 55%, transparent 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.55),
+    0 2px 8px rgba(181, 168, 232, 0.15);
+}
+
+.about-brand .about-name {
+  font-weight: 400;
+  font-size: 15px;
+  letter-spacing: -0.015em;
+  color: var(--foreground);
+  line-height: 1.2;
+}
+
+.about-rail .about-tagline {
+  font-size: 12px;
+  color: var(--about-muted);
+  line-height: 1.55;
+  font-weight: 300;
+  margin: 14px 0 0;
+  max-width: 210px;
+  letter-spacing: -0.005em;
+}
+
+.toc {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 40px;
+}
+
+.toc a {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--ink-soft);
+  padding: 0;
+  margin: 0;
+  transition: color 0.4s, transform 0.2s;
+}
+
+.toc a::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: transparent;
+  flex-shrink: 0;
+  transition: background 0.4s, transform 0.3s;
+}
+
+.toc a:hover {
+  transform: translateX(2px);
+}
+
+.toc a.active {
+  color: var(--accent);
+  font-weight: 400;
+}
+
+.toc a.active::before {
+  background: var(--accent);
+  transform: scale(1.4);
+}
+
+.about-main {
+  grid-column: 2;
+  min-width: 0;
+  padding-top: 96px;
+  padding-bottom: 120px;
+}
+
+@media (max-width: 880px) {
+  .about-shell {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 0 24px;
+  }
+
+  .about-rail-column {
+    grid-column: 1;
+  }
+
+  .about-rail,
+  .rail {
+    position: static;
+    top: auto;
+    width: 100%;
+    padding-top: 32px;
+  }
+
+  .about-main {
+    grid-column: 1;
+    padding-top: 0;
+  }
 }
