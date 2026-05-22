@@ -4,153 +4,200 @@ import ExperienceCaseStudyTemplate from "@/components/ExperienceCaseStudyTemplat
 export const metadata: Metadata = {
   title: "Tower & Bridge — Museum of Iris",
   description:
-    "Analytics strategy case study — student-run consultancy serving Austin-area businesses.",
+    "Brand strategy and analytics case study — student-run consultancy serving Austin-area nonprofits and small businesses.",
 };
 
-const SOLUTION_TILES = [
-  {
-    image: "/images/tower-bridge-audience.png",
-    imageAlt: "Audience Segmentation Framework",
-    title: "Audience Segmentation Framework",
-    description:
-      "Primary + secondary persona maps built from behavioral data + interviews.",
-    placeholderLabel: "/images/tower-bridge-audience.png",
-    placeholderGradient: "linear-gradient(135deg, #f5e9c8, #e8d4a3)",
-  },
-  {
-    image: "/images/tower-bridge-positioning.png",
-    imageAlt: "Competitive Positioning Matrix",
-    title: "Competitive Positioning Matrix",
-    description: "Where the client sits today vs. where the white space is.",
-    placeholderLabel: "/images/tower-bridge-positioning.png",
-    placeholderGradient: "linear-gradient(135deg, #e8e2d0, #c9b88a)",
-  },
-  {
-    image: "/images/tower-bridge-dashboard.png",
-    imageAlt: "Analytics Dashboard",
-    title: "Analytics Dashboard",
-    description:
-      "Cleaned-up event tracking — what the numbers mean, not just what they are.",
-    placeholderLabel: "/images/tower-bridge-dashboard.png",
-    placeholderGradient: "linear-gradient(135deg, #e6dcc4, #d4bd83)",
-  },
-  {
-    image: "/images/tower-bridge-deck.png",
-    imageAlt: "Executive Recommendation Deck",
-    title: "Executive Recommendation Deck",
-    description:
-      "Closing call: where the client should focus, why, and how to measure if it's working.",
-    placeholderLabel: "/images/tower-bridge-deck.png",
-    placeholderGradient: "linear-gradient(135deg, #efe3c2, #d8c08b)",
-  },
-] as const;
+const IMAGE_BASE = "/images/tower-bridge";
 
 export default function TowerAndBridgeCaseStudyPage() {
   return (
     <ExperienceCaseStudyTemplate
-      accent="#c9a96e"
-      accent2="#e0c79a"
-      accentTint="rgba(224,199,154,0.18)"
-      atmosphere="radial-gradient(50% 50% at 12% 10%, rgba(224,199,154,0.18) 0%, transparent 60%), radial-gradient(40% 40% at 85% 92%, rgba(201,169,110,0.10) 0%, transparent 60%)"
-      avatar="T"
+      breadcrumb={[
+        { label: "Experience", href: "/experience" },
+        { label: "Tower & Bridge", href: "/experience" },
+        { label: "Client Strategy" },
+      ]}
+      eyebrowTags={[
+        "2024 – Present",
+        "Strategy Analyst",
+        "Brand & Analytics",
+        "Agency-Style Client Work",
+      ]}
       title="Tower & Bridge"
-      subline="Analytics Strategy · Student Agency"
+      subtitle="Real clients, real deliverables, real pressure — turning brand strategy and analytics into measurable nonprofit and small-business growth at UT Austin's student-run consultancy."
       metadata={[
         { label: "Timeline", value: "2024 – Present" },
         { label: "Role", value: "Strategy Analyst" },
-        { label: "Type", value: "Client Work" },
-        { label: "With", value: "Account Team" },
+        { label: "Focus", value: "Brand Strategy & Analytics" },
+        { label: "Method", value: "Agency-Style Client Work" },
       ]}
-      toc={[
-        { id: "context", label: "Context" },
-        { id: "problem", label: "Problem" },
-        { id: "process", label: "Process" },
-        { id: "solution", label: "Solution" },
-        { id: "impact", label: "Impact" },
-        { id: "reflection", label: "Reflection" },
-      ]}
-      context={{
-        heading:
-          "A student-run analytics & strategy consultancy serving Austin-area businesses.",
-        body: "Tower & Bridge is UT Austin's student-run analytics and strategy consultancy. Real clients, real deliverables, real pressure. I joined as a strategist working on brand positioning, audience research, and analytics reporting for Austin-area businesses.",
-        constraints: [
-          "Client timelines don't flex for exam week.",
-          "Deliverables must be executive-ready, not student-project-ready.",
-          "Working across teams with different methodologies and tools.",
-          "Balancing depth of analysis with speed of delivery.",
+      overview={{
+        body: "Tower & Bridge is UT Austin's student-run strategy consultancy. We run real engagements for Austin-area nonprofits and small businesses — full-funnel brand strategy, analytics audits, social campaigns, and executive-ready deliverables. My work has centered on turning fragmented client data and content into cohesive strategy that drives measurable outcomes.",
+        bullets: [
+          "Lead strategist on two multi-month client engagements: Trinity Child Development Center (nonprofit preschool) and Heartening (small-business retail).",
+          "Built media-relations strategy and analytics reporting that drove +333% engagement and $1,500+ in direct revenue.",
+          "Operated under real client timelines — executive-ready, not student-project-ready.",
         ],
       }}
-      problem={{
-        quote:
-          "Most small businesses have data but no insight. They can tell you how many people visited their site. They can't tell you why those people left, what they almost bought, or who their real audience actually is.",
+      challenge={{
+        heading: "Most small organizations have data but no insight.",
+        body: "Trinity and Heartening came to us with the same underlying friction: lots of social posts, lots of vague analytics, no clear story about what was working and why. They needed a strategist who could read the numbers, find the signal, and translate it into a plan their team could execute next week — not next quarter.",
+        frameCards: [
+          {
+            label: "The Friction",
+            title: "Data without direction.",
+            body: "Posts going up without a content strategy. Analytics dashboards no one read. Brand voice that drifted across channels. The information existed — the synthesis didn't.",
+          },
+          {
+            label: "The Strategic Goal",
+            title: "Insight that turns into action.",
+            body: "Convert raw analytics + audience research into clear, executive-ready recommendations the client could actually implement — with enough specificity to move next week, not next quarter.",
+          },
+        ],
       }}
+      pullQuote="Strategy at Tower & Bridge is applied, not academic. Every deliverable is built around a decision the client needs to make."
+      clients={[
+        {
+          sectionLabel: "Client 01 · Trinity Child Development Center",
+          title: "Trinity Child Development Center",
+          subtitle:
+            "A nonprofit preschool serving an underserved community — needed brand presence + nonprofit-revenue strategy.",
+          body: "Built a communications campaign promoting Trinity CDC's mission of accessible, high-quality early childcare. Established a cohesive brand image across Instagram and Facebook, executed media relations with local businesses, and ran weekly analytics reporting to measure what was working.",
+          images: [
+            {
+              src: `${IMAGE_BASE}/trinity-analytics-report.png`,
+              alt: "Weekly analytics report — engagement breakdown, top posts, follower growth",
+              placeholderLabel: `${IMAGE_BASE}/trinity-analytics-report.png`,
+              caption: "Analytics Report · Week 1 example",
+            },
+            {
+              src: `${IMAGE_BASE}/trinity-final-case-study.png`,
+              alt: "Final case study deck cover — task, tactics, results",
+              placeholderLabel: `${IMAGE_BASE}/trinity-final-case-study.png`,
+              caption: "Final Case Study Deck",
+              tall: true,
+            },
+          ],
+          metrics: [
+            {
+              label: "Instagram Engagement",
+              num: "+333%",
+              sub: "Increase over baseline",
+            },
+            {
+              label: "Follower Growth",
+              num: "+275%",
+              sub: "Across Instagram & Facebook",
+            },
+            {
+              label: "Direct Revenue",
+              num: "$1.5K+",
+              sub: "From secured nonprofit partnership",
+            },
+          ],
+        },
+        {
+          sectionLabel: "Client 02 · Heartening",
+          title: "Heartening",
+          subtitle:
+            "Small-business retail brand — needed cohesive social strategy and benchmark analytics reporting.",
+          body: "Built a benchmark analytics framework comparing weekly performance against historical baselines. Identified that video content drove higher engagement and that posting cadence on TikTok needed to increase. Translated those findings into a concrete content calendar the team could execute.",
+          images: [
+            {
+              src: `${IMAGE_BASE}/heartening-deck-cover.png`,
+              alt: "Heartening Spring 2026 Strategy Deck cover",
+              placeholderLabel: `${IMAGE_BASE}/heartening-deck-cover.png`,
+              caption: "Strategy Deck Cover",
+            },
+            {
+              src: `${IMAGE_BASE}/heartening-analytics-report.png`,
+              alt: "Analytics report — Instagram, TikTok performance + insights",
+              placeholderLabel: `${IMAGE_BASE}/heartening-analytics-report.png`,
+              caption: "Benchmark Analytics Report",
+            },
+          ],
+          bullets: [
+            "Identified video content drove highest engagement (+44% lift over static).",
+            "Recommended increased TikTok posting frequency based on engagement velocity data.",
+            "Spring Break post significantly outperformed baseline — flagged seasonal pattern for forward planning.",
+          ],
+        },
+      ]}
       process={{
         heading: "Five phases from kickoff to recommendation.",
-        rows: [
+        steps: [
           {
-            num: "01",
-            phase: "Client Kickoff",
-            desc: "Discovery sessions to map business goals, existing data infrastructure, and key decision-makers. Identified the real question behind the stated question.",
+            num: "01 / Client Kickoff",
+            heading: "Mapping the question behind the question.",
+            body: "Discovery sessions with the client to map business goals, existing infrastructure, and decision-makers. Most kickoffs surface a stated problem and a real problem — the work starts with identifying the gap.",
+            image: {
+              src: `${IMAGE_BASE}/process-kickoff.png`,
+              alt: "Team kickoff photo or whiteboard discovery session",
+              placeholderLabel: `${IMAGE_BASE}/process-kickoff.png`,
+            },
           },
           {
-            num: "02",
-            phase: "Data Audit",
-            desc: "Assessed what analytics existed, what was being tracked, what was being ignored, and what was being misread.",
+            num: "02 / Data Audit",
+            heading: "Reading the analytics already in the room.",
+            body: "Assessed what was being tracked, what was being ignored, and what was being misread. Most clients have more data than they realize — the audit surfaces what's signal vs. what's noise.",
+            image: {
+              src: `${IMAGE_BASE}/process-audit.png`,
+              alt: "Analytics dashboard screenshot or audit table",
+              placeholderLabel: `${IMAGE_BASE}/process-audit.png`,
+            },
           },
           {
-            num: "03",
-            phase: "Research",
-            desc: "Primary interviews with target customers + secondary competitive-landscape research. Always looking for the gap between perception and reality.",
+            num: "03 / Research",
+            heading: "Bridging perception and reality.",
+            body: "Primary interviews with target audience members combined with secondary competitive-landscape research. Always looking for the gap between how the client sees themselves and how their audience actually does.",
+            image: {
+              src: `${IMAGE_BASE}/process-research.png`,
+              alt: "Research synthesis board or affinity map",
+              placeholderLabel: `${IMAGE_BASE}/process-research.png`,
+            },
           },
           {
-            num: "04",
-            phase: "Synthesis",
-            desc: "Translating raw data into strategic insight. The hardest part — making numbers tell a story an executive will act on.",
+            num: "04 / Synthesis",
+            heading: "Turning numbers into a story.",
+            body: "The hardest part. Translating raw data into a strategic insight that an executive will actually act on — not just nod at. Every recommendation has to pass the \"so what?\" test before it makes the deck.",
+            image: {
+              src: `${IMAGE_BASE}/process-synthesis.png`,
+              alt: "Strategy framework or insight one-pager",
+              placeholderLabel: `${IMAGE_BASE}/process-synthesis.png`,
+            },
           },
           {
-            num: "05",
-            phase: "Presentation",
-            desc: "Executive decks designed for clarity under pressure. Every slide earns its place — no filler, no qualifications, just the finding and the recommendation.",
+            num: "05 / Presentation",
+            heading: "Decks designed for clarity under pressure.",
+            body: "Executive decks where every slide earns its place. No filler, no qualifications, no \"this is just a student project.\" The finding and the recommendation — that's it.",
+            image: {
+              src: `${IMAGE_BASE}/process-presentation.png`,
+              alt: "Final client presentation slide or team photo presenting",
+              placeholderLabel: `${IMAGE_BASE}/process-presentation.png`,
+            },
           },
-        ],
-      }}
-      solution={{
-        heading: "Insight that turns into action — not reports that sit in inboxes.",
-        body: "Strategy at Tower & Bridge is applied, not academic. Every deliverable is built around a decision the client needs to make. My work centered on converting raw analytics and market data into clear positioning recommendations and audience maps — with enough specificity that the client could act on them the next day.",
-        tiles: [...SOLUTION_TILES],
-      }}
-      impact={{
-        heading: "Ongoing engagement — real client outcomes, not classroom exercises.",
-        callout:
-          "Multiple client relationships · executive-ready deliverables · 2024–Present",
-        stats: [
-          { num: "3+", label: "Client Engagements" },
-          { num: "Real", label: "Client Outcomes" },
-          { num: "4", label: "Deliverable Types" },
-          { num: "2024", label: "Started" },
         ],
       }}
       reflection={{
         heading: "What I'd tell next-semester me.",
         cards: [
           {
-            eyebrow: "What Worked",
-            title: "Leading with curiosity.",
-            body: "Coming in with genuine curiosity — not just asking what the client wanted, but what problem they were actually trying to solve. That distinction changed the quality of every deliverable I produced.",
+            label: "Strategy",
+            title: "Curiosity beats expertise.",
+            body: "Coming in with genuine curiosity — not asking what the client wanted, but what problem they were actually trying to solve — changed the quality of every deliverable I produced.",
           },
           {
-            eyebrow: "What I'd Change",
-            title: "Pushing back earlier.",
-            body: "No pushback on the \"so what\" earlier in each project. I got better at it over time but early on I was producing excellent analysis with a weak recommendation. The analysis is only valuable if it tells someone what to do next.",
+            label: "Craft",
+            title: "Push back on the \"so what\" earlier.",
+            body: "Early on I was producing strong analysis with a weak recommendation. The analysis is only valuable if it tells someone exactly what to do next.",
           },
           {
-            eyebrow: "What I Learned",
+            label: "Learning",
             title: "Strategy is messier than case studies suggest.",
-            body: "Real-world strategy is messier and more political than any case study suggests. The right answer and the implementable answer are often different. My job is to close that gap — not pick one and ignore the other.",
+            body: "Real-world strategy is more political than any case study suggests. The right answer and the implementable answer are often different — my job is to close that gap, not pick one.",
           },
         ],
       }}
-      footerBreadcrumb="Experience · Tower & Bridge · Client Strategy"
     />
   );
 }
