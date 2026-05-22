@@ -37,7 +37,7 @@ export default function DreamsPage() {
       <section className="relative overflow-hidden">
         <ParallaxHeroGradient />
 
-        <div className="relative z-10 w-full max-w-6xl mx-auto px-6 pt-36 pb-12 block">
+        <div className="design-hero relative z-10">
           {/* Row 1: Status indicator */}
           <div className="flex items-center gap-2">
             <span
@@ -100,16 +100,16 @@ export default function DreamsPage() {
           DESIGN PROJECTS
           ══════════════════════════════════════════ */}
       <section style={{ paddingBottom: 16 }}>
-        <div className="w-full max-w-6xl mx-auto px-6 my-16">
+        <div className="design-section-label">
           <p
             className="section-label"
             style={{ color: "#BBBBBB", marginBottom: 14 }}
           >
             DESIGN PROJECTS
           </p>
-
-          <ProjectsGridSection />
         </div>
+
+        <ProjectsGridSection />
       </section>
 
       {/* ══════════════════════════════════════════
