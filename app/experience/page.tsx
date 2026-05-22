@@ -47,10 +47,10 @@ const INTEGRATED_DESIGN_MODAL: ModalConfig = {
     "Orchestrated a full-semester user research process across student demographics and local businesses. Utilized rapid prototyping to evaluate friction points, successfully pivoting from retail merchandise systems to an integrated stadium jumbotron video framework coupled with a custom-coded responsive QR data-collection landing page.",
   projects: [
     {
-      title: "Unhoused Advocacy Ecosystem",
+      title: "Giving Back",
       subtitle:
-        "Full UX research cycle for unhoused community advocacy — from interviews to stadium-scale activation.",
-      route: "/experience/integrated-design/unhoused-advocacy",
+        "Design thinking for West Campus unhoused advocacy — empathy research, two cycles, Jumbotron campaign.",
+      route: "/experience/giving-back",
     },
   ],
 };
