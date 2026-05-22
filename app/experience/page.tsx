@@ -233,7 +233,7 @@ function OperationalArchiveRow({
   dateRange: string;
 }) {
   return (
-    <div className="flex items-center justify-between py-4 border-b border-black/[0.04] w-full max-w-6xl mx-auto px-6 group transition-colors duration-300 hover:bg-neutral-50/30 rounded-xl">
+    <div className="flex items-center justify-between py-4 border-b border-black/[0.04] w-full group transition-colors duration-300 hover:bg-neutral-50/30 rounded-xl">
       <div className="flex items-center gap-4">
         <LedgerBadge icon={icon} />
         <div className="flex flex-col gap-0.5">
@@ -401,14 +401,14 @@ export default function ExperiencePage() {
     <div className="relative" style={{ paddingBottom: 100 }}>
       <ExperienceHero />
 
-      <div className="w-full max-w-6xl mx-auto px-6 block">
+      <div className="experience-content">
         <Hairline />
 
         {/* ── Pillar 1: Strategic Impact Cases ────────────────────────── */}
         <section style={{ marginTop: 64, marginBottom: 80 }}>
           <SectionLabel>Selected Projects</SectionLabel>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto px-6 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
             {STRATEGIC_IMPACT_CARDS.map((card) => (
               <ProjectCard
                 key={card.id}
@@ -428,7 +428,7 @@ export default function ExperiencePage() {
         <section style={{ marginTop: 64, marginBottom: 80 }}>
           <SectionLabel>Publications &amp; Illustrations</SectionLabel>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto px-6 mt-6 w-full items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-6 w-full items-start">
             {ANALYTICAL_LEDGER.map((entry) => (
               <div key={entry.id}>
                 <AnalyticalColumnHeader
