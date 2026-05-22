@@ -228,7 +228,7 @@ export default function ProjectsGridSection() {
         {/* Ambient gradient hum behind the grid */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[600px] bg-gradient-to-tr from-purple-500/5 via-indigo-400/5 to-transparent rounded-full blur-[120px] pointer-events-none -z-10" />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+        <div className="projects-grid">
           {CARDS.map((card) => (
             <div key={card.id} className="group relative overflow-visible">
               {/* Chromatic ambient glow — Gemini */}
