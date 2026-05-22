@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import ProjectCard from "@/components/ProjectCard";
 import CompanyModal, { type ModalProject } from "@/components/CompanyModal";
+import ParallaxHeroGradient from "@/components/ParallaxHeroGradient";
 
 // ─── Pillar 1: Strategic Impact Cards ────────────────────────────────────────
 
@@ -268,26 +269,56 @@ export default function ExperiencePage() {
   const [activeModal, setActiveModal] = useState<ModalConfig | null>(null);
 
   return (
-    <div
-      className="relative overflow-hidden"
-      style={{ backgroundColor: "transparent", paddingBottom: 100 }}
-    >
-      {/* Watercolor gradient orbs */}
-      <div className="absolute top-[-15%] right-[-10%] w-[650px] h-[650px] bg-indigo-300/6 rounded-full blur-[120px] pointer-events-none -z-10" aria-hidden="true" />
-      <div className="absolute top-[10%] right-[-5%] w-[600px] h-[600px] bg-purple-400/4 rounded-full blur-[130px] pointer-events-none -z-10" aria-hidden="true" />
-      <div className="w-full max-w-6xl mx-auto px-6 pt-36 pb-12 block">
+    <div className="relative" style={{ paddingBottom: 100 }}>
+      {/* ══════════════════════════════════════════
+          HERO — mirrors home page iris wang block exactly
+          ══════════════════════════════════════════ */}
+      <section className="relative overflow-hidden">
+        <ParallaxHeroGradient />
 
-        {/* ── Hero header ─────────────────────────────────────────────── */}
-        <h1 className="text-[44px] font-thin tracking-tight text-neutral-800 lowercase mb-5 select-none">
-          experience
-        </h1>
-        <p className="text-[16px] font-normal tracking-normal text-neutral-500/90">
-          Advertising + Business + Design + Law.
-        </p>
-        <p className="text-[15px] font-normal text-neutral-400 tracking-normal mt-3">
-          All with the goal of making complex things human.
-        </p>
+        <div className="relative z-10 w-full max-w-6xl mx-auto px-6 pt-36 pb-12 block">
+          {/* Spacer matching home status row height for vertical alignment */}
+          <div className="flex items-center gap-2" aria-hidden="true">
+            <span
+              className="rounded-full flex-shrink-0"
+              style={{ width: 6, height: 6, visibility: "hidden" }}
+            />
+            <span className="font-[300]" style={{ fontSize: 12, visibility: "hidden" }}>
+              spacer
+            </span>
+          </div>
 
+          <h1
+            className="name-splash font-[200]"
+            style={{
+              color: "var(--foreground)",
+              marginTop: 16,
+              marginBottom: 14,
+              fontSize: 40,
+              letterSpacing: "-0.025em",
+              lineHeight: 1.15,
+            }}
+          >
+            experience
+          </h1>
+
+          <p
+            className="font-[300]"
+            style={{ color: "var(--foreground)", fontSize: 18 }}
+          >
+            Advertising + Business + Design + Law.
+          </p>
+
+          <p
+            className="font-[300]"
+            style={{ color: "#888888", marginTop: 12, fontSize: 14, lineHeight: 1.7 }}
+          >
+            All with the goal of making complex things human.
+          </p>
+        </div>
+      </section>
+
+      <div className="w-full max-w-6xl mx-auto px-6 block">
         <Hairline />
 
         {/* ── Pillar 1: Strategic Impact Cases ────────────────────────── */}
