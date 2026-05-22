@@ -163,6 +163,22 @@ const OPERATIONAL_LEDGER = [
   },
 ] as const;
 
+const TOOLKIT = [
+  "Figma",
+  "Cursor",
+  "Claude",
+  "AI workflows",
+  "HTML / CSS",
+] as const;
+
+const INTERNSHIP_TAGS = [
+  "product design",
+  "0-1",
+  "AI",
+  "research",
+  "writing",
+] as const;
+
 // ─── Hairline ─────────────────────────────────────────────────────────────────
 
 function Hairline() {
@@ -237,6 +253,123 @@ function OperationalArchiveRow({
 const ANALYTICAL_LINK_CLASS =
   "mt-1 inline-flex items-center gap-1 text-[11px] font-medium lowercase tracking-wide text-indigo-500/90 transition-all duration-300 hover:text-indigo-600 hover:underline";
 
+function ToolkitPill({ label }: { label: string }) {
+  return (
+    <span className="rounded-full bg-neutral-100 px-3.5 py-1.5 text-[12px] font-normal text-neutral-700">
+      {label}
+    </span>
+  );
+}
+
+function InternshipTag({ label }: { label: string }) {
+  return (
+    <span className="rounded-full bg-neutral-200/70 px-2.5 py-1 text-[11px] font-light text-neutral-600">
+      {label}
+    </span>
+  );
+}
+
+function ExperienceHero() {
+  return (
+    <section className="relative overflow-hidden">
+      <ParallaxHeroGradient />
+
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 pt-36 pb-12">
+        <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-14">
+          {/* ── Left: title, tagline, toolkit ── */}
+          <div>
+            <h1
+              className="name-splash font-[200]"
+              style={{
+                color: "var(--foreground)",
+                marginBottom: 14,
+                fontSize: 48,
+                letterSpacing: "-0.03em",
+                lineHeight: 1.1,
+              }}
+            >
+              experience
+            </h1>
+
+            <p className="font-[300] text-[18px] leading-snug">
+              <span className="text-[var(--foreground)]">Advertising</span>
+              <span className="text-[#A78BFA]/55"> + </span>
+              <span className="text-[var(--foreground)]">Business</span>
+              <span className="text-[#A78BFA]/55"> + </span>
+              <span className="text-gradient-ihwn">Design</span>
+              <span className="text-[#A78BFA]/55"> + </span>
+              <span className="text-[var(--foreground)]">Law.</span>
+            </p>
+
+            <p
+              className="font-[300]"
+              style={{ color: "#888888", marginTop: 12, fontSize: 14, lineHeight: 1.7 }}
+            >
+              All with the goal of making complex things human.
+            </p>
+
+            <div className="mt-10">
+              <p className="section-label text-[#BBBBBB]">Toolkit</p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {TOOLKIT.map((tool) => (
+                  <ToolkitPill key={tool} label={tool} />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* ── Right: internship card ── */}
+          <aside className="rounded-[20px] border border-black/[0.04] bg-white p-6 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.08)]">
+            <div className="flex items-center gap-2">
+              <span
+                className="rounded-full flex-shrink-0"
+                style={{
+                  width: 6,
+                  height: 6,
+                  background: "var(--status-green)",
+                  display: "inline-block",
+                }}
+                aria-hidden="true"
+              />
+              <span className="text-[10px] font-normal uppercase tracking-[0.14em] text-[#BBBBBB]">
+                looking for next
+              </span>
+            </div>
+
+            <h2 className="mt-4 text-[15px] font-medium leading-snug text-[var(--foreground)]">
+              Product design internship · Summer 2026
+            </h2>
+
+            <p className="mt-3 text-[12px] font-light leading-relaxed text-neutral-500">
+              Teams prioritizing real product experiences, cross-functional
+              collaborations, and growth in fast-paced environments.
+            </p>
+
+            <div className="mt-4 flex flex-wrap gap-1.5">
+              {INTERNSHIP_TAGS.map((tag) => (
+                <InternshipTag key={tag} label={tag} />
+              ))}
+            </div>
+
+            <div
+              className="mt-5 h-px w-full bg-black/[0.06]"
+              aria-hidden="true"
+            />
+
+            <Link
+              href="mailto:iriswang32@gmail.com"
+              className="mt-4 flex items-center justify-between text-[13px] font-medium text-[var(--foreground)] transition-opacity hover:opacity-70"
+            >
+              <span>Get in touch</span>
+              <span aria-hidden="true">→</span>
+            </Link>
+          </aside>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function AnalyticalColumnHeader({
   icon,
   organizationName,
@@ -270,53 +403,7 @@ export default function ExperiencePage() {
 
   return (
     <div className="relative" style={{ paddingBottom: 100 }}>
-      {/* ══════════════════════════════════════════
-          HERO — mirrors home page iris wang block exactly
-          ══════════════════════════════════════════ */}
-      <section className="relative overflow-hidden">
-        <ParallaxHeroGradient />
-
-        <div className="relative z-10 w-full max-w-6xl mx-auto px-6 pt-36 pb-12 block">
-          {/* Spacer matching home status row height for vertical alignment */}
-          <div className="flex items-center gap-2" aria-hidden="true">
-            <span
-              className="rounded-full flex-shrink-0"
-              style={{ width: 6, height: 6, visibility: "hidden" }}
-            />
-            <span className="font-[300]" style={{ fontSize: 12, visibility: "hidden" }}>
-              spacer
-            </span>
-          </div>
-
-          <h1
-            className="name-splash font-[200]"
-            style={{
-              color: "var(--foreground)",
-              marginTop: 16,
-              marginBottom: 14,
-              fontSize: 40,
-              letterSpacing: "-0.025em",
-              lineHeight: 1.15,
-            }}
-          >
-            experience
-          </h1>
-
-          <p
-            className="font-[300]"
-            style={{ color: "var(--foreground)", fontSize: 18 }}
-          >
-            Advertising + Business + Design + Law.
-          </p>
-
-          <p
-            className="font-[300]"
-            style={{ color: "#888888", marginTop: 12, fontSize: 14, lineHeight: 1.7 }}
-          >
-            All with the goal of making complex things human.
-          </p>
-        </div>
-      </section>
+      <ExperienceHero />
 
       <div className="w-full max-w-6xl mx-auto px-6 block">
         <Hairline />
