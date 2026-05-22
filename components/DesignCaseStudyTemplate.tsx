@@ -48,6 +48,8 @@ export interface DesignCaseStudyProps {
   processSteps: ProcessStep[];
   /** Final design mockups, videos, any media — injected as children */
   children?: React.ReactNode;
+  /** Override the "Final Design" section label — e.g. "Final Result" */
+  finalSectionLabel?: string;
   /** Reflection footer columns (what worked / what to change / takeaway) */
   reflectionColumns: ReflectionColumn[];
 }
@@ -104,6 +106,7 @@ export default function DesignCaseStudyTemplate({
   pullQuoteText,
   processSteps,
   children,
+  finalSectionLabel = "Final Design",
   reflectionColumns,
 }: DesignCaseStudyProps) {
   return (
@@ -407,7 +410,7 @@ export default function DesignCaseStudyTemplate({
         {/* ── Final Design — dynamic children slot ───────── */}
         {children && (
           <section style={{ marginBottom: 64 }}>
-            <SectionLabel>Final Design</SectionLabel>
+            <SectionLabel>{finalSectionLabel}</SectionLabel>
             {/* Outer frame echoing the Figma gradient hero placeholder */}
             <div
               style={{
