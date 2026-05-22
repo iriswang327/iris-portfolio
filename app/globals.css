@@ -481,6 +481,13 @@ html[data-picker-active="1"] footer {
   align-items: start;
 }
 
+.experience-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
 .looking-card {
   margin-top: 12px;
   background: #fff;
@@ -496,6 +503,11 @@ html[data-picker-active="1"] footer {
     grid-template-columns: 1fr;
     gap: 40px;
     padding: 96px 24px 64px;
+  }
+
+  .experience-content {
+    padding-left: 24px;
+    padding-right: 24px;
   }
 
   .looking-card {
