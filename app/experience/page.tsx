@@ -65,7 +65,7 @@ const RISK_RADAR_MODAL: ModalConfig = {
       title: "AI Crisis Engine",
       subtitle:
         "AI brand crisis prediction — BERT, RAG, Spring 2026.",
-      route: "/experience/risk-radar/ai-crisis-engine",
+      route: "/experience/risk-radar",
     },
   ],
 };
