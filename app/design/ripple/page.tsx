@@ -31,20 +31,24 @@ export default function RipplePage() {
       pullQuoteText="Research that never happens is the most expensive kind. Ripple removes the friction between the question and the person who can answer it."
       processSteps={[
         {
-          step: "01 / Discovery & Mapping",
+          step: "01 / DISCOVERY & MAPPING",
           text: "Interviewed designers and potential participants to map the full recruitment journey — identifying where time was lost and what signals mattered most for study-participant fit.",
+          image: "/images/ripple-process-1.png",
         },
         {
-          step: "02 / User Flow Design",
+          step: "02 / USER FLOW DESIGN",
           text: "Defined the dual-track flow: designer-side study creation and participant-side browsing. Focused on reducing the number of steps between intent and enrollment to under three taps.",
+          image: "/images/ripple-process-2.png",
         },
         {
-          step: "03 / Interface Iteration",
+          step: "03 / INTERFACE ITERATION",
           text: "Built and tested multiple iterations of the study card system and profile matching UI with cross-functional feedback from Convergent's product and engineering teams.",
+          image: "/images/ripple-process-3.png",
         },
         {
           step: "04 / PITCH & ITERATION",
           text: "Practiced pitching structural features directly to our product engineering leads before presenting live to tech executives, cross-functional judges, and convergent teams on campus Demo Day.",
+          image: "/images/ripple-proccess-4.png",
         },
       ]}
       reflectionColumns={[
@@ -72,38 +76,6 @@ export default function RipplePage() {
             alt="Ripple platform hero interface"
             className="w-full h-auto object-contain max-w-4xl mx-auto block drop-shadow-2xl"
           />
-        </div>
-
-        {/* 4-column process track */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          <div className="rounded-xl overflow-hidden border border-black/5 aspect-square">
-            <img
-              src="/images/ripple-process-1.png"
-              alt="Ripple process step 1"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </div>
-          <div className="rounded-xl overflow-hidden border border-black/5 aspect-square">
-            <img
-              src="/images/ripple-process-2.png"
-              alt="Ripple process step 2"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </div>
-          <div className="rounded-xl overflow-hidden border border-black/5 aspect-square">
-            <img
-              src="/images/ripple-process-3.png"
-              alt="Ripple process step 3"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </div>
-          <div className="rounded-xl overflow-hidden border border-black/5 aspect-square">
-            <img
-              src="/images/ripple-proccess-4.png"
-              alt="Ripple process step 4"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </div>
         </div>
 
         {/* Demo video — browser controls for recruiter playback */}

@@ -18,6 +18,8 @@ export interface CompetitiveCard {
 export interface ProcessStep {
   step: string;
   text: string;
+  /** Optional image rendered inside the coloured placeholder area */
+  image?: string;
 }
 
 export interface ReflectionColumn {
@@ -351,29 +353,39 @@ export default function DesignCaseStudyTemplate({
             >
               {processSteps.map((ps, idx) => (
                 <div key={ps.step}>
-                  {/* Coloured image placeholder area */}
+                  {/* Process image / coloured placeholder */}
                   <div
                     style={{
                       height: 160,
                       borderRadius: 12,
-                      background: STEP_COLORS[idx % STEP_COLORS.length],
+                      background: ps.image ? "transparent" : STEP_COLORS[idx % STEP_COLORS.length],
                       border: "1px solid rgba(0,0,0,0.06)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
+                      overflow: "hidden",
                       marginBottom: 12,
                     }}
                     aria-label={ps.step}
                   >
-                    <span
-                      style={{
-                        fontSize: 12,
-                        fontWeight: 300,
-                        color: "rgba(26,22,37,0.3)",
-                      }}
-                    >
-                      [ image ]
-                    </span>
+                    {ps.image ? (
+                      <img
+                        src={ps.image}
+                        alt={ps.step}
+                        className="w-full h-full object-cover rounded-lg"
+                      />
+                    ) : (
+                      <div
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <span style={{ fontSize: 12, fontWeight: 300, color: "rgba(26,22,37,0.3)" }}>
+                          [ image ]
+                        </span>
+                      </div>
+                    )}
                   </div>
 
                   {/* Step label */}
