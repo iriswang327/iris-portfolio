@@ -870,65 +870,93 @@ export default function RiskRadarCaseStudyTemplate({
           </div>
         </section>
 
-        {/* CTA banner */}
-        <section
-          style={{
-            marginBottom: 48,
-            padding: "32px 36px",
-            background: ACCENT,
-            color: "#fff",
-            borderRadius: 16,
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "space-between",
-            alignItems: "center",
-            gap: 24,
-          }}
-        >
-          <div>
-            <p
-              style={{
-                fontSize: 10,
-                fontWeight: 500,
-                letterSpacing: "0.16em",
-                textTransform: "uppercase",
-                color: "rgba(255,255,255,0.6)",
-                marginBottom: 12,
-              }}
-            >
-              {cta.label}
-            </p>
-            <p
-              style={{
-                fontSize: 20,
-                fontWeight: 200,
-                letterSpacing: "-0.015em",
-                lineHeight: 1.35,
-                maxWidth: 520,
-              }}
-            >
-              {cta.heading}
-            </p>
-          </div>
-          <Link
-            href={cta.href}
+        {/* CTA — signature gradient frame + glass interior */}
+        <section style={{ marginBottom: 48, marginTop: 8 }}>
+          <div
+            className="gradient-ihwn"
             style={{
-              color: "#fff",
-              textDecoration: "none",
-              fontSize: 13,
-              fontWeight: 500,
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 8,
-              padding: "12px 24px",
-              border: "1px solid rgba(255,255,255,0.3)",
-              borderRadius: 100,
-              transition: "background 200ms ease",
+              padding: 1.5,
+              borderRadius: 20,
+              boxShadow:
+                "0 28px 72px -24px rgba(167, 139, 250, 0.45), 0 12px 40px -16px rgba(26, 22, 37, 0.14)",
             }}
-            className="hover:bg-white/10"
           >
-            {cta.linkText}
-          </Link>
+            <div
+              style={{
+                borderRadius: 18,
+                padding: "40px 44px",
+                background: "rgba(255, 255, 255, 0.82)",
+                backdropFilter: "blur(28px)",
+                WebkitBackdropFilter: "blur(28px)",
+                border: "1px solid rgba(255, 255, 255, 0.9)",
+                boxShadow:
+                  "inset 0 1px 0 rgba(255, 255, 255, 0.95), 0 4px 24px -8px rgba(14, 14, 16, 0.06)",
+                display: "flex",
+                flexWrap: "wrap",
+                justifyContent: "space-between",
+                alignItems: "center",
+                gap: 28,
+              }}
+            >
+              <div style={{ flex: "1 1 280px", maxWidth: 560 }}>
+                <div className="flex items-center gap-2" style={{ marginBottom: 14 }}>
+                  <span
+                    aria-hidden="true"
+                    className="gradient-ihwn flex-shrink-0"
+                    style={{
+                      width: 6,
+                      height: 6,
+                      borderRadius: "50%",
+                      display: "inline-block",
+                    }}
+                  />
+                  <p
+                    className="text-gradient-ihwn"
+                    style={{
+                      fontSize: 10,
+                      fontWeight: 500,
+                      letterSpacing: "0.18em",
+                      textTransform: "uppercase",
+                      margin: 0,
+                    }}
+                  >
+                    {cta.label}
+                  </p>
+                </div>
+                <p
+                  style={{
+                    fontSize: 22,
+                    fontWeight: 300,
+                    color: "var(--foreground)",
+                    letterSpacing: "-0.02em",
+                    lineHeight: 1.35,
+                    margin: 0,
+                  }}
+                >
+                  {cta.heading}
+                </p>
+              </div>
+              <Link
+                href={cta.href}
+                className="gradient-ihwn flex-shrink-0 transition-opacity hover:opacity-90"
+                style={{
+                  color: "#fff",
+                  textDecoration: "none",
+                  fontSize: 13,
+                  fontWeight: 500,
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                  padding: "14px 28px",
+                  borderRadius: 100,
+                  boxShadow: "0 8px 24px -6px rgba(167, 139, 250, 0.55)",
+                  letterSpacing: "0.01em",
+                }}
+              >
+                {cta.linkText}
+              </Link>
+            </div>
+          </div>
         </section>
 
         {/* Footer row */}
