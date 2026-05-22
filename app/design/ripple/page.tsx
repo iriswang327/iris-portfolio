@@ -69,17 +69,6 @@ export default function RipplePage() {
       {/* ── Media blocks ── */}
       <div className="space-y-4 w-full mt-12">
 
-        {/* Demo video — browser controls for recruiter playback */}
-        <div className="rounded-2xl overflow-hidden border border-black/5 bg-[#0A1628]">
-          <video
-            controls
-            className="w-full h-auto"
-            aria-label="Ripple product demo walkthrough"
-          >
-            <source src="/videos/ripple-demo.mp4" type="video/mp4" />
-          </video>
-        </div>
-
         {/* ── Final Result: Asymmetrical split-hero layout ── */}
 
         {/* Master asymmetrical grid */}
@@ -120,6 +109,17 @@ export default function RipplePage() {
             </div>
           </div>
 
+        </div>
+
+        {/* Demo video — constrained player between wireframes and trophy */}
+        <div className="w-full max-w-3xl mx-auto my-12 px-4 block">
+          <video
+            controls
+            className="w-full h-auto rounded-xl border border-black/[0.04] bg-neutral-950 shadow-sm"
+            aria-label="Ripple product demo walkthrough"
+          >
+            <source src="/videos/ripple-demo.mp4" type="video/mp4" />
+          </video>
         </div>
 
         {/* Trophy victory footer block */}
