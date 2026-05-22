@@ -50,11 +50,21 @@ export default function RootLayout({
       </head>
       <body className={`${geistSans.variable} font-sans antialiased`}>
         <EmotionProvider>
-          {/* Emotion picker — global fixed overlay, client-only */}
-          <EmotionPickerClient />
-          <Nav />
-          <main>{children}</main>
-          <Footer />
+          <div className="relative min-h-screen overflow-x-hidden bg-[#FBFBFC]">
+            {/* ── Ambient watercolor orbs ── */}
+            <div className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] bg-purple-400/5 rounded-full blur-[130px] pointer-events-none z-0" aria-hidden="true" />
+            <div className="absolute top-[35%] left-[-10%] w-[700px] h-[700px] bg-pink-400/[0.04] rounded-full blur-[140px] pointer-events-none z-0" aria-hidden="true" />
+            <div className="absolute bottom-[10%] right-[-10%] w-[650px] h-[650px] bg-cyan-400/5 rounded-full blur-[120px] pointer-events-none z-0" aria-hidden="true" />
+
+            {/* ── Site chrome ── */}
+            <div className="relative z-10">
+              {/* Emotion picker — global fixed overlay, client-only */}
+              <EmotionPickerClient />
+              <Nav />
+              <main>{children}</main>
+              <Footer />
+            </div>
+          </div>
         </EmotionProvider>
       </body>
     </html>
