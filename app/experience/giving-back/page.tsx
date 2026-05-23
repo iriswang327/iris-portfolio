@@ -120,30 +120,24 @@ export default function GivingBackCaseStudyPage() {
       testOne={{
         heading: "12 participants. Structured questionnaire. Clear signal on what wasn't working.",
         body: "We collected feedback from 12 participants through a structured questionnaire comparing the two designs. The signal was sharper than expected — the UT version landed visually but the message was unclear, and the Nike version was readable but not eye-catching.",
+        highlightImage: {
+          src: `${IMAGE_BASE}/test-cycle-01.png`,
+          alt: "Cycle 01 testing synthesis — participant feedback themes and insights",
+          placeholderLabel: `${IMAGE_BASE}/test-cycle-01.png`,
+          caption: "Cycle 01 · testing synthesis",
+        },
         quotes: [
           {
             text: '"I think a QR code would be a great idea for the shirt."',
             source: "Participant 03",
           },
           {
-            text: '"Not difficult to understand the message of the t-shirt at all, but at the same time not that easy."',
-            source: "Participant 07",
-          },
-          {
-            text: '"The Nike black and white is too plain — not eye-catching enough."',
-            source: "Participant 11",
-          },
-          {
-            text: '"Way too busy and overstimulating."',
-            source: "Participant 04",
+            text: '"Housing crisis — people would appreciate it, out in the open raising awareness."',
+            source: "Participant 02",
           },
           {
             text: '"Remove figure in the front, change the list of locations on the back, pin-point map on locations."',
             source: "Participant 09",
-          },
-          {
-            text: '"Housing crisis — people would appreciate it, out in the open raising awareness."',
-            source: "Participant 02",
           },
         ],
         insights: {
@@ -162,10 +156,12 @@ export default function GivingBackCaseStudyPage() {
       redefine={{
         heading: "The prototype was working — the question wasn't.",
         body: 'The clearest finding from Cycle 1 wasn\'t about the shirt. It was that our "how might we" was scoped too broadly. Our prototype was actually testing the <em>student</em> response — not the unhoused community\'s experience. So we rewrote the question to match the user we were really designing for.',
-        originalHmw:
-          '"How might we create a supportive environment for people who face homelessness around West Campus?"',
-        refinedHmw:
-          '"How might we increase student engagement & awareness towards supporting the unhoused community in West Campus?"',
+        hmwImage: {
+          src: `${IMAGE_BASE}/changing-how-might-we.png`,
+          alt: "How might we refinement — original question narrowed to student engagement and awareness",
+          placeholderLabel: `${IMAGE_BASE}/changing-how-might-we.png`,
+          caption: "Original → refined how might we",
+        },
         needed: [
           "Clearer message",
           "Engaging content",
@@ -191,9 +187,10 @@ export default function GivingBackCaseStudyPage() {
               "Our marketing lead handled the actual cutting; I led the concept, the messaging direction, and the on-camera content. The result was a 30-second piece that felt native to the Jumbotron, not parachuted into it.",
             ],
             image: {
-              src: `${IMAGE_BASE}/jumbotron-video.png`,
-              alt: "Jumbotron video frame — UT sports-reel aesthetic with awareness messaging",
-              placeholderLabel: `${IMAGE_BASE}/jumbotron-video.png`,
+              src: `${IMAGE_BASE}/test-playing.png`,
+              alt: "Jumbotron awareness video — UT sports-reel aesthetic with giving back messaging",
+              placeholderLabel: "/videos/jumbotron-video.mp4",
+              videoSrc: "/videos/jumbotron-video.mp4",
             },
           },
           {
