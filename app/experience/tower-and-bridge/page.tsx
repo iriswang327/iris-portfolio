@@ -20,38 +20,82 @@ export default function TowerAndBridgeCaseStudyPage() {
         { label: "Focus", value: "Brand Strategy & Analytics" },
         { label: "Method", value: "Agency-Style Client Work" },
       ]}
+      accent={{
+        heroGradient:
+          "linear-gradient(148deg, #F7F4EC 0%, #D4E2CC 42%, #E8DFD0 72%, #EDD5C4 100%)",
+        bulletColor: "#7C9A6E",
+        heroEyebrow: "Impact at a glance",
+        heroMetrics: [
+          {
+            label: "Engagement",
+            num: "+333%",
+            sub: "Instagram lift · Trinity CDC",
+          },
+          {
+            label: "Revenue",
+            num: "$1.5K+",
+            sub: "Secured nonprofit partnership",
+          },
+          {
+            label: "Campaigns",
+            num: "2",
+            sub: "6-week client engagements",
+          },
+        ],
+        heroImage: {
+          src: `${IMAGE_BASE}/case-study-page.png`,
+          alt: "Tower & Bridge final case study deliverable",
+          placeholderLabel: `${IMAGE_BASE}/case-study-page.png`,
+        },
+      }}
       overview={{
-        body: "Tower & Bridge is UT Austin's student-run advertising agency. We run real campaigns for Austin-area nonprofits and small businesses — full-funnel brand strategy, analytics audits, social campaigns, and executive-ready deliverables. My work has centered on turning fragmented client data and content into cohesive strategy that drives measurable outcomes.",
+        body: "Tower & Bridge is UT Austin's student-run advertising agency — real campaigns for Austin nonprofits and small businesses.",
         bullets: [
-          "Lead analyst on two 6-week campaigns: Trinity Child Development Center (nonprofit preschool) and Heartening (zero-waste thrift store).",
-          "Built media-relations strategy and analytics reporting that drove +333% engagement and $1,500+ in direct revenue for Trinity CDC.",
-          "Operated under real client timelines demonstrating real client work.",
+          "Lead analyst on two 6-week campaigns: Trinity Child Development Center and Heartening.",
+          "Turned fragmented client data into weekly analytics, strategy decks, and executive-ready recommendations.",
+          "Operated under real client timelines with board approval before every client presentation.",
         ],
       }}
       challenge={{
         heading: "Most small organizations have data but no insight to create strategic direction.",
-        body: "Trinity and Heartening came to us with the same underlying friction: lots of social posts, lots of vague analytics, no clear story about what was working and why. They needed a team who could read the numbers, find the signal, and translate it into a plan their team could execute within a week.",
+        bullets: [
+          "Trinity and Heartening both had social content going out without a cohesive strategy.",
+          "Analytics existed, but no one was translating numbers into decisions.",
+          "They needed a team who could find the signal and ship a plan within a week.",
+        ],
         frameCards: [
           {
             label: "The Friction",
             title: "Data without direction.",
-            body: "Posts going up without a content strategy. Analytics dashboards no one read. Brand voice that drifted across channels. Information without insights.",
+            bullets: [
+              "Posts without a content strategy.",
+              "Dashboards no one read.",
+              "Brand voice drifting across channels.",
+            ],
           },
           {
             label: "The Strategic Goal",
             title: "Insight that turns into action.",
-            body: "Convert raw analytics + audience research into clear recommendations the client could actually implement, acting as a real agency.",
+            bullets: [
+              "Convert analytics + audience research into clear recommendations.",
+              "Give clients something they could implement immediately.",
+              "Operate like a real agency — not a class project.",
+            ],
           },
         ],
       }}
       pullQuote="Every deliverable is built around a decision the client needs to make."
       clients={[
         {
-          sectionLabel: "Client 01 · Trinity Child Development Center",
+          sectionLabel: "Client 01",
           title: "Trinity Child Development Center",
           subtitle:
-            "A nonprofit preschool serving an underserved community — needed brand presence + nonprofit-revenue strategy.",
-          body: "Built a communications campaign promoting Trinity CDC's mission of accessible, high-quality early childcare. Established a cohesive brand image across Instagram and Facebook, executed media relations with local businesses, and ran weekly analytics reporting to measure what was working.",
+            "Nonprofit preschool serving an underserved community — needed brand presence + nonprofit-revenue strategy.",
+          bullets: [
+            "Built a communications campaign promoting accessible, high-quality early childcare.",
+            "Established cohesive brand presence across Instagram and Facebook.",
+            "Executed media relations with local businesses and ran weekly analytics reporting.",
+          ],
           images: [
             {
               src: `${IMAGE_BASE}/trinity-analytics-report.png`,
@@ -86,11 +130,16 @@ export default function TowerAndBridgeCaseStudyPage() {
           ],
         },
         {
-          sectionLabel: "Client 02 · Heartening",
+          sectionLabel: "Client 02",
           title: "Heartening",
           subtitle:
             "Small-business retail brand — needed cohesive social strategy and benchmark analytics reporting.",
-          body: "Built a benchmark analytics framework comparing weekly performance against historical baselines. Identified that video content drove higher engagement and that posting cadence on TikTok needed to increase. Translated those findings into a concrete content calendar the team could execute.",
+          bullets: [
+            "Built a benchmark analytics framework against historical baselines.",
+            "Identified video content as the highest-performing format on social.",
+            "Translated findings into a concrete content calendar the team could execute.",
+            "Flagged seasonal spikes (Spring Break) for forward planning.",
+          ],
           images: [
             {
               src: `${IMAGE_BASE}/heartening-deck-cover.png`,
@@ -105,11 +154,6 @@ export default function TowerAndBridgeCaseStudyPage() {
               caption: "Benchmark Analytics Report",
             },
           ],
-          bullets: [
-            "Identified video content drove highest engagement (+44% lift over static).",
-            "Recommended increased TikTok posting frequency based on engagement velocity data.",
-            "Spring Break post significantly outperformed baseline — flagged seasonal pattern for forward planning.",
-          ],
         },
       ]}
       process={{
@@ -118,9 +162,13 @@ export default function TowerAndBridgeCaseStudyPage() {
           {
             num: "01 / Client Kickoff",
             heading: "Mapping the question behind the question.",
-            body: "Discovery sessions with the client to map business goals, existing infrastructure, and decision-makers. Most kickoffs surface a stated problem and a real problem — the work starts with identifying the gap.",
+            bullets: [
+              "Discovery sessions to map business goals and decision-makers.",
+              "Surface the stated problem vs. the real problem.",
+              "Align the team before any analytics work begins.",
+            ],
             image: {
-              src: `${IMAGE_BASE}/process-kickoff.png`,
+              src: `${IMAGE_BASE}/team-kickoff.png`,
               alt: "Team kickoff photo or whiteboard discovery session",
               placeholderLabel: `${IMAGE_BASE}/team-kickoff.png`,
             },
@@ -128,9 +176,13 @@ export default function TowerAndBridgeCaseStudyPage() {
           {
             num: "02 / Data Audit",
             heading: "Reading the analytics already in the room.",
-            body: "Assessed what was being tracked, what was being ignored, and what was being misread. Most clients have more data than they realize — the audit surfaces what's signal vs. what's noise.",
+            bullets: [
+              "Assessed what was tracked, ignored, and misread.",
+              "Separated signal from noise in existing dashboards.",
+              "Identified gaps before building new reporting.",
+            ],
             image: {
-              src: `${IMAGE_BASE}/process-audit.png`,
+              src: `${IMAGE_BASE}/analytics-pitch-slide.png`,
               alt: "Analytics dashboard screenshot or audit table",
               placeholderLabel: `${IMAGE_BASE}/analytics-pitch-slide.png`,
             },
@@ -138,9 +190,13 @@ export default function TowerAndBridgeCaseStudyPage() {
           {
             num: "03 / Prototyping",
             heading: "Bridging perception and reality.",
-            body: "Created and presented a full-fledged pitch deck with media, creative, PR, and analytics strategies to executive board before presenting to the client.",
+            bullets: [
+              "Built a full pitch deck: media, creative, PR, and analytics.",
+              "Presented to executive board before the client saw anything.",
+              "Pressure-tested strategy internally first.",
+            ],
             image: {
-              src: `${IMAGE_BASE}/process-research.png`,
+              src: `${IMAGE_BASE}/pitch-deck-presentation.png`,
               alt: "Pitch deck presentation",
               placeholderLabel: `${IMAGE_BASE}/pitch-deck-presentation.png`,
             },
@@ -148,7 +204,11 @@ export default function TowerAndBridgeCaseStudyPage() {
           {
             num: "04 / Synthesis",
             heading: "Turning numbers into a story.",
-            body: "The hardest part. Translating raw data into a strategic insight that an executive will actually act on — not just nod at. Every recommendation has to pass the \"so what?\" test before it makes the deck.",
+            bullets: [
+              "Translated raw data into insights executives would act on.",
+              "Every recommendation had to pass the \"so what?\" test.",
+              "Framed numbers as decisions — not just observations.",
+            ],
             image: {
               src: `${IMAGE_BASE}/process-synthesis.png`,
               alt: "Strategy framework or insight one-pager",
@@ -158,9 +218,13 @@ export default function TowerAndBridgeCaseStudyPage() {
           {
             num: "05 / Case Study",
             heading: "One-pager designed for clarity and conciseness.",
-            body: "Executive page where every statistic earns its place. No fillers & no \"this is just a student project.\" Just the results of our work.",
+            bullets: [
+              "Executive summary where every statistic earned its place.",
+              "No filler — just results of the work.",
+              "Built to read like a real agency deliverable.",
+            ],
             image: {
-              src: `${IMAGE_BASE}/process-presentation.png`,
+              src: `${IMAGE_BASE}/case-study-page.png`,
               alt: "Final client presentation slide",
               placeholderLabel: `${IMAGE_BASE}/case-study-page.png`,
             },
@@ -173,17 +237,29 @@ export default function TowerAndBridgeCaseStudyPage() {
           {
             label: "Strategy",
             title: "Take initiative and be proactive!",
-            body: "As analytics manager, our work can be boring. Simply looking at numbers was easy, but coming up with insights took training. I learned to not simply ask what the client wanted, but also what problem they were actually trying to solve - giving me better deliverables each and every week.",
+            bullets: [
+              "Looking at numbers was easy — insights took training.",
+              "Learned to ask what problem the client was actually trying to solve.",
+              "Better questions led to stronger weekly deliverables.",
+            ],
           },
           {
             label: "Professionalism",
             title: "Everyone is busy, time is valuable!",
-            body: "There were times our clients were unresponsive, didn't provide feedback, and didn't like things that were previously approved. Our team of 4 students learned to continue with our work and provide our best deliverables, despite lack of communication.",
+            bullets: [
+              "Clients were sometimes unresponsive or changed direction mid-campaign.",
+              "Our team of four kept shipping despite communication gaps.",
+              "Professionalism meant delivering our best work regardless.",
+            ],
           },
           {
             label: "Learning",
             title: "Numbers can be interesting.",
-            body: "At one point, it felt like I was looking at the same thing week-by-week. Although repetitive, I learned to be curious and ask why certain percentages were lower or higher. I brought life to the statistics and insights came easier.",
+            bullets: [
+              "Weekly reporting felt repetitive at first.",
+              "Staying curious about why metrics shifted made insights come faster.",
+              "I learned to bring life to the statistics.",
+            ],
           },
         ],
       }}
