@@ -102,7 +102,7 @@ const GEMINI_MODAL: ModalConfig = {
     {
       title: "PROJECT 01 / News Integration",
       subtitle:
-        "How might we turn Gemini's blog into an intelligence layer inside the trading experience?",
+        "Bridging crypto news and the in-app trading experience.",
       route: "/design/gemini",
       preview: "/images/gemini-modal-preview.png",
     },
@@ -181,7 +181,7 @@ const CARDS: CardDef[] = [
     pillDark: true,
     hoverDescription: "News inside the trading flow — product strategy + UI.",
     videoUrl: "/videos/gemini-thumbnail.mp4",
-    frameClassName: "w-full h-full aspect-[16/10] bg-gradient-to-tr from-sky-100/40 via-blue-50/20 to-slate-50/60 rounded-2xl p-6 border border-blue-200/20 shadow-[0_15px_40px_rgba(0,0,0,0.02)] flex items-center justify-center overflow-hidden transition-all duration-500 hover:shadow-[0_20px_50px_rgba(14,165,233,0.05)]",
+    frameClassName: "project-card-frame bg-gradient-to-tr from-sky-100/40 via-blue-50/20 to-slate-50/60 border border-blue-200/20 shadow-[0_15px_40px_rgba(0,0,0,0.02)] transition-all duration-500 hover:shadow-[0_20px_50px_rgba(14,165,233,0.05)]",
     modal: GEMINI_MODAL,
   },
   {
@@ -192,7 +192,7 @@ const CARDS: CardDef[] = [
     pillDark: true,
     hoverDescription: "Bridging designers and research participants at speed.",
     videoUrl: "/videos/ripple-thumbnail.mp4",
-    frameClassName: "w-full h-full aspect-[16/10] bg-gradient-to-tr from-purple-950/20 via-indigo-500/5 to-slate-50 rounded-2xl p-6 border border-black/[0.03] shadow-[0_15px_40px_rgba(0,0,0,0.03)] flex items-center justify-center overflow-hidden",
+    frameClassName: "project-card-frame bg-gradient-to-tr from-purple-950/20 via-indigo-500/5 to-slate-50 border border-black/[0.03] shadow-[0_15px_40px_rgba(0,0,0,0.03)]",
     modal: TC_MODAL,
   },
   {
