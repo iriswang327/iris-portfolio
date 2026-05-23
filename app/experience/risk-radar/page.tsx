@@ -12,17 +12,6 @@ const IMAGE_BASE = "/images/risk-radar";
 export default function RiskRadarCaseStudyPage() {
   return (
     <RiskRadarCaseStudyTemplate
-      breadcrumb={[
-        { label: "Experience", href: "/experience" },
-        { label: "Risk Radar", href: "/experience" },
-        { label: "AI Product Strategy" },
-      ]}
-      eyebrowTags={[
-        "Spring 2026",
-        "Head of AI",
-        "B2B SaaS · AI Workflows",
-        "Cross-Disciplinary Build",
-      ]}
       title="Risk Radar"
       subtitle="An AI-powered crisis management platform that predicts brand-reputation threats before they go viral. Built over a semester with McCombs business and Moody advertising students."
       tagline="Predict · Prepare · Protect"

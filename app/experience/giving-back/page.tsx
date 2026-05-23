@@ -12,17 +12,6 @@ const IMAGE_BASE = "/images/west-campus";
 export default function GivingBackCaseStudyPage() {
   return (
     <GivingBackCaseStudyTemplate
-      breadcrumb={[
-        { label: "Experience", href: "/experience" },
-        { label: "Integrated Design", href: "/experience" },
-        { label: "Design Thinking · UX Research" },
-      ]}
-      eyebrowTags={[
-        "Fall 2025",
-        "UX Researcher",
-        "UX Research & Empathy",
-        "Two-Cycle Iteration",
-      ]}
       title="Giving Back"
       subtitle="A semester-long design thinking project exploring how UT students can engage with and support the unhoused community in West Campus — from empathy interviews through two prototype-and-test cycles to a Jumbotron video campaign."
       metadata={[
