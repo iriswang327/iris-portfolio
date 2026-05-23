@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 const FOOTER_LINKS = [
-  { href: "/", label: "Dreams" },
+  { href: "/", label: "Design" },
   { href: "/experience", label: "Experience" },
   { href: "/about", label: "About" },
 ] as const;
