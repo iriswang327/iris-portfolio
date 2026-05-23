@@ -466,7 +466,7 @@ export default function ExperiencePage() {
         <Hairline />
 
         {/* ── Pillar 1: Strategic Impact Cases ────────────────────────── */}
-        <section style={{ marginTop: 64, marginBottom: 80 }}>
+        <section style={{ marginTop: 52, marginBottom: 80 }}>
           <SectionLabel>Selected Projects</SectionLabel>
 
           <div className="relative mb-16">
@@ -521,9 +521,20 @@ export default function ExperiencePage() {
           <SectionLabel>Publications &amp; Illustrations</SectionLabel>
 
           <div className="experience-glass-panel experience-glass-panel--wide">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 w-full items-start">
-              {ANALYTICAL_LEDGER.map((entry) => (
-                <div key={entry.id}>
+            <div className="relative grid w-full grid-cols-1 items-stretch lg:grid-cols-2">
+              <div
+                className="pointer-events-none absolute bottom-3 left-1/2 top-3 hidden w-px -translate-x-1/2 bg-black/[0.05] lg:block"
+                aria-hidden="true"
+              />
+              {ANALYTICAL_LEDGER.map((entry, index) => (
+                <div
+                  key={entry.id}
+                  className={
+                    index === 0
+                      ? "border-b border-black/[0.05] pb-10 lg:border-b-0 lg:pb-0 lg:pr-12"
+                      : "pt-10 lg:pt-0 lg:pl-12"
+                  }
+                >
                   <AnalyticalColumnHeader
                     icon={"icon" in entry ? entry.icon : undefined}
                     logoSrc={"logoSrc" in entry ? entry.logoSrc : undefined}

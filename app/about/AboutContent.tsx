@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import VinylPlayer from "@/components/VinylPlayer";
 import ParallaxHeroGradient from "@/components/ParallaxHeroGradient";
@@ -10,7 +11,7 @@ import ParallaxHeroGradient from "@/components/ParallaxHeroGradient";
 
 const NAV_ITEMS = [
   { id: "hi", label: "Hi!" },
-  { id: "work", label: "Work" },
+  { id: "currently", label: "Currently" },
   { id: "community", label: "Community" },
   { id: "philosophy", label: "Philosophy" },
   { id: "entertainment", label: "Entertainment" },
@@ -19,22 +20,44 @@ const NAV_ITEMS = [
 
 const SECTION_THEMES: Record<(typeof NAV_ITEMS)[number]["id"], string> = {
   hi: "#e9a7c4",
-  work: "#b5a8e8",
+  currently: "#b5a8e8",
   community: "#a8cdb5",
   philosophy: "#9eb2e8",
   entertainment: "#e0c79a",
   fun: "#e9a7c4",
 };
 
-// ─── Work timeline ──────────────────────────────────────────────────────────
+// ─── Currently ──────────────────────────────────────────────────────────────
 
-const WORK_ITEMS = [
-  { initials: "SW", bg: "#FEF9EC", color: "#D97706", name: "SparroWriting", role: "Marketing Operations & Instructor", date: "2022–2025" },
-  { initials: "AU", bg: "#EFF6FF", color: "#60A5FA", name: "ASUCI Office of the President", role: "Outreach Intern", date: "2023–2024" },
-  { initials: "TB", bg: "#FFFBEB", color: "#FBBF24", name: "Tower & Bridge", role: "Analytics Strategy Manager", date: "2025–Present" },
-  { initials: "LR", bg: "#FFF7ED", color: "#FB923C", name: "Longhorn Racing", role: "Operations Team", date: "2024–Present" },
-  { initials: "LJ", bg: "#EFF6FF", color: "#60A5FA", name: "Texas Undergraduate Law Journal", role: "Staff Writer", date: "2024–Present" },
-  { initials: "LG", bg: "#F0EEFF", color: "#A78BFA", name: "Letters of Gold", role: "Director of Projects", date: "2026–Present" },
+const CURRENTLY_ITEMS = [
+  {
+    logoSrc: "/images/tower-bridge-logo.png",
+    logoAlt: "Tower & Bridge",
+    name: "Tower & Bridge",
+    role: "Analytics Strategy Manager",
+    date: "2025–Present",
+  },
+  {
+    logoSrc: "/images/lhr-logo.png",
+    logoAlt: "Longhorn Racing",
+    name: "Longhorn Racing",
+    role: "Operations Team",
+    date: "2024–Present",
+  },
+  {
+    logoSrc: "/images/tulj-logo.png",
+    logoAlt: "Texas Undergraduate Law Journal",
+    name: "Texas Undergraduate Law Journal",
+    role: "Staff Writer",
+    date: "2024–Present",
+  },
+  {
+    logoSrc: "/images/letters-of-gold-logo.png",
+    logoAlt: "Letters of Gold",
+    name: "Letters of Gold",
+    role: "Director of Projects",
+    date: "2026–Present",
+  },
 ] as const;
 
 // ─── Community cards ────────────────────────────────────────────────────────
@@ -60,22 +83,22 @@ const COMMUNITY_ITEMS = [
 // ─── Books ──────────────────────────────────────────────────────────────────
 
 const BOOKS_CURRENT = [
-  { title: "Crime and Punishment", author: "Fyodor Dostoevsky", color: "#C9B99A" },
-  { title: "East of Eden", author: "John Steinbeck", color: "#B8C4A0" },
-  { title: "A Court of Silver Flames", author: "Sarah J. Maas", color: "#E8A5B0" },
+  { title: "Crime and Punishment", author: "Fyodor Dostoevsky", color: "#C9B99A", isbn: "0451524934" },
+  { title: "East of Eden", author: "John Steinbeck", color: "#B8C4A0", isbn: "0142000665" },
+  { title: "A Court of Silver Flames", author: "Sarah J. Maas", color: "#E8A5B0", isbn: "1681196288" },
 ];
 
 const BOOKS_TBR = [
   { title: "I Want You to Be Happy", author: "Jem Calber", color: "#C4B5E8" },
-  { title: "In Five Years", author: "Rebecca Serle", color: "#B5D4E8" },
-  { title: "Babel", author: "R.F. Kuang", color: "#8BA8C8" },
-  { title: "The Art of War", author: "Sun Tzu", color: "#C8BEA8" },
-  { title: "Madonna in a Fur Coat", author: "Sabahattin Ali", color: "#D4A8B8" },
+  { title: "In Five Years", author: "Rebecca Serle", color: "#B5D4E8", isbn: "1982105386" },
+  { title: "Babel", author: "R.F. Kuang", color: "#8BA8C8", isbn: "0063021420" },
+  { title: "The Art of War", author: "Sun Tzu", color: "#C8BEA8", isbn: "1599869038" },
+  { title: "Madonna in a Fur Coat", author: "Sabahattin Ali", color: "#D4A8B8", isbn: "0143106385" },
 ];
 
 const BOOKS_STARS = [
-  { title: "The Goldfinch", author: "Donna Tartt", color: "#E8D4A0" },
-  { title: "Recursion", author: "Blake Crouch", color: "#A8C4D4" },
+  { title: "The Goldfinch", author: "Donna Tartt", color: "#E8D4A0", isbn: "0316055443" },
+  { title: "Recursion", author: "Blake Crouch", color: "#A8C4D4", isbn: "0525564239" },
 ];
 
 // ─── Fun facts ──────────────────────────────────────────────────────────────
@@ -92,38 +115,50 @@ const FUN_FACTS = [
 
 // ─── Book cover component ───────────────────────────────────────────────────
 
-function BookCover({ title, author, color }: { title: string; author: string; color: string }) {
+type BookEntry = {
+  title: string;
+  author: string;
+  color: string;
+  isbn?: string;
+};
+
+function BookCover({ title, author, color, isbn }: BookEntry) {
+  const [coverFailed, setCoverFailed] = useState(false);
+  const coverSrc = isbn
+    ? `https://covers.openlibrary.org/b/isbn/${isbn}-M.jpg`
+    : null;
+
+  if (coverSrc && !coverFailed) {
+    return (
+      <div
+        className="relative h-[110px] w-20 flex-shrink-0 overflow-hidden rounded-lg shadow-[2px_4px_12px_rgba(0,0,0,0.1)]"
+        title={`${title} — ${author}`}
+      >
+        <Image
+          src={coverSrc}
+          alt={`${title} by ${author}`}
+          fill
+          sizes="80px"
+          className="object-cover"
+          onError={() => setCoverFailed(true)}
+        />
+      </div>
+    );
+  }
+
   return (
     <div
-      style={{
-        width: 80,
-        height: 110,
-        borderRadius: 8,
-        background: color,
-        flexShrink: 0,
-        position: "relative",
-        overflow: "hidden",
-        boxShadow: "2px 4px 12px rgba(0,0,0,0.1)",
-      }}
+      className="relative h-[110px] w-20 flex-shrink-0 overflow-hidden rounded-lg shadow-[2px_4px_12px_rgba(0,0,0,0.1)]"
+      style={{ background: color }}
       title={`${title} — ${author}`}
     >
       <div
-        style={{
-          position: "absolute",
-          left: 7,
-          top: 0,
-          bottom: 0,
-          width: 1.5,
-          background: "rgba(0,0,0,0.12)",
-        }}
+        className="absolute bottom-0 left-[7px] top-0 w-px bg-black/10"
+        aria-hidden="true"
       />
-      <div style={{ padding: "10px 10px 10px 14px" }}>
-        <p style={{ fontSize: 7.5, fontWeight: 600, color: "rgba(0,0,0,0.55)", lineHeight: 1.4 }}>
-          {title}
-        </p>
-        <p style={{ fontSize: 6.5, fontWeight: 400, color: "rgba(0,0,0,0.35)", marginTop: 5 }}>
-          {author}
-        </p>
+      <div className="px-2.5 py-2.5 pl-3.5">
+        <p className="text-[7.5px] font-semibold leading-snug text-black/55">{title}</p>
+        <p className="mt-1 text-[6.5px] font-normal text-black/35">{author}</p>
       </div>
     </div>
   );
@@ -156,20 +191,28 @@ function QuoteBlock({ quote, attribution }: { quote: string; attribution: string
   );
 }
 
-// ─── Work row ───────────────────────────────────────────────────────────────
+// ─── Currently row ────────────────────────────────────────────────────────────
 
-function WorkRow({ item, isLast }: { item: (typeof WORK_ITEMS)[number]; isLast: boolean }) {
+function CurrentlyRow({
+  item,
+  isLast,
+}: {
+  item: (typeof CURRENTLY_ITEMS)[number];
+  isLast: boolean;
+}) {
   return (
     <div>
-      <div className="flex items-center" style={{ gap: 16, paddingTop: 14, paddingBottom: 14 }}>
-        <div
-          className="flex-shrink-0 flex items-center justify-center rounded-full"
-          style={{ width: 40, height: 40, background: item.bg, fontSize: 10, fontWeight: 500, color: item.color }}
-          aria-hidden="true"
-        >
-          {item.initials}
+      <div className="flex items-center" style={{ gap: 16, paddingTop: 10, paddingBottom: 10 }}>
+        <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full border border-black/[0.04] bg-white shadow-sm">
+          <Image
+            src={item.logoSrc}
+            alt={item.logoAlt}
+            fill
+            sizes="40px"
+            className="object-cover scale-[1.18]"
+          />
         </div>
-        <div className="flex-1 min-w-0">
+        <div className="min-w-0 flex-1">
           <span style={{ fontSize: 13, fontWeight: 400, color: "var(--foreground)" }}>
             {item.name}
           </span>
@@ -177,7 +220,7 @@ function WorkRow({ item, isLast }: { item: (typeof WORK_ITEMS)[number]; isLast: 
             {item.role}
           </span>
         </div>
-        <span className="flex-shrink-0" style={{ fontSize: 11, fontWeight: 300, color: "#BBBBBB" }}>
+        <span className="shrink-0" style={{ fontSize: 11, fontWeight: 300, color: "#BBBBBB" }}>
           {item.date}
         </span>
       </div>
@@ -260,7 +303,13 @@ export default function AboutContent() {
         <div className="about-rail-column">
           <aside className="about-rail rail">
             <div className="about-brand">
-              <div className="about-lotus" aria-hidden="true" />
+              <Image
+                src="/images/lotus-logo.png"
+                alt="Iris Wang logo"
+                width={26}
+                height={26}
+                className="h-[26px] w-[26px] shrink-0 object-contain"
+              />
               <span className="about-name">iris wang</span>
             </div>
 
@@ -299,11 +348,9 @@ export default function AboutContent() {
                 alignItems: "flex-start",
               }}
             >
-              {/* Polaroid photo */}
               <div
+                className="w-[180px] shrink-0"
                 style={{
-                  width: 180,
-                  flexShrink: 0,
                   transform: "rotate(1.5deg)",
                   background: "#ffffff",
                   padding: 8,
@@ -311,27 +358,20 @@ export default function AboutContent() {
                   borderRadius: 2,
                 }}
               >
-                <div
-                  style={{
-                    width: "100%",
-                    height: 220,
-                    background: "linear-gradient(135deg, #F0EEFF 0%, #E8F0FF 100%)",
-                    borderRadius: 1,
-                  }}
-                  aria-label="Photo of Iris"
-                />
+                <div className="relative h-[220px] w-full overflow-hidden rounded-[1px]">
+                  <Image
+                    src="/images/about-iris.png"
+                    alt="Iris Wang"
+                    fill
+                    sizes="180px"
+                    className="object-cover"
+                    priority
+                  />
+                </div>
                 <p
-                  style={{
-                    fontSize: 10,
-                    fontWeight: 300,
-                    fontStyle: "italic",
-                    color: "#BBBBBB",
-                    marginTop: 10,
-                    textAlign: "center",
-                    lineHeight: 1.4,
-                  }}
+                  className="mt-2.5 text-center text-[10px] font-light italic leading-snug text-[#BBBBBB]"
                 >
-                  austin, tx — somewhere between a law brief and a sketchbook
+                  nyc whenever i can visit :)
                 </p>
               </div>
 
@@ -353,8 +393,8 @@ export default function AboutContent() {
                 </div>
 
                 <p style={{ fontSize: 14, fontWeight: 300, color: "#444444", lineHeight: 1.8, marginBottom: 16 }}>
-                  With a diverse span of work, I lead with one desire. The ultimate goal to bridge
-                  complex systems to intuitive understanding.
+                  Across what I&apos;m doing currently, I lead with one desire: bridging complex
+                  systems to intuitive understanding.
                 </p>
 
                 <p style={{ fontSize: 14, fontWeight: 300, color: "#444444", lineHeight: 1.8, marginBottom: 20 }}>
@@ -375,16 +415,22 @@ export default function AboutContent() {
             </div>
           </section>
 
-        {/* ── WORK SECTION ── */}
-        <section id="work" data-theme="work" style={{ marginBottom: 72 }}>
+        {/* ── CURRENTLY SECTION ── */}
+        <section id="currently" data-theme="currently" style={{ marginBottom: 72 }}>
           <p className="section-label" style={{ color: "#BBBBBB", marginBottom: 20 }}>
-            WORK
+            CURRENTLY
           </p>
 
-          <div>
-            {WORK_ITEMS.map((item, i) => (
-              <WorkRow key={item.name} item={item} isLast={i === WORK_ITEMS.length - 1} />
-            ))}
+          <div className="experience-glass-panel experience-glass-panel--wide experience-glass-panel--compact-y">
+            <div className="flex w-full flex-col">
+              {CURRENTLY_ITEMS.map((item, i) => (
+                <CurrentlyRow
+                  key={item.name}
+                  item={item}
+                  isLast={i === CURRENTLY_ITEMS.length - 1}
+                />
+              ))}
+            </div>
           </div>
 
           <Link
