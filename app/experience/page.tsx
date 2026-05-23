@@ -1,46 +1,15 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import ProjectCard from "@/components/ProjectCard";
-import ExperienceModal from "@/components/ExperienceModal";
+import ExperienceModal, {
+  type ExperienceAccentTheme,
+} from "@/components/ExperienceModal";
 import ParallaxHeroGradient from "@/components/ParallaxHeroGradient";
 
 const GLASS_FRAME_BASE =
   "w-full h-full aspect-[16/10] rounded-2xl p-6 flex items-center justify-center overflow-hidden transition-all duration-500";
-
-function TowerBridgeLogo() {
-  return (
-    <span
-      className="text-[32px] font-extralight tracking-tight text-amber-900/20 select-none"
-      aria-hidden="true"
-    >
-      T&amp;B
-    </span>
-  );
-}
-
-function IntegratedDesignLogo() {
-  return (
-    <span
-      className="text-[28px] font-extralight tracking-[0.2em] text-rose-900/20 select-none"
-      aria-hidden="true"
-    >
-      ID
-    </span>
-  );
-}
-
-function RiskRadarLogo() {
-  return (
-    <span
-      className="text-[28px] font-extralight tracking-[0.18em] text-indigo-200/25 select-none"
-      aria-hidden="true"
-    >
-      RR
-    </span>
-  );
-}
 
 // ─── Pillar 1: Strategic Impact Cards ────────────────────────────────────────
 
@@ -54,6 +23,7 @@ interface ModalConfig {
   collaborators: string;
   microDescription: string;
   expandHref: string;
+  accentTheme: ExperienceAccentTheme;
 }
 
 interface ImpactCardDef {
@@ -62,7 +32,6 @@ interface ImpactCardDef {
   pill: string;
   pillDark?: boolean;
   hoverDescription: string;
-  logo?: ReactNode;
   videoUrl?: string;
   imageUrl?: string;
   frameClassName?: string;
@@ -82,6 +51,7 @@ const TOWER_BRIDGE_MODAL: ModalConfig = {
   microDescription:
     "A strategic growth and data tracking framework for consumer sustainability campaigns, translating raw performance metrics into investor-ready pitch decks for executive board approval.",
   expandHref: "/experience/tower-and-bridge",
+  accentTheme: "gold",
 };
 
 const INTEGRATED_DESIGN_MODAL: ModalConfig = {
@@ -94,6 +64,7 @@ const INTEGRATED_DESIGN_MODAL: ModalConfig = {
   microDescription:
     "An end-to-end user behavioral research sprint that pivoted from a physical merchandise proof-of-concept to an integrated stadium jumbotron video campaign and live responsive data portal.",
   expandHref: "/experience/giving-back",
+  accentTheme: "rose",
 };
 
 const RISK_RADAR_MODAL: ModalConfig = {
@@ -106,13 +77,13 @@ const RISK_RADAR_MODAL: ModalConfig = {
   microDescription:
     "An enterprise product strategy transforming back-end Large Language Models, BERT classification loops, and vector embeddings into a low-friction predictive crisis dashboard for brand executives.",
   expandHref: "/experience/risk-radar",
+  accentTheme: "navy",
 };
 
 const STRATEGIC_IMPACT_CARDS: ImpactCardDef[] = [
   {
     id: "tower-bridge",
     gradient: "linear-gradient(148deg, #F5EDD8 0%, #EDD9A3 100%)",
-    logo: <TowerBridgeLogo />,
     pill: "Tower & Bridge · Analytics Strategy",
     pillDark: false,
     hoverDescription: "Real clients, real strategy, real stakes.",
@@ -125,7 +96,6 @@ const STRATEGIC_IMPACT_CARDS: ImpactCardDef[] = [
   {
     id: "integrated-design-thinking",
     gradient: "linear-gradient(148deg, #FCE8F0 0%, #F4C8DC 100%)",
-    logo: <IntegratedDesignLogo />,
     pill: "Integrated Design · UX Research",
     pillDark: false,
     hoverDescription: "Full UX research cycle for unhoused community advocacy.",
@@ -137,7 +107,6 @@ const STRATEGIC_IMPACT_CARDS: ImpactCardDef[] = [
   {
     id: "risk-radar",
     gradient: "linear-gradient(148deg, #0D0D14 0%, #1A1A2E 55%, #243B5A 100%)",
-    logo: <RiskRadarLogo />,
     pill: "Risk Radar · AI Product",
     pillDark: true,
     hoverDescription: "AI brand crisis prediction — BERT, RAG, Spring 2026.",
@@ -490,7 +459,6 @@ export default function ExperiencePage() {
                   )}
                   <ProjectCard
                     gradient={card.gradient}
-                    logo={card.logo}
                     pill={card.pill}
                     pillDark={card.pillDark}
                     hoverDescription={card.hoverDescription}
@@ -585,6 +553,7 @@ export default function ExperiencePage() {
         collaborators={activeModal?.collaborators ?? ""}
         microDescription={activeModal?.microDescription ?? ""}
         expandHref={activeModal?.expandHref ?? "/experience"}
+        accentTheme={activeModal?.accentTheme ?? "gold"}
       />
     </div>
   );

@@ -6,6 +6,8 @@ import { motion, AnimatePresence } from "framer-motion";
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
+export type ExperienceAccentTheme = "gold" | "rose" | "navy";
+
 export interface ExperienceModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -19,7 +21,65 @@ export interface ExperienceModalProps {
   microDescription: string;
   /** Standalone case study route for expand ↗ and CTA */
   expandHref: string;
+  /** Matches experience card glass frame — gold / rose / navy */
+  accentTheme: ExperienceAccentTheme;
 }
+
+const ACCENT_STYLES: Record<
+  ExperienceAccentTheme,
+  {
+    frameGradient: string;
+    frameShadow: string;
+    ctaShadow: string;
+    arrowGradient: string;
+    arrowShadow: string;
+    badgeBg: string;
+    badgeColor: string;
+    focusRingClass: string;
+    ctaLinkHoverClass: string;
+  }
+> = {
+  gold: {
+    frameGradient:
+      "linear-gradient(148deg, #F5EDD8 0%, #E8C878 45%, #EDD9A3 100%)",
+    frameShadow:
+      "0 48px 100px -28px rgba(217, 119, 6, 0.22), 0 24px 64px -20px rgba(14, 14, 16, 0.1)",
+    ctaShadow: "0 20px 56px -16px rgba(217, 119, 6, 0.28)",
+    ctaHoverShadow: "0 12px 40px -12px rgba(217, 119, 6, 0.25)",
+    arrowGradient: "linear-gradient(148deg, #E8C878 0%, #D97706 100%)",
+    arrowShadow: "0 8px 20px -6px rgba(217, 119, 6, 0.45)",
+    badgeBg: "rgba(232, 200, 120, 0.35)",
+    badgeColor: "#92400E",
+    focusRingClass: "focus-visible:ring-amber-500",
+    ctaLinkHoverClass: "hover:shadow-[0_12px_40px_-12px_rgba(217,119,6,0.25)]",
+  },
+  rose: {
+    frameGradient:
+      "linear-gradient(148deg, #FCE8F0 0%, #F4A8C8 50%, #F4C8DC 100%)",
+    frameShadow:
+      "0 48px 100px -28px rgba(236, 72, 153, 0.2), 0 24px 64px -20px rgba(14, 14, 16, 0.1)",
+    ctaShadow: "0 20px 56px -16px rgba(236, 72, 153, 0.25)",
+    arrowGradient: "linear-gradient(148deg, #F9A8D4 0%, #EC4899 100%)",
+    arrowShadow: "0 8px 20px -6px rgba(236, 72, 153, 0.4)",
+    badgeBg: "rgba(244, 168, 200, 0.35)",
+    badgeColor: "#9D174D",
+    focusRingClass: "focus-visible:ring-pink-500",
+    ctaLinkHoverClass: "hover:shadow-[0_12px_40px_-12px_rgba(236,72,153,0.22)]",
+  },
+  navy: {
+    frameGradient:
+      "linear-gradient(148deg, #1A1A2E 0%, #3D4F7C 50%, #4B6CB7 100%)",
+    frameShadow:
+      "0 48px 100px -28px rgba(99, 102, 241, 0.28), 0 24px 64px -20px rgba(14, 14, 16, 0.18)",
+    ctaShadow: "0 20px 56px -16px rgba(99, 102, 241, 0.3)",
+    arrowGradient: "linear-gradient(148deg, #4B6CB7 0%, #4338CA 100%)",
+    arrowShadow: "0 8px 20px -6px rgba(99, 102, 241, 0.45)",
+    badgeBg: "rgba(75, 108, 183, 0.25)",
+    badgeColor: "#C7D2FE",
+    focusRingClass: "focus-visible:ring-indigo-500",
+    ctaLinkHoverClass: "hover:shadow-[0_12px_40px_-12px_rgba(99,102,241,0.28)]",
+  },
+};
 
 // ─── Animation variants ──────────────────────────────────────────────────────
 
@@ -49,7 +109,9 @@ export default function ExperienceModal({
   collaborators,
   microDescription,
   expandHref,
+  accentTheme,
 }: ExperienceModalProps) {
+  const accent = ACCENT_STYLES[accentTheme];
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -93,7 +155,11 @@ export default function ExperienceModal({
           >
             {/* Gradient frame — glass sheet */}
             <motion.div
-              className="gradient-ihwn w-full max-w-[920px] mx-auto rounded-[28px] p-[1.5px] pointer-events-auto shadow-[0_48px_100px_-28px_rgba(167,139,250,0.45),0_24px_64px_-20px_rgba(14,14,16,0.14)]"
+              className="w-full max-w-[920px] mx-auto rounded-[28px] p-[1.5px] pointer-events-auto"
+              style={{
+                background: accent.frameGradient,
+                boxShadow: accent.frameShadow,
+              }}
               variants={cardVariants}
               initial="hidden"
               animate="visible"
@@ -106,7 +172,7 @@ export default function ExperienceModal({
                 <div className="flex w-full items-center justify-between mb-10">
                   <Link
                     href={expandHref}
-                    className="flex h-9 w-9 items-center justify-center rounded-full border border-black/[0.08] bg-white/60 text-[14px] text-neutral-500 shadow-sm backdrop-blur-sm transition-all hover:border-black/[0.12] hover:bg-white hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A78BFA]"
+                    className={`flex h-9 w-9 items-center justify-center rounded-full border border-black/[0.08] bg-white/60 text-[14px] text-neutral-500 shadow-sm backdrop-blur-sm transition-all hover:border-black/[0.12] hover:bg-white hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 ${accent.focusRingClass}`}
                     aria-label={`Open ${companyName} case study full page`}
                   >
                     <span aria-hidden="true">↗</span>
@@ -114,7 +180,7 @@ export default function ExperienceModal({
                   <button
                     type="button"
                     onClick={onClose}
-                    className="flex h-9 w-9 items-center justify-center rounded-full border border-black/[0.08] bg-white/60 text-[18px] leading-none text-neutral-500 shadow-sm backdrop-blur-sm transition-all hover:border-black/[0.12] hover:bg-white hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A78BFA]"
+                    className={`flex h-9 w-9 items-center justify-center rounded-full border border-black/[0.08] bg-white/60 text-[18px] leading-none text-neutral-500 shadow-sm backdrop-blur-sm transition-all hover:border-black/[0.12] hover:bg-white hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 ${accent.focusRingClass}`}
                     aria-label="Close modal"
                   >
                     ×
@@ -124,15 +190,14 @@ export default function ExperienceModal({
                 {/* Company identity */}
                 <div className="flex w-full flex-col items-center gap-3">
                   <div
-                    className="flex h-[60px] w-[60px] items-center justify-center overflow-hidden rounded-full shadow-[0_8px_24px_-8px_rgba(167,139,250,0.35)]"
+                    className="flex h-[60px] w-[60px] items-center justify-center overflow-hidden rounded-full"
                     style={{
-                      background: companyLogoImage
-                        ? "transparent"
-                        : "rgba(167,139,250,0.16)",
+                      background: companyLogoImage ? "transparent" : accent.badgeBg,
                       fontSize: 22,
                       fontWeight: 400,
-                      color: "#A78BFA",
+                      color: accent.badgeColor,
                       letterSpacing: "-0.01em",
+                      boxShadow: accent.ctaShadow,
                     }}
                     aria-hidden={!!companyLogoImage}
                   >
@@ -198,16 +263,26 @@ export default function ExperienceModal({
                 />
 
                 {/* Glass gradient CTA — view case study */}
-                <div className="gradient-ihwn rounded-2xl p-[1.5px] shadow-[0_20px_56px_-16px_rgba(167,139,250,0.4)]">
+                <div
+                  className="rounded-2xl p-[1.5px]"
+                  style={{
+                    background: accent.frameGradient,
+                    boxShadow: accent.ctaShadow,
+                  }}
+                >
                   <Link
                     href={expandHref}
-                    className="group flex w-full items-center justify-between gap-4 rounded-[14px] border border-white/90 bg-white/[0.82] px-8 py-6 backdrop-blur-xl transition-all hover:bg-white/[0.92] hover:shadow-[0_12px_40px_-12px_rgba(167,139,250,0.35)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A78BFA] focus-visible:ring-offset-2"
+                    className={`group flex w-full items-center justify-between gap-4 rounded-[14px] border border-white/90 bg-white/[0.82] px-8 py-6 backdrop-blur-xl transition-all hover:bg-white/[0.92] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${accent.focusRingClass} ${accent.ctaLinkHoverClass}`}
                   >
                     <span className="text-[15px] font-medium tracking-tight text-[var(--foreground)]">
                       View case study
                     </span>
                     <span
-                      className="gradient-ihwn flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-[15px] text-white shadow-[0_8px_20px_-6px_rgba(167,139,250,0.55)] transition-transform group-hover:translate-x-0.5"
+                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-[15px] text-white transition-transform group-hover:translate-x-0.5"
+                      style={{
+                        background: accent.arrowGradient,
+                        boxShadow: accent.arrowShadow,
+                      }}
                       aria-hidden="true"
                     >
                       →
