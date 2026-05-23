@@ -13,17 +13,32 @@ export default function GivingBackCaseStudyPage() {
   return (
     <GivingBackCaseStudyTemplate
       title="Giving Back"
-      subtitle="A semester-long design thinking project exploring how UT students can engage with and support the unhoused community in West Campus — from empathy interviews through two prototype-and-test cycles to a Jumbotron video campaign."
+      subtitle="Design thinking capstone — empathy research, two prototype cycles, one Jumbotron pitch."
+      subtitleHtml='Design thinking capstone — <strong>empathy research → two cycles → Jumbotron campaign</strong> for West Campus&apos;s unhoused community.'
       metadata={[
         { label: "Timeline", value: "Fall 2025 · One Semester" },
         { label: "Role", value: "UX Researcher" },
         { label: "Method", value: "Design Thinking · 2 cycles" },
         { label: "Course", value: "Integrated Design Thinking · UT Austin" },
       ]}
+      accent={{
+        heroGradient:
+          "linear-gradient(148deg, #FAF0E6 0%, #E8D5C4 42%, #D4B896 100%)",
+        bulletColor: "#BF5700",
+        heroEyebrow: "Impact at a glance",
+        heroMetrics: [
+          { label: "Cycles", num: "2", sub: "Prototype & test" },
+          { label: "Themes", num: "4", sub: "From empathy research" },
+          { label: "Participants", num: "12+", sub: "Cycle 01 testing" },
+        ],
+        heroImage: {
+          src: `${IMAGE_BASE}/impact-glance.png`,
+          alt: "Giving Back project impact — empathy research through Jumbotron video prototype",
+          placeholderLabel: `${IMAGE_BASE}/impact-glance.png`,
+        },
+      }}
       overview={{
-        heading:
-          "A four-person team tackling an invisible problem in a community we live in.",
-        body: "Our team worked across UX research, ideation, and two full prototype-and-test cycles to address how UT students engage with the unhoused community surrounding West Campus. We conducted user interviews with student org members, volunteer organizations, and anonymous students; surfaced four themes from the research; and iterated from a wearable awareness tool to a Jumbotron video campaign.",
+        heading: "An invisible problem in a community we actually live in.",
         team: [
           { name: "Emily Araiza" },
           { name: "Frida Balderas" },
@@ -31,22 +46,27 @@ export default function GivingBackCaseStudyPage() {
           { name: "Manay Divatia" },
         ],
         bullets: [
-          "Proposed the prototype directions and led the prototyping workstream across both cycles.",
-          "Conducted user interviews across student organizations and volunteer groups supporting the unhoused.",
-          "Created the t-shirt designs (Prototype #1) and led video production content for the Jumbotron concept (Prototype #2).",
+          "<strong>Led prototyping</strong> both cycles — t-shirt → Jumbotron video",
+          "Interviews with student orgs, volunteer boards, and anonymous peers",
+          "<em>Owned</em> Cycle 01 t-shirt designs + Cycle 02 video concept & on-camera content",
         ],
       }}
       theQuestion={{
-        heading: 'We started with a "how might we" — but the wrong scope.',
-        body: "Our original framing pointed at the problem but didn't give us a target user or behavior to design for. The research would show us how to refine it.",
+        heading: 'Right problem. Wrong "how might we."',
+        bullets: [
+          "Framed around homelessness broadly — <strong>no target user, no behavior</strong>",
+          "Cycle 01 would force us to <em>rewrite the question entirely</em>",
+        ],
         hmwLabel: "Original How Might We",
         hmwHtml:
           '"How might we create a supportive environment for <span style="color:#BF5700">people who face homelessness</span> around West Campus?"',
       }}
       research={{
-        heading:
-          "User interviews surfaced four themes, leading us to our design target.",
-        body: "We interviewed student org members, volunteer-organization board members, and anonymous students. We affinity-mapped quotes on a Miro board and clustered them into four themes capturing both the systemic friction and the individual fear-and-ignorance gaps.",
+        heading: "Four interview themes. One design target.",
+        bullets: [
+          "Affinity-mapped real quotes on Miro — <strong>4 themes</strong> from org boards + students",
+          "Systemic hostility <em>and</em> individual fear — both had to shape the design",
+        ],
         images: [
           {
             src: `${IMAGE_BASE}/miro-board.png`,
@@ -65,40 +85,45 @@ export default function GivingBackCaseStudyPage() {
           {
             num: "THEME 01",
             title: "External Factor Effects",
-            body: 'The environment around West Campus is actively hostile. Policies push for the removal of unhoused individuals; exclusion creates a "feeling of unwantedness."',
+            body: "West Campus is hostile. Policies push removal — exclusion creates <em>unwantedness</em>.",
             quote: '"Policies lead to the removal of unhoused individuals."',
             source: "— Org Board Member",
           },
           {
             num: "THEME 02",
             title: "Government Intervention",
-            body: "Policing and surveillance are prioritized over support. Homelessness gets treated as a safety issue rather than a humane crisis.",
+            body: "Policing over support. Treated as a <strong>safety issue</strong>, not a humane crisis.",
             quote: '"The unhoused are not dangerous, just underserved."',
             source: "— Org Board Member",
           },
           {
             num: "THEME 03",
             title: "Awareness & Ignorance",
-            body: 'Fear is the priority — students "can\'t walk anywhere without fear." Students want to help but lack resource knowledge, leading to aid that is "inconsistent and insufficient."',
+            body: "Students <em>want to help</em> — but fear wins without resource knowledge.",
             quote: '"Students want to help out but have no knowledge of resources."',
             source: "— Anonymous student",
           },
           {
             num: "THEME 04",
             title: "Action & Engagement",
-            body: "Available support is inadequate. Volunteer efforts are short-lived. Community care is unreliable — it shows up in bursts, not patterns.",
+            body: "Volunteer care shows up in <strong>bursts</strong>, not patterns.",
             quote: '"I never know when you are ready to give me the attention I need."',
             source: "— Breakup-letter prompt response",
           },
         ],
         pullQuote:
-          "Despite empathy, students want to help out — but they have no knowledge of resources, and are overcome by fear.",
-        closingBody:
-          "Theme three — <strong>Awareness &amp; Ignorance</strong> — was where the leverage lived. Students are the largest group on campus capable of consistent supportive action, but they're held back by an information gap, not a values gap. That gave us our user.",
+          "Students want to help — but they have no knowledge of resources, and fear wins.",
+        closingBullets: [
+          "<strong>Theme 03</strong> — Awareness & Ignorance — is where the leverage lived",
+          "Information gap, not values gap → <em>that</em> became our user",
+        ],
       }}
       prototypeOne={{
-        heading: "A wearable awareness tool — the t-shirt as a portable resource map.",
-        body: 'The first prototype used a t-shirt as a dual-purpose object: a visible call-to-action on the front and a portable map of shelters and resources on the back. We designed two variants — a UT-branded burnt-orange "Coop" version and a minimalist Nike-style version and ran them against each other.',
+        heading: "Wearable awareness — t-shirt as portable resource map.",
+        bullets: [
+          "Front: call-to-action · Back: <strong>shelter & resource map</strong>",
+          "UT Coop vs. Nike-style — tested head-to-head with 12 participants",
+        ],
         images: [
           {
             src: `${IMAGE_BASE}/tshirt-ut.png`,
@@ -115,11 +140,14 @@ export default function GivingBackCaseStudyPage() {
         ],
         calloutLabel: "The bigger idea",
         calloutText:
-          "A yearly student t-shirt design contest — chosen by the University President — to keep the awareness campaign fresh and student-owned every year.",
+          'Yearly student design contest — <em>President-selected</em> — keeps awareness <strong>fresh and student-owned</strong>.',
       }}
       testOne={{
-        heading: "12 participants. Structured questionnaire. Clear signal on what wasn't working.",
-        body: "We collected feedback from 12 participants through a structured questionnaire comparing the two designs. The signal was sharper than expected — the UT version landed visually but the message was unclear, and the Nike version was readable but not eye-catching.",
+        heading: "12 participants. One clear signal.",
+        bullets: [
+          "UT version: <strong>looked right</strong>, message unclear",
+          "Nike version: readable, but <em>not eye-catching enough</em> to spread",
+        ],
         highlightImage: {
           src: `${IMAGE_BASE}/test-cycle-01.png`,
           alt: "Cycle 01 testing synthesis — participant feedback themes and insights",
@@ -136,26 +164,29 @@ export default function GivingBackCaseStudyPage() {
             source: "Participant 02",
           },
           {
-            text: '"Remove figure in the front, change the list of locations on the back, pin-point map on locations."',
+            text: '"Remove figure in the front, change the list of locations on the back."',
             source: "Participant 09",
           },
         ],
         insights: {
           worked: [
-            "Visual prototype communicated intent immediately",
-            "UT branding (burnt orange) created instant campus belonging",
-            "The resource map concept resonated as genuinely useful",
+            "<strong>Intent landed</strong> immediately",
+            "Burnt orange = instant campus belonging",
+            "Resource map felt genuinely useful",
           ],
           didnt: [
-            "Front-side message was visually unclear",
-            "Nike version was too plain to function as awareness",
-            "Readability of the back-side resource list was poor",
+            "Front message visually muddy",
+            "Nike too plain for awareness",
+            "Back-side list hard to read",
           ],
         },
       }}
       redefine={{
-        heading: "The prototype was working — the question wasn't.",
-        body: 'The clearest finding from Cycle 1 wasn\'t about the shirt. It was that our "how might we" was scoped too broadly. Our prototype was actually testing the <em>student</em> response — not the unhoused community\'s experience. So we rewrote the question to match the user we were really designing for.',
+        heading: "Prototype worked. Question didn't.",
+        bullets: [
+          "We tested <strong>student response</strong> — not unhoused experience",
+          "Rewrote HMW to match the user we were <em>actually</em> designing for",
+        ],
         hmwImage: {
           src: `${IMAGE_BASE}/changing-how-might-we.png`,
           alt: "How might we refinement — original question narrowed to student engagement and awareness",
@@ -163,31 +194,31 @@ export default function GivingBackCaseStudyPage() {
           caption: "Original → refined how might we",
         },
         needed: [
-          "Clearer message",
-          "Engaging content",
-          "Action-oriented & to the point",
+          "<strong>Clearer</strong> message",
+          "<em>Engaging</em> content",
           'The "why care?"',
         ],
         kept: [
           "100% UT branding",
-          "Resource-as-call-to-action concept",
-          "QR-code idea from testing",
-          "Burnt orange as identity",
+          "Resource-as-call-to-action",
+          "QR code <span class=\"accent\">from testing</span>",
         ],
       }}
       prototypeTwo={{
-        heading: "The Jumbotron — meeting students where their attention already is.",
-        body: "Sixty thousand students sit in DKR Stadium on game day. The Jumbotron between plays is the rare moment where attention is captive and consent is implicit. We pivoted from wearable to broadcast — a video styled like the TikTok and Instagram reels UT already posts, but reframed to highlight the realities of homelessness and a concrete way to help.",
+        heading: "Jumbotron — meet students where attention already is.",
+        bullets: [
+          "<strong>60K students</strong> at DKR · captive eyes between plays",
+          "Sports-reel aesthetic — <em>not</em> an ad parachuted into game day",
+        ],
         contributions: [
           {
-            step: "My Role · Led Video Production Content",
-            heading: "From concept to a story that earns the scan.",
-            paragraphs: [
-              "I owned the video concept and content direction. Pulled directly from UT's existing sports-reel aesthetic so the spot wouldn't feel like an \"ad\" — it had to live inside the same visual grammar as the game-day footage around it.",
-              "Our marketing lead handled the actual cutting; I led the concept, the messaging direction, and the on-camera content. The result was a 30-second piece that felt native to the Jumbotron, not parachuted into it.",
+            step: "My Role · Video Production",
+            heading: "Concept to a story that earns the scan.",
+            bullets: [
+              "<strong>Owned concept + content</strong> end to end",
+              "Native to Jumbotron grammar — 30 sec that <em>belongs</em> on the screen",
             ],
             image: {
-              src: `${IMAGE_BASE}/test-playing.png`,
               alt: "Jumbotron awareness video — UT sports-reel aesthetic with giving back messaging",
               placeholderLabel: "/videos/jumbotron-video.mp4",
               videoSrc: "/videos/jumbotron-video.mp4",
@@ -196,9 +227,9 @@ export default function GivingBackCaseStudyPage() {
           {
             step: "Messaging",
             heading: '"Stop doomscrolling. Fall in love with giving back."',
-            paragraphs: [
-              "The core line of the video reframes the scroll. The video doesn't tell students they're bad for ignoring the unhoused — it tells them there's a more interesting way to spend their attention than the doomscroll.",
-              "The video closes on a QR code that opens a mock website with volunteer opportunities, community calendar, local shelters, and ways to get involved — turning passive viewing into one tappable next step.",
+            bullets: [
+              '<span class="lead"><em>Reframes the scroll</em></span> — better than doomscrolling',
+              "QR closes the loop → <strong>volunteer ops, calendar, shelters</strong>",
             ],
             image: {
               src: `${IMAGE_BASE}/qr-website.png`,
@@ -209,8 +240,11 @@ export default function GivingBackCaseStudyPage() {
         ],
       }}
       testTwo={{
-        heading: "We rebuilt game day in an apartment to test it for real.",
-        body: 'We recreated a game-like environment in our apartment — sports on the TV, friends watching, simulated commercial breaks. During a "timeout" we cut to the prototype video, then asked four questions: a mood check, game-day viewing habits, what captures attention during breaks, and sense of community connection.',
+        heading: "We faked game day in an apartment.",
+        bullets: [
+          "Sports on TV, friends, simulated timeouts — <strong>then cut to the video</strong>",
+          "Four questions: mood, habits, attention hooks, community connection",
+        ],
         images: [
           {
             src: `${IMAGE_BASE}/test-setup.png`,
@@ -239,58 +273,59 @@ export default function GivingBackCaseStudyPage() {
             source: "Post · Post-prototype",
           },
           {
-            text: '"There are bigger issues going on in the world. We as a community need to get involved — we\'re consumed by other things."',
-            source: "Post · Post-prototype",
-          },
-          {
-            text: '"Music makes me look up or pay attention during game breaks."',
-            source: "Pre · Attention habits",
-          },
-          {
             text: '"I wish the website links to ways to help actually worked."',
             source: "Post · Constructive",
           },
         ],
         insights: {
           worked: [
-            "People felt moved by the video",
-            "Visuals and music were extremely engaging",
-            "Viewers appreciated the QR code as a real next step",
+            "People felt <strong>moved</strong>",
+            "Visuals + music were extremely engaging",
+            "QR code felt like a <em>real</em> next step",
           ],
           didnt: [
-            "Font of overlay text was slightly hard to read",
-            "Closing QR graphic was basic — needs polish",
+            "Overlay text slightly hard to read",
+            "Closing QR graphic needs polish",
             "Bright lights + music distracted some viewers",
           ],
         },
       }}
       futureWork={{
-        heading: "Where this goes from here.",
+        heading: "Where this goes next.",
         label: "Scale",
         items: [
-          "Secure official partnership with UT Athletics / DKR Stadium to launch the Jumbotron Video at full scale",
-          "Develop and host Empathy & Safety Training on the landing page to directly address student fear and ignorance",
-          "Adapt the video for different sporting events — not just football",
-          "Update concept yearly to match new trends on TikTok and Instagram; keep the core message, refresh visuals",
+          "<strong>UT Athletics partnership</strong> — launch at DKR full scale",
+          "Empathy & Safety Training on the landing page",
+          "Adapt for <em>all sporting events</em>, not just football",
+          "Refresh visuals yearly — keep the message, match TikTok/IG trends",
         ],
       }}
       reflection={{
-        heading: "What two prototype cycles taught me.",
+        heading: "What two cycles taught me.",
         cards: [
           {
             label: "What I Learned",
-            title: "Empathy exists with research.",
-            body: "The four themes only emerged because we actually went out and talked to students and org board members in person. Affinity-mapping their actual words on the Miro board was where we pulled insights. From there, we were able to understand and create a design!",
+            title: "Empathy needs research.",
+            bullets: [
+              "Four themes only emerged because we <strong>talked to people in person</strong>",
+              "Affinity-mapping their words on Miro — <em>that's</em> where insight lives",
+            ],
           },
           {
             label: "What Surprised Me",
-            title: "Think bigger!",
-            body: 'Originally, we had our jumbotron idea in out list of prototypes. However, we slashed it because it seemed intangible. TUrns out, it was important to think bigger as it may be your best fall back after all.',
+            title: "Think bigger.",
+            bullets: [
+              "Jumbotron was on our list from day one — we cut it as <em>intangible</em>",
+              "Turns out it was the right fallback after Cycle 01",
+            ],
           },
           {
             label: "What's Next",
-            title: "I want to lead research-driven design.",
-            body: "This project brought a new perspective on research-driven design. While conducting interviews, synthesizing themes, prototyping fast, and iterating with real users in the loop, mastering these concepts create the best designs to make impact.",
+            title: "Research-driven design.",
+            bullets: [
+              "Research isn't a checkbox — it's the <strong>foundation</strong>",
+              "Interview → synthesize → prototype fast → test with real users. <em>That cycle moves people.</em>",
+            ],
           },
         ],
       }}
