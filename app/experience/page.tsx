@@ -1,10 +1,46 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import Link from "next/link";
 import ProjectCard from "@/components/ProjectCard";
 import ExperienceModal from "@/components/ExperienceModal";
 import ParallaxHeroGradient from "@/components/ParallaxHeroGradient";
+
+const GLASS_FRAME_BASE =
+  "w-full h-full aspect-[16/10] rounded-2xl p-6 flex items-center justify-center overflow-hidden transition-all duration-500";
+
+function TowerBridgeLogo() {
+  return (
+    <span
+      className="text-[32px] font-extralight tracking-tight text-amber-900/20 select-none"
+      aria-hidden="true"
+    >
+      T&amp;B
+    </span>
+  );
+}
+
+function IntegratedDesignLogo() {
+  return (
+    <span
+      className="text-[28px] font-extralight tracking-[0.2em] text-rose-900/20 select-none"
+      aria-hidden="true"
+    >
+      ID
+    </span>
+  );
+}
+
+function RiskRadarLogo() {
+  return (
+    <span
+      className="text-[28px] font-extralight tracking-[0.18em] text-indigo-200/25 select-none"
+      aria-hidden="true"
+    >
+      RR
+    </span>
+  );
+}
 
 // ─── Pillar 1: Strategic Impact Cards ────────────────────────────────────────
 
@@ -18,9 +54,6 @@ interface ModalConfig {
   collaborators: string;
   microDescription: string;
   expandHref: string;
-  mediaSrc?: string;
-  mediaAlt?: string;
-  mediaVideo?: boolean;
 }
 
 interface ImpactCardDef {
@@ -29,6 +62,13 @@ interface ImpactCardDef {
   pill: string;
   pillDark?: boolean;
   hoverDescription: string;
+  logo?: ReactNode;
+  videoUrl?: string;
+  imageUrl?: string;
+  frameClassName?: string;
+  /** Ambient chromatic glow on hover (Gemini / Convergent parity) */
+  showChromaticGlow?: boolean;
+  glowVariant?: "gold" | "rose" | "navy";
   modal: ModalConfig;
 }
 
@@ -42,9 +82,6 @@ const TOWER_BRIDGE_MODAL: ModalConfig = {
   microDescription:
     "A strategic growth and data tracking framework for consumer sustainability campaigns, translating raw performance metrics into investor-ready pitch decks for executive board approval.",
   expandHref: "/experience/tower-and-bridge",
-  mediaSrc: "/videos/tower-thumbnail.mp4",
-  mediaAlt: "Tower & Bridge analytics and strategy work preview",
-  mediaVideo: true,
 };
 
 const INTEGRATED_DESIGN_MODAL: ModalConfig = {
@@ -75,25 +112,38 @@ const STRATEGIC_IMPACT_CARDS: ImpactCardDef[] = [
   {
     id: "tower-bridge",
     gradient: "linear-gradient(148deg, #F5EDD8 0%, #EDD9A3 100%)",
+    logo: <TowerBridgeLogo />,
     pill: "Tower & Bridge · Analytics Strategy",
     pillDark: false,
     hoverDescription: "Real clients, real strategy, real stakes.",
+    videoUrl: "/videos/tower-thumbnail.mp4",
+    frameClassName: `${GLASS_FRAME_BASE} bg-gradient-to-tr from-amber-50/70 via-orange-50/40 to-stone-50/60 border border-amber-200/30 shadow-[0_15px_40px_rgba(0,0,0,0.04)] hover:shadow-[0_22px_50px_rgba(217,119,6,0.1)]`,
+    showChromaticGlow: true,
+    glowVariant: "gold",
     modal: TOWER_BRIDGE_MODAL,
   },
   {
     id: "integrated-design-thinking",
     gradient: "linear-gradient(148deg, #FCE8F0 0%, #F4C8DC 100%)",
+    logo: <IntegratedDesignLogo />,
     pill: "Integrated Design · UX Research",
     pillDark: false,
     hoverDescription: "Full UX research cycle for unhoused community advocacy.",
+    frameClassName: `${GLASS_FRAME_BASE} bg-gradient-to-tr from-rose-50/70 via-pink-50/45 to-fuchsia-50/40 border border-pink-200/25 shadow-[0_15px_40px_rgba(0,0,0,0.04)] hover:shadow-[0_22px_50px_rgba(236,72,153,0.1)]`,
+    showChromaticGlow: true,
+    glowVariant: "rose",
     modal: INTEGRATED_DESIGN_MODAL,
   },
   {
     id: "risk-radar",
-    gradient: "linear-gradient(148deg, #0D0D14 0%, #1A1A2E 100%)",
+    gradient: "linear-gradient(148deg, #0D0D14 0%, #1A1A2E 55%, #243B5A 100%)",
+    logo: <RiskRadarLogo />,
     pill: "Risk Radar · AI Product",
     pillDark: true,
     hoverDescription: "AI brand crisis prediction — BERT, RAG, Spring 2026.",
+    frameClassName: `${GLASS_FRAME_BASE} bg-gradient-to-tr from-slate-900/50 via-indigo-950/35 to-slate-800/30 border border-white/[0.08] shadow-[0_15px_40px_rgba(0,0,0,0.2)] hover:shadow-[0_22px_50px_rgba(99,102,241,0.15)]`,
+    showChromaticGlow: true,
+    glowVariant: "navy",
     modal: RISK_RADAR_MODAL,
   },
 ];
@@ -409,17 +459,49 @@ export default function ExperiencePage() {
         <section style={{ marginTop: 64, marginBottom: 80 }}>
           <SectionLabel>Selected Projects</SectionLabel>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-            {STRATEGIC_IMPACT_CARDS.map((card) => (
-              <ProjectCard
-                key={card.id}
-                gradient={card.gradient}
-                pill={card.pill}
-                pillDark={card.pillDark}
-                hoverDescription={card.hoverDescription}
-                onClick={() => setActiveModal(card.modal)}
-              />
-            ))}
+          <div className="relative mb-16">
+            <div
+              className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[480px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr from-purple-500/[0.06] via-indigo-400/[0.04] to-transparent blur-[100px]"
+              aria-hidden="true"
+            />
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+              {STRATEGIC_IMPACT_CARDS.map((card) => (
+                <div
+                  key={card.id}
+                  className="group relative overflow-visible"
+                >
+                  {card.showChromaticGlow && card.glowVariant === "gold" && (
+                    <div
+                      className="absolute inset-0 -z-10 rounded-[20px] bg-gradient-to-r from-amber-500/0 to-orange-500/0 opacity-0 blur-xl transition-all duration-500 group-hover:opacity-50 group-hover:from-amber-500/15 group-hover:to-orange-500/10"
+                      aria-hidden="true"
+                    />
+                  )}
+                  {card.showChromaticGlow && card.glowVariant === "rose" && (
+                    <div
+                      className="absolute inset-0 -z-10 rounded-[20px] bg-gradient-to-r from-pink-500/0 to-rose-500/0 opacity-0 blur-xl transition-all duration-500 group-hover:opacity-50 group-hover:from-pink-500/15 group-hover:to-rose-500/10"
+                      aria-hidden="true"
+                    />
+                  )}
+                  {card.showChromaticGlow && card.glowVariant === "navy" && (
+                    <div
+                      className="absolute inset-0 -z-10 rounded-[20px] bg-gradient-to-r from-indigo-500/0 to-cyan-500/0 opacity-0 blur-xl transition-all duration-500 group-hover:opacity-50 group-hover:from-indigo-500/20 group-hover:to-cyan-500/10"
+                      aria-hidden="true"
+                    />
+                  )}
+                  <ProjectCard
+                    gradient={card.gradient}
+                    logo={card.logo}
+                    pill={card.pill}
+                    pillDark={card.pillDark}
+                    hoverDescription={card.hoverDescription}
+                    videoUrl={card.videoUrl}
+                    imageUrl={card.imageUrl}
+                    frameClassName={card.frameClassName}
+                    onClick={() => setActiveModal(card.modal)}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -503,9 +585,6 @@ export default function ExperiencePage() {
         collaborators={activeModal?.collaborators ?? ""}
         microDescription={activeModal?.microDescription ?? ""}
         expandHref={activeModal?.expandHref ?? "/experience"}
-        mediaSrc={activeModal?.mediaSrc}
-        mediaAlt={activeModal?.mediaAlt}
-        mediaVideo={activeModal?.mediaVideo}
       />
     </div>
   );
