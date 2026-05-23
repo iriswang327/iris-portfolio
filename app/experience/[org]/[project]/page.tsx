@@ -7,7 +7,7 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { org, project } = await params;
-  const title = `${decodeURIComponent(project).replace(/-/g, " ")} — Museum of Iris`;
+  const title = decodeURIComponent(project).replace(/-/g, " ");
   return {
     title,
     description: `${decodeURIComponent(org)} project.`,

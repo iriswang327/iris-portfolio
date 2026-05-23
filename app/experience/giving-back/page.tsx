@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import GivingBackCaseStudyTemplate from "@/components/GivingBackCaseStudyTemplate";
 
 export const metadata: Metadata = {
-  title: "Giving Back — Museum of Iris",
+  title: "Giving Back",
   description:
     "Design Thinking Final Project — UT West Campus unhoused community support through empathy research, two prototype cycles, and a Jumbotron video campaign. Fall 2025.",
 };

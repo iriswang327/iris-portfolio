@@ -12,9 +12,16 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "Museum of Iris",
+  title: {
+    default: "Design",
+    template: "%s",
+  },
   description:
     "Working at the edges of law, tech, and people. — Iris Wang, UT Austin · Advertising + CS · 2027",
+  icons: {
+    icon: [{ url: "/images/lotus-logo.png", type: "image/png" }],
+    apple: [{ url: "/images/lotus-logo.png", type: "image/png" }],
+  },
   openGraph: {
     title: "Museum of Iris",
     description: "Working at the edges of law, tech, and people.",

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import ExperienceCaseStudyTemplate from "@/components/ExperienceCaseStudyTemplate";
 
 export const metadata: Metadata = {
-  title: "Tower & Bridge — Museum of Iris",
+  title: "Tower & Bridge",
   description:
     "Brand strategy and analytics case study — student-run consultancy serving Austin-area nonprofits and small businesses.",
 };
