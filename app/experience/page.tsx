@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import ProjectCard from "@/components/ProjectCard";
 import ExperienceModal, {
   type ExperienceAccentTheme,
@@ -44,6 +45,7 @@ interface ImpactCardDef {
 const TOWER_BRIDGE_MODAL: ModalConfig = {
   companyName: "Tower & Bridge",
   companyLogo: "T&B",
+  companyLogoImage: "/images/tower-bridge-logo.png",
   timeline: "2024 – Present",
   role: "Strategy Analyst",
   orgType: "Brand & Analytics",
@@ -57,6 +59,7 @@ const TOWER_BRIDGE_MODAL: ModalConfig = {
 const INTEGRATED_DESIGN_MODAL: ModalConfig = {
   companyName: "Integrated Design Project",
   companyLogo: "ID",
+  companyLogoImage: "/images/integrated-design-logo.png",
   timeline: "Fall 2025",
   role: "Lead Prototyper",
   orgType: "Design Thinking · UT Austin",
@@ -70,6 +73,7 @@ const INTEGRATED_DESIGN_MODAL: ModalConfig = {
 const RISK_RADAR_MODAL: ModalConfig = {
   companyName: "Risk Radar",
   companyLogo: "RR",
+  companyLogoImage: "/images/risk-radar-logo.png",
   timeline: "Spring 2026",
   role: "Head of AI",
   orgType: "B2B SaaS · AI Product",
@@ -138,7 +142,8 @@ const ANALYTICAL_LEDGER = [
     organizationName: "Texas Undergraduate Law Journal",
     roleName: "staff writer",
     timeline: "2025-present",
-    icon: "⚖",
+    logoSrc: "/images/tulj-logo.png",
+    logoAlt: "Texas Undergraduate Law Journal",
     papers: LAW_PAPERS,
   },
   {
@@ -146,7 +151,8 @@ const ANALYTICAL_LEDGER = [
     organizationName: "The Daily Texan",
     roleName: "opinion illustrator",
     timeline: "2024–2025",
-    icon: "✎",
+    logoSrc: "/images/the-daily-texan-logo.png",
+    logoAlt: "The Daily Texan",
     linkHref: "#",
     linkLabel: "view illustration archive →",
   },
@@ -158,28 +164,32 @@ const OPERATIONAL_LEDGER = [
     companyName: "Letters of Gold",
     roleTitle: "Director of Special Projects",
     dateRange: "2025–Present",
-    icon: "G",
+    logoSrc: "/images/letters-of-gold-logo.png",
+    logoAlt: "Letters of Gold",
   },
   {
     id: "longhorn-racing",
     companyName: "Longhorn Racing",
     roleTitle: "Operations Team · Designer",
     dateRange: "2025–Present",
-    icon: "L",
+    logoSrc: "/images/lhr-logo.png",
+    logoAlt: "Longhorn Racing",
   },
   {
     id: "sparro",
     companyName: "SparroWriting Services",
     roleTitle: "Office Manager & Teaching Assistant",
     dateRange: "2022–2025",
-    icon: "S",
+    logoSrc: "/images/sparrowriting-logo.png",
+    logoAlt: "SparroWriting Services",
   },
   {
     id: "asuci",
     companyName: "ASUCI Student Government",
     roleTitle: "Design & Outreach Intern",
     dateRange: "2023–2024",
-    icon: "A",
+    logoSrc: "/images/asuci-logo.png",
+    logoAlt: "ASUCI Student Government",
   },
 ] as const;
 
@@ -231,10 +241,30 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 
 // ─── Shared badge ─────────────────────────────────────────────────────────────
 
-function LedgerBadge({ icon }: { icon: string }) {
+function LedgerBadge({
+  icon,
+  logoSrc,
+  logoAlt = "",
+}: {
+  icon?: string;
+  logoSrc?: string;
+  logoAlt?: string;
+}) {
   return (
-    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-black/[0.04] bg-white text-sm font-medium text-neutral-600 shadow-sm">
-      {icon}
+    <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full border border-black/[0.04] bg-white shadow-sm">
+      {logoSrc ? (
+        <Image
+          src={logoSrc}
+          alt={logoAlt}
+          fill
+          sizes="44px"
+          className="object-cover scale-[1.18]"
+        />
+      ) : (
+        <div className="flex h-full w-full items-center justify-center">
+          <span className="text-sm font-medium text-neutral-600">{icon}</span>
+        </div>
+      )}
     </div>
   );
 }
@@ -243,11 +273,15 @@ function LedgerBadge({ icon }: { icon: string }) {
 
 function OperationalArchiveRow({
   icon,
+  logoSrc,
+  logoAlt,
   companyName,
   roleTitle,
   dateRange,
 }: {
-  icon: string;
+  icon?: string;
+  logoSrc?: string;
+  logoAlt?: string;
   companyName: string;
   roleTitle: string;
   dateRange: string;
@@ -255,7 +289,7 @@ function OperationalArchiveRow({
   return (
     <div className="flex items-center justify-between py-4 border-b border-black/[0.04] w-full group transition-colors duration-300 hover:bg-white/40 rounded-xl last:border-b-0">
       <div className="flex items-center gap-4">
-        <LedgerBadge icon={icon} />
+        <LedgerBadge icon={icon} logoSrc={logoSrc} logoAlt={logoAlt} />
         <div className="flex flex-col gap-0.5">
           <p className="text-[14px] font-semibold tracking-normal text-neutral-900">
             {companyName}
@@ -388,18 +422,22 @@ function ExperienceHero() {
 
 function AnalyticalColumnHeader({
   icon,
+  logoSrc,
+  logoAlt,
   organizationName,
   roleName,
   timeline,
 }: {
-  icon: string;
+  icon?: string;
+  logoSrc?: string;
+  logoAlt?: string;
   organizationName: string;
   roleName: string;
   timeline: string;
 }) {
   return (
     <div className="flex items-center">
-      <LedgerBadge icon={icon} />
+      <LedgerBadge icon={icon} logoSrc={logoSrc} logoAlt={logoAlt} />
       <div className="ml-4 flex flex-col">
         <p className="text-[14px] font-semibold tracking-normal text-neutral-900">
           {organizationName}
@@ -484,7 +522,9 @@ export default function ExperiencePage() {
               {ANALYTICAL_LEDGER.map((entry) => (
                 <div key={entry.id}>
                   <AnalyticalColumnHeader
-                    icon={entry.icon}
+                    icon={"icon" in entry ? entry.icon : undefined}
+                    logoSrc={"logoSrc" in entry ? entry.logoSrc : undefined}
+                    logoAlt={"logoAlt" in entry ? entry.logoAlt : undefined}
                     organizationName={entry.organizationName}
                     roleName={entry.roleName}
                     timeline={entry.timeline}
@@ -529,7 +569,8 @@ export default function ExperiencePage() {
               {OPERATIONAL_LEDGER.map((entry) => (
                 <OperationalArchiveRow
                   key={entry.id}
-                  icon={entry.icon}
+                  logoSrc={entry.logoSrc}
+                  logoAlt={entry.logoAlt}
                   companyName={entry.companyName}
                   roleTitle={entry.roleTitle}
                   dateRange={entry.dateRange}
