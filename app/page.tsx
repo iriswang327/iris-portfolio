@@ -49,8 +49,8 @@ export default function DreamsPage() {
               aria-hidden="true"
             />
             <span
-              className="font-[300]"
-              style={{ fontSize: 12, color: "#888888" }}
+              className="design-hero-status font-[300]"
+              style={{ color: "#888888" }}
             >
               open to summer 2026 internships · nyc preferred
             </span>
@@ -58,14 +58,11 @@ export default function DreamsPage() {
 
           {/* Row 2: Name */}
           <h1
-            className="name-splash font-[200]"
+            className="name-splash design-hero-name font-[200]"
             style={{
               color: "var(--foreground)",
               marginTop: 16,
               marginBottom: 14,
-              fontSize: 40,
-              letterSpacing: "-0.025em",
-              lineHeight: 1.15,
             }}
           >
             iris wang
@@ -73,8 +70,8 @@ export default function DreamsPage() {
 
           {/* Row 3: Product [role] for [audience] */}
           <div
-            className="flex items-baseline gap-[7px] font-[300] flex-wrap"
-            style={{ color: "var(--foreground)", fontSize: 18 }}
+            className="design-hero-line flex items-baseline gap-[7px] font-[300] flex-wrap"
+            style={{ color: "var(--foreground)" }}
           >
             <span>Product</span>
             <RotatingWords
@@ -90,8 +87,8 @@ export default function DreamsPage() {
 
           {/* Row 4: Tagline */}
           <p
-            className="font-[300]"
-            style={{ color: "#888888", marginTop: 12, fontSize: 14, lineHeight: 1.7 }}
+            className="design-hero-tagline font-[300]"
+            style={{ color: "#888888", marginTop: 12, lineHeight: 1.7 }}
           >
             Working at the edges of law, tech, and people.
           </p>
