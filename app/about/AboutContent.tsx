@@ -41,22 +41,22 @@ const CURRENTLY_ITEMS = [
     logoSrc: "/images/lhr-logo.png",
     logoAlt: "Longhorn Racing",
     name: "Longhorn Racing",
-    role: "Operations Team",
-    date: "2024–Present",
+    role: "Operations Designer",
+    date: "2025–Present",
   },
   {
     logoSrc: "/images/tulj-logo.png",
     logoAlt: "Texas Undergraduate Law Journal",
     name: "Texas Undergraduate Law Journal",
     role: "Staff Writer",
-    date: "2024–Present",
+    date: "2025–Present",
   },
   {
     logoSrc: "/images/letters-of-gold-logo.png",
     logoAlt: "Letters of Gold",
     name: "Letters of Gold",
-    role: "Director of Projects",
-    date: "2026–Present",
+    role: "Director of Special Projects",
+    date: "2025–Present",
   },
 ] as const;
 
@@ -65,13 +65,13 @@ const CURRENTLY_ITEMS = [
 const COMMUNITY_ITEMS = [
   {
     name: "Letters of Gold",
-    role: "Director of Projects (incoming)",
-    desc: "Building a children's book on skin protection and diversity",
+    role: "Director of Special Projects",
+    desc: "Managing projects focusing on skin protection and DEI in healthcare",
   },
   {
     name: "Humane Society of Dallas",
     role: "Animal Volunteer",
-    desc: "Because animals deserve advocates too 🐾",
+    desc: "Because animals deserve advocates too.",
   },
   {
     name: "Boys & Girls Club",
@@ -385,10 +385,10 @@ export default function AboutContent() {
 
                 <div style={{ display: "flex", flexDirection: "column", gap: 4, marginBottom: 16 }}>
                   <span style={{ fontSize: 12, fontWeight: 300, color: "#888888" }}>
-                    📍 Austin, TX · NYC soon
+                    📍 ATX · NYC · CA
                   </span>
                   <span style={{ fontSize: 12, fontWeight: 300, color: "#888888" }}>
-                    🎓 UT Austin · Advertising + CS · 2027
+                    🎓 UT Austin · 2027
                   </span>
                 </div>
 
