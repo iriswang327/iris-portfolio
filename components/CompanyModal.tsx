@@ -204,7 +204,7 @@ export default function CompanyModal({
 
                 {/* Type pill label */}
                 <p style={{ fontSize: 12, fontWeight: 300, color: "#888888" }}>
-                  Product Design · Mock Project
+                  Product Designer · Case Study
                 </p>
               </div>
 
