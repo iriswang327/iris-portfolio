@@ -474,7 +474,7 @@ html[data-picker-active="1"] footer {
 .experience-hero {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 96px 40px 64px;
+  padding: 96px 40px 52px;
   display: grid;
   grid-template-columns: 1fr 440px;
   gap: 80px;
@@ -517,11 +517,16 @@ html[data-picker-active="1"] footer {
   margin-right: auto;
 }
 
+.experience-glass-panel--compact-y {
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+
 @media (max-width: 960px) {
   .experience-hero {
     grid-template-columns: 1fr;
     gap: 40px;
-    padding: 96px 24px 64px;
+    padding: 96px 24px 52px;
   }
 
   .experience-content {
@@ -535,6 +540,11 @@ html[data-picker-active="1"] footer {
 
   .experience-glass-panel {
     padding: 24px;
+  }
+
+  .experience-glass-panel--compact-y {
+    padding-top: 14px;
+    padding-bottom: 14px;
   }
 }
 
