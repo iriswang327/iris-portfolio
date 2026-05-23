@@ -4,7 +4,7 @@ import GivingBackCaseStudyTemplate from "@/components/GivingBackCaseStudyTemplat
 export const metadata: Metadata = {
   title: "Giving Back — Museum of Iris",
   description:
-    "Design thinking case study — UT West Campus unhoused advocacy through empathy research, two prototype cycles, and a Jumbotron video campaign. Fall 2025.",
+    "Design Thinking Final Project — UT West Campus unhoused community support through empathy research, two prototype cycles, and a Jumbotron video campaign. Fall 2025.",
 };
 
 const IMAGE_BASE = "/images/west-campus";
@@ -19,7 +19,7 @@ export default function GivingBackCaseStudyPage() {
       ]}
       eyebrowTags={[
         "Fall 2025",
-        "Lead Prototyper",
+        "UX Researcher",
         "UX Research & Empathy",
         "Two-Cycle Iteration",
       ]}
@@ -27,18 +27,18 @@ export default function GivingBackCaseStudyPage() {
       subtitle="A semester-long design thinking project exploring how UT students can engage with and support the unhoused community in West Campus — from empathy interviews through two prototype-and-test cycles to a Jumbotron video campaign."
       metadata={[
         { label: "Timeline", value: "Fall 2025 · One Semester" },
-        { label: "Role", value: "Lead Prototyper & Design Proposer" },
+        { label: "Role", value: "UX Researcher" },
         { label: "Method", value: "Design Thinking · 2 cycles" },
-        { label: "Course", value: "Design Thinking · UT Austin" },
+        { label: "Course", value: "Integrated Design Thinking · UT Austin" },
       ]}
       overview={{
         heading:
-          "A four-person team tackling an invisible problem on a campus we walk through every day.",
+          "A four-person team tackling an invisible problem in a community we live in.",
         body: "Our team worked across UX research, ideation, and two full prototype-and-test cycles to address how UT students engage with the unhoused community surrounding West Campus. We conducted user interviews with student org members, volunteer organizations, and anonymous students; surfaced four themes from the research; and iterated from a wearable awareness tool to a Jumbotron video campaign.",
         team: [
           { name: "Emily Araiza" },
           { name: "Frida Balderas" },
-          { role: "Lead Prototyper", name: "Iris Wang", isMe: true },
+          { role: "UX Researcher", name: "Iris Wang", isMe: true },
           { name: "Manay Divatia" },
         ],
         bullets: [
@@ -56,7 +56,7 @@ export default function GivingBackCaseStudyPage() {
       }}
       research={{
         heading:
-          "User interviews surfaced four themes — and one of them gave us our design target.",
+          "User interviews surfaced four themes, leading us to our design target.",
         body: "We interviewed student org members, volunteer-organization board members, and anonymous students. We affinity-mapped quotes on a Miro board and clustered them into four themes capturing both the systemic friction and the individual fear-and-ignorance gaps.",
         images: [
           {
@@ -109,11 +109,11 @@ export default function GivingBackCaseStudyPage() {
       }}
       prototypeOne={{
         heading: "A wearable awareness tool — the t-shirt as a portable resource map.",
-        body: 'The first prototype reframed the t-shirt as a dual-purpose object: a visible call-to-action on the front and a portable map of shelters and resources on the back. We designed two variants — a UT-branded burnt-orange "Coop" version and a minimalist Nike-style version — and ran them against each other.',
+        body: 'The first prototype used a t-shirt as a dual-purpose object: a visible call-to-action on the front and a portable map of shelters and resources on the back. We designed two variants — a UT-branded burnt-orange "Coop" version and a minimalist Nike-style version and ran them against each other.',
         images: [
           {
             src: `${IMAGE_BASE}/tshirt-ut.png`,
-            alt: "UT Coop version — burnt orange, longhorn graphic, resource map on back",
+            alt: "UT Co-op version — burnt orange, longhorn graphic, resource map on back",
             placeholderLabel: `${IMAGE_BASE}/tshirt-ut.png`,
             caption: "UT Coop version · burnt orange",
           },
@@ -293,18 +293,18 @@ export default function GivingBackCaseStudyPage() {
         cards: [
           {
             label: "What I Learned",
-            title: "Empathy is not optional research.",
-            body: "The four themes only emerged because we actually went out and talked to students and org board members in person. Affinity-mapping their actual words on the Miro board was where the design unlocked. You can't synthesize what you didn't gather.",
+            title: "Empathy exists with research.",
+            body: "The four themes only emerged because we actually went out and talked to students and org board members in person. Affinity-mapping their actual words on the Miro board was where we pulled insights. From there, we were able to understand and create a design!",
           },
           {
             label: "What Surprised Me",
-            title: "The first prototype was the success.",
-            body: 'It felt like a "failure" when feedback came back mixed — but the shirt was doing exactly what a prototype should do: surface that our research question was scoped wrong. The pivot from t-shirt to Jumbotron wasn\'t a retreat. It was the design thinking process working.',
+            title: "Think bigger!",
+            body: 'Originally, we had our jumbotron idea in out list of prototypes. However, we slashed it because it seemed intangible. TUrns out, it was important to think bigger as it may be your best fall back after all.',
           },
           {
             label: "What's Next",
             title: "I want to lead research-driven design.",
-            body: "This project confirmed what I already suspected: I'm at my best when I'm conducting interviews, synthesizing themes, prototyping fast, and iterating with real users in the loop. UX research-heavy work — design grounded in empathy — is where I want to keep going.",
+            body: "This project brought a new perspective on research-driven design. While conducting interviews, synthesizing themes, prototyping fast, and iterating with real users in the loop, mastering these concepts create the best designs to make impact.",
           },
         ],
       }}
