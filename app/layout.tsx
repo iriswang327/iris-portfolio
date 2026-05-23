@@ -4,7 +4,6 @@ import "./globals.css";
 import { EmotionProvider } from "@/context/EmotionContext";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import EmotionPickerClient from "@/components/EmotionPickerClient";
 
 const geistSans = Geist({
   subsets: ["latin"],
@@ -36,18 +35,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        {/*
-          No-flash script — runs synchronously before React hydration.
-          Hides page content for new visitors so the emotion picker is the
-          very first thing they see. Removed by EmotionPicker when done.
-        */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{if(!sessionStorage.getItem('museum-of-iris-picker-shown'))document.documentElement.setAttribute('data-picker-active','1');}catch(e){}})();`,
-          }}
-        />
-      </head>
       <body className={`${geistSans.variable} font-sans antialiased`}>
         <EmotionProvider>
           <div className="relative min-h-screen bg-[#FBFBFC]">
@@ -58,8 +45,6 @@ export default function RootLayout({
 
             {/* ── Site chrome ── */}
             <div className="relative z-10">
-              {/* Emotion picker — global fixed overlay, client-only */}
-              <EmotionPickerClient />
               <Nav />
               <main>{children}</main>
               <Footer />
