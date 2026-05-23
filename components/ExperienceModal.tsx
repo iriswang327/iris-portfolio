@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 // ─── Types ──────────────────────────────────────────────────────────────────
@@ -180,9 +181,9 @@ export default function ExperienceModal({
 
               <div className="flex w-full flex-col items-center gap-3">
                 <div
-                  className="flex h-[60px] w-[60px] items-center justify-center overflow-hidden rounded-full shadow-[0_4px_16px_-4px_rgba(0,0,0,0.08)]"
+                  className="relative h-[60px] w-[60px] shrink-0 overflow-hidden rounded-full shadow-[0_4px_16px_-4px_rgba(0,0,0,0.08)]"
                   style={{
-                    background: companyLogoImage ? "transparent" : accent.badgeBg,
+                    background: companyLogoImage ? "#ffffff" : accent.badgeBg,
                     fontSize: 22,
                     fontWeight: 400,
                     color: accent.badgeColor,
@@ -191,14 +192,17 @@ export default function ExperienceModal({
                   aria-hidden={!!companyLogoImage}
                 >
                   {companyLogoImage ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
+                    <Image
                       src={companyLogoImage}
                       alt=""
-                      className="h-[60px] w-[60px] object-contain"
+                      fill
+                      sizes="60px"
+                      className="object-cover scale-[1.18]"
                     />
                   ) : (
-                    companyLogo
+                    <div className="flex h-full w-full items-center justify-center">
+                      {companyLogo}
+                    </div>
                   )}
                 </div>
                 <h2 className="text-[28px] font-extralight tracking-tight text-[var(--foreground)]">
