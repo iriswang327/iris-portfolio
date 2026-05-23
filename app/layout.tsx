@@ -13,7 +13,7 @@ const geistSans = Geist({
 
 export const metadata: Metadata = {
   title: {
-    default: "Design",
+    default: "iris wang",
     template: "%s",
   },
   description:
@@ -23,14 +23,14 @@ export const metadata: Metadata = {
     apple: [{ url: "/images/lotus-logo.png", type: "image/png" }],
   },
   openGraph: {
-    title: "Museum of Iris",
+    title: "iris wang",
     description: "Working at the edges of law, tech, and people.",
-    siteName: "Museum of Iris",
+    siteName: "iris wang",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Museum of Iris",
+    title: "iris wang",
     description: "Working at the edges of law, tech, and people.",
   },
 };
