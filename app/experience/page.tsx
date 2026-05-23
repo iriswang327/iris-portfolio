@@ -537,9 +537,8 @@ export default function ExperiencePage() {
                   }
                 >
                   <AnalyticalColumnHeader
-                    icon={"icon" in entry ? entry.icon : undefined}
-                    logoSrc={"logoSrc" in entry ? entry.logoSrc : undefined}
-                    logoAlt={"logoAlt" in entry ? entry.logoAlt : undefined}
+                    logoSrc={entry.logoSrc}
+                    logoAlt={entry.logoAlt}
                     organizationName={entry.organizationName}
                     roleName={entry.roleName}
                     timeline={entry.timeline}

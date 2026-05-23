@@ -15,7 +15,7 @@ const NAV_ITEMS = [
   { id: "community", label: "Community" },
   { id: "philosophy", label: "Philosophy" },
   { id: "entertainment", label: "Entertainment" },
-  { id: "fun", label: "Fun Facts", star: true },
+  { id: "fun", label: "Fun Facts ✦" },
 ] as const;
 
 const SECTION_THEMES: Record<(typeof NAV_ITEMS)[number]["id"], string> = {
@@ -170,7 +170,7 @@ const FUN_FACTS = [
   { emoji: "🎾", line: "played & coached competitive tennis in high school" },
   { emoji: "📸", line: "aspiring vlogger (CapCut is my best friend!)" },
   { emoji: "⚖️", line: "avg 12k steps a day, preferably outdoor walks" },
-  { emoji: "🎨", line: "illustrated something 50,000 people saw without knowing it was me" },
+  { emoji: "🎨", line: "passionate about watercolor, oil painting, and learning physical art (ceramics next)" },
   { emoji: "🐾", line: "squirrel & otter lover" },
   { emoji: "🏊🏼‍♀️", line: "lifeguard & water park safety certified!" },
   { emoji: "☕", line: "approximately 847 americanos w/ cinnamon since freshman year" },
@@ -385,7 +385,7 @@ export default function AboutContent() {
             <p className="about-tagline">design, strategy, &amp; everything in between.</p>
 
             <nav className="toc" id="toc" aria-label="About page sections">
-              {NAV_ITEMS.map(({ id, label, star }) => (
+              {NAV_ITEMS.map(({ id, label }) => (
                 <a
                   key={id}
                   href={`#${id}`}
@@ -398,7 +398,6 @@ export default function AboutContent() {
                   aria-current={activeSection === id ? "location" : undefined}
                 >
                   {label}
-                  {star ? <span style={{ opacity: 0.7 }}> ✦</span> : null}
                 </a>
               ))}
             </nav>
