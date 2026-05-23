@@ -64,7 +64,8 @@
 
   /* Animation */
   --transition-theme: 0.6s ease;
-  --page-transition-duration: 2s;
+  --page-transition-duration: 3.5s;
+  --page-transition-easing: cubic-bezier(0.22, 1, 0.36, 1);
   --spring-card: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
@@ -262,7 +263,12 @@ html[data-picker-active="1"] footer {
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation-duration: var(--page-transition-duration);
-  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  animation-timing-function: var(--page-transition-easing);
+}
+
+::view-transition-group(root) {
+  animation-duration: var(--page-transition-duration);
+  animation-timing-function: var(--page-transition-easing);
 }
 
 ::view-transition-old(root) {
@@ -293,6 +299,9 @@ html[data-picker-active="1"] footer {
   from {
     opacity: 1;
   }
+  35% {
+    opacity: 0.92;
+  }
   to {
     opacity: 0;
   }
@@ -301,6 +310,9 @@ html[data-picker-active="1"] footer {
 @keyframes page-crossfade-in {
   from {
     opacity: 0;
+  }
+  65% {
+    opacity: 0.96;
   }
   to {
     opacity: 1;
