@@ -125,51 +125,70 @@ Ready for Bed (black #1A1A1A, white text):
 
 ### Emotion Picker Screen
 
-Background: full watercolor gradient wash
-Lavender #F0EEFF → blush #FCE8F8 → periwinkle #EEF4FF
-Soft, organic, NOT plain white
+Background: RICH watercolor gradient wash — more saturated
+than the rest of the site, more color, more presence
+Layered radial gradients, more vivid:
+- Lavender blob: rgba(196,181,253,0.7) top-left, very large
+- Blush blob: rgba(251,207,232,0.65) top-right, large
+- Periwinkle blob: rgba(165,180,252,0.6) center
+- Additional warm pink blob: rgba(244,143,177,0.3) bottom-left
+- Sky blue blob: rgba(125,211,252,0.3) bottom-right
+Overall effect: rich, dreamy, painterly — more color than
+the rest of the site. Feels like stepping into a painting.
 
 Movement (Framer Motion in Cursor):
-3 soft radial gradient blobs drifting very slowly
-Like watercolor slowly bleeding — very gentle
-Annotation: "slow drifting blobs — Framer Motion"
+Opening animation sequence:
+1. Page starts pure white
+2. Watercolor ink drop falls from top center
+3. Spreads outward organically in gradient colors —
+   lavender bleeding into blush bleeding into periwinkle
+   like ink dropped into water, very organic edges
+4. As color settles, iris wang logo fades/draws in
+5. Question text fades in
+6. Pills appear staggered from bottom
+Total animation: ~3 seconds, very slow and dreamy
 
-IHWN lotus mark (NOT a heart, NOT any other shape):
-- 64px tall, fineline SVG lotus
-- Layered petals, pointed inner, wide outer, teardrop stem
-- IHWN gradient stroke (#F0ABFC → #A78BFA → #7DD3FC)
-- Draws itself on load: SVG path animation 2s
-- After drawing: gentle float
+3 soft radial gradient blobs continue drifting slowly
+after the ink drop animation settles
+Annotation: "ink drop + drifting blobs — Framer Motion"
+
+iris wang logo mark:
+- File: /public/images/lotus-logo.png
+- This is the hand-drawn Procreate watercolor lotus
+- Use next/image, display at 80px tall on emotion picker
+- Gentle float after appearing:
   translateY 0 → -4px → 0, 4s infinite ease
+- Never generate SVG — always use this PNG file
 
 Question text:
-"how are you arriving today?"
+"hi, how are you?"
 Geist Sans 26px weight 200 #1A1625
 Letter-spacing: -0.02em
-Fade in after lotus draws, 0.5s delay
+Fade in after lotus appears, 0.5s delay
 
-Emotion pills — gallery tag / paint swatch style:
-NOT filled pastel rounded pills:
-- Border-radius: 10px (rectangular, not fully round)
-- Background: transparent
-- Border: 1.5px solid emotion color
-- Small 8px square color swatch LEFT of text
-- Text: Geist Sans 12px weight 300
-  letter-spacing: 0.06em lowercase
-- Padding: 8px 16px
-- Hover: background fills emotion color 15% opacity
-  scale(1.02), 150ms ease
-- Layout: horizontal row, 20px gaps
+Emotion pills — FILLED soft pastel style
+(match Figma exactly):
+- Border-radius: 999px (fully rounded pill)
+- Background: emotion color at 70-80% opacity (soft fill)
+- No border needed — filled is the style
+- Text: Geist Sans 12px weight 400 #1A1625 lowercase
+- Padding: 8px 20px
+- Hover: scale(1.03), darken slightly, 150ms ease
+- Layout: horizontal row, 12px gaps
+- Pills match exactly what's in Figma:
+  happy (soft yellow) · calm (sage green) ·
+  curious (pale blue) · frustrated (soft pink/red) ·
+  ready for bed (near black with white text)
 
 Subtitle below pills:
 "your choice colors the experience"
 9px uppercase #BBBBBB letter-spacing 0.1em
 
-"skip →" below: 10px uppercase #BBBBBB
+"SKIP FOR NOW →" below: 10px uppercase #BBBBBB
 
 Overall feeling:
-Stepping into an art studio or gallery portal
-NOT a wellness check-in, NOT a mental health app
+Rich, dreamy, painterly — most colorful moment on the site
+Like stepping into a painting before entering the gallery
 
 ### Loading Transition Screen (after emotion selection)
 1. Emotion color fills screen smoothly (0.4s ease)
@@ -190,26 +209,28 @@ NOT a wellness check-in, NOT a mental health app
 
 ## Navigation
 - Height: 56px
-- Background: rgba(250,249,255,0.82) + blur(24px)
-  Dark mode: rgba(10,10,10,0.85) + blur(24px)
-- Border bottom: 0.5px solid rgba(0,0,0,0.06)
+- Background: transparent — no background, no blur, no border
+- Dark mode: transparent
+- Nav floats over the hero gradient
+- Logo: NOT in nav — footer only
+- Emotion dot: removed from nav
 
-Left: IHWN lotus (28px, gradient stroke) +
-"iris wang" Geist Sans 14px weight 400 #1A1625
-
-Right: DREAMS · EXPERIENCE · ABOUT
-- 13px weight 300 #888888 default
-- Active: weight 400 #1A1625 + 1px IHWN gradient underline
+Right-aligned: DREAMS · EXPERIENCE · ABOUT
+- 13px weight 300 #1A1625
+- Active: IHWN gradient underline (1px)
 - 28px gap between links
-- Emotion color dot (8px) after ABOUT
-- NO contact button, NO hamburger on desktop
+- 24px padding-right
+- NO logo, NO emotion dot, NO contact button, NO hamburger on desktop
 
 ---
 
 ## Layout
-- Max content width: 960px centered
-- Horizontal padding: 32px desktop / 20px mobile
-- Section gaps: 64px standard / 96px large
+- Hero content max-width: 680px left-aligned
+- Cards max-width: full viewport, 24px side padding only
+- Hero padding top: 180px
+- Hero padding left: 24px
+- Section gaps: 80px standard / 96px large
+- NOT centered — left-aligned content
 
 ---
 
@@ -252,7 +273,7 @@ Padding: 36px 32px
 3-column grid:
 
 Left:
-- IHWN lotus (20px) + "iris wang" 14px weight 400
+- iris wang logo (20px) + "iris wang" 14px weight 400
 - "🕐 Austin, TX" — 11px weight 300 #BBBBBB
 - "Built with Next.js & americanos ☕"
   10px weight 300 #CCCCCC
@@ -275,18 +296,30 @@ Bottom: "CHANGELOG: [date]" 10px uppercase #DDDDDD
 ### / → Dreams (Homepage)
 
 Hero (left-aligned, watercolor wash):
-- Green pulse dot + "open to summer 2026 internships · anywhere"
-- "iris wang" 52px weight 200 + watercolor splash behind
-- "Product [designer/thinker/innovator/lover]" rotating
-- "for [humans/AI startups/dog lovers/friends/the future]"
-  Fixed words stay, rotating words in IHWN gradient
-  2.5s interval, smooth crossfade
-- "Working at the edges of law, tech, and people."
-- "UT Austin · Advertising + CS · 2027"
+- Padding top: 120px, sides: 64px
+- Status line: green dot + "open to summer 2026 internships · anywhere" 12px weight 300 #888888, sits 16px above name
+- "iris wang": 36px weight 200 tracking -0.02em + watercolor splash behind
+- Rotating text (ONE LINE, 18px weight 300):
+  "Product [designer/thinker/innovator/lover] for [humans/AI startups/dog lovers/friends/the future]"
+  Fixed words in #1A1625, rotating words in IHWN gradient
+  Each word rotates INDEPENDENTLY on different timers:
+  Role word rotates every 4s
+  Audience word rotates every 2.5s
+  Framer Motion AnimatePresence — exits up, enters from below
+- Gap between name and rotating text: 6px
+- "Working at the edges of law, tech, and people." 14px weight 300 #888888, margin-top 20px
+- "UT Austin · Advertising + CS · 2027" 12px weight 300 #BBBBBB, margin-top 6px
+- Gap before MOCK PROJECTS section: 80px
 
 Section label: "MOCK PROJECTS"
 
 2-column card grid:
+- Card height: 340px
+- Card border-radius: 20px
+- Grid gap: 16px
+- Cards support optional videoUrl prop:
+  if videoUrl → show looping muted autoplay video
+  if no videoUrl → show gradient background
 
 Apple:
 - Gradient: linear-gradient(148deg, #B4B1FD 0%, #909BE6 48%, #748ADB 100%)
@@ -335,10 +368,10 @@ Museum of Art:
 ### /experience → Experience Page
 
 Hero (watercolor wash):
-- Label: "REAL PROJECTS, REAL TEAM, REAL IMPACT"
-- Title: "experience" — 40px weight 200
+- Label: "REAL PROJECTS, REAL TEAM, REAL IMPACT" 10px uppercase #BBBBBB
+- Title: "experience" — 32px weight 200 (matches new type scale)
 - Subtitle: "Advertising. Business. Design. Law.
-  One through-line: making complex things human."
+  One through-line: making complex things human." 14px weight 300 #888888
 
 NO Giving Back section — removed entirely.
 Those orgs live on About page community section only.
@@ -381,8 +414,6 @@ Those orgs live on About page community section only.
    Desc: "Student government outreach · 2023–2024"
 
 Currently section label: "CURRENTLY"
-
-Clean vertical timeline list:
 - Small logo circle (40px, #F5F5F5 bg)
 - Name: 13px weight 400 + Role: 12px weight 300 #888
 - Date: 11px weight 300 #BBBBBB right-aligned
@@ -404,7 +435,7 @@ Left: 220px fixed sidebar
 Right: scrollable content
 
 Sidebar:
-- IHWN lotus (32px) + "iris wang" 13px weight 400
+- iris wang logo (32px) + "iris wang" 13px weight 400
 - "design, strategy, & everything in between." 11px #888
 - Anchor nav:
   Hi! · Work · Community · Philosophy ·
@@ -478,12 +509,12 @@ Even if it's just 1%.
 Quote blocks with IHWN gradient left border (2px):
 20px weight 200 italic, attribution 11px #BBBBBB
 
-Quotes (Iris to finalize):
-"The details are not the details. They make the design."
-— Charles Eames
-
-"Design is not just what it looks like. Design is how it works."
+Real quotes from Iris:
+"The most powerful person in the world is the storyteller."
 — Steve Jobs
+
+"Be intentional. Be consistent. Be bored."
+— What I believe in, because without stimulation, boredom sparks creativity :)
 
 Entertainment Section:
 Header: "Entertainment"
@@ -538,11 +569,11 @@ Subtitle: "things that don't fit anywhere else"
 
 Items (emoji + punchy line):
 🎾 played & coached competitive tennis in high school
-📸 the fastest thing i've photographed: 187mph
-⚖️ has read more legal briefs than novels this year
-🎨 illustrated something 50,000 people saw without knowing
+📸 aspiring vlogger (CapCut is my best friend!)
+⚖️ avg 12k steps a day, preferably outdoor walks
+🎨 illustrated something 50,000 people saw without knowing it was me
 🐾 squirrel & otter lover
-🏊🏼‍♀️ lifeguard certified!
+🏊🏼‍♀️ lifeguard & water park safety certified!
 ☕ approximately 847 americanos w/ cinnamon since freshman year
 
 ---
@@ -785,8 +816,11 @@ Footer CTA: "Let's talk!"
 ---
 
 ## Humanity Details
-- Watercolor splashes throughout (not just hero)
-- IHWN lotus — hand-drawn watercolor feel
+- Hand-drawn watercolor logo mark → /public/images/lotus-logo.png
+  Use next/image, 32px tall in nav, auto width
+  Alt text: "Iris Wang logo"
+  Never generate SVG — always use this PNG
+- Watercolor splashes throughout site (not just hero)
 - About photo: 1.5° polaroid tilt
 - "americanos ☕" in footer
 - Fun Facts voice: personal, surprising, punchy
@@ -794,8 +828,8 @@ Footer CTA: "Let's talk!"
 - The Booth: South Congress Hotel intimacy
 - Coffee Order: learning about visitors through joy
 - Museum of Art: just the art, nothing else
-- Emotion picker: meets the user where they are
-- Dark mode background stays #0A0A0A — solid, not gradient
+- Emotion picker: sunrise animation, meets user where they are
+- Dark mode background: #0A0A0A solid, no gradient
 
 ---
 
@@ -807,18 +841,23 @@ Footer CTA: "Let's talk!"
 
 ## Cursor / Claude Code Build Notes
 
+Logo: always use /public/images/lotus-logo.png
+Never generate SVG or any other logo mark.
+Use next/image component everywhere.
+
 Animations (Framer Motion):
-- Emotion picker lotus: SVG path draw + float
-- Loading screen: color fill + text + dots
+- Emotion picker: sunrise ink drop animation (build last)
+  white → ink drop falls → color fills upward → question appears
+- Loading screen: emotion color fill + text + dots
 - Dark mode: CSS variables swap 0.6s
 - Rotating hero text: AnimatePresence 2.5s
-- Card hover: scale(0.97) spring + desc fade
-- Modal: fade + scale backdrop blur
+- Card hover: scale(0.97) spring + desc fade below card
+- Modal: fade + scale + backdrop blur
 - Museum: useScroll horizontal
-- Record player: CSS rotate + AnimatePresence
+- Record player: CSS rotate + AnimatePresence album swap
 - Booth: react-webcam + canvas filter processing
 - Coffee builder: step animation + submit confirmation
-- Watercolor blobs: useAnimationFrame slow drift
+- Watercolor blobs: slow drifting radial gradients
 
 Content (Sanity CMS):
 - Books, music rotation, fun facts, quotes
