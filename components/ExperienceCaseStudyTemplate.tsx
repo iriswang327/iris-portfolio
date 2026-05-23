@@ -339,39 +339,42 @@ export default function ExperienceCaseStudyTemplate({
         {/* Overview */}
         <section style={{ marginBottom: 64 }}>
           <SectionLabel>Overview</SectionLabel>
-          <p style={{ ...bodyTextStyle, marginBottom: overview.bullets.length ? 16 : 0 }}>
-            {overview.body}
-          </p>
-          {overview.bullets.length > 0 && (
-            <ul style={{ listStyle: "none", padding: 0, margin: 0, maxWidth: 640 }}>
-              {overview.bullets.map((item) => (
-                <li
-                  key={item}
-                  style={{
-                    ...bodyTextStyle,
-                    display: "flex",
-                    gap: 10,
-                    alignItems: "flex-start",
-                    marginBottom: 8,
-                    fontSize: 13,
-                  }}
-                >
-                  <span
-                    aria-hidden="true"
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-start">
+            <p style={{ ...bodyTextStyle, marginBottom: 0, maxWidth: "none" }}>
+              {overview.body}
+            </p>
+            {overview.bullets.length > 0 && (
+              <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+                {overview.bullets.map((item) => (
+                  <li
+                    key={item}
                     style={{
-                      width: 4,
-                      height: 4,
-                      borderRadius: "50%",
-                      background: "#c9a96e",
-                      marginTop: 8,
-                      flexShrink: 0,
+                      ...bodyTextStyle,
+                      display: "flex",
+                      gap: 10,
+                      alignItems: "flex-start",
+                      marginBottom: 8,
+                      fontSize: 13,
+                      maxWidth: "none",
                     }}
-                  />
-                  {item}
-                </li>
-              ))}
-            </ul>
-          )}
+                  >
+                    <span
+                      aria-hidden="true"
+                      style={{
+                        width: 4,
+                        height: 4,
+                        borderRadius: "50%",
+                        background: "#c9a96e",
+                        marginTop: 8,
+                        flexShrink: 0,
+                      }}
+                    />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </section>
 
         <Hairline style={{ marginBottom: 64 }} />
