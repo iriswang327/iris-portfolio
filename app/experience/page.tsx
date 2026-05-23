@@ -103,6 +103,7 @@ const STRATEGIC_IMPACT_CARDS: ImpactCardDef[] = [
     pill: "Integrated Design · UX Research",
     pillDark: false,
     hoverDescription: "Full UX research cycle for unhoused community advocacy.",
+    videoUrl: "/videos/integrated-design-thumbnail.mp4",
     frameClassName: `${GLASS_FRAME_BASE} bg-gradient-to-tr from-rose-50/70 via-pink-50/45 to-fuchsia-50/40 border border-pink-200/25 shadow-[0_15px_40px_rgba(0,0,0,0.04)] hover:shadow-[0_22px_50px_rgba(236,72,153,0.1)]`,
     showChromaticGlow: true,
     glowVariant: "rose",
@@ -126,13 +127,12 @@ const STRATEGIC_IMPACT_CARDS: ImpactCardDef[] = [
 const LAW_PAPERS = [
   {
     title:
-      "The Dune Franchise: Copyright Disputes & Entertainment Ownership Frameworks",
-    href: "#",
+      "The Fatal Drip: Jenifer's Law and Unresolved Gaps in Texas Medical Spa Regulation",
+    href: "https://www.texasulj.org/blog/the-fatal-drip-jenifer-s-law-and-unresolved-gaps-in-texas-medical-spa-regulation",
   },
   {
-    title:
-      "Medspa Regulations: Algorithmic Policy Analysis within Consumer Healthcare",
-    href: "#",
+    title: "Beyond the Credits: Contract Law's Missing Scene",
+    href: "https://www.texasulj.org/post/beyond-the-credits-contract-law-s-missing-scene",
   },
 ] as const;
 
@@ -153,7 +153,7 @@ const ANALYTICAL_LEDGER = [
     timeline: "2024–2025",
     logoSrc: "/images/the-daily-texan-logo.png",
     logoAlt: "The Daily Texan",
-    linkHref: "#",
+    linkHref: "https://thedailytexan.com/staff_name/iris-wang/",
     linkLabel: "view illustration archive →",
   },
 ] as const;
@@ -537,7 +537,12 @@ export default function ExperiencePage() {
                           <p className="text-[13px] font-normal leading-relaxed text-neutral-600">
                             {paper.title}
                           </p>
-                          <Link href={paper.href} className={ANALYTICAL_LINK_CLASS}>
+                          <Link
+                            href={paper.href}
+                            className={ANALYTICAL_LINK_CLASS}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
                             read research paper →
                           </Link>
                         </div>
@@ -547,7 +552,12 @@ export default function ExperiencePage() {
 
                   {"linkHref" in entry && (
                     <div className="mt-4 flex flex-col gap-4 pl-[60px]">
-                      <Link href={entry.linkHref} className={ANALYTICAL_LINK_CLASS}>
+                      <Link
+                        href={entry.linkHref}
+                        className={ANALYTICAL_LINK_CLASS}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         {entry.linkLabel}
                       </Link>
                     </div>
