@@ -255,6 +255,67 @@ html[data-picker-active="1"] footer {
 }
 
 /* ─────────────────────────────────────────────
+   Route crossfade (View Transitions API)
+   ───────────────────────────────────────────── */
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+}
+
+::view-transition-old(root) {
+  animation-name: page-crossfade-out;
+}
+
+::view-transition-new(root) {
+  animation-name: page-crossfade-in;
+}
+
+::view-transition-group(site-nav),
+::view-transition-group(site-footer) {
+  animation: none;
+  z-index: 100;
+}
+
+::view-transition-old(site-nav),
+::view-transition-old(site-footer) {
+  display: none;
+}
+
+::view-transition-new(site-nav),
+::view-transition-new(site-footer) {
+  animation: none;
+}
+
+@keyframes page-crossfade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes page-crossfade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+}
+
+/* ─────────────────────────────────────────────
    Fun Cards — dark-mode aware purple tint
    ───────────────────────────────────────────── */
 

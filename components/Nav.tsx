@@ -29,6 +29,7 @@ export default function Nav() {
     <header
       className="fixed top-0 left-0 right-0 z-[100] h-14 flex items-center justify-end"
       style={{
+        viewTransitionName: "site-nav",
         background: scrolled ? "rgba(250,249,255,0.85)" : "transparent",
         backdropFilter: scrolled ? "blur(20px)" : "none",
         WebkitBackdropFilter: scrolled ? "blur(20px)" : "none",

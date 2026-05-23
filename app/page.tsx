@@ -52,7 +52,7 @@ export default function DreamsPage() {
               className="font-[300]"
               style={{ fontSize: 12, color: "#888888" }}
             >
-              open to summer 2026 internships · anywhere
+              open to summer 2026 internships · nyc preferred
             </span>
           </div>
 

@@ -391,7 +391,7 @@ function ExperienceHero() {
           </div>
 
           <h2 className="mt-4 text-[15px] font-medium leading-snug text-[var(--foreground)]">
-            Product design internship · Summer 2026
+            Product Design internship · Summer 2026
           </h2>
 
           <p className="mt-3 text-[12px] font-light leading-relaxed text-neutral-500">
