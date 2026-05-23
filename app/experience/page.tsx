@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import ProjectCard from "@/components/ProjectCard";
-import CompanyModal, { type ModalProject } from "@/components/CompanyModal";
+import ExperienceModal from "@/components/ExperienceModal";
 import ParallaxHeroGradient from "@/components/ParallaxHeroGradient";
 
 // ─── Pillar 1: Strategic Impact Cards ────────────────────────────────────────
@@ -12,8 +12,15 @@ interface ModalConfig {
   companyName: string;
   companyLogo: string;
   companyLogoImage?: string;
-  whyCompanyText: string;
-  projects: ModalProject[];
+  timeline: string;
+  role: string;
+  orgType: string;
+  collaborators: string;
+  microDescription: string;
+  expandHref: string;
+  mediaSrc?: string;
+  mediaAlt?: string;
+  mediaVideo?: boolean;
 }
 
 interface ImpactCardDef {
@@ -28,46 +35,40 @@ interface ImpactCardDef {
 const TOWER_BRIDGE_MODAL: ModalConfig = {
   companyName: "Tower & Bridge",
   companyLogo: "T&B",
-  whyCompanyText:
-    "Complex growth data is useless if stakeholders can't interpret it. I structured performance metrics and visibility tracking layouts for sustainable brands, translating raw analytics into investor-ready pitch decks that secured executive alignment.",
-  projects: [
-    {
-      title: "Analytics Orchestration",
-      subtitle:
-        "Performance metrics, visibility tracking, and executive pitch decks for real client accounts.",
-      route: "/experience/tower-and-bridge",
-    },
-  ],
+  timeline: "2024 – Present",
+  role: "Strategy Analyst",
+  orgType: "Brand & Analytics",
+  collaborators: "Trinity CDC · Heartening",
+  microDescription:
+    "A strategic growth and data tracking framework for consumer sustainability campaigns, translating raw performance metrics into investor-ready pitch decks for executive board approval.",
+  expandHref: "/experience/tower-and-bridge",
+  mediaSrc: "/videos/tower-thumbnail.mp4",
+  mediaAlt: "Tower & Bridge analytics and strategy work preview",
+  mediaVideo: true,
 };
 
 const INTEGRATED_DESIGN_MODAL: ModalConfig = {
   companyName: "Integrated Design Project",
   companyLogo: "ID",
-  whyCompanyText:
-    "Massive sports stadiums make community advocacy nearly invisible. We audited local housing organizations, tested physical touchpoints, and launched an integrated football jumbotron video campaign connected to a live, responsive data-collection portal.",
-  projects: [
-    {
-      title: "Giving Back",
-      subtitle:
-        "Design thinking for West Campus unhoused advocacy — empathy research, two cycles, Jumbotron campaign.",
-      route: "/experience/giving-back",
-    },
-  ],
+  timeline: "Fall 2025",
+  role: "Lead Prototyper",
+  orgType: "Design Thinking · UT Austin",
+  collaborators: "Emily Araiza · Frida Balderas · Manay Divatia",
+  microDescription:
+    "An end-to-end user behavioral research sprint that pivoted from a physical merchandise proof-of-concept to an integrated stadium jumbotron video campaign and live responsive data portal.",
+  expandHref: "/experience/giving-back",
 };
 
 const RISK_RADAR_MODAL: ModalConfig = {
   companyName: "Risk Radar",
   companyLogo: "RR",
-  whyCompanyText:
-    "Corporate executives lack the technical tools to anticipate sudden PR crises. I designed the end-to-end product architecture for an AI predictive engine, converting backend LLMs, BERT tokenization, and vector embeddings into a low-friction interface.",
-  projects: [
-    {
-      title: "AI Crisis Engine",
-      subtitle:
-        "AI brand crisis prediction — BERT, RAG, Spring 2026.",
-      route: "/experience/risk-radar",
-    },
-  ],
+  timeline: "Spring 2026",
+  role: "Head of AI",
+  orgType: "B2B SaaS · AI Product",
+  collaborators: "Brooke Mikell · Joesh Nayak · Nikhil Sehgal",
+  microDescription:
+    "An enterprise product strategy transforming back-end Large Language Models, BERT classification loops, and vector embeddings into a low-friction predictive crisis dashboard for brand executives.",
+  expandHref: "/experience/risk-radar",
 };
 
 const STRATEGIC_IMPACT_CARDS: ImpactCardDef[] = [
@@ -490,14 +491,21 @@ export default function ExperiencePage() {
 
       </div>
 
-      <CompanyModal
+      <ExperienceModal
         isOpen={!!activeModal}
         onClose={() => setActiveModal(null)}
         companyName={activeModal?.companyName ?? ""}
         companyLogo={activeModal?.companyLogo ?? ""}
         companyLogoImage={activeModal?.companyLogoImage}
-        whyCompanyText={activeModal?.whyCompanyText ?? ""}
-        projects={activeModal?.projects ?? []}
+        timeline={activeModal?.timeline ?? ""}
+        role={activeModal?.role ?? ""}
+        orgType={activeModal?.orgType ?? ""}
+        collaborators={activeModal?.collaborators ?? ""}
+        microDescription={activeModal?.microDescription ?? ""}
+        expandHref={activeModal?.expandHref ?? "/experience"}
+        mediaSrc={activeModal?.mediaSrc}
+        mediaAlt={activeModal?.mediaAlt}
+        mediaVideo={activeModal?.mediaVideo}
       />
     </div>
   );
