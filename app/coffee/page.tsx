@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "What's Your Order? — Museum of Iris",
+  title: "What's Your Order?",
   description: "Build your coffee and tell Iris what you're having.",
 };
 

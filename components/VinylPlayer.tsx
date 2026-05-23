@@ -4,12 +4,12 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const TRACKS = [
-  { artist: "Sade", track: "No Ordinary Love", color: "#C4A882" },
-  { artist: "Rüfüs Du Sol", track: "New York", color: "#4A6B8A" },
-  { artist: "Noah Kahan", track: "Call Your Mom", color: "#8B7355" },
-  { artist: "Olivia Dean", track: "Baby Steps", color: "#D4A5A5" },
-  { artist: "Frank Sinatra", track: "New York, New York", color: "#2C4A6E" },
+  { artist: "Olivia Dean", track: "Baby Steps", color: "#C8B8B4" },
   { artist: "Michael Jackson", track: "Human Nature", color: "#6B8E6B" },
+  { artist: "Rüfüs Du Sol", track: "New York", color: "#4A6B8A" },
+  { artist: "Sade", track: "No Ordinary Love", color: "#C4A882" },
+  { artist: "Justin Bieber", track: "Favorite Girl", color: "#B8A8C8" },
+  { artist: "Prospa", track: "Free Your Mind", color: "#7DD3FC" },
 ] as const;
 
 export default function VinylPlayer() {
@@ -48,6 +48,7 @@ export default function VinylPlayer() {
       <div className="relative" style={{ width: 200, height: 200 }}>
         {/* Vinyl disc — spins */}
         <div
+          className="vinyl-disc"
           style={{
             width: 200,
             height: 200,
@@ -55,11 +56,8 @@ export default function VinylPlayer() {
             background:
               "radial-gradient(circle at 50% 50%, #2a2a2a 0%, #1a1a1a 60%, #111111 100%)",
             boxShadow: "0 8px 40px rgba(0,0,0,0.18)",
-            animation: "spin-vinyl 8s linear infinite",
             position: "relative",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
+            overflow: "hidden",
           }}
         >
           {/* Groove rings */}
@@ -68,39 +66,52 @@ export default function VinylPlayer() {
               key={d}
               style={{
                 position: "absolute",
+                top: "50%",
+                left: "50%",
                 width: d,
                 height: d,
+                marginTop: -d / 2,
+                marginLeft: -d / 2,
                 borderRadius: "50%",
                 border: "0.5px solid rgba(255,255,255,0.04)",
               }}
             />
           ))}
 
-          {/* Album art circle */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={track.color}
-              initial={{ opacity: 0, scale: 0.85 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.85 }}
-              transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-              style={{
-                width: 72,
-                height: 72,
-                borderRadius: "50%",
-                background: track.color,
-                zIndex: 2,
-                boxShadow: "0 0 0 3px rgba(255,255,255,0.08)",
-              }}
-            />
-          </AnimatePresence>
+          {/* Album art circle — centered, crossfades in place */}
+          <div
+            className="absolute inset-0 flex items-center justify-center"
+            aria-hidden="true"
+          >
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={index}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+                style={{
+                  position: "absolute",
+                  width: 72,
+                  height: 72,
+                  borderRadius: "50%",
+                  background: track.color,
+                  boxShadow: "0 0 0 3px rgba(255,255,255,0.08)",
+                }}
+              />
+            </AnimatePresence>
+          </div>
 
           {/* Center spindle dot */}
           <div
             style={{
               position: "absolute",
+              top: "50%",
+              left: "50%",
               width: 8,
               height: 8,
+              marginTop: -4,
+              marginLeft: -4,
               borderRadius: "50%",
               background: "#444",
               zIndex: 3,
@@ -142,15 +153,18 @@ export default function VinylPlayer() {
           style={{ gap: 4 }}
         >
           <p style={{ fontSize: 14, fontWeight: 400, color: "var(--foreground)" }}>
-            {track.artist}
+            {track.track}
           </p>
           <p style={{ fontSize: 12, fontWeight: 300, color: "#888888", marginTop: 3 }}>
-            {track.track}
+            {track.artist}
           </p>
         </motion.div>
       </AnimatePresence>
 
       <style>{`
+        .vinyl-disc {
+          animation: spin-vinyl 8s linear infinite;
+        }
         @keyframes spin-vinyl {
           from { transform: rotate(0deg); }
           to   { transform: rotate(360deg); }

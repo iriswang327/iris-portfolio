@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Museum of Art — Museum of Iris",
+  title: "Museum of Art",
   description: "Illustrations, oils, watercolors.",
 };
 

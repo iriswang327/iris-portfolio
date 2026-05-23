@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import RiskRadarCaseStudyTemplate from "@/components/RiskRadarCaseStudyTemplate";
 
 export const metadata: Metadata = {
-  title: "Risk Radar — Museum of Iris",
+  title: "Risk Radar",
   description:
     "AI-powered crisis management platform — predictive brand reputation scoring, white-box architecture, and B2B SaaS product strategy. Spring 2026.",
 };
