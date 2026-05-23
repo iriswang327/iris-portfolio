@@ -29,7 +29,7 @@ const TOWER_BRIDGE_MODAL: ModalConfig = {
   companyName: "Tower & Bridge",
   companyLogo: "T&B",
   whyCompanyText:
-    "Managed performance data metrics and consumer visibility tracking layouts across multiple accounts (Trinity CDC, Heartening Sustainability). Translated raw engagement data reports directly into pitching slide decks to secure executive project approvals.",
+    "Complex growth data is useless if stakeholders can't interpret it. I structured performance metrics and visibility tracking layouts for sustainable brands, translating raw analytics into investor-ready pitch decks that secured executive alignment.",
   projects: [
     {
       title: "Analytics Orchestration",
@@ -44,7 +44,7 @@ const INTEGRATED_DESIGN_MODAL: ModalConfig = {
   companyName: "Integrated Design Project",
   companyLogo: "ID",
   whyCompanyText:
-    "Orchestrated a full-semester user research process across student demographics and local businesses. Utilized rapid prototyping to evaluate friction points, successfully pivoting from retail merchandise systems to an integrated stadium jumbotron video framework coupled with a custom-coded responsive QR data-collection landing page.",
+    "Massive sports stadiums make community advocacy nearly invisible. We audited local housing organizations, tested physical touchpoints, and launched an integrated football jumbotron video campaign connected to a live, responsive data-collection portal.",
   projects: [
     {
       title: "Giving Back",
@@ -59,7 +59,7 @@ const RISK_RADAR_MODAL: ModalConfig = {
   companyName: "Risk Radar",
   companyLogo: "RR",
   whyCompanyText:
-    "Designed front-end user experience architectures for predictive crisis models. Synthesized complex back-end architectures, mapping LLM tokenization pipelines, BERT classification loops, and vector embedding structures directly into low-friction design frameworks for non-technical enterprise executives.",
+    "Corporate executives lack the technical tools to anticipate sudden PR crises. I designed the end-to-end product architecture for an AI predictive engine, converting backend LLMs, BERT tokenization, and vector embeddings into a low-friction interface.",
   projects: [
     {
       title: "AI Crisis Engine",
