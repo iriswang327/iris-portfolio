@@ -102,7 +102,7 @@ const GEMINI_MODAL: ModalConfig = {
     {
       title: "PROJECT 01 / News Integration",
       subtitle:
-        "How might we turn Gemini's blog into an intelligence layer inside the trading experience?",
+        "Bridging crypto news and the in-app trading experience.",
       route: "/design/gemini",
       preview: "/images/gemini-modal-preview.png",
     },
