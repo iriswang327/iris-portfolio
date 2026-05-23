@@ -46,26 +46,26 @@ const TOWER_BRIDGE_MODAL: ModalConfig = {
   companyName: "Tower & Bridge",
   companyLogo: "T&B",
   companyLogoImage: "/images/tower-bridge-logo.png",
-  timeline: "2024 – Present",
-  role: "Strategy Analyst",
-  orgType: "Brand & Analytics",
+  timeline: "2025 – Present",
+  role: "Analytics Manager",
+  orgType: "Brand Strategy & Analytics",
   collaborators: "Trinity CDC · Heartening",
   microDescription:
-    "A strategic growth and data tracking framework for consumer sustainability campaigns, translating raw performance metrics into investor-ready pitch decks for executive board approval.",
+    "Real clients, real deliverables, real pressure — UT Austin's student-run advertising agency turning brand strategy and analytics into measurable nonprofit and small-business growth for Trinity CDC and Heartening.",
   expandHref: "/experience/tower-and-bridge",
   accentTheme: "gold",
 };
 
 const INTEGRATED_DESIGN_MODAL: ModalConfig = {
-  companyName: "Integrated Design Project",
-  companyLogo: "ID",
+  companyName: "Giving Back",
+  companyLogo: "GB",
   companyLogoImage: "/images/integrated-design-logo.png",
-  timeline: "Fall 2025",
-  role: "Lead Prototyper",
-  orgType: "Design Thinking · UT Austin",
+  timeline: "Fall 2025 · One Semester",
+  role: "UX Researcher",
+  orgType: "Integrated Design Thinking · UT Austin",
   collaborators: "Emily Araiza · Frida Balderas · Manay Divatia",
   microDescription:
-    "An end-to-end user behavioral research sprint that pivoted from a physical merchandise proof-of-concept to an integrated stadium jumbotron video campaign and live responsive data portal.",
+    "A semester-long design thinking project exploring how UT students can engage with and support the unhoused community in West Campus — from empathy interviews through two prototype-and-test cycles to a Jumbotron video campaign.",
   expandHref: "/experience/giving-back",
   accentTheme: "burnt",
 };
@@ -74,12 +74,13 @@ const RISK_RADAR_MODAL: ModalConfig = {
   companyName: "Risk Radar",
   companyLogo: "RR",
   companyLogoImage: "/images/risk-radar-logo.png",
-  timeline: "Spring 2026",
+  timeline: "Spring 2026 · One Semester",
   role: "Head of AI",
-  orgType: "B2B SaaS · AI Product",
-  collaborators: "Brooke Mikell · Joesh Nayak · Nikhil Sehgal",
+  orgType: "B2B SaaS · AI Workflows",
+  collaborators:
+    "Brooke Mikell · Joesh Nayak · Nikhil Sehgal · Hayden King · Varun Vedala",
   microDescription:
-    "An enterprise product strategy transforming back-end Large Language Models, BERT classification loops, and vector embeddings into a low-friction predictive crisis dashboard for brand executives.",
+    "An AI-powered crisis management platform that predicts brand-reputation threats before they go viral. Built over a semester with McCombs business and Moody advertising students.",
   expandHref: "/experience/risk-radar",
   accentTheme: "navy",
 };
@@ -89,7 +90,7 @@ const STRATEGIC_IMPACT_CARDS: ImpactCardDef[] = [
     id: "tower-bridge",
     gradient:
       "linear-gradient(148deg, #F7F4EC 0%, #D4E2CC 42%, #E8DFD0 72%, #EDD5C4 100%)",
-    pill: "Tower & Bridge · Analytics Strategy",
+    pill: "Tower & Bridge · Analytics Manager",
     pillDark: false,
     hoverDescription: "Real clients, real strategy, real stakes.",
     videoUrl: "/videos/tower-thumbnail.mp4",
