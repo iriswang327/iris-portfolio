@@ -14,7 +14,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
       className="w-full"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 1, ease: [0.4, 0, 0.2, 1] }}
+      transition={{ duration: 1.8, ease: [0.4, 0, 0.2, 1] }}
     >
       {children}
     </motion.div>
