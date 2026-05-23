@@ -48,7 +48,7 @@ export default function ProjectCard({
   const cardInner = (
       <motion.div
       className="relative overflow-hidden rounded-[20px] w-full bg-white border border-black/[0.03] sm:group-hover:border-black/[0.06] transition-colors duration-500 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.04),0_0_1px_rgba(0,0,0,0.12)]"
-      style={{ height: 340, cursor: onClick || (!locked && href) ? "pointer" : "default" }}
+      style={{ height: 400, cursor: onClick || (!locked && href) ? "pointer" : "default" }}
       animate={{ scale: hovered && !locked ? 0.97 : 1 }}
       transition={{ duration: 0.3, ease: [0.34, 1.56, 0.64, 1] }}
       aria-label={pill}
@@ -71,7 +71,7 @@ export default function ProjectCard({
                 muted
                 loop
                 playsInline
-                className="max-h-[85%] w-auto object-contain rounded-xl shadow-sm border border-black/[0.01]"
+                className="h-full w-full object-contain rounded-lg shadow-sm border border-black/[0.01]"
                 src={videoUrl}
                 aria-hidden="true"
               />
@@ -80,7 +80,7 @@ export default function ProjectCard({
               <img
                 src={imageUrl}
                 alt=""
-                className="max-h-[85%] w-auto object-contain rounded-xl shadow-sm border border-black/[0.01]"
+                className="h-full w-full object-contain rounded-lg shadow-sm border border-black/[0.01]"
                 aria-hidden="true"
               />
             )}
