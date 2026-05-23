@@ -97,12 +97,12 @@ const GEMINI_MODAL: ModalConfig = {
   companyLogo: "G",
   companyLogoImage: "/images/gemini-logo.png",
   whyCompanyText:
-    "Crypto is intimidating because the information is scattered and hard to trust. I want to bring contextual, reliable news into the trading experience.",
+    "Crypto news is scattered — and Gemini's blog lives outside the trading flow. I wanted to explore whether bringing context into the exchange could keep traders informed without making them leave. Coinbase already proves the pattern; this case study is my product design take on closing Gemini's gap.",
   projects: [
     {
       title: "PROJECT 01 / News Integration",
       subtitle:
-        "Turning a siloed content blog into an integrated intelligence layer inside the active trading flow.",
+        "How might we turn Gemini's blog into an intelligence layer inside the trading experience?",
       route: "/design/gemini",
       preview: "/images/gemini-modal-preview.png",
     },
@@ -179,7 +179,7 @@ const CARDS: CardDef[] = [
     logo: <GeminiLogo />,
     pill: "Gemini · Product Design",
     pillDark: true,
-    hoverDescription: "Contextual crypto news in the trading experience.",
+    hoverDescription: "News inside the trading flow — product strategy + UI.",
     videoUrl: "/videos/gemini-thumbnail.mp4",
     frameClassName: "w-full h-full aspect-[16/10] bg-gradient-to-tr from-sky-100/40 via-blue-50/20 to-slate-50/60 rounded-2xl p-6 border border-blue-200/20 shadow-[0_15px_40px_rgba(0,0,0,0.02)] flex items-center justify-center overflow-hidden transition-all duration-500 hover:shadow-[0_20px_50px_rgba(14,165,233,0.05)]",
     modal: GEMINI_MODAL,
