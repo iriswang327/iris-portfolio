@@ -24,38 +24,38 @@ export default function TowerAndBridgeCaseStudyPage() {
         "Agency-Style Client Work",
       ]}
       title="Tower & Bridge"
-      subtitle="Real clients, real deliverables, real pressure — turning brand strategy and analytics into measurable nonprofit and small-business growth at UT Austin's student-run consultancy."
+      subtitle="Real clients, real deliverables, real pressure — turning brand strategy and analytics into measurable nonprofit and small-business growth at UT Austin's student-run agency."
       metadata={[
-        { label: "Timeline", value: "2024 – Present" },
-        { label: "Role", value: "Strategy Analyst" },
+        { label: "Timeline", value: "2025 – Present" },
+        { label: "Role", value: "Analytics Manager" },
         { label: "Focus", value: "Brand Strategy & Analytics" },
         { label: "Method", value: "Agency-Style Client Work" },
       ]}
       overview={{
-        body: "Tower & Bridge is UT Austin's student-run strategy consultancy. We run real engagements for Austin-area nonprofits and small businesses — full-funnel brand strategy, analytics audits, social campaigns, and executive-ready deliverables. My work has centered on turning fragmented client data and content into cohesive strategy that drives measurable outcomes.",
+        body: "Tower & Bridge is UT Austin's student-run advertising agency. We run real campaigns for Austin-area nonprofits and small businesses — full-funnel brand strategy, analytics audits, social campaigns, and executive-ready deliverables. My work has centered on turning fragmented client data and content into cohesive strategy that drives measurable outcomes.",
         bullets: [
-          "Lead strategist on two multi-month client engagements: Trinity Child Development Center (nonprofit preschool) and Heartening (small-business retail).",
-          "Built media-relations strategy and analytics reporting that drove +333% engagement and $1,500+ in direct revenue.",
-          "Operated under real client timelines — executive-ready, not student-project-ready.",
+          "Lead analyst on two 6-week campaigns: Trinity Child Development Center (nonprofit preschool) and Heartening (zero-waste thrift store).",
+          "Built media-relations strategy and analytics reporting that drove +333% engagement and $1,500+ in direct revenue for Trinity CDC.",
+          "Operated under real client timelines demonstrating real client work.",
         ],
       }}
       challenge={{
-        heading: "Most small organizations have data but no insight.",
-        body: "Trinity and Heartening came to us with the same underlying friction: lots of social posts, lots of vague analytics, no clear story about what was working and why. They needed a strategist who could read the numbers, find the signal, and translate it into a plan their team could execute next week — not next quarter.",
+        heading: "Most small organizations have data but no insight to create strategic direction.",
+        body: "Trinity and Heartening came to us with the same underlying friction: lots of social posts, lots of vague analytics, no clear story about what was working and why. They needed a team who could read the numbers, find the signal, and translate it into a plan their team could execute within a week.",
         frameCards: [
           {
             label: "The Friction",
             title: "Data without direction.",
-            body: "Posts going up without a content strategy. Analytics dashboards no one read. Brand voice that drifted across channels. The information existed — the synthesis didn't.",
+            body: "Posts going up without a content strategy. Analytics dashboards no one read. Brand voice that drifted across channels. Information without insights.",
           },
           {
             label: "The Strategic Goal",
             title: "Insight that turns into action.",
-            body: "Convert raw analytics + audience research into clear, executive-ready recommendations the client could actually implement — with enough specificity to move next week, not next quarter.",
+            body: "Convert raw analytics + audience research into clear recommendations the client could actually implement, acting as a real agency.",
           },
         ],
       }}
-      pullQuote="Strategy at Tower & Bridge is applied, not academic. Every deliverable is built around a decision the client needs to make."
+      pullQuote="Every deliverable is built around a decision the client needs to make."
       clients={[
         {
           sectionLabel: "Client 01 · Trinity Child Development Center",
@@ -124,7 +124,7 @@ export default function TowerAndBridgeCaseStudyPage() {
         },
       ]}
       process={{
-        heading: "Five phases from kickoff to recommendation.",
+        heading: "Five phases from kickoff to case study.",
         steps: [
           {
             num: "01 / Client Kickoff",
@@ -133,7 +133,7 @@ export default function TowerAndBridgeCaseStudyPage() {
             image: {
               src: `${IMAGE_BASE}/process-kickoff.png`,
               alt: "Team kickoff photo or whiteboard discovery session",
-              placeholderLabel: `${IMAGE_BASE}/process-kickoff.png`,
+              placeholderLabel: `${IMAGE_BASE}/team-kickoff.png`,
             },
           },
           {
@@ -143,17 +143,17 @@ export default function TowerAndBridgeCaseStudyPage() {
             image: {
               src: `${IMAGE_BASE}/process-audit.png`,
               alt: "Analytics dashboard screenshot or audit table",
-              placeholderLabel: `${IMAGE_BASE}/process-audit.png`,
+              placeholderLabel: `${IMAGE_BASE}/analytics-pitch-slide.png`,
             },
           },
           {
-            num: "03 / Research",
+            num: "03 / Prototyping",
             heading: "Bridging perception and reality.",
-            body: "Primary interviews with target audience members combined with secondary competitive-landscape research. Always looking for the gap between how the client sees themselves and how their audience actually does.",
+            body: "Created and presented a full-fledged pitch deck with media, creative, PR, and analytics strategies to executive board before presenting to the client.",
             image: {
               src: `${IMAGE_BASE}/process-research.png`,
-              alt: "Research synthesis board or affinity map",
-              placeholderLabel: `${IMAGE_BASE}/process-research.png`,
+              alt: "Pitch deck presentation",
+              placeholderLabel: `${IMAGE_BASE}/pitch-deck-presentation.png`,
             },
           },
           {
@@ -167,34 +167,34 @@ export default function TowerAndBridgeCaseStudyPage() {
             },
           },
           {
-            num: "05 / Presentation",
-            heading: "Decks designed for clarity under pressure.",
-            body: "Executive decks where every slide earns its place. No filler, no qualifications, no \"this is just a student project.\" The finding and the recommendation — that's it.",
+            num: "05 / Case Study",
+            heading: "One-pager designed for clarity and conciseness.",
+            body: "Executive page where every statistic earns its place. No fillers & no \"this is just a student project.\" Just the results of our work.",
             image: {
               src: `${IMAGE_BASE}/process-presentation.png`,
-              alt: "Final client presentation slide or team photo presenting",
-              placeholderLabel: `${IMAGE_BASE}/process-presentation.png`,
+              alt: "Final client presentation slide",
+              placeholderLabel: `${IMAGE_BASE}/case-study-page.png`,
             },
           },
         ],
       }}
       reflection={{
-        heading: "What I'd tell next-semester me.",
+        heading: "What I Learned.",
         cards: [
           {
             label: "Strategy",
-            title: "Curiosity beats expertise.",
-            body: "Coming in with genuine curiosity — not asking what the client wanted, but what problem they were actually trying to solve — changed the quality of every deliverable I produced.",
+            title: "Take initiative and be proactive!",
+            body: "As analytics manager, our work can be boring. Simply looking at numbers was easy, but coming up with insights took training. I learned to not simply ask what the client wanted, but also what problem they were actually trying to solve - giving me better deliverables each and every week.",
           },
           {
-            label: "Craft",
-            title: "Push back on the \"so what\" earlier.",
-            body: "Early on I was producing strong analysis with a weak recommendation. The analysis is only valuable if it tells someone exactly what to do next.",
+            label: "Professionalism",
+            title: "Everyone is busy, time is valuable!",
+            body: "There were times our clients were unresponsive, didn't provide feedback, and didn't like things that were previously approved. Our team of 4 students learned to continue with our work and provide our best deliverables, despite lack of communication.",
           },
           {
             label: "Learning",
-            title: "Strategy is messier than case studies suggest.",
-            body: "Real-world strategy is more political than any case study suggests. The right answer and the implementable answer are often different — my job is to close that gap, not pick one.",
+            title: "Numbers can be interesting.",
+            body: "At one point, it felt like I was looking at the same thing week-by-week. Although repetitive, I learned to be curious and ask why certain percentages were lower or higher. I brought life to the statistics and insights came easier.",
           },
         ],
       }}
