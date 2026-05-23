@@ -25,18 +25,13 @@ export interface RiskRadarPhase {
 export interface RiskRadarContribution {
   step: string;
   heading: string;
-  paragraphs: string[];
+  paragraphs?: string[];
+  bullets?: string[];
   image: {
     src: string;
     alt: string;
     placeholderLabel: string;
   };
-}
-
-export interface RiskRadarWhyNowCell {
-  key: string;
-  heading: string;
-  desc: string;
 }
 
 export interface RiskRadarMetric {
@@ -48,7 +43,8 @@ export interface RiskRadarMetric {
 export interface RiskRadarReflectionCard {
   label: string;
   title: string;
-  body: string;
+  body?: string;
+  bullets?: string[];
 }
 
 export interface TeamMember {
@@ -57,40 +53,56 @@ export interface TeamMember {
   isMe?: boolean;
 }
 
+export interface RiskRadarHeroMetric {
+  label: string;
+  num: string;
+  sub: string;
+}
+
+export interface RiskRadarCaseStudyAccent {
+  heroGradient: string;
+  bulletColor?: string;
+  heroEyebrow?: string;
+  heroMetrics?: RiskRadarHeroMetric[];
+  heroImage?: {
+    src: string;
+    alt: string;
+    placeholderLabel: string;
+  };
+}
+
 export interface RiskRadarCaseStudyProps {
   title: string;
   subtitle: string;
+  subtitleHtml?: string;
   tagline: string;
   metadata: RiskRadarMetaCell[];
+  accent?: RiskRadarCaseStudyAccent;
   overview: {
     heading: string;
-    body: string;
+    body?: string;
+    bullets?: string[];
     team: TeamMember[];
   };
   problem: {
     heading: string;
-    body: string;
+    bullets?: string[];
     cards: RiskRadarProblemCard[];
     pullQuote: string;
   };
   solution: {
     heading: string;
-    body: string;
+    bullets?: string[];
     phases: RiskRadarPhase[];
   };
   contributions: {
     sectionLabel: string;
     heading: string;
-    body: string;
+    bullets?: string[];
     items: RiskRadarContribution[];
   };
-  whyNow: {
+  market?: {
     heading: string;
-    cells: RiskRadarWhyNowCell[];
-  };
-  market: {
-    heading: string;
-    body: string;
     metrics: RiskRadarMetric[];
     bullets: string[];
   };
@@ -115,18 +127,140 @@ const ACCENT = "#1e3a5f";
 const ACCENT_TINT = "rgba(30,58,95,0.08)";
 const ACCENT_TINT_2 = "rgba(30,58,95,0.04)";
 
-// ─── Shared primitives (aligned with DesignCaseStudyTemplate) ────────────────
+const richTextClassName =
+  "[&_strong]:font-medium [&_strong]:text-[var(--foreground)] [&_em]:italic [&_em]:text-[rgba(26,22,37,0.72)] [&_.lead]:text-[15px] [&_.lead]:font-normal [&_.lead]:tracking-[-0.01em] [&_.lead]:text-[var(--foreground)] [&_.muted]:text-[11px] [&_.muted]:text-[rgba(26,22,37,0.42)] [&_.accent]:font-medium [&_.accent]:text-[#1e3a5f] [&_.sm]:text-[11px] [&_.sm]:text-[rgba(26,22,37,0.5)]";
 
-function SectionLabel({ children }: { children: React.ReactNode }) {
+function RichText({
+  html,
+  className = "",
+  style,
+}: {
+  html: string;
+  className?: string;
+  style?: React.CSSProperties;
+}) {
+  return (
+    <span
+      className={`${richTextClassName} ${className}`.trim()}
+      style={style}
+      dangerouslySetInnerHTML={{ __html: html }}
+    />
+  );
+}
+
+function SectionEyebrow({
+  children,
+  accentColor = ACCENT,
+}: {
+  children: React.ReactNode;
+  accentColor?: string;
+}) {
   return (
     <p
       style={{
         fontSize: 10,
-        fontWeight: 400,
-        color: "#BBBBBB",
+        fontWeight: 500,
+        color: accentColor,
+        letterSpacing: "0.2em",
+        textTransform: "uppercase",
+        marginBottom: 8,
+      }}
+    >
+      {children}
+    </p>
+  );
+}
+
+function SectionTitle({ children }: { children: React.ReactNode }) {
+  return (
+    <h2
+      style={{
+        fontSize: 26,
+        fontWeight: 200,
+        color: "var(--foreground)",
+        letterSpacing: "-0.025em",
+        lineHeight: 1.2,
+        margin: 0,
+      }}
+    >
+      {children}
+    </h2>
+  );
+}
+
+function SectionHeading({
+  eyebrow,
+  title,
+  accentColor,
+}: {
+  eyebrow: string;
+  title?: string;
+  accentColor?: string;
+}) {
+  return (
+    <header style={{ marginBottom: title ? 28 : 20 }}>
+      <SectionEyebrow accentColor={accentColor}>{eyebrow}</SectionEyebrow>
+      {title && <SectionTitle>{title}</SectionTitle>}
+    </header>
+  );
+}
+
+function SubsectionTitle({ children }: { children: React.ReactNode }) {
+  return (
+    <h3
+      style={{
+        fontSize: 17,
+        fontWeight: 300,
+        color: "var(--foreground)",
+        letterSpacing: "-0.02em",
+        lineHeight: 1.35,
+        margin: 0,
+      }}
+    >
+      {children}
+    </h3>
+  );
+}
+
+function StepEyebrow({
+  children,
+  accentColor = ACCENT,
+}: {
+  children: React.ReactNode;
+  accentColor?: string;
+}) {
+  return (
+    <p
+      style={{
+        fontSize: 10,
+        fontWeight: 500,
+        color: accentColor,
         letterSpacing: "0.16em",
         textTransform: "uppercase",
-        marginBottom: 20,
+        marginBottom: 6,
+      }}
+    >
+      {children}
+    </p>
+  );
+}
+
+function CardEyebrow({
+  children,
+  accentColor = "rgba(26,22,37,0.38)",
+}: {
+  children: React.ReactNode;
+  accentColor?: string;
+}) {
+  return (
+    <p
+      style={{
+        fontSize: 10,
+        fontWeight: 500,
+        color: accentColor,
+        letterSpacing: "0.14em",
+        textTransform: "uppercase",
+        marginBottom: 6,
       }}
     >
       {children}
@@ -138,34 +272,140 @@ function Hairline({ style }: { style?: React.CSSProperties }) {
   return (
     <div
       aria-hidden="true"
-      style={{
-        height: "0.5px",
-        background: "rgba(0,0,0,0.06)",
-        ...style,
-      }}
+      style={{ height: "0.5px", background: "rgba(0,0,0,0.06)", ...style }}
     />
   );
 }
 
-const bodyTextStyle: React.CSSProperties = {
-  fontSize: 14,
-  fontWeight: 300,
-  color: "#444444",
-  lineHeight: 1.75,
-  maxWidth: 640,
-};
+function BulletList({
+  items,
+  compact,
+  dotColor = ACCENT,
+  leadIndex,
+}: {
+  items: string[];
+  compact?: boolean;
+  dotColor?: string;
+  leadIndex?: number;
+}) {
+  return (
+    <ul style={{ listStyle: "none", padding: 0, margin: 0, maxWidth: compact ? 320 : 640 }}>
+      {items.map((item, index) => {
+        const isLead = leadIndex === index;
+        return (
+          <li
+            key={`${item.slice(0, 48)}-${index}`}
+            style={{
+              display: "flex",
+              gap: 10,
+              alignItems: "flex-start",
+              fontSize: isLead ? 14 : compact ? 11 : 12,
+              fontWeight: isLead ? 400 : 300,
+              color: isLead
+                ? "var(--foreground)"
+                : compact
+                  ? "rgba(26,22,37,0.55)"
+                  : "rgba(26,22,37,0.62)",
+              lineHeight: isLead ? 1.55 : 1.6,
+              marginBottom: isLead ? 10 : 7,
+            }}
+          >
+            <span
+              aria-hidden="true"
+              style={{
+                width: isLead ? 5 : 4,
+                height: isLead ? 5 : 4,
+                borderRadius: "50%",
+                background: dotColor,
+                marginTop: isLead ? 9 : 7,
+                flexShrink: 0,
+              }}
+            />
+            <RichText html={item} />
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
 
-const sectionHeadingStyle: React.CSSProperties = {
-  fontSize: 13,
-  fontWeight: 400,
-  color: "var(--foreground)",
-  marginBottom: 10,
-  letterSpacing: "-0.01em",
-  maxWidth: 640,
-  lineHeight: 1.45,
-};
-
-// ─── Image slot with placeholder fallback ────────────────────────────────────
+function HeroImpactBand({ accent }: { accent: RiskRadarCaseStudyAccent }) {
+  return (
+    <section
+      className="relative mb-12 overflow-hidden rounded-2xl border border-[#1e3a5f]/25"
+      style={{
+        background: accent.heroGradient,
+        boxShadow:
+          "0 20px 50px -24px rgba(30,58,95,0.22), 0 12px 32px -20px rgba(0,0,0,0.1)",
+      }}
+    >
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-indigo-500/20 blur-3xl"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -bottom-20 -left-10 h-56 w-56 rounded-full bg-slate-400/15 blur-3xl"
+      />
+      <div className="relative grid grid-cols-1 items-center gap-8 p-6 sm:p-8 md:grid-cols-2 md:gap-10">
+        <div>
+          {accent.heroEyebrow && (
+            <SectionEyebrow accentColor="#7dd3fc">{accent.heroEyebrow}</SectionEyebrow>
+          )}
+          {accent.heroMetrics && accent.heroMetrics.length > 0 && (
+            <div className="grid grid-cols-3 gap-4">
+              {accent.heroMetrics.map((metric) => (
+                <div key={metric.label}>
+                  <p
+                    style={{
+                      fontSize: 28,
+                      fontWeight: 200,
+                      color: "var(--foreground)",
+                      letterSpacing: "-0.03em",
+                      lineHeight: 1,
+                      marginBottom: 6,
+                    }}
+                  >
+                    {metric.num}
+                  </p>
+                  <p
+                    style={{
+                      fontSize: 10,
+                      fontWeight: 500,
+                      color: "rgba(26,22,37,0.55)",
+                      letterSpacing: "0.08em",
+                      textTransform: "uppercase",
+                      marginBottom: 4,
+                    }}
+                  >
+                    {metric.label}
+                  </p>
+                  <p
+                    style={{
+                      fontSize: 10,
+                      fontWeight: 300,
+                      color: "rgba(26,22,37,0.42)",
+                      lineHeight: 1.4,
+                    }}
+                  >
+                    {metric.sub}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+        {accent.heroImage && (
+          <CaseImageSlot
+            src={accent.heroImage.src}
+            alt={accent.heroImage.alt}
+            placeholderLabel={accent.heroImage.placeholderLabel}
+          />
+        )}
+      </div>
+    </section>
+  );
+}
 
 function CaseImageSlot({
   src,
@@ -231,18 +471,17 @@ function CaseImageSlot({
   );
 }
 
-// ─── Main template ───────────────────────────────────────────────────────────
-
 export default function RiskRadarCaseStudyTemplate({
   title,
   subtitle,
+  subtitleHtml,
   tagline,
   metadata,
+  accent,
   overview,
   problem,
   solution,
   contributions,
-  whyNow,
   market,
   reflection,
   cta,
@@ -250,10 +489,12 @@ export default function RiskRadarCaseStudyTemplate({
   backLabel = "← Back to experience",
   footerCrumb,
 }: RiskRadarCaseStudyProps) {
+  const eyebrowColor = accent?.bulletColor ?? ACCENT;
+  const bulletColor = accent?.bulletColor ?? ACCENT;
+
   return (
     <div className="w-full" style={{ backgroundColor: "var(--background)", paddingTop: 56 }}>
       <div className="mx-auto w-full" style={{ maxWidth: 960, padding: "0 32px" }}>
-        {/* Hero */}
         <div style={{ marginTop: 40, marginBottom: 16 }}>
           <h1
             style={{
@@ -267,7 +508,6 @@ export default function RiskRadarCaseStudyTemplate({
           >
             {title}
           </h1>
-
           <p
             style={{
               fontSize: 13,
@@ -278,10 +518,8 @@ export default function RiskRadarCaseStudyTemplate({
               marginBottom: 16,
             }}
           >
-            {subtitle}
+            {subtitleHtml ? <RichText html={subtitleHtml} /> : subtitle}
           </p>
-
-          {/* Tagline strip */}
           <div className="flex items-center gap-3" style={{ marginTop: 4 }}>
             <span
               aria-hidden="true"
@@ -307,7 +545,6 @@ export default function RiskRadarCaseStudyTemplate({
           </div>
         </div>
 
-        {/* Metadata grid */}
         {metadata.length > 0 && (
           <div
             style={{
@@ -356,11 +593,17 @@ export default function RiskRadarCaseStudyTemplate({
           </div>
         )}
 
-        {/* Overview */}
+        {accent && (accent.heroMetrics?.length || accent.heroImage) && (
+          <HeroImpactBand accent={accent} />
+        )}
+
         <section style={{ marginBottom: 64 }}>
-          <SectionLabel>Overview</SectionLabel>
-          <p style={sectionHeadingStyle}>{overview.heading}</p>
-          <p style={{ ...bodyTextStyle, marginBottom: 24 }}>{overview.body}</p>
+          <SectionHeading eyebrow="Overview" title={overview.heading} accentColor={eyebrowColor} />
+          {overview.bullets && overview.bullets.length > 0 && (
+            <div style={{ marginBottom: 20 }}>
+              <BulletList items={overview.bullets} dotColor={bulletColor} leadIndex={0} />
+            </div>
+          )}
           <div className="flex flex-wrap gap-2">
             {overview.team.map((member) => (
               <span
@@ -392,15 +635,14 @@ export default function RiskRadarCaseStudyTemplate({
 
         <Hairline style={{ marginBottom: 64 }} />
 
-        {/* The Problem */}
         <section style={{ marginBottom: 64 }}>
-          <SectionLabel>The Problem</SectionLabel>
-          <p style={sectionHeadingStyle}>{problem.heading}</p>
-          <p style={{ ...bodyTextStyle, marginBottom: 20 }}>{problem.body}</p>
-          <div
-            className="grid grid-cols-1 md:grid-cols-3 gap-3"
-            style={{ marginBottom: 32 }}
-          >
+          <SectionHeading eyebrow="The Problem" title={problem.heading} accentColor={eyebrowColor} />
+          {problem.bullets && problem.bullets.length > 0 && (
+            <div style={{ marginBottom: 20 }}>
+              <BulletList items={problem.bullets} dotColor={bulletColor} leadIndex={0} />
+            </div>
+          )}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3" style={{ marginBottom: 28 }}>
             {problem.cards.map((card) => (
               <div
                 key={card.label}
@@ -411,39 +653,19 @@ export default function RiskRadarCaseStudyTemplate({
                   padding: "20px 20px 18px",
                 }}
               >
-                <p
-                  style={{
-                    fontSize: 10,
-                    fontWeight: 500,
-                    color: ACCENT,
-                    letterSpacing: "0.14em",
-                    textTransform: "uppercase",
-                    marginBottom: 8,
-                  }}
-                >
-                  {card.label}
-                </p>
-                <p
-                  style={{
-                    fontSize: 13,
-                    fontWeight: 400,
-                    color: "var(--foreground)",
-                    marginBottom: 10,
-                    letterSpacing: "-0.01em",
-                    lineHeight: 1.3,
-                  }}
-                >
-                  {card.title}
-                </p>
+                <CardEyebrow accentColor={eyebrowColor}>{card.label}</CardEyebrow>
+                <SubsectionTitle>{card.title}</SubsectionTitle>
                 <p
                   style={{
                     fontSize: 11,
                     fontWeight: 300,
-                    color: "#888888",
-                    lineHeight: 1.6,
+                    color: "rgba(26,22,37,0.55)",
+                    lineHeight: 1.55,
+                    marginTop: 8,
+                    marginBottom: 0,
                   }}
                 >
-                  {card.body}
+                  <RichText html={card.body} />
                 </p>
               </div>
             ))}
@@ -455,7 +677,7 @@ export default function RiskRadarCaseStudyTemplate({
               background: "rgba(167,139,250,0.04)",
               border: "1px solid rgba(167,139,250,0.12)",
               borderRadius: 12,
-              padding: "28px 32px",
+              padding: "24px 28px",
             }}
           >
             <div
@@ -473,16 +695,17 @@ export default function RiskRadarCaseStudyTemplate({
             />
             <p
               style={{
-                fontSize: 20,
+                fontSize: 18,
                 fontWeight: 200,
                 fontStyle: "italic",
                 color: "var(--foreground)",
-                lineHeight: 1.55,
+                lineHeight: 1.5,
                 letterSpacing: "-0.015em",
+                margin: 0,
               }}
             >
               &ldquo;
-              <span dangerouslySetInnerHTML={{ __html: problem.pullQuote }} />
+              <RichText html={problem.pullQuote} />
               &rdquo;
             </p>
           </blockquote>
@@ -490,11 +713,13 @@ export default function RiskRadarCaseStudyTemplate({
 
         <Hairline style={{ marginBottom: 64 }} />
 
-        {/* The Solution */}
         <section style={{ marginBottom: 64 }}>
-          <SectionLabel>The Solution</SectionLabel>
-          <p style={sectionHeadingStyle}>{solution.heading}</p>
-          <p style={{ ...bodyTextStyle, marginBottom: 24 }}>{solution.body}</p>
+          <SectionHeading eyebrow="The Solution" title={solution.heading} accentColor={eyebrowColor} />
+          {solution.bullets && solution.bullets.length > 0 && (
+            <div style={{ marginBottom: 20 }}>
+              <BulletList items={solution.bullets} dotColor={bulletColor} leadIndex={0} />
+            </div>
+          )}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             {solution.phases.map((phase) => (
               <div
@@ -506,38 +731,19 @@ export default function RiskRadarCaseStudyTemplate({
                   padding: "20px 20px 18px",
                 }}
               >
-                <p
-                  style={{
-                    fontSize: 10,
-                    fontWeight: 500,
-                    color: ACCENT,
-                    letterSpacing: "0.1em",
-                    textTransform: "uppercase",
-                    marginBottom: 12,
-                  }}
-                >
-                  {phase.step}
-                </p>
-                <p
-                  style={{
-                    fontSize: 13,
-                    fontWeight: 400,
-                    color: "var(--foreground)",
-                    marginBottom: 8,
-                    letterSpacing: "-0.01em",
-                  }}
-                >
-                  {phase.heading}
-                </p>
+                <StepEyebrow accentColor={eyebrowColor}>{phase.step}</StepEyebrow>
+                <SubsectionTitle>{phase.heading}</SubsectionTitle>
                 <p
                   style={{
                     fontSize: 11,
                     fontWeight: 300,
-                    color: "#888888",
-                    lineHeight: 1.6,
+                    color: "rgba(26,22,37,0.55)",
+                    lineHeight: 1.55,
+                    marginTop: 8,
+                    marginBottom: 0,
                   }}
                 >
-                  {phase.body}
+                  <RichText html={phase.body} />
                 </p>
               </div>
             ))}
@@ -546,11 +752,17 @@ export default function RiskRadarCaseStudyTemplate({
 
         <Hairline style={{ marginBottom: 64 }} />
 
-        {/* My Contributions */}
         <section style={{ marginBottom: 64 }}>
-          <SectionLabel>{contributions.sectionLabel}</SectionLabel>
-          <p style={sectionHeadingStyle}>{contributions.heading}</p>
-          <p style={{ ...bodyTextStyle, marginBottom: 32 }}>{contributions.body}</p>
+          <SectionHeading
+            eyebrow={contributions.sectionLabel}
+            title={contributions.heading}
+            accentColor={eyebrowColor}
+          />
+          {contributions.bullets && contributions.bullets.length > 0 && (
+            <div style={{ marginBottom: 28 }}>
+              <BulletList items={contributions.bullets} dotColor={bulletColor} leadIndex={0} />
+            </div>
+          )}
           {contributions.items.map((item, index) => (
             <div
               key={item.step}
@@ -561,43 +773,28 @@ export default function RiskRadarCaseStudyTemplate({
               }}
             >
               <div style={{ direction: "ltr" }}>
-                <p
-                  style={{
-                    fontSize: 10,
-                    fontWeight: 500,
-                    color: ACCENT,
-                    letterSpacing: "0.1em",
-                    textTransform: "uppercase",
-                    marginBottom: 5,
-                  }}
-                >
-                  {item.step}
-                </p>
-                <p
-                  style={{
-                    fontSize: 13,
-                    fontWeight: 400,
-                    color: "var(--foreground)",
-                    marginBottom: 8,
-                    letterSpacing: "-0.01em",
-                  }}
-                >
-                  {item.heading}
-                </p>
-                {item.paragraphs.map((para) => (
-                  <p
-                    key={para.slice(0, 40)}
-                    style={{
-                      fontSize: 11,
-                      fontWeight: 300,
-                      color: "rgba(26,22,37,0.4)",
-                      lineHeight: 1.6,
-                      maxWidth: 320,
-                      marginBottom: 8,
-                    }}
-                    dangerouslySetInnerHTML={{ __html: para }}
-                  />
-                ))}
+                <StepEyebrow accentColor={eyebrowColor}>{item.step}</StepEyebrow>
+                <SubsectionTitle>{item.heading}</SubsectionTitle>
+                <div style={{ marginTop: 10 }}>
+                  {item.bullets && item.bullets.length > 0 && (
+                    <BulletList items={item.bullets} dotColor={bulletColor} compact />
+                  )}
+                  {item.paragraphs?.map((para) => (
+                    <p
+                      key={para.slice(0, 40)}
+                      style={{
+                        fontSize: 11,
+                        fontWeight: 300,
+                        color: "rgba(26,22,37,0.4)",
+                        lineHeight: 1.6,
+                        maxWidth: 320,
+                        marginBottom: 8,
+                      }}
+                    >
+                      <RichText html={para} />
+                    </p>
+                  ))}
+                </div>
               </div>
               <div style={{ direction: "ltr" }}>
                 <CaseImageSlot
@@ -610,164 +807,80 @@ export default function RiskRadarCaseStudyTemplate({
           ))}
         </section>
 
-        <Hairline style={{ marginBottom: 64 }} />
-
-        {/* Why Now */}
-        <section style={{ marginBottom: 64 }}>
-          <SectionLabel>Why Now</SectionLabel>
-          <p style={sectionHeadingStyle}>{whyNow.heading}</p>
-          <div
-            style={{
-              marginTop: 24,
-              padding: "24px 28px",
-              border: "1px solid rgba(0,0,0,0.06)",
-              borderRadius: 16,
-              background: "#ffffff",
-            }}
-          >
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {whyNow.cells.map((cell) => (
-                <div key={cell.key}>
-                  <p
-                    style={{
-                      fontSize: 10,
-                      fontWeight: 500,
-                      color: ACCENT,
-                      letterSpacing: "0.08em",
-                      textTransform: "uppercase",
-                      marginBottom: 10,
-                    }}
-                  >
-                    {cell.key}
-                  </p>
-                  <p
-                    style={{
-                      fontSize: 13,
-                      fontWeight: 400,
-                      color: "var(--foreground)",
-                      marginBottom: 8,
-                      lineHeight: 1.3,
-                    }}
-                  >
-                    {cell.heading}
-                  </p>
-                  <p
-                    style={{
-                      fontSize: 11,
-                      fontWeight: 300,
-                      color: "#888888",
-                      lineHeight: 1.55,
-                    }}
-                  >
-                    {cell.desc}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <Hairline style={{ marginBottom: 64 }} />
-
-        {/* Market Opportunity */}
-        <section style={{ marginBottom: 64 }}>
-          <SectionLabel>Market Opportunity</SectionLabel>
-          <p style={sectionHeadingStyle}>{market.heading}</p>
-          <p style={{ ...bodyTextStyle, marginBottom: 24 }}>{market.body}</p>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: `repeat(${Math.min(market.metrics.length, 3)}, 1fr)`,
-              borderTop: "0.5px solid rgba(0,0,0,0.06)",
-              borderLeft: "0.5px solid rgba(0,0,0,0.06)",
-              marginBottom: 24,
-            }}
-            className="max-sm:grid-cols-1"
-          >
-            {market.metrics.map((metric) => (
+        {market && (
+          <>
+            <Hairline style={{ marginBottom: 64 }} />
+            <section style={{ marginBottom: 64 }}>
+              <SectionHeading
+                eyebrow="Market Snapshot"
+                title={market.heading}
+                accentColor={eyebrowColor}
+              />
               <div
-                key={metric.label}
                 style={{
-                  padding: "16px 20px",
-                  borderRight: "0.5px solid rgba(0,0,0,0.06)",
-                  borderBottom: "0.5px solid rgba(0,0,0,0.06)",
+                  display: "grid",
+                  gridTemplateColumns: `repeat(${Math.min(market.metrics.length, 3)}, 1fr)`,
+                  borderTop: "0.5px solid rgba(0,0,0,0.06)",
+                  borderLeft: "0.5px solid rgba(0,0,0,0.06)",
+                  marginBottom: 20,
                 }}
+                className="max-sm:grid-cols-1"
               >
-                <p
-                  style={{
-                    fontSize: 10,
-                    fontWeight: 400,
-                    color: "#BBBBBB",
-                    letterSpacing: "0.14em",
-                    textTransform: "uppercase",
-                    marginBottom: 8,
-                  }}
-                >
-                  {metric.label}
-                </p>
-                <p
-                  style={{
-                    fontSize: 24,
-                    fontWeight: 200,
-                    color: "var(--foreground)",
-                    letterSpacing: "-0.02em",
-                    lineHeight: 1.1,
-                    marginBottom: 4,
-                  }}
-                >
-                  {metric.num}
-                </p>
-                <p
-                  style={{
-                    fontSize: 11,
-                    fontWeight: 300,
-                    color: "#888888",
-                    lineHeight: 1.5,
-                  }}
-                >
-                  {metric.sub}
-                </p>
+                {market.metrics.map((metric) => (
+                  <div
+                    key={metric.label}
+                    style={{
+                      padding: "16px 20px",
+                      borderRight: "0.5px solid rgba(0,0,0,0.06)",
+                      borderBottom: "0.5px solid rgba(0,0,0,0.06)",
+                    }}
+                  >
+                    <p
+                      style={{
+                        fontSize: 10,
+                        fontWeight: 400,
+                        color: "#BBBBBB",
+                        letterSpacing: "0.14em",
+                        textTransform: "uppercase",
+                        marginBottom: 8,
+                      }}
+                    >
+                      {metric.label}
+                    </p>
+                    <p
+                      style={{
+                        fontSize: 24,
+                        fontWeight: 200,
+                        color: "var(--foreground)",
+                        letterSpacing: "-0.02em",
+                        lineHeight: 1.1,
+                        marginBottom: 4,
+                      }}
+                    >
+                      {metric.num}
+                    </p>
+                    <p
+                      style={{
+                        fontSize: 10,
+                        fontWeight: 300,
+                        color: "rgba(26,22,37,0.45)",
+                        lineHeight: 1.45,
+                      }}
+                    >
+                      {metric.sub}
+                    </p>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-          <ul style={{ listStyle: "none", padding: 0, margin: 0, maxWidth: 640 }}>
-            {market.bullets.map((item) => (
-              <li
-                key={item}
-                style={{
-                  display: "flex",
-                  gap: 10,
-                  alignItems: "flex-start",
-                  fontSize: 13,
-                  fontWeight: 300,
-                  color: "#444444",
-                  lineHeight: 1.65,
-                  marginBottom: 8,
-                }}
-              >
-                <span
-                  aria-hidden="true"
-                  style={{
-                    width: 4,
-                    height: 4,
-                    borderRadius: "50%",
-                    background: ACCENT,
-                    marginTop: 8,
-                    flexShrink: 0,
-                  }}
-                />
-                <span dangerouslySetInnerHTML={{ __html: item }} />
-              </li>
-            ))}
-          </ul>
-        </section>
+              <BulletList items={market.bullets} dotColor={bulletColor} />
+            </section>
+          </>
+        )}
 
         <Hairline style={{ marginBottom: 64 }} />
 
-        {/* Reflection */}
         <section style={{ marginBottom: 64 }}>
-          <SectionLabel>Reflection</SectionLabel>
-          <p style={{ ...sectionHeadingStyle, marginBottom: 24 }}>{reflection.heading}</p>
+          <SectionHeading eyebrow="Reflection" title={reflection.heading} accentColor={eyebrowColor} />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             {reflection.cards.map((card) => (
               <div
@@ -779,46 +892,30 @@ export default function RiskRadarCaseStudyTemplate({
                   padding: "20px 20px 18px",
                 }}
               >
-                <p
-                  style={{
-                    fontSize: 10,
-                    fontWeight: 400,
-                    color: "#BBBBBB",
-                    letterSpacing: "0.14em",
-                    textTransform: "uppercase",
-                    marginBottom: 12,
-                  }}
-                >
-                  {card.label}
-                </p>
-                <p
-                  style={{
-                    fontSize: 13,
-                    fontWeight: 400,
-                    color: "var(--foreground)",
-                    marginBottom: 10,
-                    letterSpacing: "-0.01em",
-                    lineHeight: 1.3,
-                  }}
-                >
-                  {card.title}
-                </p>
-                <p
-                  style={{
-                    fontSize: 11,
-                    fontWeight: 300,
-                    color: "#888888",
-                    lineHeight: 1.65,
-                  }}
-                >
-                  {card.body}
-                </p>
+                <CardEyebrow accentColor={eyebrowColor}>{card.label}</CardEyebrow>
+                <SubsectionTitle>{card.title}</SubsectionTitle>
+                <div style={{ marginTop: 10 }}>
+                  {card.body && (
+                    <p
+                      style={{
+                        fontSize: 11,
+                        fontWeight: 300,
+                        color: "#888888",
+                        lineHeight: 1.65,
+                      }}
+                    >
+                      <RichText html={card.body} />
+                    </p>
+                  )}
+                  {card.bullets && card.bullets.length > 0 && (
+                    <BulletList items={card.bullets} dotColor={bulletColor} compact />
+                  )}
+                </div>
               </div>
             ))}
           </div>
         </section>
 
-        {/* CTA — signature gradient frame + glass interior */}
         <section style={{ marginBottom: 48, marginTop: 8 }}>
           <div
             className="gradient-ihwn"
@@ -907,7 +1004,6 @@ export default function RiskRadarCaseStudyTemplate({
           </div>
         </section>
 
-        {/* Footer row */}
         <div
           style={{
             paddingBottom: 80,
