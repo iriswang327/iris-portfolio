@@ -9,7 +9,7 @@ export default defineConfig({
   basePath: "/studio",
   projectId,
   dataset,
-  title: "Museum of Iris",
+  title: "iris wang",
   schema: {
     types: schemaTypes,
   },
@@ -17,7 +17,7 @@ export default defineConfig({
     structureTool({
       structure: (S) =>
         S.list()
-          .title("Museum of Iris")
+          .title("iris wang")
           .items([
             S.listItem()
               .title("Dreams — Mock Projects")
