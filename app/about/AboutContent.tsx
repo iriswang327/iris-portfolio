@@ -83,22 +83,85 @@ const COMMUNITY_ITEMS = [
 // ─── Books ──────────────────────────────────────────────────────────────────
 
 const BOOKS_CURRENT = [
-  { title: "Crime and Punishment", author: "Fyodor Dostoevsky", color: "#C9B99A", isbn: "0451524934" },
-  { title: "East of Eden", author: "John Steinbeck", color: "#B8C4A0", isbn: "0142000665" },
-  { title: "A Court of Silver Flames", author: "Sarah J. Maas", color: "#E8A5B0", isbn: "1681196288" },
+  {
+    title: "Crime and Punishment",
+    author: "Fyodor Dostoevsky",
+    wash: "#F5EBC8",
+    accent: "#E8D498",
+  },
+  {
+    title: "East of Eden",
+    author: "John Steinbeck",
+    wash: "#FFE0C8",
+    accent: "#FFBF94",
+  },
+  {
+    title: "A Tree Grows in Brooklyn",
+    author: "Betty Smith",
+    wash: "#D8E8D4",
+    accent: "#98C098",
+  },
 ];
 
 const BOOKS_TBR = [
-  { title: "I Want You to Be Happy", author: "Jem Calber", color: "#C4B5E8" },
-  { title: "In Five Years", author: "Rebecca Serle", color: "#B5D4E8", isbn: "1982105386" },
-  { title: "Babel", author: "R.F. Kuang", color: "#8BA8C8", isbn: "0063021420" },
-  { title: "The Art of War", author: "Sun Tzu", color: "#C8BEA8", isbn: "1599869038" },
-  { title: "Madonna in a Fur Coat", author: "Sabahattin Ali", color: "#D4A8B8", isbn: "0143106385" },
+  {
+    title: "Sunburn",
+    author: "Laura Lippman",
+    wash: "#F8D8C8",
+    accent: "#E8A888",
+  },
+  {
+    title: "In Five Years",
+    author: "Rebecca Serle",
+    wash: "#E4EAF2",
+    accent: "#A8BCD8",
+  },
+  {
+    title: "Madonna in a Fur Coat",
+    author: "Sabahattin Ali",
+    wash: "#E8E8EA",
+    accent: "#B0B0B8",
+  },
+  {
+    title: "I Want You to Be Happy",
+    author: "Jem Calber",
+    wash: "#F8D8E8",
+    accent: "#ECB8D4",
+  },
+  {
+    title: "Babel",
+    author: "R.F. Kuang",
+    wash: "#E8E8EA",
+    accent: "#B8B8BE",
+  },
 ];
 
-const BOOKS_STARS = [
-  { title: "The Goldfinch", author: "Donna Tartt", color: "#E8D4A0", isbn: "0316055443" },
-  { title: "Recursion", author: "Blake Crouch", color: "#A8C4D4", isbn: "0525564239" },
+const BOOKS_PRETTY_GOOD = [
+  {
+    title: "The Goldfinch",
+    author: "Donna Tartt",
+    wash: "#C8E4F0",
+    accent: "#90C8E0",
+  },
+  {
+    title: "Recursion",
+    author: "Blake Crouch",
+    wash: "#F5EAC8",
+    accent: "#E8D080",
+  },
+  {
+    title: "Tomorrow, and Tomorrow, and Tomorrow",
+    author: "Gabrielle Zevin",
+    wash:
+      "linear-gradient(120deg, #FADCE8 0%, #F5ECC8 22%, #D8F0D8 44%, #D8E8F8 66%, #E8D8F8 88%)",
+    accent: "linear-gradient(135deg, #F0ABFC, #A78BFA, #7DD3FC)",
+  },
+  {
+    title: "Normal People",
+    author: "Sally Rooney",
+    wash: "#D8E4D4",
+    accent: "#98B898",
+  },
 ];
 
 // ─── Fun facts ──────────────────────────────────────────────────────────────
@@ -113,52 +176,58 @@ const FUN_FACTS = [
   { emoji: "☕", line: "approximately 847 americanos w/ cinnamon since freshman year" },
 ] as const;
 
-// ─── Book cover component ───────────────────────────────────────────────────
+// ─── Book ledger (text-first, no covers) ─────────────────────────────────────
 
 type BookEntry = {
   title: string;
   author: string;
-  color: string;
-  isbn?: string;
+  wash: string;
+  accent: string;
 };
 
-function BookCover({ title, author, color, isbn }: BookEntry) {
-  const [coverFailed, setCoverFailed] = useState(false);
-  const coverSrc = isbn
-    ? `https://covers.openlibrary.org/b/isbn/${isbn}-M.jpg`
-    : null;
-
-  if (coverSrc && !coverFailed) {
-    return (
-      <div
-        className="relative h-[110px] w-20 flex-shrink-0 overflow-hidden rounded-lg shadow-[2px_4px_12px_rgba(0,0,0,0.1)]"
-        title={`${title} — ${author}`}
-      >
-        <Image
-          src={coverSrc}
-          alt={`${title} by ${author}`}
-          fill
-          sizes="80px"
-          className="object-cover"
-          onError={() => setCoverFailed(true)}
-        />
-      </div>
-    );
-  }
-
+function BookLedgerRow({ book }: { book: BookEntry }) {
   return (
     <div
-      className="relative h-[110px] w-20 flex-shrink-0 overflow-hidden rounded-lg shadow-[2px_4px_12px_rgba(0,0,0,0.1)]"
-      style={{ background: color }}
-      title={`${title} — ${author}`}
+      className="flex items-center gap-3 rounded-lg px-3 py-2.5"
+      style={{ background: book.wash }}
     >
-      <div
-        className="absolute bottom-0 left-[7px] top-0 w-px bg-black/10"
+      <span
+        className="h-2 w-2 shrink-0 rounded-full"
+        style={{ background: book.accent }}
         aria-hidden="true"
       />
-      <div className="px-2.5 py-2.5 pl-3.5">
-        <p className="text-[7.5px] font-semibold leading-snug text-black/55">{title}</p>
-        <p className="mt-1 text-[6.5px] font-normal text-black/35">{author}</p>
+      <div className="min-w-0 flex-1">
+        <p className="text-[12px] font-normal leading-snug text-[var(--foreground)]">
+          {book.title}
+        </p>
+        <p className="mt-px text-[10px] font-light text-[#AAAAAA]">{book.author}</p>
+      </div>
+    </div>
+  );
+}
+
+function BookShelf({
+  label,
+  books,
+  columns = 1,
+}: {
+  label: string;
+  books: BookEntry[];
+  columns?: 1 | 2;
+}) {
+  return (
+    <div>
+      <p className="section-label mb-2 text-[#BBBBBB]">{label}</p>
+      <div
+        className={
+          columns === 2
+            ? "grid grid-cols-1 gap-1 sm:grid-cols-2"
+            : "flex flex-col gap-1"
+        }
+      >
+        {books.map((book) => (
+          <BookLedgerRow key={book.title} book={book} />
+        ))}
       </div>
     </div>
   );
@@ -535,45 +604,12 @@ export default function AboutContent() {
           </div>
 
           {activeTab === "books" ? (
-            <div className="flex flex-col" style={{ gap: 32 }}>
-              {/* Currently Reading */}
-              <div>
-                <p className="section-label" style={{ color: "#BBBBBB", marginBottom: 16 }}>
-                  CURRENTLY READING
-                </p>
-                <div className="flex flex-wrap" style={{ gap: 12 }}>
-                  {BOOKS_CURRENT.map((b) => (
-                    <BookCover key={b.title} {...b} />
-                  ))}
-                </div>
+            <div className="flex flex-col gap-6">
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                <BookShelf label="Currently Reading" books={BOOKS_CURRENT} />
+                <BookShelf label="To Be Read" books={BOOKS_TBR} />
               </div>
-
-              {/* To Be Read */}
-              <div>
-                <p className="section-label" style={{ color: "#BBBBBB", marginBottom: 16 }}>
-                  TO BE READ
-                </p>
-                <div className="flex flex-wrap" style={{ gap: 12 }}>
-                  {BOOKS_TBR.map((b) => (
-                    <BookCover key={b.title} {...b} />
-                  ))}
-                </div>
-              </div>
-
-              {/* Almost ✦ Stars */}
-              <div>
-                <p className="section-label" style={{ color: "#BBBBBB", marginBottom: 6 }}>
-                  ALMOST ✦ STARS
-                </p>
-                <p style={{ fontSize: 11, fontWeight: 300, fontStyle: "italic", color: "#888888", marginBottom: 16 }}>
-                  because art is not perfection
-                </p>
-                <div className="flex flex-wrap" style={{ gap: 12 }}>
-                  {BOOKS_STARS.map((b) => (
-                    <BookCover key={b.title} {...b} />
-                  ))}
-                </div>
-              </div>
+              <BookShelf label="Pretty Good Reads" books={BOOKS_PRETTY_GOOD} columns={2} />
             </div>
           ) : (
             <div className="flex justify-center" style={{ paddingTop: 16, paddingBottom: 16 }}>
