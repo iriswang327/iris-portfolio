@@ -28,8 +28,6 @@ export interface ReflectionColumn {
 }
 
 export interface DesignCaseStudyProps {
-  /** e.g. "Dreams → Apple → Maps Redesign" */
-  breadcrumb: string;
   /** Back link href — e.g. "/design" */
   backHref?: string;
   /** Back link label — e.g. "← Back to Apple" */
@@ -97,7 +95,6 @@ function Hairline({ style }: { style?: React.CSSProperties }) {
 // ─── Main component ──────────────────────────────────────────────────────────
 
 export default function DesignCaseStudyTemplate({
-  breadcrumb,
   backHref = "/design",
   backLabel = "← Back to Design",
   title,
@@ -122,38 +119,8 @@ export default function DesignCaseStudyTemplate({
         style={{ maxWidth: 960, padding: "0 32px" }}
       >
 
-        {/* ── Breadcrumb ─────────────────────────────────── */}
-        <p
-          style={{
-            fontSize: 11,
-            fontWeight: 300,
-            color: "#BBBBBB",
-            marginTop: 40,
-            marginBottom: 0,
-            letterSpacing: "-0.01em",
-          }}
-        >
-          {breadcrumb}
-        </p>
-
         {/* ── Hero block ─────────────────────────────────── */}
-        <div style={{ marginTop: 24, marginBottom: 32 }}>
-          {/* Top label row — "MOCK PROJECT · COMPANY · PRODUCT DESIGN" */}
-          {metadata.length > 0 && (
-            <p
-              style={{
-                fontSize: 10,
-                fontWeight: 400,
-                color: "#BBBBBB",
-                letterSpacing: "0.16em",
-                textTransform: "uppercase",
-                marginBottom: 10,
-              }}
-            >
-              {metadata.map((m) => m.value).join(" · ")}
-            </p>
-          )}
-
+        <div style={{ marginTop: 40, marginBottom: 32 }}>
           {/* Title */}
           <h1
             style={{

@@ -5,7 +5,6 @@ import DesignCaseStudyTemplate from "@/components/DesignCaseStudyTemplate";
 export default function GeminiPage() {
   return (
     <DesignCaseStudyTemplate
-      breadcrumb="Design → Gemini → News Integration"
       backHref="/"
       backLabel="← Back to Design"
       title="Gemini Crypto Integration"

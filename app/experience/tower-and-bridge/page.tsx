@@ -12,17 +12,6 @@ const IMAGE_BASE = "/images/tower-bridge";
 export default function TowerAndBridgeCaseStudyPage() {
   return (
     <ExperienceCaseStudyTemplate
-      breadcrumb={[
-        { label: "Experience", href: "/experience" },
-        { label: "Tower & Bridge", href: "/experience" },
-        { label: "Client Strategy" },
-      ]}
-      eyebrowTags={[
-        "2024 – Present",
-        "Strategy Analyst",
-        "Brand & Analytics",
-        "Agency-Style Client Work",
-      ]}
       title="Tower & Bridge"
       subtitle="Real clients, real deliverables, real pressure — turning brand strategy and analytics into measurable nonprofit and small-business growth at UT Austin's student-run agency."
       metadata={[

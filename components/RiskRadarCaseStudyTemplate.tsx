@@ -5,11 +5,6 @@ import Link from "next/link";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
-export interface RiskRadarBreadcrumbItem {
-  label: string;
-  href?: string;
-}
-
 export interface RiskRadarMetaCell {
   label: string;
   value: string;
@@ -63,8 +58,6 @@ export interface TeamMember {
 }
 
 export interface RiskRadarCaseStudyProps {
-  breadcrumb: RiskRadarBreadcrumbItem[];
-  eyebrowTags: string[];
   title: string;
   subtitle: string;
   tagline: string;
@@ -241,8 +234,6 @@ function CaseImageSlot({
 // ─── Main template ───────────────────────────────────────────────────────────
 
 export default function RiskRadarCaseStudyTemplate({
-  breadcrumb,
-  eyebrowTags,
   title,
   subtitle,
   tagline,
@@ -262,51 +253,8 @@ export default function RiskRadarCaseStudyTemplate({
   return (
     <div className="w-full" style={{ backgroundColor: "var(--background)", paddingTop: 56 }}>
       <div className="mx-auto w-full" style={{ maxWidth: 960, padding: "0 32px" }}>
-        {/* Breadcrumb */}
-        <nav
-          aria-label="Breadcrumb"
-          style={{
-            fontSize: 11,
-            fontWeight: 300,
-            color: "#BBBBBB",
-            marginTop: 40,
-            marginBottom: 0,
-            letterSpacing: "-0.01em",
-          }}
-        >
-          {breadcrumb.map((item, index) => (
-            <span key={`${item.label}-${index}`}>
-              {index > 0 && <span style={{ margin: "0 6px" }}>→</span>}
-              {item.href ? (
-                <Link
-                  href={item.href}
-                  className="transition-colors hover:text-[var(--foreground)]"
-                  style={{ color: "inherit", textDecoration: "none" }}
-                >
-                  {item.label}
-                </Link>
-              ) : (
-                <span>{item.label}</span>
-              )}
-            </span>
-          ))}
-        </nav>
-
         {/* Hero */}
-        <div style={{ marginTop: 24, marginBottom: 16 }}>
-          <p
-            style={{
-              fontSize: 10,
-              fontWeight: 400,
-              color: "#BBBBBB",
-              letterSpacing: "0.16em",
-              textTransform: "uppercase",
-              marginBottom: 10,
-            }}
-          >
-            {eyebrowTags.join(" · ")}
-          </p>
-
+        <div style={{ marginTop: 40, marginBottom: 16 }}>
           <h1
             style={{
               fontSize: 40,

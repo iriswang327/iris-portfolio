@@ -5,11 +5,6 @@ import Link from "next/link";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
-export interface GivingBackBreadcrumbItem {
-  label: string;
-  href?: string;
-}
-
 export interface GivingBackMetaCell {
   label: string;
   value: string;
@@ -64,8 +59,6 @@ export interface ReflectionCard {
 }
 
 export interface GivingBackCaseStudyProps {
-  breadcrumb: GivingBackBreadcrumbItem[];
-  eyebrowTags: string[];
   title: string;
   subtitle: string;
   metadata: GivingBackMetaCell[];
@@ -446,8 +439,6 @@ function InsightsSplitPanel({ insights }: { insights: InsightsSplit }) {
 
 export default function GivingBackCaseStudyTemplate(props: GivingBackCaseStudyProps) {
   const {
-    breadcrumb,
-    eyebrowTags,
     title,
     subtitle,
     metadata,
@@ -469,48 +460,7 @@ export default function GivingBackCaseStudyTemplate(props: GivingBackCaseStudyPr
   return (
     <div className="w-full" style={{ backgroundColor: "var(--background)", paddingTop: 56 }}>
       <div className="mx-auto w-full" style={{ maxWidth: 960, padding: "0 32px" }}>
-        <nav
-          aria-label="Breadcrumb"
-          style={{
-            fontSize: 11,
-            fontWeight: 300,
-            color: "#BBBBBB",
-            marginTop: 40,
-            marginBottom: 0,
-            letterSpacing: "-0.01em",
-          }}
-        >
-          {breadcrumb.map((item, index) => (
-            <span key={`${item.label}-${index}`}>
-              {index > 0 && <span style={{ margin: "0 6px" }}>→</span>}
-              {item.href ? (
-                <Link
-                  href={item.href}
-                  className="transition-colors hover:text-[var(--foreground)]"
-                  style={{ color: "inherit", textDecoration: "none" }}
-                >
-                  {item.label}
-                </Link>
-              ) : (
-                <span>{item.label}</span>
-              )}
-            </span>
-          ))}
-        </nav>
-
-        <div style={{ marginTop: 24, marginBottom: 32 }}>
-          <p
-            style={{
-              fontSize: 10,
-              fontWeight: 400,
-              color: "#BBBBBB",
-              letterSpacing: "0.16em",
-              textTransform: "uppercase",
-              marginBottom: 10,
-            }}
-          >
-            {eyebrowTags.join(" · ")}
-          </p>
+        <div style={{ marginTop: 40, marginBottom: 32 }}>
           <h1
             style={{
               fontSize: 40,

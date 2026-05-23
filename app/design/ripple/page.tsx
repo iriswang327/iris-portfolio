@@ -5,7 +5,6 @@ import DesignCaseStudyTemplate from "@/components/DesignCaseStudyTemplate";
 export default function RipplePage() {
   return (
     <DesignCaseStudyTemplate
-      breadcrumb="Design → Texas Convergent → Ripple"
       backHref="/"
       backLabel="← Back to Design"
       finalSectionLabel="Final Result"
