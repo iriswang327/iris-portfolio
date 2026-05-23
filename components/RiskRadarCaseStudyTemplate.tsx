@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -65,9 +65,11 @@ export interface RiskRadarCaseStudyAccent {
   heroEyebrow?: string;
   heroMetrics?: RiskRadarHeroMetric[];
   heroImage?: {
-    src: string;
+    src?: string;
     alt: string;
     placeholderLabel: string;
+    videoSrc?: string;
+    posterSrc?: string;
   };
 }
 
@@ -396,14 +398,76 @@ function HeroImpactBand({ accent }: { accent: RiskRadarCaseStudyAccent }) {
           )}
         </div>
         {accent.heroImage && (
-          <CaseImageSlot
-            src={accent.heroImage.src}
-            alt={accent.heroImage.alt}
-            placeholderLabel={accent.heroImage.placeholderLabel}
-          />
+          accent.heroImage.videoSrc ? (
+            <CaseVideoPlayer
+              src={accent.heroImage.videoSrc}
+              poster={accent.heroImage.posterSrc}
+              alt={accent.heroImage.alt}
+            />
+          ) : accent.heroImage.src ? (
+            <CaseImageSlot
+              src={accent.heroImage.src}
+              alt={accent.heroImage.alt}
+              placeholderLabel={accent.heroImage.placeholderLabel}
+            />
+          ) : null
         )}
       </div>
     </section>
+  );
+}
+
+function CaseVideoPlayer({
+  src,
+  poster,
+  alt,
+}: {
+  src: string;
+  poster?: string;
+  alt: string;
+}) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [hasStarted, setHasStarted] = useState(false);
+
+  const handlePlay = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    void video.play();
+    setHasStarted(true);
+  };
+
+  return (
+    <div className="relative w-full overflow-hidden rounded-xl border border-black/[0.04] bg-neutral-950 shadow-sm">
+      <video
+        ref={videoRef}
+        src={src}
+        {...(poster ? { poster } : {})}
+        controls
+        playsInline
+        muted
+        preload={poster ? "metadata" : "auto"}
+        className="block w-full h-auto"
+        aria-label={alt}
+        onPlay={() => setHasStarted(true)}
+      />
+      {!hasStarted && (
+        <button
+          type="button"
+          onClick={handlePlay}
+          className="absolute inset-0 flex min-h-[44px] items-center justify-center bg-black/25 transition-colors hover:bg-black/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1e3a5f]/50 focus-visible:ring-offset-2"
+          aria-label={`Play ${alt}`}
+        >
+          <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white/92 text-[18px] text-neutral-900 shadow-[0_8px_24px_rgba(0,0,0,0.2)]">
+            ▶
+          </span>
+        </button>
+      )}
+      {!hasStarted && (
+        <p className="pointer-events-none absolute bottom-3 left-3 right-3 text-center text-[10px] font-normal tracking-[0.08em] uppercase text-white/70">
+          Tap to play · Unmute for sound
+        </p>
+      )}
+    </div>
   );
 }
 
@@ -593,9 +657,10 @@ export default function RiskRadarCaseStudyTemplate({
           </div>
         )}
 
-        {accent && (accent.heroMetrics?.length || accent.heroImage) && (
-          <HeroImpactBand accent={accent} />
-        )}
+        {accent &&
+          (accent.heroMetrics?.length ||
+            accent.heroImage?.src ||
+            accent.heroImage?.videoSrc) && <HeroImpactBand accent={accent} />}
 
         <section style={{ marginBottom: 64 }}>
           <SectionHeading eyebrow="Overview" title={overview.heading} accentColor={eyebrowColor} />

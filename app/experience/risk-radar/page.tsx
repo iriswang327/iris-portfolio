@@ -26,16 +26,16 @@ export default function RiskRadarCaseStudyPage() {
         heroGradient:
           "linear-gradient(148deg, #E8EEF5 0%, #C5D4E8 42%, #9BB0CC 100%)",
         bulletColor: "#1e3a5f",
-        heroEyebrow: "At a glance",
+        heroEyebrow: "Impact at a glance",
         heroMetrics: [
           { label: "Phases", num: "3", sub: "Ingest → predict → respond" },
           { label: "Score", num: "0–100", sub: "Risk probability" },
           { label: "Format", num: "Pitch", sub: "Class mock · not shipped" },
         ],
         heroImage: {
-          src: `${IMAGE_BASE}/dashboard.png`,
-          alt: "Risk Radar dashboard mockup — risk feed, scores, response templates",
-          placeholderLabel: `${IMAGE_BASE}/dashboard.png`,
+          alt: "Risk Radar product demo — ingest, predict, respond walkthrough",
+          placeholderLabel: "/videos/demo.mp4",
+          videoSrc: "/videos/demo.mp4",
         },
       }}
       overview={{
