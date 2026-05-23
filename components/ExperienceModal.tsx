@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
-export type ExperienceAccentTheme = "gold" | "rose" | "navy";
+export type ExperienceAccentTheme = "gold" | "burnt" | "navy";
 
 export interface ExperienceModalProps {
   isOpen: boolean;
@@ -40,29 +40,31 @@ const ACCENT_STYLES: Record<
 > = {
   gold: {
     panelShadow:
-      "0 20px 60px -30px rgba(14, 14, 16, 0.15), 0 1px 3px rgba(14, 14, 16, 0.04), 0 40px 90px -32px rgba(217, 119, 6, 0.1)",
-    badgeBg: "rgba(245, 237, 216, 0.6)",
-    badgeColor: "#92400E",
+      "0 20px 60px -30px rgba(14, 14, 16, 0.15), 0 1px 3px rgba(14, 14, 16, 0.04), 0 40px 90px -32px rgba(74, 124, 89, 0.1), 0 28px 60px -24px rgba(191, 87, 0, 0.08)",
+    badgeBg: "rgba(232, 240, 228, 0.72)",
+    badgeColor: "#3F6212",
     ctaShadow:
-      "0 16px 48px -20px rgba(14, 14, 16, 0.1), 0 12px 36px -16px rgba(217, 119, 6, 0.12)",
+      "0 16px 48px -20px rgba(14, 14, 16, 0.1), 0 12px 36px -16px rgba(74, 124, 89, 0.12), 0 8px 24px -12px rgba(191, 87, 0, 0.1)",
     ctaHoverShadow:
-      "0 20px 56px -18px rgba(14, 14, 16, 0.12), 0 16px 44px -14px rgba(217, 119, 6, 0.18)",
-    arrowGradient: "linear-gradient(148deg, #F5EDD8 0%, #D97706 100%)",
-    arrowShadow: "0 6px 16px -4px rgba(217, 119, 6, 0.3)",
-    focusRingClass: "focus-visible:ring-amber-400/50",
+      "0 20px 56px -18px rgba(14, 14, 16, 0.12), 0 16px 44px -14px rgba(74, 124, 89, 0.16), 0 12px 32px -12px rgba(191, 87, 0, 0.14)",
+    arrowGradient:
+      "linear-gradient(148deg, #F7F4EC 0%, #7C9A6E 52%, #BF5700 100%)",
+    arrowShadow:
+      "0 6px 16px -4px rgba(74, 124, 89, 0.28), 0 4px 12px -4px rgba(191, 87, 0, 0.22)",
+    focusRingClass: "focus-visible:ring-emerald-500/45",
   },
-  rose: {
+  burnt: {
     panelShadow:
-      "0 20px 60px -30px rgba(14, 14, 16, 0.15), 0 1px 3px rgba(14, 14, 16, 0.04), 0 40px 90px -32px rgba(236, 72, 153, 0.09)",
-    badgeBg: "rgba(252, 232, 240, 0.65)",
-    badgeColor: "#9D174D",
+      "0 20px 60px -30px rgba(14, 14, 16, 0.15), 0 1px 3px rgba(14, 14, 16, 0.04), 0 40px 90px -32px rgba(191, 87, 0, 0.1)",
+    badgeBg: "rgba(250, 240, 230, 0.65)",
+    badgeColor: "#9A3412",
     ctaShadow:
-      "0 16px 48px -20px rgba(14, 14, 16, 0.1), 0 12px 36px -16px rgba(236, 72, 153, 0.1)",
+      "0 16px 48px -20px rgba(14, 14, 16, 0.1), 0 12px 36px -16px rgba(191, 87, 0, 0.12)",
     ctaHoverShadow:
-      "0 20px 56px -18px rgba(14, 14, 16, 0.12), 0 16px 44px -14px rgba(236, 72, 153, 0.16)",
-    arrowGradient: "linear-gradient(148deg, #FCE8F0 0%, #EC4899 100%)",
-    arrowShadow: "0 6px 16px -4px rgba(236, 72, 153, 0.28)",
-    focusRingClass: "focus-visible:ring-pink-400/50",
+      "0 20px 56px -18px rgba(14, 14, 16, 0.12), 0 16px 44px -14px rgba(191, 87, 0, 0.18)",
+    arrowGradient: "linear-gradient(148deg, #FAF0E6 0%, #BF5700 100%)",
+    arrowShadow: "0 6px 16px -4px rgba(191, 87, 0, 0.3)",
+    focusRingClass: "focus-visible:ring-orange-600/50",
   },
   navy: {
     panelShadow:

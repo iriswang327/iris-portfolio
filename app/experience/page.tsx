@@ -38,7 +38,7 @@ interface ImpactCardDef {
   frameClassName?: string;
   /** Ambient chromatic glow on hover (Gemini / Convergent parity) */
   showChromaticGlow?: boolean;
-  glowVariant?: "gold" | "rose" | "navy";
+  glowVariant?: "gold" | "burnt" | "navy";
   modal: ModalConfig;
 }
 
@@ -67,7 +67,7 @@ const INTEGRATED_DESIGN_MODAL: ModalConfig = {
   microDescription:
     "An end-to-end user behavioral research sprint that pivoted from a physical merchandise proof-of-concept to an integrated stadium jumbotron video campaign and live responsive data portal.",
   expandHref: "/experience/giving-back",
-  accentTheme: "rose",
+  accentTheme: "burnt",
 };
 
 const RISK_RADAR_MODAL: ModalConfig = {
@@ -87,26 +87,28 @@ const RISK_RADAR_MODAL: ModalConfig = {
 const STRATEGIC_IMPACT_CARDS: ImpactCardDef[] = [
   {
     id: "tower-bridge",
-    gradient: "linear-gradient(148deg, #F5EDD8 0%, #EDD9A3 100%)",
+    gradient:
+      "linear-gradient(148deg, #F7F4EC 0%, #D4E2CC 42%, #E8DFD0 72%, #EDD5C4 100%)",
     pill: "Tower & Bridge · Analytics Strategy",
     pillDark: false,
     hoverDescription: "Real clients, real strategy, real stakes.",
     videoUrl: "/videos/tower-thumbnail.mp4",
-    frameClassName: `${GLASS_FRAME_BASE} bg-gradient-to-tr from-amber-50/70 via-orange-50/40 to-stone-50/60 border border-amber-200/30 shadow-[0_15px_40px_rgba(0,0,0,0.04)] hover:shadow-[0_22px_50px_rgba(217,119,6,0.1)]`,
+    frameClassName: `${GLASS_FRAME_BASE} backdrop-blur-md bg-gradient-to-br from-stone-50/85 via-emerald-100/70 to-amber-100/65 border border-emerald-300/35 shadow-[0_15px_40px_rgba(0,0,0,0.04),inset_0_1px_0_rgba(255,255,255,0.5)] hover:shadow-[0_22px_50px_rgba(74,124,89,0.14),0_16px_36px_-12px_rgba(191,87,0,0.12)] ring-1 ring-[#BF5700]/10`,
     showChromaticGlow: true,
     glowVariant: "gold",
     modal: TOWER_BRIDGE_MODAL,
   },
   {
     id: "integrated-design-thinking",
-    gradient: "linear-gradient(148deg, #FCE8F0 0%, #F4C8DC 100%)",
+    gradient:
+      "linear-gradient(148deg, #FAF0E6 0%, #E8D5C4 42%, #D4B896 100%)",
     pill: "Integrated Design · UX Research",
     pillDark: false,
     hoverDescription: "Full UX research cycle for unhoused community advocacy.",
     videoUrl: "/videos/integrated-design-thumbnail.mp4",
-    frameClassName: `${GLASS_FRAME_BASE} bg-gradient-to-tr from-rose-50/70 via-pink-50/45 to-fuchsia-50/40 border border-pink-200/25 shadow-[0_15px_40px_rgba(0,0,0,0.04)] hover:shadow-[0_22px_50px_rgba(236,72,153,0.1)]`,
+    frameClassName: `${GLASS_FRAME_BASE} backdrop-blur-md bg-gradient-to-br from-orange-100/70 via-[#BF5700]/12 to-stone-300/50 border border-[#BF5700]/20 shadow-[0_15px_40px_rgba(0,0,0,0.04)] hover:shadow-[0_22px_50px_rgba(191,87,0,0.14)]`,
     showChromaticGlow: true,
-    glowVariant: "rose",
+    glowVariant: "burnt",
     modal: INTEGRATED_DESIGN_MODAL,
   },
   {
@@ -115,6 +117,7 @@ const STRATEGIC_IMPACT_CARDS: ImpactCardDef[] = [
     pill: "Risk Radar · AI Product",
     pillDark: true,
     hoverDescription: "AI brand crisis prediction — BERT, RAG, Spring 2026.",
+    videoUrl: "/videos/risk-radar-thumbnail.mp4",
     frameClassName: `${GLASS_FRAME_BASE} bg-gradient-to-tr from-slate-900/50 via-indigo-950/35 to-slate-800/30 border border-white/[0.08] shadow-[0_15px_40px_rgba(0,0,0,0.2)] hover:shadow-[0_22px_50px_rgba(99,102,241,0.15)]`,
     showChromaticGlow: true,
     glowVariant: "navy",
@@ -479,13 +482,13 @@ export default function ExperiencePage() {
                 >
                   {card.showChromaticGlow && card.glowVariant === "gold" && (
                     <div
-                      className="absolute inset-0 -z-10 rounded-[20px] bg-gradient-to-r from-amber-500/0 to-orange-500/0 opacity-0 blur-xl transition-all duration-500 group-hover:opacity-50 group-hover:from-amber-500/15 group-hover:to-orange-500/10"
+                      className="absolute inset-0 -z-10 rounded-[20px] bg-gradient-to-r from-emerald-400/0 via-[#BF5700]/0 to-amber-300/0 opacity-0 blur-xl transition-all duration-500 group-hover:opacity-55 group-hover:from-emerald-400/18 group-hover:via-[#BF5700]/12 group-hover:to-amber-200/14"
                       aria-hidden="true"
                     />
                   )}
-                  {card.showChromaticGlow && card.glowVariant === "rose" && (
+                  {card.showChromaticGlow && card.glowVariant === "burnt" && (
                     <div
-                      className="absolute inset-0 -z-10 rounded-[20px] bg-gradient-to-r from-pink-500/0 to-rose-500/0 opacity-0 blur-xl transition-all duration-500 group-hover:opacity-50 group-hover:from-pink-500/15 group-hover:to-rose-500/10"
+                      className="absolute inset-0 -z-10 rounded-[20px] bg-gradient-to-r from-[#BF5700]/0 to-stone-500/0 opacity-0 blur-xl transition-all duration-500 group-hover:opacity-50 group-hover:from-[#BF5700]/18 group-hover:to-stone-500/12"
                       aria-hidden="true"
                     />
                   )}
