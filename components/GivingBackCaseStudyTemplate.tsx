@@ -44,62 +44,91 @@ export interface InsightsSplit {
 export interface GivingBackContribution {
   step: string;
   heading: string;
-  paragraphs: string[];
+  paragraphs?: string[];
+  bullets?: string[];
   image: {
-    src: string;
+    src?: string;
     alt: string;
     placeholderLabel: string;
     videoSrc?: string;
+    posterSrc?: string;
   };
 }
 
 export interface ReflectionCard {
   label: string;
   title: string;
-  body: string;
+  body?: string;
+  bullets?: string[];
+}
+
+export interface GivingBackHeroMetric {
+  label: string;
+  num: string;
+  sub: string;
+}
+
+export interface GivingBackCaseStudyAccent {
+  heroGradient: string;
+  bulletColor?: string;
+  heroEyebrow?: string;
+  heroMetrics?: GivingBackHeroMetric[];
+  heroImage?: {
+    src: string;
+    alt: string;
+    placeholderLabel: string;
+  };
 }
 
 export interface GivingBackCaseStudyProps {
   title: string;
   subtitle: string;
+  subtitleHtml?: string;
   metadata: GivingBackMetaCell[];
+  accent?: GivingBackCaseStudyAccent;
   overview: {
     heading: string;
-    body: string;
+    body?: string;
     team: TeamMember[];
     bullets: string[];
   };
   theQuestion: {
     heading: string;
-    body: string;
+    body?: string;
+    bullets?: string[];
     hmwLabel: string;
     hmwHtml: string;
   };
   research: {
     heading: string;
-    body: string;
+    body?: string;
+    bullets?: string[];
     images: ImagePairItem[];
     themes: ThemeCard[];
     pullQuote: string;
-    closingBody: string;
+    closingBody?: string;
+    closingBullets?: string[];
   };
   prototypeOne: {
     heading: string;
-    body: string;
+    body?: string;
+    bullets?: string[];
     images: ImagePairItem[];
     calloutLabel: string;
     calloutText: string;
   };
   testOne: {
     heading: string;
-    body: string;
+    body?: string;
+    bullets?: string[];
     highlightImage?: ImagePairItem;
     quotes: ParticipantQuote[];
     insights: InsightsSplit;
   };
   redefine: {
     heading: string;
-    body: string;
+    body?: string;
+    bullets?: string[];
     hmwImage?: {
       src: string;
       alt: string;
@@ -113,12 +142,14 @@ export interface GivingBackCaseStudyProps {
   };
   prototypeTwo: {
     heading: string;
-    body: string;
+    body?: string;
+    bullets?: string[];
     contributions: GivingBackContribution[];
   };
   testTwo: {
     heading: string;
-    body: string;
+    body?: string;
+    bullets?: string[];
     images: ImagePairItem[];
     quotes: ParticipantQuote[];
     insights: InsightsSplit;
@@ -143,16 +174,161 @@ const ACCENT = "#BF5700";
 const ACCENT_TINT = "rgba(191,87,0,0.10)";
 const ACCENT_TINT_2 = "rgba(191,87,0,0.04)";
 
-function SectionLabel({ children }: { children: React.ReactNode }) {
+function SectionEyebrow({
+  children,
+  accentColor = ACCENT,
+}: {
+  children: React.ReactNode;
+  accentColor?: string;
+}) {
   return (
     <p
       style={{
         fontSize: 10,
-        fontWeight: 400,
-        color: "#BBBBBB",
+        fontWeight: 500,
+        color: accentColor,
+        letterSpacing: "0.2em",
+        textTransform: "uppercase",
+        marginBottom: 8,
+      }}
+    >
+      {children}
+    </p>
+  );
+}
+
+function SectionTitle({ children }: { children: React.ReactNode }) {
+  return (
+    <h2
+      style={{
+        fontSize: 26,
+        fontWeight: 200,
+        color: "var(--foreground)",
+        letterSpacing: "-0.025em",
+        lineHeight: 1.2,
+        margin: 0,
+      }}
+    >
+      {children}
+    </h2>
+  );
+}
+
+function SectionIntro({ children, html }: { children?: React.ReactNode; html?: string }) {
+  if (html) {
+    return (
+      <p
+        className={richTextClassName}
+        style={{
+          fontSize: 13,
+          fontWeight: 300,
+          color: "rgba(26,22,37,0.45)",
+          lineHeight: 1.65,
+          maxWidth: 640,
+          marginTop: 10,
+          marginBottom: 0,
+        }}
+        dangerouslySetInnerHTML={{ __html: html }}
+      />
+    );
+  }
+
+  return (
+    <p
+      style={{
+        fontSize: 13,
+        fontWeight: 300,
+        color: "rgba(26,22,37,0.45)",
+        lineHeight: 1.65,
+        maxWidth: 640,
+        marginTop: 10,
+        marginBottom: 0,
+      }}
+    >
+      {children}
+    </p>
+  );
+}
+
+function SectionHeading({
+  eyebrow,
+  title,
+  intro,
+  introHtml,
+  accentColor,
+}: {
+  eyebrow: string;
+  title?: string;
+  intro?: string;
+  introHtml?: string;
+  accentColor?: string;
+}) {
+  return (
+    <header style={{ marginBottom: title || intro || introHtml ? 28 : 20 }}>
+      <SectionEyebrow accentColor={accentColor}>{eyebrow}</SectionEyebrow>
+      {title && <SectionTitle>{title}</SectionTitle>}
+      {introHtml && <SectionIntro html={introHtml} />}
+      {!introHtml && intro && <SectionIntro>{intro}</SectionIntro>}
+    </header>
+  );
+}
+
+function SubsectionTitle({ children }: { children: React.ReactNode }) {
+  return (
+    <h3
+      style={{
+        fontSize: 17,
+        fontWeight: 300,
+        color: "var(--foreground)",
+        letterSpacing: "-0.02em",
+        lineHeight: 1.35,
+        margin: 0,
+      }}
+    >
+      {children}
+    </h3>
+  );
+}
+
+function StepEyebrow({
+  children,
+  accentColor = ACCENT,
+}: {
+  children: React.ReactNode;
+  accentColor?: string;
+}) {
+  return (
+    <p
+      style={{
+        fontSize: 10,
+        fontWeight: 500,
+        color: accentColor,
         letterSpacing: "0.16em",
         textTransform: "uppercase",
-        marginBottom: 20,
+        marginBottom: 6,
+      }}
+    >
+      {children}
+    </p>
+  );
+}
+
+function CardEyebrow({
+  children,
+  accentColor = "rgba(26,22,37,0.38)",
+}: {
+  children: React.ReactNode;
+  accentColor?: string;
+}) {
+  return (
+    <p
+      style={{
+        fontSize: 10,
+        fontWeight: 500,
+        color: accentColor,
+        letterSpacing: "0.14em",
+        textTransform: "uppercase",
+        marginBottom: 6,
       }}
     >
       {children}
@@ -177,15 +353,110 @@ const bodyTextStyle: React.CSSProperties = {
   maxWidth: 640,
 };
 
-const sectionHeadingStyle: React.CSSProperties = {
-  fontSize: 13,
-  fontWeight: 400,
-  color: "var(--foreground)",
-  marginBottom: 10,
-  letterSpacing: "-0.01em",
-  maxWidth: 640,
-  lineHeight: 1.45,
-};
+const richTextClassName =
+  "[&_strong]:font-medium [&_strong]:text-[var(--foreground)] [&_em]:italic [&_em]:text-[rgba(26,22,37,0.72)] [&_.lead]:text-[15px] [&_.lead]:font-normal [&_.lead]:tracking-[-0.01em] [&_.lead]:text-[var(--foreground)] [&_.muted]:text-[11px] [&_.muted]:text-[rgba(26,22,37,0.42)] [&_.accent]:font-medium [&_.accent]:text-[#BF5700] [&_.sm]:text-[11px] [&_.sm]:text-[rgba(26,22,37,0.5)]";
+
+function RichText({
+  html,
+  className = "",
+  style,
+}: {
+  html: string;
+  className?: string;
+  style?: React.CSSProperties;
+}) {
+  return (
+    <span
+      className={`${richTextClassName} ${className}`.trim()}
+      style={style}
+      dangerouslySetInnerHTML={{ __html: html }}
+    />
+  );
+}
+
+function HeroImpactBand({
+  accent,
+}: {
+  accent: GivingBackCaseStudyAccent;
+}) {
+  return (
+    <section
+      className="relative mb-12 overflow-hidden rounded-2xl border border-[#BF5700]/20"
+      style={{
+        background: accent.heroGradient,
+        boxShadow: "0 20px 50px -24px rgba(191,87,0,0.18), 0 12px 32px -20px rgba(0,0,0,0.08)",
+      }}
+    >
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-[#BF5700]/15 blur-3xl"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -bottom-20 -left-10 h-56 w-56 rounded-full bg-orange-200/30 blur-3xl"
+      />
+      <div className="relative grid grid-cols-1 items-center gap-8 p-6 sm:p-8 md:grid-cols-2 md:gap-10">
+        <div>
+          {accent.heroEyebrow && (
+            <SectionEyebrow accentColor={ACCENT}>{accent.heroEyebrow}</SectionEyebrow>
+          )}
+          {accent.heroMetrics && accent.heroMetrics.length > 0 && (
+            <div className="grid grid-cols-3 gap-4">
+              {accent.heroMetrics.map((metric) => (
+                <div key={metric.label}>
+                  <p
+                    style={{
+                      fontSize: 28,
+                      fontWeight: 200,
+                      color: "var(--foreground)",
+                      letterSpacing: "-0.03em",
+                      lineHeight: 1,
+                      marginBottom: 6,
+                    }}
+                  >
+                    {metric.num}
+                  </p>
+                  <p
+                    style={{
+                      fontSize: 10,
+                      fontWeight: 500,
+                      color: "rgba(26,22,37,0.5)",
+                      letterSpacing: "0.12em",
+                      textTransform: "uppercase",
+                      marginBottom: 4,
+                    }}
+                  >
+                    {metric.label}
+                  </p>
+                  <p
+                    style={{
+                      fontSize: 11,
+                      fontWeight: 300,
+                      color: "rgba(26,22,37,0.45)",
+                      lineHeight: 1.45,
+                    }}
+                  >
+                    {metric.sub}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+        {accent.heroImage && (
+          <div className="overflow-hidden rounded-xl border border-white/60 bg-white/50 p-2 shadow-[0_12px_32px_rgba(0,0,0,0.06)] backdrop-blur-sm">
+            <CaseImageSlot
+              src={accent.heroImage.src}
+              alt={accent.heroImage.alt}
+              placeholderLabel={accent.heroImage.placeholderLabel}
+              wide
+            />
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
 
 function CaseImageSlot({
   src,
@@ -293,11 +564,11 @@ function CaseVideoPlayer({
       <video
         ref={videoRef}
         src={src}
-        poster={poster}
+        {...(poster ? { poster } : {})}
         controls
         playsInline
         muted
-        preload="metadata"
+        preload={poster ? "metadata" : "auto"}
         className="block w-full h-auto"
         aria-label={alt}
         onPlay={() => setHasStarted(true)}
@@ -329,15 +600,27 @@ function CaseMediaSlot({
   placeholderLabel,
   wide,
   videoSrc,
+  posterSrc,
 }: {
-  src: string;
+  src?: string;
   alt: string;
   placeholderLabel: string;
   wide?: boolean;
   videoSrc?: string;
+  posterSrc?: string;
 }) {
   if (videoSrc) {
-    return <CaseVideoPlayer src={videoSrc} poster={src} alt={alt} />;
+    return (
+      <CaseVideoPlayer
+        src={videoSrc}
+        poster={posterSrc}
+        alt={alt}
+      />
+    );
+  }
+
+  if (!src) {
+    return null;
   }
 
   return (
@@ -353,40 +636,53 @@ function CaseMediaSlot({
 function BulletList({
   items,
   accentMuted,
+  compact,
+  dotColor = ACCENT,
+  leadIndex,
 }: {
   items: string[];
   accentMuted?: boolean;
+  compact?: boolean;
+  dotColor?: string;
+  leadIndex?: number;
 }) {
   return (
-    <ul style={{ listStyle: "none", padding: 0, margin: 0, maxWidth: 640 }}>
-      {items.map((item) => (
-        <li
-          key={item}
-          style={{
-            display: "flex",
-            gap: 10,
-            alignItems: "flex-start",
-            fontSize: 13,
-            fontWeight: 300,
-            color: "#444444",
-            lineHeight: 1.65,
-            marginBottom: 8,
-          }}
-        >
-          <span
-            aria-hidden="true"
+    <ul style={{ listStyle: "none", padding: 0, margin: 0, maxWidth: compact ? 320 : 640 }}>
+      {items.map((item, index) => {
+        const isLead = leadIndex === index;
+        return (
+          <li
+            key={`${item.slice(0, 48)}-${index}`}
             style={{
-              width: 4,
-              height: 4,
-              borderRadius: "50%",
-              background: accentMuted ? "#BBBBBB" : ACCENT,
-              marginTop: 8,
-              flexShrink: 0,
+              display: "flex",
+              gap: 10,
+              alignItems: "flex-start",
+              fontSize: isLead ? 14 : compact ? 11 : 12,
+              fontWeight: isLead ? 400 : 300,
+              color: isLead
+                ? "var(--foreground)"
+                : compact
+                  ? "rgba(26,22,37,0.55)"
+                  : "rgba(26,22,37,0.62)",
+              lineHeight: isLead ? 1.55 : 1.6,
+              marginBottom: isLead ? 10 : 7,
             }}
-          />
-          {item}
-        </li>
-      ))}
+          >
+            <span
+              aria-hidden="true"
+              style={{
+                width: isLead ? 5 : 4,
+                height: isLead ? 5 : 4,
+                borderRadius: "50%",
+                background: accentMuted ? "#BBBBBB" : dotColor,
+                marginTop: isLead ? 9 : 7,
+                flexShrink: 0,
+              }}
+            />
+            <RichText html={item} />
+          </li>
+        );
+      })}
     </ul>
   );
 }
@@ -472,7 +768,13 @@ function QuoteGrid({ quotes }: { quotes: ParticipantQuote[] }) {
   );
 }
 
-function InsightsSplitPanel({ insights }: { insights: InsightsSplit }) {
+function InsightsSplitPanel({
+  insights,
+  dotColor = ACCENT,
+}: {
+  insights: InsightsSplit;
+  dotColor?: string;
+}) {
   return (
     <div
       className="grid grid-cols-1 md:grid-cols-2 gap-3"
@@ -498,7 +800,7 @@ function InsightsSplitPanel({ insights }: { insights: InsightsSplit }) {
         >
           What Worked
         </p>
-        <BulletList items={insights.worked} />
+        <BulletList items={insights.worked} dotColor={dotColor} />
       </div>
       <div
         style={{
@@ -520,7 +822,7 @@ function InsightsSplitPanel({ insights }: { insights: InsightsSplit }) {
         >
           What Didn&apos;t
         </p>
-        <BulletList items={insights.didnt} accentMuted />
+        <BulletList items={insights.didnt} accentMuted dotColor={dotColor} />
       </div>
     </div>
   );
@@ -530,7 +832,9 @@ export default function GivingBackCaseStudyTemplate(props: GivingBackCaseStudyPr
   const {
     title,
     subtitle,
+    subtitleHtml,
     metadata,
+    accent,
     overview,
     theQuestion,
     research,
@@ -545,6 +849,9 @@ export default function GivingBackCaseStudyTemplate(props: GivingBackCaseStudyPr
     backLabel = "← Back to experience",
     footerCrumb,
   } = props;
+
+  const eyebrowColor = accent?.bulletColor ?? ACCENT;
+  const bulletColor = accent?.bulletColor ?? ACCENT;
 
   return (
     <div className="w-full" style={{ backgroundColor: "var(--background)", paddingTop: 56 }}>
@@ -571,7 +878,7 @@ export default function GivingBackCaseStudyTemplate(props: GivingBackCaseStudyPr
               maxWidth: 680,
             }}
           >
-            {subtitle}
+            {subtitleHtml ? <RichText html={subtitleHtml} /> : subtitle}
           </p>
         </div>
 
@@ -622,10 +929,19 @@ export default function GivingBackCaseStudyTemplate(props: GivingBackCaseStudyPr
           </div>
         )}
 
+        {accent && (accent.heroMetrics?.length || accent.heroImage) && (
+          <HeroImpactBand accent={accent} />
+        )}
+
         <section style={{ marginBottom: 64 }}>
-          <SectionLabel>Overview</SectionLabel>
-          <p style={sectionHeadingStyle}>{overview.heading}</p>
-          <p style={{ ...bodyTextStyle, marginBottom: 20 }}>{overview.body}</p>
+          <SectionHeading
+            eyebrow="Overview"
+            title={overview.heading}
+            accentColor={eyebrowColor}
+          />
+          {overview.body && (
+            <p style={{ ...bodyTextStyle, marginBottom: 20 }}>{overview.body}</p>
+          )}
           <div className="flex flex-wrap gap-2" style={{ marginBottom: 20 }}>
             {overview.team.map((member) => (
               <span
@@ -655,15 +971,25 @@ export default function GivingBackCaseStudyTemplate(props: GivingBackCaseStudyPr
               </span>
             ))}
           </div>
-          <BulletList items={overview.bullets} />
+          <BulletList items={overview.bullets} dotColor={bulletColor} leadIndex={0} />
         </section>
 
         <Hairline style={{ marginBottom: 64 }} />
 
         <section style={{ marginBottom: 64 }}>
-          <SectionLabel>The Question</SectionLabel>
-          <p style={sectionHeadingStyle}>{theQuestion.heading}</p>
-          <p style={{ ...bodyTextStyle, marginBottom: 24 }}>{theQuestion.body}</p>
+          <SectionHeading
+            eyebrow="The Question"
+            title={theQuestion.heading}
+            accentColor={eyebrowColor}
+          />
+          {theQuestion.body && (
+            <p style={{ ...bodyTextStyle, marginBottom: 20 }}>{theQuestion.body}</p>
+          )}
+          {theQuestion.bullets && theQuestion.bullets.length > 0 && (
+            <div style={{ marginBottom: 24 }}>
+              <BulletList items={theQuestion.bullets} dotColor={bulletColor} leadIndex={0} />
+            </div>
+          )}
           <div
             style={{
               padding: "28px 32px",
@@ -702,9 +1028,19 @@ export default function GivingBackCaseStudyTemplate(props: GivingBackCaseStudyPr
         <Hairline style={{ marginBottom: 64 }} />
 
         <section style={{ marginBottom: 64 }}>
-          <SectionLabel>Research · Empathize</SectionLabel>
-          <p style={sectionHeadingStyle}>{research.heading}</p>
-          <p style={{ ...bodyTextStyle, marginBottom: 0 }}>{research.body}</p>
+          <SectionHeading
+            eyebrow="Research · Empathize"
+            title={research.heading}
+            accentColor={eyebrowColor}
+          />
+          {research.body && (
+            <p style={{ ...bodyTextStyle, marginBottom: 0 }}>{research.body}</p>
+          )}
+          {research.bullets && research.bullets.length > 0 && (
+            <div style={{ marginTop: research.body ? 16 : 0, marginBottom: 0 }}>
+              <BulletList items={research.bullets} dotColor={bulletColor} leadIndex={0} />
+            </div>
+          )}
           <ImagePairGrid images={research.images} />
           <div
             className="grid grid-cols-1 md:grid-cols-2 gap-3"
@@ -733,11 +1069,12 @@ export default function GivingBackCaseStudyTemplate(props: GivingBackCaseStudyPr
                 </p>
                 <p
                   style={{
-                    fontSize: 13,
-                    fontWeight: 400,
+                    fontSize: 14,
+                    fontWeight: 500,
                     color: "var(--foreground)",
-                    marginBottom: 10,
-                    lineHeight: 1.3,
+                    marginBottom: 8,
+                    lineHeight: 1.25,
+                    letterSpacing: "-0.01em",
                   }}
                 >
                   {theme.title}
@@ -746,12 +1083,12 @@ export default function GivingBackCaseStudyTemplate(props: GivingBackCaseStudyPr
                   style={{
                     fontSize: 11,
                     fontWeight: 300,
-                    color: "#888888",
-                    lineHeight: 1.6,
+                    color: "rgba(26,22,37,0.55)",
+                    lineHeight: 1.55,
                     marginBottom: 12,
                   }}
                 >
-                  {theme.body}
+                  <RichText html={theme.body} />
                 </p>
                 <div
                   style={{
@@ -822,18 +1159,35 @@ export default function GivingBackCaseStudyTemplate(props: GivingBackCaseStudyPr
               &ldquo;{research.pullQuote}&rdquo;
             </p>
           </blockquote>
-          <p
-            style={bodyTextStyle}
-            dangerouslySetInnerHTML={{ __html: research.closingBody }}
-          />
+          {research.closingBody && (
+            <p
+              style={bodyTextStyle}
+              dangerouslySetInnerHTML={{ __html: research.closingBody }}
+            />
+          )}
+          {research.closingBullets && research.closingBullets.length > 0 && (
+            <div style={{ marginTop: 16 }}>
+              <BulletList items={research.closingBullets} dotColor={bulletColor} leadIndex={0} />
+            </div>
+          )}
         </section>
 
         <Hairline style={{ marginBottom: 64 }} />
 
         <section style={{ marginBottom: 64 }}>
-          <SectionLabel>Prototype 01 · Define &amp; Ideate</SectionLabel>
-          <p style={sectionHeadingStyle}>{prototypeOne.heading}</p>
-          <p style={{ ...bodyTextStyle, marginBottom: 0 }}>{prototypeOne.body}</p>
+          <SectionHeading
+            eyebrow="Prototype 01 · Define & Ideate"
+            title={prototypeOne.heading}
+            accentColor={eyebrowColor}
+          />
+          {prototypeOne.body && (
+            <p style={{ ...bodyTextStyle, marginBottom: 0 }}>{prototypeOne.body}</p>
+          )}
+          {prototypeOne.bullets && prototypeOne.bullets.length > 0 && (
+            <div style={{ marginTop: prototypeOne.body ? 16 : 0 }}>
+              <BulletList items={prototypeOne.bullets} dotColor={bulletColor} leadIndex={0} />
+            </div>
+          )}
           <ImagePairGrid images={prototypeOne.images} />
           <div
             style={{
@@ -857,17 +1211,16 @@ export default function GivingBackCaseStudyTemplate(props: GivingBackCaseStudyPr
             </p>
             <p
               style={{
-                fontSize: 18,
+                fontSize: 17,
                 fontWeight: 300,
                 color: "var(--foreground)",
                 letterSpacing: "-0.01em",
                 lineHeight: 1.45,
                 margin: 0,
                 maxWidth: 640,
-                fontStyle: "italic",
               }}
             >
-              {prototypeOne.calloutText}
+              <RichText html={prototypeOne.calloutText} />
             </p>
           </div>
         </section>
@@ -875,9 +1228,19 @@ export default function GivingBackCaseStudyTemplate(props: GivingBackCaseStudyPr
         <Hairline style={{ marginBottom: 64 }} />
 
         <section style={{ marginBottom: 64 }}>
-          <SectionLabel>Test · Cycle 01</SectionLabel>
-          <p style={sectionHeadingStyle}>{testOne.heading}</p>
-          <p style={{ ...bodyTextStyle, marginBottom: 0 }}>{testOne.body}</p>
+          <SectionHeading
+            eyebrow="Test · Cycle 01"
+            title={testOne.heading}
+            accentColor={eyebrowColor}
+          />
+          {testOne.body && (
+            <p style={{ ...bodyTextStyle, marginBottom: 0 }}>{testOne.body}</p>
+          )}
+          {testOne.bullets && testOne.bullets.length > 0 && (
+            <div style={{ marginTop: testOne.body ? 16 : 0 }}>
+              <BulletList items={testOne.bullets} dotColor={bulletColor} leadIndex={0} />
+            </div>
+          )}
           {testOne.highlightImage && (
             <div className="mt-6 mb-2 flex flex-col gap-2">
               <CaseImageSlot
@@ -890,18 +1253,28 @@ export default function GivingBackCaseStudyTemplate(props: GivingBackCaseStudyPr
             </div>
           )}
           {testOne.quotes.length > 0 && <QuoteGrid quotes={testOne.quotes} />}
-          <InsightsSplitPanel insights={testOne.insights} />
+          <InsightsSplitPanel insights={testOne.insights} dotColor={bulletColor} />
         </section>
 
         <Hairline style={{ marginBottom: 64 }} />
 
         <section style={{ marginBottom: 64 }}>
-          <SectionLabel>Redefine</SectionLabel>
-          <p style={sectionHeadingStyle}>{redefine.heading}</p>
-          <p
-            style={{ ...bodyTextStyle, marginBottom: 24 }}
-            dangerouslySetInnerHTML={{ __html: redefine.body }}
+          <SectionHeading
+            eyebrow="Redefine"
+            title={redefine.heading}
+            accentColor={eyebrowColor}
           />
+          {redefine.body && (
+            <p
+              style={{ ...bodyTextStyle, marginBottom: 20 }}
+              dangerouslySetInnerHTML={{ __html: redefine.body }}
+            />
+          )}
+          {redefine.bullets && redefine.bullets.length > 0 && (
+            <div style={{ marginBottom: 24 }}>
+              <BulletList items={redefine.bullets} dotColor={bulletColor} leadIndex={0} />
+            </div>
+          )}
           {redefine.hmwImage ? (
             <div className="mb-6 flex flex-col gap-2">
               <CaseImageSlot
@@ -1028,7 +1401,7 @@ export default function GivingBackCaseStudyTemplate(props: GivingBackCaseStudyPr
               >
                 What We Needed
               </p>
-              <BulletList items={redefine.needed} />
+              <BulletList items={redefine.needed} dotColor={bulletColor} />
             </div>
             <div
               style={{
@@ -1050,7 +1423,7 @@ export default function GivingBackCaseStudyTemplate(props: GivingBackCaseStudyPr
               >
                 What We Kept
               </p>
-              <BulletList items={redefine.kept} />
+              <BulletList items={redefine.kept} dotColor={bulletColor} />
             </div>
           </div>
         </section>
@@ -1058,9 +1431,19 @@ export default function GivingBackCaseStudyTemplate(props: GivingBackCaseStudyPr
         <Hairline style={{ marginBottom: 64 }} />
 
         <section style={{ marginBottom: 64 }}>
-          <SectionLabel>Prototype 02 · Reframe</SectionLabel>
-          <p style={sectionHeadingStyle}>{prototypeTwo.heading}</p>
-          <p style={{ ...bodyTextStyle, marginBottom: 32 }}>{prototypeTwo.body}</p>
+          <SectionHeading
+            eyebrow="Prototype 02 · Reframe"
+            title={prototypeTwo.heading}
+            accentColor={eyebrowColor}
+          />
+          {prototypeTwo.body && (
+            <p style={{ ...bodyTextStyle, marginBottom: 20 }}>{prototypeTwo.body}</p>
+          )}
+          {prototypeTwo.bullets && prototypeTwo.bullets.length > 0 && (
+            <div style={{ marginBottom: 32 }}>
+              <BulletList items={prototypeTwo.bullets} dotColor={bulletColor} leadIndex={0} />
+            </div>
+          )}
           {prototypeTwo.contributions.map((item, index) => (
             <div
               key={item.step}
@@ -1072,44 +1455,28 @@ export default function GivingBackCaseStudyTemplate(props: GivingBackCaseStudyPr
               }}
             >
               <div style={{ direction: "ltr" }}>
-                <p
-                  style={{
-                    fontSize: 10,
-                    fontWeight: 500,
-                    color: ACCENT,
-                    letterSpacing: "0.1em",
-                    textTransform: "uppercase",
-                    marginBottom: 5,
-                  }}
-                >
-                  {item.step}
-                </p>
-                <p
-                  style={{
-                    fontSize: 13,
-                    fontWeight: 400,
-                    color: "var(--foreground)",
-                    marginBottom: 8,
-                    letterSpacing: "-0.01em",
-                  }}
-                >
-                  {item.heading}
-                </p>
-                {item.paragraphs.map((para) => (
-                  <p
-                    key={para.slice(0, 40)}
-                    style={{
-                      fontSize: 11,
-                      fontWeight: 300,
-                      color: "rgba(26,22,37,0.4)",
-                      lineHeight: 1.6,
-                      maxWidth: 320,
-                      marginBottom: 8,
-                    }}
-                  >
-                    {para}
-                  </p>
-                ))}
+                <StepEyebrow accentColor={eyebrowColor}>{item.step}</StepEyebrow>
+                <SubsectionTitle>{item.heading}</SubsectionTitle>
+                <div style={{ marginTop: 10 }}>
+                  {item.paragraphs?.map((para) => (
+                    <p
+                      key={para.slice(0, 40)}
+                      style={{
+                        fontSize: 11,
+                        fontWeight: 300,
+                        color: "rgba(26,22,37,0.4)",
+                        lineHeight: 1.6,
+                        maxWidth: 320,
+                        marginBottom: 8,
+                      }}
+                    >
+                      {para}
+                    </p>
+                  ))}
+                  {item.bullets && item.bullets.length > 0 && (
+                    <BulletList items={item.bullets} dotColor={bulletColor} compact />
+                  )}
+                </div>
               </div>
               <div style={{ direction: "ltr" }}>
                 <CaseMediaSlot
@@ -1117,6 +1484,7 @@ export default function GivingBackCaseStudyTemplate(props: GivingBackCaseStudyPr
                   alt={item.image.alt}
                   placeholderLabel={item.image.placeholderLabel}
                   videoSrc={item.image.videoSrc}
+                  posterSrc={item.image.posterSrc}
                 />
               </div>
             </div>
@@ -1126,19 +1494,32 @@ export default function GivingBackCaseStudyTemplate(props: GivingBackCaseStudyPr
         <Hairline style={{ marginBottom: 64 }} />
 
         <section style={{ marginBottom: 64 }}>
-          <SectionLabel>Test · Cycle 02</SectionLabel>
-          <p style={sectionHeadingStyle}>{testTwo.heading}</p>
-          <p style={{ ...bodyTextStyle, marginBottom: 0 }}>{testTwo.body}</p>
+          <SectionHeading
+            eyebrow="Test · Cycle 02"
+            title={testTwo.heading}
+            accentColor={eyebrowColor}
+          />
+          {testTwo.body && (
+            <p style={{ ...bodyTextStyle, marginBottom: 0 }}>{testTwo.body}</p>
+          )}
+          {testTwo.bullets && testTwo.bullets.length > 0 && (
+            <div style={{ marginTop: testTwo.body ? 16 : 0 }}>
+              <BulletList items={testTwo.bullets} dotColor={bulletColor} leadIndex={0} />
+            </div>
+          )}
           <ImagePairGrid images={testTwo.images} />
-          <QuoteGrid quotes={testTwo.quotes} />
-          <InsightsSplitPanel insights={testTwo.insights} />
+          {testTwo.quotes.length > 0 && <QuoteGrid quotes={testTwo.quotes} />}
+          <InsightsSplitPanel insights={testTwo.insights} dotColor={bulletColor} />
         </section>
 
         <Hairline style={{ marginBottom: 64 }} />
 
         <section style={{ marginBottom: 64 }}>
-          <SectionLabel>Future Work</SectionLabel>
-          <p style={sectionHeadingStyle}>{futureWork.heading}</p>
+          <SectionHeading
+            eyebrow="Future Work"
+            title={futureWork.heading}
+            accentColor={eyebrowColor}
+          />
           <div
             style={{
               marginTop: 24,
@@ -1160,17 +1541,18 @@ export default function GivingBackCaseStudyTemplate(props: GivingBackCaseStudyPr
             >
               {futureWork.label}
             </p>
-            <BulletList items={futureWork.items} />
+            <BulletList items={futureWork.items} dotColor={bulletColor} />
           </div>
         </section>
 
         <Hairline style={{ marginBottom: 64 }} />
 
         <section style={{ marginBottom: 64 }}>
-          <SectionLabel>Reflection</SectionLabel>
-          <p style={{ ...sectionHeadingStyle, marginBottom: 24 }}>
-            {reflection.heading}
-          </p>
+          <SectionHeading
+            eyebrow="Reflection"
+            title={reflection.heading}
+            accentColor={eyebrowColor}
+          />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             {reflection.cards.map((card) => (
               <div
@@ -1182,39 +1564,25 @@ export default function GivingBackCaseStudyTemplate(props: GivingBackCaseStudyPr
                   background: "#ffffff",
                 }}
               >
-                <p
-                  style={{
-                    fontSize: 10,
-                    fontWeight: 400,
-                    color: "#BBBBBB",
-                    letterSpacing: "0.14em",
-                    textTransform: "uppercase",
-                    marginBottom: 12,
-                  }}
-                >
-                  {card.label}
-                </p>
-                <p
-                  style={{
-                    fontSize: 13,
-                    fontWeight: 400,
-                    color: "var(--foreground)",
-                    marginBottom: 10,
-                    lineHeight: 1.3,
-                  }}
-                >
-                  {card.title}
-                </p>
-                <p
-                  style={{
-                    fontSize: 11,
-                    fontWeight: 300,
-                    color: "#888888",
-                    lineHeight: 1.65,
-                  }}
-                >
-                  {card.body}
-                </p>
+                <CardEyebrow accentColor={eyebrowColor}>{card.label}</CardEyebrow>
+                <SubsectionTitle>{card.title}</SubsectionTitle>
+                <div style={{ marginTop: 10 }}>
+                  {card.body && (
+                    <p
+                      style={{
+                        fontSize: 11,
+                        fontWeight: 300,
+                        color: "#888888",
+                        lineHeight: 1.65,
+                      }}
+                    >
+                      {card.body}
+                    </p>
+                  )}
+                  {card.bullets && card.bullets.length > 0 && (
+                    <BulletList items={card.bullets} dotColor={bulletColor} compact />
+                  )}
+                </div>
               </div>
             ))}
           </div>
