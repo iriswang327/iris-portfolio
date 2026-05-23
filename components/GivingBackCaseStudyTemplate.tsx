@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -49,6 +49,7 @@ export interface GivingBackContribution {
     src: string;
     alt: string;
     placeholderLabel: string;
+    videoSrc?: string;
   };
 }
 
@@ -92,14 +93,21 @@ export interface GivingBackCaseStudyProps {
   testOne: {
     heading: string;
     body: string;
+    highlightImage?: ImagePairItem;
     quotes: ParticipantQuote[];
     insights: InsightsSplit;
   };
   redefine: {
     heading: string;
     body: string;
-    originalHmw: string;
-    refinedHmw: string;
+    hmwImage?: {
+      src: string;
+      alt: string;
+      placeholderLabel: string;
+      caption?: string;
+    };
+    originalHmw?: string;
+    refinedHmw?: string;
     needed: string[];
     kept: string[];
   };
@@ -258,6 +266,87 @@ function ImageCaption({ children }: { children: React.ReactNode }) {
     >
       {children}
     </p>
+  );
+}
+
+function CaseVideoPlayer({
+  src,
+  poster,
+  alt,
+}: {
+  src: string;
+  poster?: string;
+  alt: string;
+}) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [hasStarted, setHasStarted] = useState(false);
+
+  const handlePlay = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    void video.play();
+    setHasStarted(true);
+  };
+
+  return (
+    <div className="relative w-full overflow-hidden rounded-xl border border-black/[0.04] bg-neutral-950 shadow-sm">
+      <video
+        ref={videoRef}
+        src={src}
+        poster={poster}
+        controls
+        playsInline
+        muted
+        preload="metadata"
+        className="block w-full h-auto"
+        aria-label={alt}
+        onPlay={() => setHasStarted(true)}
+      />
+      {!hasStarted && (
+        <button
+          type="button"
+          onClick={handlePlay}
+          className="absolute inset-0 flex min-h-[44px] items-center justify-center bg-black/25 transition-colors hover:bg-black/35 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-600/50 focus-visible:ring-offset-2"
+          aria-label={`Play ${alt}`}
+        >
+          <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white/92 text-[18px] text-neutral-900 shadow-[0_8px_24px_rgba(0,0,0,0.2)]">
+            ▶
+          </span>
+        </button>
+      )}
+      {!hasStarted && (
+        <p className="pointer-events-none absolute bottom-3 left-3 right-3 text-center text-[10px] font-normal tracking-[0.08em] uppercase text-white/70">
+          Tap to play · Unmute for sound
+        </p>
+      )}
+    </div>
+  );
+}
+
+function CaseMediaSlot({
+  src,
+  alt,
+  placeholderLabel,
+  wide,
+  videoSrc,
+}: {
+  src: string;
+  alt: string;
+  placeholderLabel: string;
+  wide?: boolean;
+  videoSrc?: string;
+}) {
+  if (videoSrc) {
+    return <CaseVideoPlayer src={videoSrc} poster={src} alt={alt} />;
+  }
+
+  return (
+    <CaseImageSlot
+      src={src}
+      alt={alt}
+      placeholderLabel={placeholderLabel}
+      wide={wide}
+    />
   );
 }
 
@@ -789,7 +878,18 @@ export default function GivingBackCaseStudyTemplate(props: GivingBackCaseStudyPr
           <SectionLabel>Test · Cycle 01</SectionLabel>
           <p style={sectionHeadingStyle}>{testOne.heading}</p>
           <p style={{ ...bodyTextStyle, marginBottom: 0 }}>{testOne.body}</p>
-          <QuoteGrid quotes={testOne.quotes} />
+          {testOne.highlightImage && (
+            <div className="mt-6 mb-2 flex flex-col gap-2">
+              <CaseImageSlot
+                src={testOne.highlightImage.src}
+                alt={testOne.highlightImage.alt}
+                placeholderLabel={testOne.highlightImage.placeholderLabel}
+                wide
+              />
+              <ImageCaption>{testOne.highlightImage.caption}</ImageCaption>
+            </div>
+          )}
+          {testOne.quotes.length > 0 && <QuoteGrid quotes={testOne.quotes} />}
           <InsightsSplitPanel insights={testOne.insights} />
         </section>
 
@@ -802,94 +902,111 @@ export default function GivingBackCaseStudyTemplate(props: GivingBackCaseStudyPr
             style={{ ...bodyTextStyle, marginBottom: 24 }}
             dangerouslySetInnerHTML={{ __html: redefine.body }}
           />
-          <div
-            style={{
-              padding: "28px 32px",
-              border: "1px solid rgba(0,0,0,0.06)",
-              borderRadius: 16,
-              background: "#ffffff",
-              marginBottom: 24,
-            }}
-          >
-            <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-4 items-center">
-              <div
-                style={{
-                  padding: "16px 20px",
-                  borderRadius: 12,
-                  background: ACCENT_TINT_2,
-                }}
-              >
-                <p
-                  style={{
-                    fontSize: 10,
-                    fontWeight: 500,
-                    color: "#BBBBBB",
-                    letterSpacing: "0.14em",
-                    textTransform: "uppercase",
-                    marginBottom: 10,
-                  }}
-                >
-                  Original
-                </p>
-                <p
-                  style={{
-                    fontSize: 12,
-                    fontWeight: 400,
-                    fontStyle: "italic",
-                    color: "var(--foreground)",
-                    lineHeight: 1.45,
-                    margin: 0,
-                  }}
-                >
-                  {redefine.originalHmw}
-                </p>
-              </div>
-              <span
-                aria-hidden="true"
-                style={{
-                  fontSize: 20,
-                  color: ACCENT,
-                  fontWeight: 300,
-                  textAlign: "center",
-                }}
-                className="hidden md:block"
-              >
-                →
-              </span>
-              <div
-                style={{
-                  padding: "16px 20px",
-                  borderRadius: 12,
-                  background: ACCENT_TINT,
-                }}
-              >
-                <p
-                  style={{
-                    fontSize: 10,
-                    fontWeight: 500,
-                    color: ACCENT,
-                    letterSpacing: "0.14em",
-                    textTransform: "uppercase",
-                    marginBottom: 10,
-                  }}
-                >
-                  Refined
-                </p>
-                <p
-                  style={{
-                    fontSize: 12,
-                    fontWeight: 400,
-                    fontStyle: "italic",
-                    color: "var(--foreground)",
-                    lineHeight: 1.45,
-                    margin: 0,
-                  }}
-                >
-                  {redefine.refinedHmw}
-                </p>
-              </div>
+          {redefine.hmwImage ? (
+            <div className="mb-6 flex flex-col gap-2">
+              <CaseImageSlot
+                src={redefine.hmwImage.src}
+                alt={redefine.hmwImage.alt}
+                placeholderLabel={redefine.hmwImage.placeholderLabel}
+                wide
+              />
+              {redefine.hmwImage.caption && (
+                <ImageCaption>{redefine.hmwImage.caption}</ImageCaption>
+              )}
             </div>
-          </div>
+          ) : (
+            redefine.originalHmw &&
+            redefine.refinedHmw && (
+              <div
+                style={{
+                  padding: "28px 32px",
+                  border: "1px solid rgba(0,0,0,0.06)",
+                  borderRadius: 16,
+                  background: "#ffffff",
+                  marginBottom: 24,
+                }}
+              >
+                <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-4 items-center">
+                  <div
+                    style={{
+                      padding: "16px 20px",
+                      borderRadius: 12,
+                      background: ACCENT_TINT_2,
+                    }}
+                  >
+                    <p
+                      style={{
+                        fontSize: 10,
+                        fontWeight: 500,
+                        color: "#BBBBBB",
+                        letterSpacing: "0.14em",
+                        textTransform: "uppercase",
+                        marginBottom: 10,
+                      }}
+                    >
+                      Original
+                    </p>
+                    <p
+                      style={{
+                        fontSize: 12,
+                        fontWeight: 400,
+                        fontStyle: "italic",
+                        color: "var(--foreground)",
+                        lineHeight: 1.45,
+                        margin: 0,
+                      }}
+                    >
+                      {redefine.originalHmw}
+                    </p>
+                  </div>
+                  <span
+                    aria-hidden="true"
+                    style={{
+                      fontSize: 20,
+                      color: ACCENT,
+                      fontWeight: 300,
+                      textAlign: "center",
+                    }}
+                    className="hidden md:block"
+                  >
+                    →
+                  </span>
+                  <div
+                    style={{
+                      padding: "16px 20px",
+                      borderRadius: 12,
+                      background: ACCENT_TINT,
+                    }}
+                  >
+                    <p
+                      style={{
+                        fontSize: 10,
+                        fontWeight: 500,
+                        color: ACCENT,
+                        letterSpacing: "0.14em",
+                        textTransform: "uppercase",
+                        marginBottom: 10,
+                      }}
+                    >
+                      Refined
+                    </p>
+                    <p
+                      style={{
+                        fontSize: 12,
+                        fontWeight: 400,
+                        fontStyle: "italic",
+                        color: "var(--foreground)",
+                        lineHeight: 1.45,
+                        margin: 0,
+                      }}
+                    >
+                      {redefine.refinedHmw}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )
+          )}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div
               style={{
@@ -995,10 +1112,11 @@ export default function GivingBackCaseStudyTemplate(props: GivingBackCaseStudyPr
                 ))}
               </div>
               <div style={{ direction: "ltr" }}>
-                <CaseImageSlot
+                <CaseMediaSlot
                   src={item.image.src}
                   alt={item.image.alt}
                   placeholderLabel={item.image.placeholderLabel}
+                  videoSrc={item.image.videoSrc}
                 />
               </div>
             </div>
