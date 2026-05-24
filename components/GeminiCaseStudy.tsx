@@ -125,20 +125,20 @@ export default function GeminiCaseStudy() {
           </div>
         </header>
 
-        <section className="case-study-section case-study-section--stage" aria-label="Design previews">
+        <section className="case-study-section case-study-section--visual" aria-label="Design previews">
           <CaseLabel>Interface</CaseLabel>
           <CaseHeading>Explorations before feedback</CaseHeading>
           <p className="case-study-scroll-hint">
             Scroll for design after feedback from an ex-Gemini senior product designer.
           </p>
-          <div className="case-study-visual-mosaic">
+          <div className="case-study-teaser-grid case-study-teaser-grid--draft">
             <CaseFigure
-              className="case-study-figure--hero"
+              className="case-study-figure--wide"
               src="/images/gemini-desktop-markets.png"
               alt="Early Gemini markets page with integrated news stream"
               caption="Markets · news stream"
-              width={1400}
-              height={875}
+              width={1200}
+              height={750}
               priority
               draft
             />
@@ -164,44 +164,17 @@ export default function GeminiCaseStudy() {
 
         <CaseHairline />
 
-        <section className="case-study-section">
+        <section className="case-study-section case-study-section--primary">
           <CaseLabel>Context</CaseLabel>
           <CaseHeading>Why this project</CaseHeading>
 
-          <div className="case-study-story-grid">
-            <div className="case-study-story-main">
-              <p className="case-study-lede">
-                As someone with no crypto background, I wanted to learn more about Gemini. The blog
-                made me click out quickly — that&apos;s where this project started.
-              </p>
+          <div className="case-study-context-grid case-study-context-grid--editorial">
+            <p className="case-study-lede case-study-lede--flush">
+              As someone with no crypto background, I wanted to learn more about Gemini. The blog
+              made me click out quickly — that&apos;s where this project started.
+            </p>
 
-              <CaseSubheading>Questions I worked through</CaseSubheading>
-              <ul className="case-study-strategy-list">
-                <li>
-                  <span className="case-study-strategy-q">Why put news on the exchange?</span>
-                  <span className="case-study-strategy-a">
-                    Leaving the app to read news breaks your flow. Keep people here when they&apos;re
-                    already paying attention.
-                  </span>
-                </li>
-                <li>
-                  <span className="case-study-strategy-q">Would it move volume?</span>
-                  <span className="case-study-strategy-a">
-                    If macro news — rate cuts, ETF filings — shows up next to the asset you&apos;re
-                    trading, you might act on it instead of opening another tab first.
-                  </span>
-                </li>
-                <li>
-                  <span className="case-study-strategy-q">Has anyone tried this?</span>
-                  <span className="case-study-strategy-a">
-                    Coinbase ships news in-app. Gemini has a blog, but it lives outside trading and
-                    reads like generic company content.
-                  </span>
-                </li>
-              </ul>
-            </div>
-
-            <div className="case-study-story-aside experience-glass-panel">
+            <div className="case-study-context-panel experience-glass-panel">
               <CaseSubheading>What I identified</CaseSubheading>
               <ul className="case-study-pain-list case-study-pain-list--panel">
                 {PAIN_POINTS.map((point) => (
@@ -210,6 +183,33 @@ export default function GeminiCaseStudy() {
               </ul>
             </div>
           </div>
+
+          <div className="case-study-strategy-block case-study-strategy-block--editorial">
+            <CaseSubheading>Questions I worked through</CaseSubheading>
+            <ul className="case-study-strategy-list">
+              <li>
+                <span className="case-study-strategy-q">Why put news on the exchange?</span>
+                <span className="case-study-strategy-a">
+                  Leaving the app to read news breaks your flow. Keep people here when they&apos;re
+                  already paying attention.
+                </span>
+              </li>
+              <li>
+                <span className="case-study-strategy-q">Would it move volume?</span>
+                <span className="case-study-strategy-a">
+                  If macro news — rate cuts, ETF filings — shows up next to the asset you&apos;re
+                  trading, you might act on it instead of opening another tab first.
+                </span>
+              </li>
+              <li>
+                <span className="case-study-strategy-q">Has anyone tried this?</span>
+                <span className="case-study-strategy-a">
+                  Coinbase ships news in-app. Gemini has a blog, but it lives outside trading and
+                  reads like generic company content.
+                </span>
+              </li>
+            </ul>
+          </div>
         </section>
 
         <CaseHairline />
@@ -217,7 +217,7 @@ export default function GeminiCaseStudy() {
         <section className="case-study-section case-study-section--compact">
           <CaseLabel>Systems</CaseLabel>
           <CaseHeading>How data moves</CaseHeading>
-          <p className="case-study-body case-study-body--intro">
+          <p className="case-study-body case-study-body--last">
             I made sure to map how news enters the product. Rather than a static feed, I believed
             the UI should hold up when headlines are long or alerts come in fast.
           </p>
@@ -273,7 +273,7 @@ export default function GeminiCaseStudy() {
 
         <CaseHairline />
 
-        <section className="case-study-section case-study-section--stage">
+        <section className="case-study-section case-study-section--visual">
           <CaseLabel>Iteration</CaseLabel>
           <CaseHeading>Before → after</CaseHeading>
           <div className="case-study-compare-grid case-study-compare-grid--wide">
@@ -281,36 +281,36 @@ export default function GeminiCaseStudy() {
               src="/images/gemini-process-1.png"
               alt="Before feedback — news panel always open on the trading screen"
               caption="Before · always open"
-              width={900}
-              height={560}
+              width={800}
+              height={500}
               muted
             />
             <CaseFigure
               src="/images/gemini-process-2.png"
               alt="After feedback — banner and expandable news card"
               caption="After · banner + expandable card"
-              width={900}
-              height={560}
+              width={800}
+              height={500}
             />
           </div>
         </section>
 
         <CaseHairline />
 
-        <section className="case-study-section case-study-section--stage">
+        <section className="case-study-section case-study-section--visual">
           <CaseLabel>Final design</CaseLabel>
           <CaseHeading>After feedback</CaseHeading>
-          <p className="case-study-body case-study-body--intro">
+          <p className="case-study-body case-study-body--tight">
             I built parts in code to test long headlines and breaking alerts — stuff that&apos;s
             hard to fake in static mocks.
           </p>
           <CaseFigure
-            className="case-study-figure--hero"
+            className="case-study-figure--wide"
             src="/images/gemini-desktop-all.png"
             alt="Final Gemini blog homepage with breaking news tags and card hierarchy"
             caption="Blog hub · tags + breaking news"
-            width={1400}
-            height={875}
+            width={1200}
+            height={750}
           />
         </section>
 

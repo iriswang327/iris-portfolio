@@ -2280,15 +2280,36 @@ html[data-picker-active="1"] footer {
 
 /* Gemini editorial layout */
 .case-study--gemini .case-study-shell--editorial {
-  max-width: min(1440px, 100%);
+  max-width: var(--layout-wide);
 }
 
 .case-study--gemini .case-study-section {
   max-width: none;
 }
 
-.case-study--gemini .case-study-section--stage {
+.case-study--gemini .case-study-section--primary {
+  max-width: none;
+}
+
+.case-study--gemini .case-study-context-grid--editorial {
+  max-width: none;
   width: 100%;
+}
+
+@media (min-width: 960px) {
+  .case-study--gemini .case-study-context-grid--editorial {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 24px;
+  }
+}
+
+.case-study--gemini .case-study-strategy-block--editorial {
+  max-width: none;
+  width: 100%;
+}
+
+.case-study--gemini .case-study-strategy-block--editorial .case-study-strategy-list {
+  max-width: 44rem;
 }
 
 .case-study-hero--editorial {
