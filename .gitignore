@@ -18,6 +18,10 @@
 .DS_Store
 *.pem
 
+# internal docs (local only — not for public repo)
+CLAUDE.md
+guidelines.md
+
 # debug
 npm-debug.log*
 yarn-debug.log*

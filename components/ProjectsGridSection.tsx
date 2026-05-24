@@ -3,6 +3,11 @@
 import { useState, type ReactNode } from "react";
 import ProjectCard from "@/components/ProjectCard";
 import CompanyModal, { type ModalProject } from "@/components/CompanyModal";
+import {
+  GEMINI_HOVER,
+  GEMINI_MODAL_SUMMARY,
+  GEMINI_TAGLINE,
+} from "@/lib/gemini-copy";
 
 // ─── Logo SVGs ────────────────────────────────────────────────────────────────
 
@@ -88,7 +93,8 @@ interface ModalConfig {
   companyName: string;
   companyLogo: string;
   companyLogoImage?: string;
-  whyCompanyText: string;
+  tagline?: string;
+  whyCompanyText?: string;
   projects: ModalProject[];
 }
 
@@ -96,13 +102,11 @@ const GEMINI_MODAL: ModalConfig = {
   companyName: "Gemini",
   companyLogo: "G",
   companyLogoImage: "/images/gemini-logo.png",
-  whyCompanyText:
-    "Crypto news is scattered — and Gemini's blog lives outside the trading flow. I wanted to explore whether bringing context into the exchange could keep traders informed without making them leave. Coinbase already proves the pattern; this case study is my product design take on closing Gemini's gap.",
+  tagline: GEMINI_TAGLINE,
+  whyCompanyText: GEMINI_MODAL_SUMMARY,
   projects: [
     {
-      title: "PROJECT 01 / News Integration",
-      subtitle:
-        "Bridging crypto news and the in-app trading experience.",
+      title: "News Integration",
       route: "/design/gemini",
       preview: "/images/gemini-modal-preview.png",
     },
@@ -179,7 +183,7 @@ const CARDS: CardDef[] = [
     logo: <GeminiLogo />,
     pill: "Gemini · Product Design",
     pillDark: true,
-    hoverDescription: "News inside the trading flow — product strategy + UI.",
+    hoverDescription: GEMINI_HOVER,
     videoUrl: "/videos/gemini-thumbnail.mp4",
     frameClassName: "project-card-frame bg-gradient-to-tr from-sky-100/40 via-blue-50/20 to-slate-50/60 border border-blue-200/20 shadow-[0_15px_40px_rgba(0,0,0,0.02)] transition-all duration-500 hover:shadow-[0_20px_50px_rgba(14,165,233,0.05)]",
     modal: GEMINI_MODAL,
@@ -263,7 +267,8 @@ export default function ProjectsGridSection() {
         companyName={activeModal?.companyName ?? ""}
         companyLogo={activeModal?.companyLogo ?? ""}
         companyLogoImage={activeModal?.companyLogoImage}
-        whyCompanyText={activeModal?.whyCompanyText ?? ""}
+        tagline={activeModal?.tagline}
+        whyCompanyText={activeModal?.whyCompanyText}
         projects={activeModal?.projects ?? []}
       />
     </>

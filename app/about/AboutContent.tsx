@@ -187,20 +187,15 @@ type BookEntry = {
 
 function BookLedgerRow({ book }: { book: BookEntry }) {
   return (
-    <div
-      className="flex items-center gap-3 rounded-lg px-3 py-2.5"
-      style={{ background: book.wash }}
-    >
+    <div className="about-book-row" style={{ background: book.wash }}>
       <span
-        className="h-2 w-2 shrink-0 rounded-full"
+        className="about-book-dot"
         style={{ background: book.accent }}
         aria-hidden="true"
       />
       <div className="min-w-0 flex-1">
-        <p className="text-[12px] font-normal leading-snug text-[var(--foreground)]">
-          {book.title}
-        </p>
-        <p className="mt-px text-[10px] font-light text-[#AAAAAA]">{book.author}</p>
+        <p className="about-book-title">{book.title}</p>
+        <p className="about-book-author">{book.author}</p>
       </div>
     </div>
   );
@@ -217,7 +212,7 @@ function BookShelf({
 }) {
   return (
     <div>
-      <p className="section-label mb-2 text-[#BBBBBB]">{label}</p>
+      <p className="section-label about-book-shelf-label">{label}</p>
       <div
         className={
           columns === 2
@@ -237,25 +232,10 @@ function BookShelf({
 
 function QuoteBlock({ quote, attribution }: { quote: string; attribution: string }) {
   return (
-    <div style={{ position: "relative", paddingLeft: 20, marginBottom: 28 }}>
-      {/* Gradient left border */}
-      <div
-        style={{
-          position: "absolute",
-          left: 0,
-          top: 0,
-          bottom: 0,
-          width: 2,
-          background: "linear-gradient(180deg, #f0abfc 0%, #a78bfa 50%, #7dd3fc 100%)",
-        }}
-        aria-hidden="true"
-      />
-      <p style={{ fontSize: 20, fontWeight: 200, fontStyle: "italic", color: "var(--foreground)", lineHeight: 1.5 }}>
-        &ldquo;{quote}&rdquo;
-      </p>
-      <p style={{ fontSize: 11, fontWeight: 300, color: "#BBBBBB", marginTop: 8 }}>
-        {attribution}
-      </p>
+    <div className="about-quote">
+      <div className="about-quote-accent" aria-hidden="true" />
+      <p className="about-quote-text">&ldquo;{quote}&rdquo;</p>
+      <p className="about-quote-attribution">{attribution}</p>
     </div>
   );
 }
@@ -271,7 +251,7 @@ function CurrentlyRow({
 }) {
   return (
     <div>
-      <div className="flex items-center" style={{ gap: 16, paddingTop: 10, paddingBottom: 10 }}>
+      <div className="about-currently-row">
         <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full border border-black/[0.04] bg-white shadow-sm">
           <Image
             src={item.logoSrc}
@@ -282,20 +262,12 @@ function CurrentlyRow({
           />
         </div>
         <div className="min-w-0 flex-1">
-          <span style={{ fontSize: 13, fontWeight: 400, color: "var(--foreground)" }}>
-            {item.name}
-          </span>
-          <span style={{ fontSize: 12, fontWeight: 300, color: "#888888", marginLeft: 8 }}>
-            {item.role}
-          </span>
+          <span className="about-currently-name">{item.name}</span>
+          <span className="about-currently-role">{item.role}</span>
         </div>
-        <span className="shrink-0" style={{ fontSize: 11, fontWeight: 300, color: "#BBBBBB" }}>
-          {item.date}
-        </span>
+        <span className="about-currently-date">{item.date}</span>
       </div>
-      {!isLast && (
-        <div style={{ height: "0.5px", background: "var(--border)" }} aria-hidden="true" />
-      )}
+      {!isLast && <div className="about-currently-divider" aria-hidden="true" />}
     </div>
   );
 }
@@ -498,7 +470,7 @@ export default function AboutContent() {
         <section id="community" data-theme="community" className="about-section">
           <h2 className="about-heading font-[300]">My Communities 🤍</h2>
 
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <div className="about-community-grid">
             {COMMUNITY_ITEMS.map((item) => (
               <motion.div
                 key={item.name}
@@ -538,26 +510,13 @@ export default function AboutContent() {
           <h2 className="about-heading about-heading--loose font-[300]">Entertainment</h2>
 
           {/* Tabs */}
-          <div className="flex items-center" style={{ gap: 24, marginBottom: 32, borderBottom: "0.5px solid var(--border)" }}>
+          <div className="about-tabs">
             {(["books", "music"] as const).map((tab) => (
               <button
                 key={tab}
+                type="button"
                 onClick={() => setActiveTab(tab)}
-                className="pb-3 transition-colors duration-200 focus:outline-none capitalize"
-                style={{
-                  fontSize: 14,
-                  fontWeight: activeTab === tab ? 400 : 300,
-                  color: activeTab === tab ? "var(--foreground)" : "#888888",
-                  borderBottom: activeTab === tab ? "1.5px solid var(--foreground)" : "1.5px solid transparent",
-                  marginBottom: -1,
-                  background: "none",
-                  border: "none",
-                  borderBottomWidth: "1.5px",
-                  borderBottomStyle: "solid",
-                  borderBottomColor: activeTab === tab ? "var(--foreground)" : "transparent",
-                  cursor: "pointer",
-                  padding: "0 0 12px 0",
-                }}
+                className={`about-tab${activeTab === tab ? " about-tab--active" : ""}`}
               >
                 {tab.charAt(0).toUpperCase() + tab.slice(1)}
               </button>
@@ -565,15 +524,15 @@ export default function AboutContent() {
           </div>
 
           {activeTab === "books" ? (
-            <div className="flex flex-col gap-6">
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <div className="about-book-shelves">
+              <div className="about-book-shelves-grid">
                 <BookShelf label="Currently Reading" books={BOOKS_CURRENT} />
                 <BookShelf label="To Be Read" books={BOOKS_TBR} />
               </div>
               <BookShelf label="Pretty Good Reads" books={BOOKS_PRETTY_GOOD} columns={2} />
             </div>
           ) : (
-            <div className="flex justify-center" style={{ paddingTop: 16, paddingBottom: 16 }}>
+            <div className="about-entertainment-music">
               <VinylPlayer />
             </div>
           )}

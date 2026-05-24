@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export interface ModalProject {
   title: string;
-  subtitle: string;
+  subtitle?: string;
   route: string;
   /** When true, replaces the "view case study" link with a coming-soon indicator */
   locked?: boolean;
@@ -24,7 +24,10 @@ export interface CompanyModalProps {
   companyLogo: string;
   /** Optional image path — when provided, renders an <img> in the badge instead of text */
   companyLogoImage?: string;
-  whyCompanyText: string;
+  /** Short line under the company name — e.g. project tagline */
+  tagline?: string;
+  /** Optional one- or two-sentence context below the role line */
+  whyCompanyText?: string;
   projects: ModalProject[];
   /** Optional override for the ↗ expand button. Omit to hide the button. */
   expandHref?: string;
@@ -52,10 +55,12 @@ export default function CompanyModal({
   companyName,
   companyLogo,
   companyLogoImage,
+  tagline,
   whyCompanyText,
   projects,
   expandHref,
 }: CompanyModalProps) {
+  const hasSummary = Boolean(whyCompanyText?.trim());
 
   // Close on Escape
   useEffect(() => {
@@ -161,73 +166,40 @@ export default function CompanyModal({
                 </button>
               </div>
 
-              {/* ── Company identity — centered stack ─────────────────── */}
-              <div className="flex flex-col items-center" style={{ gap: 10, marginBottom: 20 }}>
-
-                {/* 60px badge circle */}
+              {/* ── Company identity ───────────────────────────────────── */}
+              <div className="company-modal-identity">
                 <div
-                  className="flex items-center justify-center rounded-full overflow-hidden"
+                  className="company-modal-badge"
                   style={{
-                    width: 60,
-                    height: 60,
                     background: companyLogoImage ? "transparent" : "rgba(167,139,250,0.16)",
-                    fontSize: 22,
-                    fontWeight: 400,
-                    color: "#A78BFA",
-                    letterSpacing: "-0.01em",
                   }}
                   aria-hidden="true"
                 >
                   {companyLogoImage ? (
                     <img
                       src={companyLogoImage}
-                      alt={companyName}
-                      style={{ width: 60, height: 60, objectFit: "contain" }}
+                      alt=""
+                      className="company-modal-badge-image"
                     />
                   ) : (
                     companyLogo
                   )}
                 </div>
 
-                {/* Company name */}
-                <h2
-                  style={{
-                    fontSize: 26,
-                    fontWeight: 200,
-                    color: "var(--foreground)",
-                    letterSpacing: "-0.015em",
-                    lineHeight: 1.2,
-                  }}
-                >
-                  {companyName}
-                </h2>
+                <h2 className="company-modal-name">{companyName}</h2>
 
-                {/* Type pill label */}
-                <p style={{ fontSize: 12, fontWeight: 300, color: "#888888" }}>
-                  Product Designer · Case Study
-                </p>
+                {tagline ? (
+                  <p className="company-modal-tagline">{tagline}</p>
+                ) : null}
+
+                <p className="company-modal-role">Product Designer · Case Study</p>
+
+                {hasSummary ? (
+                  <p className="company-modal-summary">{whyCompanyText}</p>
+                ) : null}
               </div>
 
-              {/* Why this company */}
-              <p
-                className="text-center"
-                style={{
-                  fontSize: 13,
-                  fontWeight: 300,
-                  color: "#888888",
-                  lineHeight: 1.75,
-                  maxWidth: 380,
-                  margin: "0 auto 28px",
-                }}
-              >
-                {whyCompanyText}
-              </p>
-
-              {/* Hairline divider */}
-              <div
-                style={{ height: "0.5px", background: "rgba(0,0,0,0.06)", marginBottom: 28 }}
-                aria-hidden="true"
-              />
+              <div className="company-modal-divider" aria-hidden="true" />
 
               {/* ── Projects list ─────────────────────────────────────── */}
               <div style={{ display: "flex", flexDirection: "column" }}>
@@ -251,29 +223,11 @@ export default function CompanyModal({
                           PROJECT {String(idx + 1).padStart(2, "0")}
                         </p>
 
-                        <p
-                          style={{
-                            fontSize: 17,
-                            fontWeight: 400,
-                            color: "var(--foreground)",
-                            lineHeight: 1.3,
-                            marginBottom: 5,
-                          }}
-                        >
-                          {project.title}
-                        </p>
+                        <p className="company-modal-project-title">{project.title}</p>
 
-                        <p
-                          style={{
-                            fontSize: 13,
-                            fontWeight: 300,
-                            color: "#888888",
-                            lineHeight: 1.6,
-                            marginBottom: 14,
-                          }}
-                        >
-                          {project.subtitle}
-                        </p>
+                        {project.subtitle ? (
+                          <p className="company-modal-project-subtitle">{project.subtitle}</p>
+                        ) : null}
 
                         {project.locked ? (
                           <span
