@@ -47,7 +47,9 @@ export default function Footer() {
 
           <div className="site-footer-col site-footer-col--end">
             <div className="site-footer-contact">
-              <p className="site-footer-contact-label">feel free to reach out</p>
+              <p className="site-footer-contact-label">
+                feel free to reach out! ✦
+              </p>
               <div className="site-footer-contact-links">
                 <a
                   href="mailto:iriswang32@gmail.com"
@@ -65,7 +67,9 @@ export default function Footer() {
                 </a>
               </div>
             </div>
-            <p className="site-footer-stamp">made in may 2026 ✦</p>
+            <p className="site-footer-stamp">
+              made in <span className="site-footer-stamp-date">may 2026</span>
+            </p>
           </div>
         </div>
       </div>

@@ -184,6 +184,45 @@ export default function RippleCaseStudy() {
           ))}
         </div>
 
+        <section
+          className="case-study-section case-study-section--visual case-study-section--ripple-showcase"
+          aria-label="Ripple product preview"
+        >
+          <CaseLabel>Product</CaseLabel>
+          <CaseHeading>At a glance</CaseHeading>
+          <p className="case-study-scroll-hint">
+            Pitch deck overview — brand, product pillars, and hi-fi UI below.
+          </p>
+
+          <p className="case-study-ripple-outcome-line">
+            <span aria-hidden="true">{RIPPLE_AWARD_EMOJI}</span>
+            <span>Best Presentation · 18 Build Teams · Demo Day</span>
+          </p>
+
+          <div className="case-study-ripple-showcase-grid">
+            <CaseFigure
+              src="/images/over-left.png"
+              alt="Ripple brand overview — logo, tagline, and purple wave identity system"
+              caption="Brand · insights that impact, matches that matter"
+              width={1896}
+              height={1056}
+              priority
+              className="case-study-figure--showcase-brand"
+            />
+            <CaseFigure
+              src="/images/overview.png"
+              alt="Ripple product features — recruit, match, and collab with explore UI mockups"
+              caption="Solution · recruit, match, collab"
+              width={960}
+              height={540}
+              priority
+              className="case-study-figure--showcase-features"
+            />
+          </div>
+        </section>
+
+        <CaseHairline />
+
         <section className="case-study-section case-study-section--primary">
           <CaseLabel>Context</CaseLabel>
           <CaseHeading>Why we proposed it</CaseHeading>
@@ -261,7 +300,6 @@ export default function RippleCaseStudy() {
               caption="01 / Core Entry Hub & User Onboarding Canvas"
               width={900}
               height={620}
-              priority
             />
             <div className="case-study-ripple-mosaic-grid">
               {FLOW_SCREENS.map((screen) => (

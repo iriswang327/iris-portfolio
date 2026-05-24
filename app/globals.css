@@ -1460,6 +1460,13 @@ html[data-picker-active="1"] footer {
   color: var(--footer-faint);
 }
 
+.site-footer-stamp-date {
+  background: linear-gradient(148deg, #c4b5fd 0%, #a78bfa 52%, #7dd3fc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 /* ─────────────────────────────────────────────
    Design case study — Gemini (lean recruiter arc)
    ───────────────────────────────────────────── */
@@ -2670,6 +2677,46 @@ html[data-picker-active="1"] footer {
   max-width: 44rem;
 }
 
+.case-study-section--ripple-showcase {
+  margin-bottom: 40px;
+}
+
+.case-study-ripple-outcome-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 24px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 0.5px solid rgba(167, 139, 250, 0.2);
+  background: rgba(167, 139, 250, 0.06);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--text-subtle);
+}
+
+.case-study-ripple-showcase-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  width: 100%;
+}
+
+@media (min-width: 960px) {
+  .case-study-ripple-showcase-grid {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: 24px;
+    align-items: start;
+  }
+}
+
+.case-study-figure--showcase-brand .case-study-frame,
+.case-study-figure--showcase-features .case-study-frame {
+  background: #ffffff;
+  box-shadow: 0 20px 50px rgba(99, 102, 241, 0.07);
+}
+
 .case-study-feedback--thesis {
   max-width: none;
 }
@@ -2792,12 +2839,20 @@ html[data-picker-active="1"] footer {
   display: grid;
   grid-template-columns: 1fr;
   gap: 20px;
+  width: 100%;
 }
 
 @media (min-width: 640px) {
   .case-study-ripple-mosaic-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 20px;
+  }
+}
+
+@media (min-width: 960px) {
+  .case-study-ripple-mosaic-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
   }
 }
 
@@ -2934,33 +2989,29 @@ html[data-picker-active="1"] footer {
   align-items: center;
   justify-content: center;
   padding: 24px;
-  overflow: hidden;
+  overflow-y: auto;
 }
 
 .experience-modal {
   position: relative;
-  display: flex;
-  flex-direction: column;
   width: 100%;
   max-width: 580px;
-  max-height: min(90vh, 680px);
   background: #ffffff;
   border-radius: 20px;
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.16);
   pointer-events: auto;
-  overflow: hidden;
+  padding: 36px;
 }
 
 .experience-modal-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  flex-shrink: 0;
-  padding: 28px 28px 0;
+  justify-content: flex-end;
+  margin-bottom: 28px;
 }
 
 .experience-modal-header-spacer {
-  width: 32px;
+  display: none;
 }
 
 .experience-modal-icon-btn {
@@ -2985,24 +3036,15 @@ html[data-picker-active="1"] footer {
 }
 
 .experience-modal-body {
-  flex: 1;
-  min-height: 0;
-  overflow-y: auto;
-  padding: 20px 36px 8px;
-  mask-image: linear-gradient(
-    to bottom,
-    #000 0%,
-    #000 calc(100% - 24px),
-    transparent 100%
-  );
+  padding: 0;
 }
 
 .experience-modal-identity {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 24px;
+  gap: 6px;
+  margin-bottom: 28px;
   text-align: center;
 }
 
@@ -3022,25 +3064,58 @@ html[data-picker-active="1"] footer {
 }
 
 .experience-modal[data-accent="gold"] .experience-modal-badge {
-  background: rgba(232, 240, 228, 0.85);
+  background: rgba(232, 240, 228, 0.95);
   color: #3f6212;
 }
 
 .experience-modal[data-accent="burnt"] .experience-modal-badge {
-  background: rgba(250, 240, 230, 0.85);
+  background: rgba(250, 240, 230, 0.95);
   color: #9a3412;
 }
 
 .experience-modal[data-accent="navy"] .experience-modal-badge {
-  background: rgba(226, 232, 240, 0.85);
+  background: rgba(226, 232, 240, 0.95);
   color: #4338ca;
 }
 
+.experience-modal-badge--image {
+  padding: 0;
+  border: 0.5px solid rgba(0, 0, 0, 0.08);
+}
+
+.experience-modal-badge--image.experience-modal-badge--dark {
+  border: 0.5px solid rgba(255, 255, 255, 0.1);
+}
+
+.experience-modal[data-accent="gold"] .experience-modal-badge--image.experience-modal-badge--light {
+  background: linear-gradient(145deg, #f0ebe3 0%, #dce8d6 100%);
+}
+
+.experience-modal[data-accent="burnt"] .experience-modal-badge--image.experience-modal-badge--light {
+  background: linear-gradient(145deg, #faf0e6 0%, #f3e4d4 100%);
+}
+
+.experience-modal[data-accent="navy"] .experience-modal-badge--image.experience-modal-badge--light {
+  background: linear-gradient(145deg, #eef2ff 0%, #e2e8f0 100%);
+}
+
+.experience-modal[data-accent="gold"] .experience-modal-badge--image.experience-modal-badge--dark {
+  background: linear-gradient(148deg, #3f6212 0%, #1a2e05 100%);
+}
+
+.experience-modal[data-accent="burnt"] .experience-modal-badge--image.experience-modal-badge--dark {
+  background: linear-gradient(148deg, #9a3412 0%, #431407 100%);
+}
+
+.experience-modal[data-accent="navy"] .experience-modal-badge--image.experience-modal-badge--dark {
+  background: linear-gradient(148deg, #0a1628 0%, #1e3a5f 100%);
+}
+
 .experience-modal-badge-image {
-  width: 60px;
-  height: 60px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  transform: scale(1.12);
+  transform: scale(1.14);
 }
 
 .experience-modal-name {
@@ -3052,15 +3127,6 @@ html[data-picker-active="1"] footer {
   margin: 0;
 }
 
-.experience-modal-tagline {
-  font-size: 14px;
-  font-weight: 300;
-  line-height: 1.55;
-  color: var(--foreground);
-  max-width: 22rem;
-  margin: 0;
-}
-
 .experience-modal-role {
   font-size: 11px;
   font-weight: 400;
@@ -3068,145 +3134,63 @@ html[data-picker-active="1"] footer {
   text-transform: uppercase;
   color: var(--text-faint);
   margin: 0;
-  text-align: center;
 }
 
-.experience-modal-meta {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  border: 0.5px solid var(--border);
-  margin-bottom: 24px;
-}
-
-@media (min-width: 640px) {
-  .experience-modal-meta {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-.experience-modal-meta-cell {
-  padding: 14px 16px;
-  border-right: 0.5px solid var(--border);
-  border-bottom: 0.5px solid var(--border);
-}
-
-.experience-modal-meta-cell:nth-child(2n) {
-  border-right: none;
-}
-
-@media (min-width: 640px) {
-  .experience-modal-meta-cell {
-    border-bottom: none;
-  }
-
-  .experience-modal-meta-cell:nth-child(2n) {
-    border-right: 0.5px solid var(--border);
-  }
-
-  .experience-modal-meta-cell:last-child {
-    border-right: none;
-  }
-}
-
-.experience-modal-meta-label {
-  font-size: 10px;
+.experience-modal-when {
+  font-size: 11px;
   font-weight: 400;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--text-faint);
-  margin: 0 0 6px;
-}
-
-.experience-modal-meta-value {
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 1.4;
-  color: var(--foreground);
-  margin: 0;
-}
-
-.experience-modal-context-label {
-  font-size: 10px;
-  font-weight: 400;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--text-faint);
-  margin: 0 0 10px;
-}
-
-.experience-modal-summary {
-  font-size: 13px;
-  font-weight: 300;
-  line-height: 1.65;
+  letter-spacing: 0.04em;
   color: var(--text-subtle);
   margin: 0;
 }
 
-.experience-modal-footer {
-  flex-shrink: 0;
-  padding: 16px 28px 28px;
-  border-top: 0.5px solid rgba(0, 0, 0, 0.06);
-  background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(10px);
-}
-
-.experience-modal-cta {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  width: 100%;
-  padding: 16px 20px;
-  border-radius: 14px;
-  border: 0.5px solid rgba(0, 0, 0, 0.06);
-  background: rgba(250, 249, 255, 0.9);
-  text-decoration: none;
-  transition: background-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.experience-modal-cta:hover {
-  background: #ffffff;
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.06);
-}
-
-.experience-modal-cta-label {
+.experience-modal-summary {
   font-size: 14px;
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  color: var(--foreground);
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--text-subtle);
+  max-width: 26rem;
+  margin: 8px 0 0;
 }
 
-.experience-modal-cta-arrow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 999px;
-  font-size: 15px;
-  color: #ffffff;
-  flex-shrink: 0;
-  background: linear-gradient(148deg, #f0abfc 0%, #a78bfa 52%, #7dd3fc 100%);
-  box-shadow: 0 6px 16px rgba(167, 139, 250, 0.28);
-  transition: transform 0.2s ease;
+.experience-modal-divider {
+  margin-bottom: 24px;
 }
 
-.experience-modal-cta:hover .experience-modal-cta-arrow {
-  transform: translateX(2px);
+.experience-modal-action {
+  text-align: center;
 }
 
-.experience-modal[data-accent="gold"] .experience-modal-cta-arrow {
-  background: linear-gradient(148deg, #f7f4ec 0%, #7c9a6e 52%, #bf5700 100%);
-  box-shadow: 0 6px 16px rgba(191, 87, 0, 0.22);
+.experience-modal-study-link {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 300;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
 }
 
-.experience-modal[data-accent="burnt"] .experience-modal-cta-arrow {
-  background: linear-gradient(148deg, #faf0e6 0%, #bf5700 100%);
-  box-shadow: 0 6px 16px rgba(191, 87, 0, 0.28);
+.experience-modal-study-link:hover {
+  opacity: 0.7;
 }
 
-.experience-modal[data-accent="navy"] .experience-modal-cta-arrow {
-  background: linear-gradient(148deg, #e0e7ff 0%, #4f46e5 100%);
-  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.28);
+.experience-modal[data-accent="gold"] .experience-modal-study-link {
+  background: linear-gradient(148deg, #4a7c59 0%, #bf5700 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.experience-modal[data-accent="burnt"] .experience-modal-study-link {
+  background: linear-gradient(148deg, #bf5700 0%, #9a3412 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.experience-modal[data-accent="navy"] .experience-modal-study-link {
+  background: linear-gradient(148deg, #6366f1 0%, #4338ca 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 

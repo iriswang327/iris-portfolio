@@ -18,12 +18,14 @@ interface ModalConfig {
   companyName: string;
   companyLogo: string;
   companyLogoImage?: string;
+  /** Use when the logo mark is white or light — renders on a dark badge */
+  logoBadgeTone?: "light" | "dark";
   tagline: string;
   timeline: string;
   role: string;
   orgType: string;
   collaborators: string;
-  microDescription: string;
+  summary: string;
   expandHref: string;
   accentTheme: ExperienceAccentTheme;
 }
@@ -50,10 +52,10 @@ const TOWER_BRIDGE_MODAL: ModalConfig = {
   tagline: "Real clients, real strategy, real stakes.",
   timeline: "2025 – Present",
   role: "Analytics Manager",
-  orgType: "Brand Strategy & Analytics",
+  orgType: "Student Agency · UT Austin",
   collaborators: "Trinity CDC · Heartening",
-  microDescription:
-    "UT Austin's student-run advertising agency — brand strategy and analytics for Trinity CDC and Heartening, with real client deliverables and real deadlines.",
+  summary:
+    "Brand analytics for Trinity CDC and Heartening — research, positioning, and client-ready deliverables.",
   expandHref: "/experience/tower-and-bridge",
   accentTheme: "gold",
 };
@@ -63,12 +65,12 @@ const INTEGRATED_DESIGN_MODAL: ModalConfig = {
   companyLogo: "GB",
   companyLogoImage: "/images/integrated-design-logo.png",
   tagline: "Full UX research cycle for unhoused community advocacy.",
-  timeline: "Fall 2025 · One Semester",
+  timeline: "Fall 2025",
   role: "UX Researcher",
-  orgType: "Integrated Design Thinking · UT Austin",
+  orgType: "Integrated Design · UT Austin",
   collaborators: "Emily Araiza · Frida Balderas · Manay Divatia",
-  microDescription:
-    "A semester-long design thinking project on how UT students can support the unhoused community in West Campus — empathy interviews, two prototype-and-test cycles, and a Jumbotron video campaign.",
+  summary:
+    "Empathy interviews and two prototype-test cycles — Jumbotron campaign for West Campus.",
   expandHref: "/experience/giving-back",
   accentTheme: "burnt",
 };
@@ -78,13 +80,13 @@ const RISK_RADAR_MODAL: ModalConfig = {
   companyLogo: "RR",
   companyLogoImage: "/images/risk-radar-logo.png",
   tagline: "AI brand crisis prediction — BERT, RAG, Spring 2026.",
-  timeline: "Spring 2026 · One Semester",
+  timeline: "Spring 2026",
   role: "Head of AI",
-  orgType: "B2B SaaS · AI Workflows",
+  orgType: "B2B SaaS · Cross-functional",
   collaborators:
     "Brooke Mikell · Joesh Nayak · Nikhil Sehgal · Hayden King · Varun Vedala",
-  microDescription:
-    "An AI-powered crisis management platform that predicts brand-reputation threats before they go viral. Built with McCombs business and Moody advertising students over one semester.",
+  summary:
+    "BERT + RAG crisis prediction — led architecture, demos, and semester pitch.",
   expandHref: "/experience/risk-radar",
   accentTheme: "navy",
 };
@@ -202,12 +204,18 @@ const OPERATIONAL_LEDGER = [
   },
 ] as const;
 
-const TOOLKIT = [
+const TOOLKIT_PRIMARY = [
   "Figma",
   "Cursor",
   "Claude",
   "AI workflows",
-  "HTML / CSS",
+  "Adobe Creative Cloud / Photoshop / Illustrator / InDesign",
+] as const;
+
+const TOOLKIT_SECONDARY = [
+  "HTML / JavaScript / CSS",
+  "Python",
+  "Slack",
 ] as const;
 
 const INTERNSHIP_TAGS = [
@@ -335,10 +343,17 @@ function ExperienceHero() {
 
           <div className="toolkit mt-10">
             <p className="section-label text-[var(--text-faint)]">Toolkit</p>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {TOOLKIT.map((tool) => (
-                <ToolkitPill key={tool} label={tool} />
-              ))}
+            <div className="experience-toolkit mt-3 flex flex-col gap-2">
+              <div className="flex flex-wrap gap-2">
+                {TOOLKIT_PRIMARY.map((tool) => (
+                  <ToolkitPill key={tool} label={tool} />
+                ))}
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {TOOLKIT_SECONDARY.map((tool) => (
+                  <ToolkitPill key={tool} label={tool} />
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -577,12 +592,11 @@ export default function ExperiencePage() {
         companyName={activeModal?.companyName ?? ""}
         companyLogo={activeModal?.companyLogo ?? ""}
         companyLogoImage={activeModal?.companyLogoImage}
-        tagline={activeModal?.tagline}
+        logoBadgeTone={activeModal?.logoBadgeTone}
         timeline={activeModal?.timeline ?? ""}
         role={activeModal?.role ?? ""}
         orgType={activeModal?.orgType ?? ""}
-        collaborators={activeModal?.collaborators ?? ""}
-        microDescription={activeModal?.microDescription ?? ""}
+        summary={activeModal?.summary ?? ""}
         expandHref={activeModal?.expandHref ?? "/experience"}
         accentTheme={activeModal?.accentTheme ?? "gold"}
       />

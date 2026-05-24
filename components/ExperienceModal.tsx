@@ -6,6 +6,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 export type ExperienceAccentTheme = "gold" | "burnt" | "navy";
+export type ExperienceLogoBadgeTone = "light" | "dark";
 
 export interface ExperienceModalProps {
   isOpen: boolean;
@@ -13,13 +14,11 @@ export interface ExperienceModalProps {
   companyName: string;
   companyLogo: string;
   companyLogoImage?: string;
-  /** Short hook under the title — like design modals */
-  tagline?: string;
+  logoBadgeTone?: ExperienceLogoBadgeTone;
   timeline: string;
   role: string;
   orgType: string;
-  collaborators: string;
-  microDescription: string;
+  summary: string;
   expandHref: string;
   accentTheme: ExperienceAccentTheme;
 }
@@ -42,12 +41,11 @@ export default function ExperienceModal({
   companyName,
   companyLogo,
   companyLogoImage,
-  tagline,
+  logoBadgeTone = "light",
   timeline,
   role,
   orgType,
-  collaborators,
-  microDescription,
+  summary,
   expandHref,
   accentTheme,
 }: ExperienceModalProps) {
@@ -71,6 +69,9 @@ export default function ExperienceModal({
   }, [isOpen]);
 
   const roleLine = `${role} · ${orgType}`;
+  const badgeClassName = companyLogoImage
+    ? `experience-modal-badge experience-modal-badge--image experience-modal-badge--${logoBadgeTone}`
+    : "experience-modal-badge";
 
   return (
     <AnimatePresence>
@@ -91,7 +92,7 @@ export default function ExperienceModal({
             className="experience-modal-shell"
             role="dialog"
             aria-modal="true"
-            aria-label={`${companyName} project details`}
+            aria-label={`${companyName} experience details`}
             onClick={onClose}
           >
             <motion.div
@@ -105,7 +106,6 @@ export default function ExperienceModal({
               onClick={(e) => e.stopPropagation()}
             >
               <div className="experience-modal-header">
-                <div className="experience-modal-header-spacer" aria-hidden="true" />
                 <button
                   type="button"
                   onClick={onClose}
@@ -118,13 +118,7 @@ export default function ExperienceModal({
 
               <div className="experience-modal-body">
                 <div className="experience-modal-identity">
-                  <div
-                    className="experience-modal-badge"
-                    style={{
-                      background: companyLogoImage ? "#ffffff" : undefined,
-                    }}
-                    aria-hidden={!!companyLogoImage}
-                  >
+                  <div className={badgeClassName} aria-hidden={!!companyLogoImage}>
                     {companyLogoImage ? (
                       <Image
                         src={companyLogoImage}
@@ -139,46 +133,18 @@ export default function ExperienceModal({
                   </div>
 
                   <h2 className="experience-modal-name">{companyName}</h2>
-
-                  {tagline ? (
-                    <p className="experience-modal-tagline">{tagline}</p>
-                  ) : null}
-
                   <p className="experience-modal-role">{roleLine}</p>
+                  <p className="experience-modal-when">{timeline}</p>
+                  <p className="experience-modal-summary">{summary}</p>
                 </div>
 
-                <div className="experience-modal-meta">
-                  <div className="experience-modal-meta-cell">
-                    <p className="experience-modal-meta-label">Timeline</p>
-                    <p className="experience-modal-meta-value">{timeline}</p>
-                  </div>
-                  <div className="experience-modal-meta-cell">
-                    <p className="experience-modal-meta-label">Role</p>
-                    <p className="experience-modal-meta-value">{role}</p>
-                  </div>
-                  <div className="experience-modal-meta-cell">
-                    <p className="experience-modal-meta-label">Org / Type</p>
-                    <p className="experience-modal-meta-value">{orgType}</p>
-                  </div>
-                  <div className="experience-modal-meta-cell">
-                    <p className="experience-modal-meta-label">With</p>
-                    <p className="experience-modal-meta-value">{collaborators}</p>
-                  </div>
-                </div>
+                <div className="company-modal-divider experience-modal-divider" aria-hidden="true" />
 
-                <div className="experience-modal-context">
-                  <p className="experience-modal-context-label">Context</p>
-                  <p className="experience-modal-summary">{microDescription}</p>
+                <div className="experience-modal-action">
+                  <Link href={expandHref} className="experience-modal-study-link">
+                    view case study →
+                  </Link>
                 </div>
-              </div>
-
-              <div className="experience-modal-footer">
-                <Link href={expandHref} className="experience-modal-cta">
-                  <span className="experience-modal-cta-label">View case study</span>
-                  <span className="experience-modal-cta-arrow" aria-hidden="true">
-                    →
-                  </span>
-                </Link>
               </div>
             </motion.div>
           </div>
