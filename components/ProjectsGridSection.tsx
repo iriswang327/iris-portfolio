@@ -3,11 +3,8 @@
 import { useState, type ReactNode } from "react";
 import ProjectCard from "@/components/ProjectCard";
 import CompanyModal, { type ModalProject } from "@/components/CompanyModal";
-import {
-  GEMINI_HOVER,
-  GEMINI_MODAL_SUMMARY,
-  GEMINI_TAGLINE,
-} from "@/lib/gemini-copy";
+import { GEMINI_HOVER, GEMINI_MODAL_SUMMARY } from "@/lib/gemini-copy";
+import { RIPPLE_HOVER, RIPPLE_MODAL_ROLE, RIPPLE_MODAL_SUMMARY } from "@/lib/ripple-copy";
 
 // ─── Logo SVGs ────────────────────────────────────────────────────────────────
 
@@ -93,7 +90,7 @@ interface ModalConfig {
   companyName: string;
   companyLogo: string;
   companyLogoImage?: string;
-  tagline?: string;
+  roleLabel?: string;
   whyCompanyText?: string;
   projects: ModalProject[];
 }
@@ -102,7 +99,6 @@ const GEMINI_MODAL: ModalConfig = {
   companyName: "Gemini",
   companyLogo: "G",
   companyLogoImage: "/images/gemini-logo.png",
-  tagline: GEMINI_TAGLINE,
   whyCompanyText: GEMINI_MODAL_SUMMARY,
   projects: [
     {
@@ -117,13 +113,11 @@ const TC_MODAL: ModalConfig = {
   companyName: "Texas Convergent",
   companyLogo: "TC",
   companyLogoImage: "/images/convergent-logo.png",
-  whyCompanyText:
-    "Building user research tools alongside cross-functional product and tech teams to validate ideas at speed.",
+  roleLabel: RIPPLE_MODAL_ROLE,
+  whyCompanyText: RIPPLE_MODAL_SUMMARY,
   projects: [
     {
-      title: "PROJECT 01 / Ripple",
-      subtitle:
-        "Bridging the gap between UX designers and high-intent research participants.",
+      title: "Ripple",
       route: "/design/ripple",
       preview: "/images/ripple-modal-preview.png",
     },
@@ -192,9 +186,9 @@ const CARDS: CardDef[] = [
     id: "tc",
     gradient: "linear-gradient(148deg, #0A1628 0%, #0D2E52 55%, #1155A0 100%)",
     logo: <TCLogo />,
-    pill: "Texas Convergent · Product Design",
+    pill: "Texas Convergent · Build Team",
     pillDark: true,
-    hoverDescription: "Bridging designers and research participants at speed.",
+    hoverDescription: RIPPLE_HOVER,
     videoUrl: "/videos/ripple-thumbnail.mp4",
     frameClassName: "project-card-frame bg-gradient-to-tr from-purple-950/20 via-indigo-500/5 to-slate-50 border border-black/[0.03] shadow-[0_15px_40px_rgba(0,0,0,0.03)]",
     modal: TC_MODAL,
@@ -267,7 +261,7 @@ export default function ProjectsGridSection() {
         companyName={activeModal?.companyName ?? ""}
         companyLogo={activeModal?.companyLogo ?? ""}
         companyLogoImage={activeModal?.companyLogoImage}
-        tagline={activeModal?.tagline}
+        roleLabel={activeModal?.roleLabel}
         whyCompanyText={activeModal?.whyCompanyText}
         projects={activeModal?.projects ?? []}
       />

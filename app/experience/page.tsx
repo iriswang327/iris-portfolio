@@ -18,6 +18,7 @@ interface ModalConfig {
   companyName: string;
   companyLogo: string;
   companyLogoImage?: string;
+  tagline: string;
   timeline: string;
   role: string;
   orgType: string;
@@ -46,12 +47,13 @@ const TOWER_BRIDGE_MODAL: ModalConfig = {
   companyName: "Tower & Bridge",
   companyLogo: "T&B",
   companyLogoImage: "/images/tower-bridge-logo.png",
+  tagline: "Real clients, real strategy, real stakes.",
   timeline: "2025 – Present",
   role: "Analytics Manager",
   orgType: "Brand Strategy & Analytics",
   collaborators: "Trinity CDC · Heartening",
   microDescription:
-    "Real clients, real deliverables, real pressure — UT Austin's student-run advertising agency turning brand strategy and analytics into measurable nonprofit and small-business growth for Trinity CDC and Heartening.",
+    "UT Austin's student-run advertising agency — brand strategy and analytics for Trinity CDC and Heartening, with real client deliverables and real deadlines.",
   expandHref: "/experience/tower-and-bridge",
   accentTheme: "gold",
 };
@@ -60,12 +62,13 @@ const INTEGRATED_DESIGN_MODAL: ModalConfig = {
   companyName: "Giving Back",
   companyLogo: "GB",
   companyLogoImage: "/images/integrated-design-logo.png",
+  tagline: "Full UX research cycle for unhoused community advocacy.",
   timeline: "Fall 2025 · One Semester",
   role: "UX Researcher",
   orgType: "Integrated Design Thinking · UT Austin",
   collaborators: "Emily Araiza · Frida Balderas · Manay Divatia",
   microDescription:
-    "A semester-long design thinking project exploring how UT students can engage with and support the unhoused community in West Campus — from empathy interviews through two prototype-and-test cycles to a Jumbotron video campaign.",
+    "A semester-long design thinking project on how UT students can support the unhoused community in West Campus — empathy interviews, two prototype-and-test cycles, and a Jumbotron video campaign.",
   expandHref: "/experience/giving-back",
   accentTheme: "burnt",
 };
@@ -74,13 +77,14 @@ const RISK_RADAR_MODAL: ModalConfig = {
   companyName: "Risk Radar",
   companyLogo: "RR",
   companyLogoImage: "/images/risk-radar-logo.png",
+  tagline: "AI brand crisis prediction — BERT, RAG, Spring 2026.",
   timeline: "Spring 2026 · One Semester",
   role: "Head of AI",
   orgType: "B2B SaaS · AI Workflows",
   collaborators:
     "Brooke Mikell · Joesh Nayak · Nikhil Sehgal · Hayden King · Varun Vedala",
   microDescription:
-    "An AI-powered crisis management platform that predicts brand-reputation threats before they go viral. Built over a semester with McCombs business and Moody advertising students.",
+    "An AI-powered crisis management platform that predicts brand-reputation threats before they go viral. Built with McCombs business and Moody advertising students over one semester.",
   expandHref: "/experience/risk-radar",
   accentTheme: "navy",
 };
@@ -573,6 +577,7 @@ export default function ExperiencePage() {
         companyName={activeModal?.companyName ?? ""}
         companyLogo={activeModal?.companyLogo ?? ""}
         companyLogoImage={activeModal?.companyLogoImage}
+        tagline={activeModal?.tagline}
         timeline={activeModal?.timeline ?? ""}
         role={activeModal?.role ?? ""}
         orgType={activeModal?.orgType ?? ""}

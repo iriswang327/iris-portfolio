@@ -24,8 +24,8 @@ export interface CompanyModalProps {
   companyLogo: string;
   /** Optional image path — when provided, renders an <img> in the badge instead of text */
   companyLogoImage?: string;
-  /** Short line under the company name — e.g. project tagline */
-  tagline?: string;
+  /** Optional line under the company name — defaults to product designer + case study */
+  roleLabel?: string;
   /** Optional one- or two-sentence context below the role line */
   whyCompanyText?: string;
   projects: ModalProject[];
@@ -55,7 +55,7 @@ export default function CompanyModal({
   companyName,
   companyLogo,
   companyLogoImage,
-  tagline,
+  roleLabel = "Product Designer · Case Study",
   whyCompanyText,
   projects,
   expandHref,
@@ -187,12 +187,7 @@ export default function CompanyModal({
                 </div>
 
                 <h2 className="company-modal-name">{companyName}</h2>
-
-                {tagline ? (
-                  <p className="company-modal-tagline">{tagline}</p>
-                ) : null}
-
-                <p className="company-modal-role">Product Designer · Case Study</p>
+                <p className="company-modal-role">{roleLabel}</p>
 
                 {hasSummary ? (
                   <p className="company-modal-summary">{whyCompanyText}</p>
