@@ -17,21 +17,21 @@ export const metadata: Metadata = {
     template: "%s",
   },
   description:
-    "Working at the edges of law, tech, and people. — Iris Wang, UT Austin · Advertising + CS · 2027",
+    "Creating intentional designs that bring ideas to reality. — Iris Wang, UT Austin · Advertising + CS · 2027",
   icons: {
     icon: [{ url: "/images/lotus-logo.png", type: "image/png" }],
     apple: [{ url: "/images/lotus-logo.png", type: "image/png" }],
   },
   openGraph: {
     title: "iris wang",
-    description: "Working at the edges of law, tech, and people.",
+    description: "Creating intentional designs that bring ideas to reality.",
     siteName: "iris wang",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "iris wang",
-    description: "Working at the edges of law, tech, and people.",
+    description: "Creating intentional designs that bring ideas to reality.",
   },
 };
 
