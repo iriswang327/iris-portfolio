@@ -44,7 +44,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} font-sans antialiased`}>
         <EmotionProvider>
-          <div className="relative min-h-screen bg-[#FBFBFC]">
+          <div className="relative min-h-screen bg-[var(--background)]">
             {/* ── Ambient watercolor orbs ── */}
             <div className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] bg-purple-400/5 rounded-full blur-[130px] pointer-events-none z-0" aria-hidden="true" />
             <div className="absolute top-[35%] left-[-10%] w-[700px] h-[700px] bg-pink-400/[0.04] rounded-full blur-[140px] pointer-events-none z-0" aria-hidden="true" />

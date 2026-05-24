@@ -157,8 +157,9 @@ const ANALYTICAL_LEDGER = [
     timeline: "2024–2025",
     logoSrc: "/images/the-daily-texan-logo.png",
     logoAlt: "The Daily Texan",
+    linkTitle: "Opinion illustration portfolio",
     linkHref: "https://thedailytexan.com/staff_name/iris-wang/",
-    linkLabel: "view illustration archive →",
+    linkLabel: "view archive →",
   },
 ] as const;
 
@@ -227,20 +228,7 @@ function Hairline() {
 // ─── Section label ────────────────────────────────────────────────────────────
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
-  return (
-    <p
-      style={{
-        fontSize: 10,
-        fontWeight: 400,
-        color: "#BBBBBB",
-        letterSpacing: "0.16em",
-        textTransform: "uppercase",
-        marginBottom: 28,
-      }}
-    >
-      {children}
-    </p>
-  );
+  return <p className="section-label mb-7 text-[var(--text-faint)]">{children}</p>;
 }
 
 // ─── Shared badge ─────────────────────────────────────────────────────────────
@@ -266,7 +254,7 @@ function LedgerBadge({
         />
       ) : (
         <div className="flex h-full w-full items-center justify-center">
-          <span className="text-sm font-medium text-neutral-600">{icon}</span>
+          <span className="text-sm font-normal text-[var(--text-subtle)]">{icon}</span>
         </div>
       )}
     </div>
@@ -295,36 +283,25 @@ function OperationalArchiveRow({
       <div className="flex items-center gap-4">
         <LedgerBadge icon={icon} logoSrc={logoSrc} logoAlt={logoAlt} />
         <div className="flex flex-col gap-0.5">
-          <p className="text-[14px] font-semibold tracking-normal text-neutral-900">
+          <p className="text-[14px] font-normal tracking-normal text-[var(--foreground)]">
             {companyName}
           </p>
-          <p className="text-[12px] font-light text-neutral-400">{roleTitle}</p>
+          <p className="text-[12px] font-light experience-muted">{roleTitle}</p>
         </div>
       </div>
-      <span className="text-[12px] font-light text-neutral-400/80 tracking-normal tabular-nums text-right select-none">
+      <span className="text-[12px] font-light experience-muted tracking-normal tabular-nums text-right select-none">
         {dateRange}
       </span>
     </div>
   );
 }
 
-const ANALYTICAL_LINK_CLASS =
-  "mt-1 inline-flex items-center gap-1 text-[11px] font-medium lowercase tracking-wide text-indigo-500/90 transition-all duration-300 hover:text-indigo-600 hover:underline";
-
 function ToolkitPill({ label }: { label: string }) {
-  return (
-    <span className="rounded-full bg-neutral-100 px-3.5 py-1.5 text-[12px] font-normal text-neutral-700">
-      {label}
-    </span>
-  );
+  return <span className="experience-toolkit-pill">{label}</span>;
 }
 
 function InternshipTag({ label }: { label: string }) {
-  return (
-    <span className="rounded-full bg-neutral-200/70 px-2.5 py-1 text-[11px] font-light text-neutral-600">
-      {label}
-    </span>
-  );
+  return <span className="experience-internship-tag">{label}</span>;
 }
 
 function ExperienceHero() {
@@ -334,16 +311,7 @@ function ExperienceHero() {
 
       <div className="experience-hero relative z-10">
         <div className="hero-left">
-          <h1
-            className="name-splash font-[200]"
-            style={{
-              color: "var(--foreground)",
-              marginBottom: 14,
-              fontSize: 48,
-              letterSpacing: "-0.03em",
-              lineHeight: 1.1,
-            }}
-          >
+          <h1 className="name-splash experience-hero-title font-[200]">
             experience
           </h1>
 
@@ -357,15 +325,12 @@ function ExperienceHero() {
             <span className="text-[var(--foreground)]">Law.</span>
           </p>
 
-          <p
-            className="lede font-[300]"
-            style={{ color: "#888888", marginTop: 12, fontSize: 14, lineHeight: 1.7 }}
-          >
+          <p className="experience-hero-lede font-[300]">
             All with the goal of making complex things human.
           </p>
 
           <div className="toolkit mt-10">
-            <p className="section-label text-[#BBBBBB]">Toolkit</p>
+            <p className="section-label text-[var(--text-faint)]">Toolkit</p>
             <div className="mt-3 flex flex-wrap gap-2">
               {TOOLKIT.map((tool) => (
                 <ToolkitPill key={tool} label={tool} />
@@ -386,16 +351,12 @@ function ExperienceHero() {
               }}
               aria-hidden="true"
             />
-            <span className="text-[10px] font-normal uppercase tracking-[0.14em] text-[#BBBBBB]">
-              looking for next
-            </span>
+            <span className="looking-card-eyebrow">looking for next</span>
           </div>
 
-          <h2 className="mt-4 text-[15px] font-medium leading-snug text-[var(--foreground)]">
-            Product Design internship · Summer 2026
-          </h2>
+          <h2 className="looking-card-title">Product Design internship · Summer 2026</h2>
 
-          <p className="mt-3 text-[12px] font-light leading-relaxed text-neutral-500">
+          <p className="looking-card-body">
             Teams prioritizing real product experiences, cross-functional
             collaborations, and growth in fast-paced environments.
           </p>
@@ -411,10 +372,7 @@ function ExperienceHero() {
             aria-hidden="true"
           />
 
-          <Link
-            href="mailto:iriswang32@gmail.com"
-            className="mt-4 flex items-center justify-between text-[13px] font-medium text-[var(--foreground)] transition-opacity hover:opacity-70"
-          >
+          <Link href="mailto:iriswang32@gmail.com" className="looking-card-cta">
             <span>Get in touch</span>
             <span aria-hidden="true">→</span>
           </Link>
@@ -443,10 +401,10 @@ function AnalyticalColumnHeader({
     <div className="flex items-center">
       <LedgerBadge icon={icon} logoSrc={logoSrc} logoAlt={logoAlt} />
       <div className="ml-4 flex flex-col">
-        <p className="text-[14px] font-semibold tracking-normal text-neutral-900">
+        <p className="text-[14px] font-normal tracking-normal text-[var(--foreground)]">
           {organizationName}
         </p>
-        <p className="mt-0.5 text-[12px] font-light text-neutral-400">
+        <p className="mt-0.5 text-[12px] font-light experience-muted">
           {roleName} &middot; {timeline}
         </p>
       </div>
@@ -467,7 +425,7 @@ export default function ExperiencePage() {
         <Hairline />
 
         {/* ── Pillar 1: Strategic Impact Cases ────────────────────────── */}
-        <section style={{ marginTop: 52, marginBottom: 80 }}>
+        <section className="experience-section experience-section--lead">
           <SectionLabel>Selected Projects</SectionLabel>
 
           <div className="relative mb-16">
@@ -518,7 +476,7 @@ export default function ExperiencePage() {
         <Hairline />
 
         {/* ── Pillar 2: Analytical & Publication Ledger ────────────────── */}
-        <section style={{ marginTop: 64, marginBottom: 80 }}>
+        <section className="experience-section experience-section--follow">
           <SectionLabel>Publications &amp; Illustrations</SectionLabel>
 
           <div className="experience-glass-panel experience-glass-panel--wide">
@@ -545,19 +503,17 @@ export default function ExperiencePage() {
                   />
 
                   {"papers" in entry && (
-                    <div className="mt-4 flex flex-col gap-4 pl-[60px]">
+                    <div className="publication-list">
                       {entry.papers.map((paper) => (
-                        <div key={paper.title}>
-                          <p className="text-[13px] font-normal leading-relaxed text-neutral-600">
-                            {paper.title}
-                          </p>
+                        <div key={paper.title} className="publication-item">
+                          <p className="publication-title">{paper.title}</p>
                           <Link
                             href={paper.href}
-                            className={ANALYTICAL_LINK_CLASS}
+                            className="publication-link"
                             target="_blank"
                             rel="noopener noreferrer"
                           >
-                            read research paper →
+                            read paper →
                           </Link>
                         </div>
                       ))}
@@ -565,15 +521,20 @@ export default function ExperiencePage() {
                   )}
 
                   {"linkHref" in entry && (
-                    <div className="mt-4 flex flex-col gap-4 pl-[60px]">
-                      <Link
-                        href={entry.linkHref}
-                        className={ANALYTICAL_LINK_CLASS}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {entry.linkLabel}
-                      </Link>
+                    <div className="publication-list">
+                      <div className="publication-item">
+                        {"linkTitle" in entry && entry.linkTitle && (
+                          <p className="publication-title">{entry.linkTitle}</p>
+                        )}
+                        <Link
+                          href={entry.linkHref}
+                          className="publication-link"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {entry.linkLabel}
+                        </Link>
+                      </div>
                     </div>
                   )}
                 </div>
@@ -585,7 +546,7 @@ export default function ExperiencePage() {
         <Hairline />
 
         {/* ── Pillar 3: Operational Archive ───────────────────────────── */}
-        <section style={{ marginTop: 64 }}>
+        <section className="experience-section experience-section--follow !mb-0">
           <SectionLabel>Marketing &amp; Operations</SectionLabel>
 
           <div className="experience-glass-panel experience-glass-panel--wide">

@@ -404,61 +404,35 @@ export default function AboutContent() {
 
         <div className="about-main">
           {/* ── HI SECTION ── */}
-          <section id="hi" data-theme="hi" style={{ marginBottom: 72 }}>
+          <section id="hi" data-theme="hi" className="about-section">
             {/* Photo + bio row */}
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                gap: 32,
-                alignItems: "flex-start",
-              }}
-            >
-              <div
-                className="w-[180px] shrink-0"
-                style={{
-                  transform: "rotate(1.5deg)",
-                  background: "#ffffff",
-                  padding: 8,
-                  boxShadow: "0 8px 32px rgba(0,0,0,0.08)",
-                  borderRadius: 2,
-                }}
-              >
-                <div className="relative h-[220px] w-full overflow-hidden rounded-[1px]">
-                  <Image
-                    src="/images/about-iris.png"
-                    alt="Iris Wang"
-                    fill
-                    sizes="180px"
-                    className="object-cover"
-                    priority
-                  />
+            <div className="about-bio-row">
+              <div className="about-photo-wrap">
+                <div className="about-photo-frame">
+                  <div className="relative h-[220px] w-full overflow-hidden rounded-[1px]">
+                    <Image
+                      src="/images/about-iris.png"
+                      alt="Iris Wang"
+                      fill
+                      sizes="180px"
+                      className="object-cover"
+                      priority
+                    />
+                  </div>
+                  <p className="about-photo-caption">nyc whenever i can visit :)</p>
                 </div>
-                <p
-                  className="mt-2.5 text-center text-[10px] font-light italic leading-snug text-[#BBBBBB]"
-                >
-                  nyc whenever i can visit :)
-                </p>
               </div>
 
               {/* Bio text */}
-              <div style={{ flex: 1 }}>
-                <h2
-                  style={{ fontSize: 22, fontWeight: 300, color: "var(--foreground)", marginBottom: 14, lineHeight: 1.3 }}
-                >
-                  Hi, I&apos;m Iris!
-                </h2>
+              <div className="min-w-0 flex-1">
+                <h2 className="about-intro-title">Hi, I&apos;m Iris!</h2>
 
-                <div style={{ display: "flex", flexDirection: "column", gap: 4, marginBottom: 16 }}>
-                  <span style={{ fontSize: 12, fontWeight: 300, color: "#888888" }}>
-                    📍 ATX · NYC · CA
-                  </span>
-                  <span style={{ fontSize: 12, fontWeight: 300, color: "#888888" }}>
-                    🎓 UT Austin · 2027
-                  </span>
+                <div className="mb-4 flex flex-col gap-1">
+                  <span className="about-meta-line">📍 ATX · NYC · TPE</span>
+                  <span className="about-meta-line">🎓 UT Austin · 2027</span>
                 </div>
 
-                <p style={{ fontSize: 14, fontWeight: 300, color: "#444444", lineHeight: 1.8, marginBottom: 16 }}>
+                <p className="about-bio-body">
                   Across what I&apos;m doing currently, I lead with one desire:{" "}
                   <strong className="font-normal">
                     bridging complex systems to intuitive, high-fidelity human experiences
@@ -466,30 +440,29 @@ export default function AboutContent() {
                   .
                 </p>
 
-                <p style={{ fontSize: 14, fontWeight: 300, color: "#444444", lineHeight: 1.8, marginBottom: 16 }}>
+                <p className="about-bio-body">
                   I love building software interfaces, mapping technical workflows, and designing
                   AI-native products. Advertising has taught me to design with{" "}
-                  <em>human behavior and brand voice</em> in mind; Computer Science gives me the
-                  skills to deploy those designs to reality. Business strategy ties it together —
-                  helping me build as a truly multi-faceted designer.
+                  <em>human behavior and brand voice</em> in mind, while Computer Science gives me
+                  the foundation to deploy those designs to reality. Merging these with business
+                  strategy allows me to execute as a truly multi-faceted designer.
                 </p>
 
-                <p style={{ fontSize: 14, fontWeight: 300, color: "#444444", lineHeight: 1.8, marginBottom: 16 }}>
+                <p className="about-bio-body">
                   Beyond design, my background spans developing software tools, analyzing regulatory
-                  law, photographing race cars, and producing print illustrations. Each domain is a
-                  lesson in <em>extreme intent, structural logic, and clean execution</em>.
+                  law, photographing race cars, and producing print illustrations. To me, each domain
+                  involves my core value of{" "}
+                  <em>presenting complex concepts as digestible content</em>.
                 </p>
 
-                <p style={{ fontSize: 14, fontWeight: 300, color: "#444444", lineHeight: 1.8, marginBottom: 20 }}>
-                  Currently, I&apos;m exploring novel AI-native workflows while keeping my work
-                  deeply grounded in{" "}
-                  <strong className="font-normal">human connection and community</strong>.
+                <p className="about-bio-body">
+                  Currently, I&apos;m exploring novel AI workflows while keeping my work deeply
+                  grounded in human connection and community.
                 </p>
 
                 <a
                   href="mailto:iriswang32@gmail.com"
-                  className="text-gradient-ihwn hover:opacity-80 transition-opacity"
-                  style={{ fontSize: 14, fontWeight: 300 }}
+                  className="about-bio-cta text-gradient-ihwn transition-opacity hover:opacity-80"
                 >
                   Working on something cool? Let&apos;s talk! →
                 </a>
@@ -498,10 +471,8 @@ export default function AboutContent() {
           </section>
 
         {/* ── CURRENTLY SECTION ── */}
-        <section id="currently" data-theme="currently" style={{ marginBottom: 72 }}>
-          <p className="section-label" style={{ color: "#BBBBBB", marginBottom: 20 }}>
-            CURRENTLY
-          </p>
+        <section id="currently" data-theme="currently" className="about-section">
+          <h2 className="about-heading font-[300]">Currently</h2>
 
           <div className="experience-glass-panel experience-glass-panel--wide experience-glass-panel--compact-y">
             <div className="flex w-full flex-col">
@@ -517,55 +488,37 @@ export default function AboutContent() {
 
           <Link
             href="/experience"
-            className="text-gradient-ihwn font-[300] hover:opacity-80 transition-opacity"
-            style={{ fontSize: 13, display: "inline-block", marginTop: 20 }}
+            className="about-link-row text-gradient-ihwn transition-opacity hover:opacity-80"
           >
             See the full experience page →
           </Link>
         </section>
 
         {/* ── COMMUNITY SECTION ── */}
-        <section id="community" data-theme="community" style={{ marginBottom: 72 }}>
-          <h2
-            className="font-[300]"
-            style={{ fontSize: 22, color: "var(--foreground)", marginBottom: 20 }}
-          >
-            My Communities 🤍
-          </h2>
+        <section id="community" data-theme="community" className="about-section">
+          <h2 className="about-heading font-[300]">My Communities 🤍</h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2" style={{ gap: 12 }}>
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             {COMMUNITY_ITEMS.map((item) => (
               <motion.div
                 key={item.name}
-                className="fun-card rounded-[14px]"
-                style={{ padding: 18 }}
+                className="fun-card about-community-card rounded-[14px]"
                 whileHover={{ scale: 0.98 }}
                 transition={{ duration: 0.2, ease: "easeOut" }}
               >
-                <p style={{ fontSize: 14, fontWeight: 400, color: "var(--foreground)", marginBottom: 4 }}>
-                  {item.name}
-                </p>
-                <p style={{ fontSize: 12, fontWeight: 300, color: "#A78BFA", marginBottom: 8 }}>
-                  {item.role}
-                </p>
-                <p style={{ fontSize: 12, fontWeight: 300, color: "#888888", lineHeight: 1.6 }}>
-                  {item.desc}
-                </p>
+                <p className="about-community-name">{item.name}</p>
+                <p className="about-community-role">{item.role}</p>
+                <p className="about-community-desc">{item.desc}</p>
               </motion.div>
             ))}
           </div>
         </section>
 
         {/* ── PHILOSOPHY SECTION ── */}
-        <section id="philosophy" data-theme="philosophy" style={{ marginBottom: 72 }}>
-          <h2
-            className="font-[300]"
-            style={{ fontSize: 22, color: "var(--foreground)", marginBottom: 8 }}
-          >
-            My Philosophy
-          </h2>
+        <section id="philosophy" data-theme="philosophy" className="about-section">
+          <h2 className="about-heading about-heading--tight font-[300]">My Philosophy</h2>
 
-          <p style={{ fontSize: 13, fontWeight: 300, color: "#888888", marginBottom: 28, lineHeight: 1.6 }}>
+          <p className="about-lede">
             Kaizen (改善) — every day is an opportunity to improve. Even if it&apos;s just 1%.
           </p>
 
@@ -581,13 +534,8 @@ export default function AboutContent() {
         </section>
 
         {/* ── ENTERTAINMENT SECTION ── */}
-        <section id="entertainment" data-theme="entertainment" style={{ marginBottom: 72 }}>
-          <h2
-            className="font-[300]"
-            style={{ fontSize: 22, color: "var(--foreground)", marginBottom: 24 }}
-          >
-            Entertainment
-          </h2>
+        <section id="entertainment" data-theme="entertainment" className="about-section">
+          <h2 className="about-heading about-heading--loose font-[300]">Entertainment</h2>
 
           {/* Tabs */}
           <div className="flex items-center" style={{ gap: 24, marginBottom: 32, borderBottom: "0.5px solid var(--border)" }}>
@@ -632,26 +580,17 @@ export default function AboutContent() {
         </section>
 
         {/* ── FUN FACTS SECTION ── */}
-        <section id="fun" data-theme="fun" style={{ marginBottom: 40 }}>
-          <h2
-            className="font-[300]"
-            style={{ fontSize: 22, color: "var(--foreground)", marginBottom: 6 }}
-          >
-            Fun Facts ✦
-          </h2>
-          <p style={{ fontSize: 13, fontWeight: 300, color: "#888888", marginBottom: 24 }}>
-            things that don&apos;t fit anywhere else
-          </p>
+        <section id="fun" data-theme="fun" className="about-section about-section--last">
+          <h2 className="about-heading about-heading--tight font-[300]">Fun Facts ✦</h2>
+          <p className="about-fun-lede">things that don&apos;t fit anywhere else</p>
 
-          <div className="flex flex-col" style={{ gap: 14 }}>
+          <div className="flex flex-col gap-3.5">
             {FUN_FACTS.map(({ emoji, line }) => (
-              <div key={line} className="flex items-start" style={{ gap: 14 }}>
-                <span style={{ fontSize: 18, flexShrink: 0, width: 28 }} aria-hidden="true">
+              <div key={line} className="flex items-start gap-3.5">
+                <span className="w-7 shrink-0 text-lg" aria-hidden="true">
                   {emoji}
                 </span>
-                <span style={{ fontSize: 14, fontWeight: 300, color: "var(--foreground)", lineHeight: 1.6 }}>
-                  {line}
-                </span>
+                <span className="about-fun-line">{line}</span>
               </div>
             ))}
           </div>

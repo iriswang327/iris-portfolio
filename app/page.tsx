@@ -3,28 +3,24 @@ import FunCard from "@/components/FunCard";
 import ParallaxHeroGradient from "@/components/ParallaxHeroGradient";
 import ProjectsGridSection from "@/components/ProjectsGridSection";
 
-
 const FUN_CARDS = [
   {
     href: "/booth",
     title: "The Booth",
     description: "vintage film photobooth — drop a photo, get a strip",
     tag: "try it out ↗",
-    comingSoon: true,
   },
   {
     href: "/coffee",
-    title: "What's Your Order?",
+    title: "Coffee Builder",
     description: "build your coffee · submit the order",
     tag: "place an order ↗",
-    comingSoon: true,
   },
   {
     href: "/museum",
-    title: "Museum of Art",
+    title: "Personal Art Gallery",
     description: "illustrations, oils, watercolors",
     tag: "view gallery ↗",
-    comingSoon: true,
   },
 ] as const;
 
@@ -32,8 +28,7 @@ const FUN_CARDS = [
 
 export default function DreamsPage() {
   return (
-    <div className="bg-[#F9F9FB]">
-
+    <>
       {/* ══════════════════════════════════════════
           HERO
           ══════════════════════════════════════════ */}
@@ -48,65 +43,43 @@ export default function DreamsPage() {
               style={{ width: 6, height: 6, background: "var(--status-green)", display: "inline-block" }}
               aria-hidden="true"
             />
-            <span
-              className="design-hero-status font-[300]"
-              style={{ color: "#888888" }}
-            >
+            <span className="design-hero-status font-[300] text-[var(--muted)]">
               open to summer 2026 internships · nyc preferred
             </span>
           </div>
 
           {/* Row 2: Name */}
-          <h1
-            className="name-splash design-hero-name font-[200]"
-            style={{
-              color: "var(--foreground)",
-              marginTop: 16,
-              marginBottom: 14,
-            }}
-          >
+          <h1 className="name-splash design-hero-name mt-4 mb-3.5 font-[200] text-[var(--foreground)]">
             iris wang
           </h1>
 
           {/* Row 3: Product [role] for [audience] */}
-          <div
-            className="design-hero-line flex items-baseline gap-[7px] font-[300] flex-wrap"
-            style={{ color: "var(--foreground)" }}
-          >
+          <div className="design-hero-line flex flex-wrap items-baseline gap-[7px] font-[300] text-[var(--foreground)]">
             <span>Product</span>
             <RotatingWords
-              words={["designer", "thinker", "innovator", "lover"]}
+              words={["designer", "thinker", "strategist", "builder"]}
               interval={4000}
             />
             <span>for</span>
             <RotatingWords
-              words={["humans", "AI startups", "dog lovers", "friends", "the future"]}
+              words={["humans", "AI startups", "teams", "founders", "the future"]}
               interval={2500}
             />
           </div>
 
           {/* Row 4: Tagline */}
-          <p
-            className="design-hero-tagline font-[300]"
-            style={{ color: "#888888", marginTop: 12, lineHeight: 1.7 }}
-          >
+          <p className="design-hero-tagline mt-3 font-[300] leading-[1.7] text-[var(--muted)]">
             Creating intentional designs that bring ideas to reality.
           </p>
-
         </div>
       </section>
 
       {/* ══════════════════════════════════════════
           DESIGN PROJECTS
           ══════════════════════════════════════════ */}
-      <section style={{ paddingBottom: 16 }}>
+      <section className="pb-4">
         <div className="design-section-label">
-          <p
-            className="section-label"
-            style={{ color: "#BBBBBB", marginBottom: 14 }}
-          >
-            DESIGN PROJECTS
-          </p>
+          <p className="section-label mb-3.5">DESIGN PROJECTS</p>
         </div>
 
         <ProjectsGridSection />
@@ -115,22 +88,20 @@ export default function DreamsPage() {
       {/* ══════════════════════════════════════════
           FOR FUN
           ══════════════════════════════════════════ */}
-      <section style={{ paddingBottom: 80 }}>
-        <div className="design-section-label" style={{ marginTop: 64 }}>
-          <p
-            className="section-label"
-            style={{ color: "#BBBBBB", marginBottom: 14 }}
-          >
-            FOR FUN
-          </p>
+      <section className="design-section-label mt-[var(--gap-section)] pb-20">
+        <p className="section-label mb-3.5">FOR FUN</p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="fun-cards-preview-wrap">
+          <div className="fun-cards-preview grid grid-cols-1 gap-6 md:grid-cols-3">
             {FUN_CARDS.map((card) => (
-              <FunCard key={card.href} {...card} />
+              <FunCard key={card.href} {...card} preview />
             ))}
           </div>
+          <p className="fun-cards-preview-label">
+            side projects in the works: coffee builder, personal art gallery, and more
+          </p>
         </div>
       </section>
-    </div>
+    </>
   );
 }

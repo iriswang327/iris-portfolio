@@ -27,43 +27,33 @@ export default function Nav() {
 
   return (
     <header
-      className="fixed top-0 left-0 right-0 z-[100] h-14 flex items-center justify-end"
+      className={`site-header${scrolled ? " site-header--scrolled" : ""}`}
       style={{
         viewTransitionName: "site-nav",
-        background: scrolled ? "rgba(250,249,255,0.85)" : "transparent",
-        backdropFilter: scrolled ? "blur(20px)" : "none",
-        WebkitBackdropFilter: scrolled ? "blur(20px)" : "none",
-        transition: "background 300ms ease, backdrop-filter 300ms ease, -webkit-backdrop-filter 300ms ease",
+        transition:
+          "background 300ms ease, backdrop-filter 300ms ease, -webkit-backdrop-filter 300ms ease",
       }}
     >
-      <nav
-        className="flex items-center"
-        style={{ gap: "28px", paddingRight: 24 }}
-        aria-label="Main navigation"
-      >
-        {NAV_LINKS.map(({ href, label }) => (
-          <Link
-            key={href}
-            href={href}
-            className="relative text-[13px] transition-colors duration-200"
-            style={{
-              fontWeight: 300,
-              color: "var(--foreground)",
-              letterSpacing: "0.02em",
-            }}
-            aria-current={isActive(href) ? "page" : undefined}
-          >
-            {label}
-            {isActive(href) && (
-              <span
-                className="absolute -bottom-px left-0 right-0 h-px"
-                style={{ background: "var(--gradient-ihwn)" }}
-                aria-hidden="true"
-              />
-            )}
-          </Link>
-        ))}
-      </nav>
+      <div className="site-header-inner">
+        <nav className="site-nav" aria-label="Main navigation">
+          {NAV_LINKS.map(({ href, label }) => {
+            const active = isActive(href);
+            return (
+              <Link
+                key={href}
+                href={href}
+                className={`site-nav-link${active ? " site-nav-link--active" : ""}`}
+                aria-current={active ? "page" : undefined}
+              >
+                {label}
+                {active && (
+                  <span className="site-nav-link-indicator" aria-hidden="true" />
+                )}
+              </Link>
+            );
+          })}
+        </nav>
+      </div>
     </header>
   );
 }

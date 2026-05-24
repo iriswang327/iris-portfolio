@@ -11,6 +11,8 @@ interface FunCardProps {
   /** Tag / CTA text — rendered with IHWN gradient */
   tag: string;
   comingSoon?: boolean;
+  /** Static blurred preview — no hover or navigation */
+  preview?: boolean;
 }
 
 /**
@@ -22,8 +24,25 @@ export default function FunCard({
   description,
   tag,
   comingSoon = false,
+  preview = false,
 }: FunCardProps) {
   const [hovered, setHovered] = useState(false);
+
+  const cardContent = (
+    <>
+      <span className="text-[13px] font-normal text-[var(--foreground)]">{title}</span>
+      <span className="mt-1 text-[11px] font-light text-[#BBBBBB]">{description}</span>
+      <span className="text-gradient-ihwn mt-3 text-[11px] font-light">{tag}</span>
+    </>
+  );
+
+  if (preview) {
+    return (
+      <div className="fun-card flex h-full min-h-[108px] flex-col rounded-[14px] p-[18px]" aria-hidden="true">
+        {cardContent}
+      </div>
+    );
+  }
 
   const cardInner = (
     <motion.div
@@ -33,28 +52,14 @@ export default function FunCard({
       style={{ cursor: comingSoon ? "default" : "pointer" }}
     >
       <div
-        className="flex flex-col h-full"
+        className="flex h-full flex-col"
         style={{
           filter: comingSoon && hovered ? "blur(8px)" : "none",
           transform: comingSoon && hovered ? "scale(1.06)" : "scale(1)",
           transition: "filter 500ms ease, transform 500ms ease",
         }}
       >
-        <span
-          className="text-[13px] font-normal"
-          style={{ color: "var(--foreground)" }}
-        >
-          {title}
-        </span>
-        <span
-          className="text-[11px] font-light mt-1"
-          style={{ color: "#BBBBBB" }}
-        >
-          {description}
-        </span>
-        <span className="text-gradient-ihwn text-[11px] font-light mt-3">
-          {tag}
-        </span>
+        {cardContent}
       </div>
 
       {comingSoon && (
