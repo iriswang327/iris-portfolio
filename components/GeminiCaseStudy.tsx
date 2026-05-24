@@ -104,26 +104,25 @@ export default function GeminiCaseStudy() {
           ← Back to Design
         </Link>
 
-        <header className="case-study-hero case-study-hero--editorial">
-          <div className="case-study-hero-copy">
-            <h1 className="case-study-title">Gemini · News Integration</h1>
-            <p className="case-study-subtitle case-study-subtitle--wide">
-              A self-directed concept — what if crypto news lived inside Gemini&apos;s trading app,
-              without cluttering the workspace?
-            </p>
-            <p className="case-study-disclaimer">
-              Portfolio case study · not a Gemini commission
-            </p>
-          </div>
-          <div className="case-study-meta case-study-meta--inline">
-            {METADATA.map((item) => (
-              <div key={item.label} className="case-study-meta-cell">
-                <p className="case-study-meta-label">{item.label}</p>
-                <p className="case-study-meta-value">{item.value}</p>
-              </div>
-            ))}
-          </div>
+        <header className="case-study-hero">
+          <h1 className="case-study-title">Gemini · News Integration</h1>
+          <p className="case-study-subtitle">
+            A self-directed concept — what if crypto news lived inside Gemini&apos;s trading app,
+            without cluttering the workspace?
+          </p>
+          <p className="case-study-disclaimer">
+            Portfolio case study · not a Gemini commission
+          </p>
         </header>
+
+        <div className="case-study-meta">
+          {METADATA.map((item) => (
+            <div key={item.label} className="case-study-meta-cell">
+              <p className="case-study-meta-label">{item.label}</p>
+              <p className="case-study-meta-value">{item.value}</p>
+            </div>
+          ))}
+        </div>
 
         <section className="case-study-section case-study-section--visual" aria-label="Design previews">
           <CaseLabel>Interface</CaseLabel>
@@ -168,47 +167,49 @@ export default function GeminiCaseStudy() {
           <CaseLabel>Context</CaseLabel>
           <CaseHeading>Why this project</CaseHeading>
 
-          <div className="case-study-context-grid case-study-context-grid--editorial">
-            <p className="case-study-lede case-study-lede--flush">
-              As someone with no crypto background, I wanted to learn more about Gemini. The blog
-              made me click out quickly — that&apos;s where this project started.
-            </p>
+          <div className="case-study-why-layout">
+            <div className="case-study-why-row">
+              <p className="case-study-lede case-study-lede--flush">
+                As someone with no crypto background, I wanted to learn more about Gemini. The blog
+                made me click out quickly — that&apos;s where this project started.
+              </p>
 
-            <div className="case-study-context-panel experience-glass-panel">
-              <CaseSubheading>What I identified</CaseSubheading>
-              <ul className="case-study-pain-list case-study-pain-list--panel">
-                {PAIN_POINTS.map((point) => (
-                  <li key={point}>{point}</li>
-                ))}
+              <div className="case-study-context-panel experience-glass-panel">
+                <CaseSubheading>What I identified</CaseSubheading>
+                <ul className="case-study-pain-list case-study-pain-list--panel">
+                  {PAIN_POINTS.map((point) => (
+                    <li key={point}>{point}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div className="case-study-strategy-block case-study-strategy-block--editorial">
+              <CaseSubheading>Questions I worked through</CaseSubheading>
+              <ul className="case-study-strategy-list">
+                <li>
+                  <span className="case-study-strategy-q">Why put news on the exchange?</span>
+                  <span className="case-study-strategy-a">
+                    Leaving the app to read news breaks your flow. Keep people here when they&apos;re
+                    already paying attention.
+                  </span>
+                </li>
+                <li>
+                  <span className="case-study-strategy-q">Would it move volume?</span>
+                  <span className="case-study-strategy-a">
+                    If macro news — rate cuts, ETF filings — shows up next to the asset you&apos;re
+                    trading, you might act on it instead of opening another tab first.
+                  </span>
+                </li>
+                <li>
+                  <span className="case-study-strategy-q">Has anyone tried this?</span>
+                  <span className="case-study-strategy-a">
+                    Coinbase ships news in-app. Gemini has a blog, but it lives outside trading and
+                    reads like generic company content.
+                  </span>
+                </li>
               </ul>
             </div>
-          </div>
-
-          <div className="case-study-strategy-block case-study-strategy-block--editorial">
-            <CaseSubheading>Questions I worked through</CaseSubheading>
-            <ul className="case-study-strategy-list">
-              <li>
-                <span className="case-study-strategy-q">Why put news on the exchange?</span>
-                <span className="case-study-strategy-a">
-                  Leaving the app to read news breaks your flow. Keep people here when they&apos;re
-                  already paying attention.
-                </span>
-              </li>
-              <li>
-                <span className="case-study-strategy-q">Would it move volume?</span>
-                <span className="case-study-strategy-a">
-                  If macro news — rate cuts, ETF filings — shows up next to the asset you&apos;re
-                  trading, you might act on it instead of opening another tab first.
-                </span>
-              </li>
-              <li>
-                <span className="case-study-strategy-q">Has anyone tried this?</span>
-                <span className="case-study-strategy-a">
-                  Coinbase ships news in-app. Gemini has a blog, but it lives outside trading and
-                  reads like generic company content.
-                </span>
-              </li>
-            </ul>
           </div>
         </section>
 

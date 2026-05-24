@@ -2098,7 +2098,7 @@ html[data-picker-active="1"] footer {
 }
 
 .case-study-critique-area {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 400;
   color: var(--foreground);
   margin-bottom: 10px;
@@ -2296,20 +2296,58 @@ html[data-picker-active="1"] footer {
   width: 100%;
 }
 
+.case-study-why-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+}
+
+.case-study-why-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  width: 100%;
+}
+
 @media (min-width: 960px) {
-  .case-study--gemini .case-study-context-grid--editorial {
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  .case-study-why-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 24px;
+    align-items: start;
   }
+}
+
+.case-study-why-row .case-study-lede {
+  margin-bottom: 0;
+}
+
+.case-study-why-row .case-study-context-panel {
+  height: 100%;
 }
 
 .case-study--gemini .case-study-strategy-block--editorial {
   max-width: none;
   width: 100%;
+  margin-top: 24px;
+  padding-top: 24px;
+}
+
+.case-study--gemini .case-study-strategy-block--editorial .case-study-subheading {
+  margin-top: 0;
+  margin-bottom: 16px;
 }
 
 .case-study--gemini .case-study-strategy-block--editorial .case-study-strategy-list {
-  max-width: 44rem;
+  max-width: none;
+}
+
+@media (min-width: 960px) {
+  .case-study--gemini .case-study-strategy-block--editorial .case-study-strategy-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+  }
 }
 
 .case-study-hero--editorial {
@@ -2456,7 +2494,7 @@ html[data-picker-active="1"] footer {
 @media (min-width: 960px) {
   .case-study-critique-grid {
     grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
-    gap: 20px;
+    gap: 24px;
     align-items: start;
   }
 }
@@ -2478,7 +2516,7 @@ html[data-picker-active="1"] footer {
 
 @media (min-width: 768px) {
   .case-study-compare-grid--wide {
-    gap: 28px;
+    gap: 24px;
   }
 }
 
@@ -2487,23 +2525,29 @@ html[data-picker-active="1"] footer {
   width: 100%;
 }
 
+/* Gemini — unified typography + section rhythm */
 .case-study--gemini .case-study-heading {
-  font-size: clamp(1.35rem, 2.2vw, 1.75rem);
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
-.case-study--gemini .case-study-lede {
-  font-size: clamp(1.05rem, 1.8vw, 1.2rem);
-  line-height: 1.55;
-  margin-bottom: 14px;
+.case-study--gemini .case-study-section--compact .case-study-heading {
+  font-size: 18px;
+}
+
+.case-study--gemini .case-study-body {
+  max-width: 44rem;
 }
 
 .case-study--gemini .case-study-hairline {
-  margin-bottom: 48px;
+  margin-bottom: 40px;
 }
 
 .case-study--gemini .case-study-section {
-  margin-bottom: 48px;
+  margin-bottom: 40px;
+}
+
+.case-study--gemini .case-study-gate--editorial {
+  margin-top: 8px;
 }
 
 .sr-only {
