@@ -90,7 +90,7 @@ export default function DreamsPage() {
             className="design-hero-tagline font-[300]"
             style={{ color: "#888888", marginTop: 12, lineHeight: 1.7 }}
           >
-            Working at the edges of law, tech, and people.
+            Creating intentional designs that bring ideas to reality.
           </p>
 
         </div>
