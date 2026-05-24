@@ -1453,6 +1453,16 @@ html[data-picker-active="1"] footer {
   line-height: 1.5;
 }
 
+.site-footer-credits-link {
+  color: var(--footer-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.site-footer-credits-link:hover {
+  color: var(--footer-subtle);
+}
+
 .site-footer-stamp {
   font-size: 10px;
   font-weight: 300;

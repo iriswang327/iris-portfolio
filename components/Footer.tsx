@@ -33,7 +33,15 @@ export default function Footer() {
             </Link>
             <p className="site-footer-credits">
               built with next.js &amp;{" "}
-              <span className="text-gradient-ihwn">americanos</span> ☕
+              <span className="text-gradient-ihwn">americanos</span> ☕ ·{" "}
+              <a
+                href="https://github.com/iriswang327/iris-portfolio"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="site-footer-credits-link"
+              >
+                github
+              </a>
             </p>
           </div>
 
