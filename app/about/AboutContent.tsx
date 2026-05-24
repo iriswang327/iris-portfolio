@@ -382,8 +382,6 @@ export default function AboutContent() {
               <span className="about-name">iris wang</span>
             </div>
 
-            <p className="about-tagline">design, strategy, &amp; everything in between.</p>
-
             <nav className="toc" id="toc" aria-label="About page sections">
               {NAV_ITEMS.map(({ id, label }) => (
                 <a
