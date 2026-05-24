@@ -111,10 +111,10 @@ const BOOKS_TBR = [
     accent: "#E8A888",
   },
   {
-    title: "In Five Years",
-    author: "Rebecca Serle",
-    wash: "#E4EAF2",
-    accent: "#A8BCD8",
+    title: "Yellowface",
+    author: "R.F. Kuang",
+    wash: "#FFF8DC",
+    accent: "#F0E080",
   },
   {
     title: "Madonna in a Fur Coat",
@@ -168,8 +168,8 @@ const BOOKS_PRETTY_GOOD = [
 
 const FUN_FACTS = [
   { emoji: "🎾", line: "played & coached competitive tennis in high school" },
-  { emoji: "📸", line: "aspiring vlogger (CapCut is my best friend!)" },
-  { emoji: "⚖️", line: "avg 12k steps a day, preferably outdoor walks" },
+  { emoji: "🌏", line: "love to travel across Asia and visit my family in Taiwan" },
+  { emoji: "🥾", line: "avg 12k steps a day, preferably outdoor walks" },
   { emoji: "🎨", line: "passionate about watercolor, oil painting, and learning physical art (ceramics next)" },
   { emoji: "🐾", line: "squirrel & otter lover" },
   { emoji: "🏊🏼‍♀️", line: "lifeguard & water park safety certified!" },
@@ -461,15 +461,31 @@ export default function AboutContent() {
                 </div>
 
                 <p style={{ fontSize: 14, fontWeight: 300, color: "#444444", lineHeight: 1.8, marginBottom: 16 }}>
-                  Across what I&apos;m doing currently, I lead with one desire: bridging complex
-                  systems to intuitive understanding.
+                  Across what I&apos;m doing currently, I lead with one desire:{" "}
+                  <strong className="font-normal">
+                    bridging complex systems to intuitive, high-fidelity human experiences
+                  </strong>
+                  .
+                </p>
+
+                <p style={{ fontSize: 14, fontWeight: 300, color: "#444444", lineHeight: 1.8, marginBottom: 16 }}>
+                  I love building software interfaces, mapping technical workflows, and designing
+                  AI-native products. Advertising has taught me to design with{" "}
+                  <em>human behavior and brand voice</em> in mind; Computer Science gives me the
+                  skills to deploy those designs to reality. Business strategy ties it together —
+                  helping me build as a truly multi-faceted designer.
+                </p>
+
+                <p style={{ fontSize: 14, fontWeight: 300, color: "#444444", lineHeight: 1.8, marginBottom: 16 }}>
+                  Beyond design, my background spans developing software tools, analyzing regulatory
+                  law, photographing race cars, and producing print illustrations. Each domain is a
+                  lesson in <em>extreme intent, structural logic, and clean execution</em>.
                 </p>
 
                 <p style={{ fontSize: 14, fontWeight: 300, color: "#444444", lineHeight: 1.8, marginBottom: 20 }}>
-                  I&apos;m an Advertising student at UT Austin with minors in CS, design strategies,
-                  &amp; entrepreneurship. I spend my time building products, writing about healthcare
-                  law, photographing race cars, and illustrating for a newspaper. Each tells a story
-                  that deserves to be heard.
+                  Currently, I&apos;m exploring novel AI-native workflows while keeping my work
+                  deeply grounded in{" "}
+                  <strong className="font-normal">human connection and community</strong>.
                 </p>
 
                 <a
@@ -562,7 +578,7 @@ export default function AboutContent() {
 
           <QuoteBlock
             quote="Be intentional. Be consistent. Be bored."
-            attribution="What I believe in, because without stimulation, boredom sparks creativity :)"
+            attribution="What I believe in, because without stimulation, boredom sparks creativity"
           />
         </section>
 
