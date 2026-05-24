@@ -344,14 +344,16 @@ export default function AboutContent() {
         <div className="about-rail-column">
           <aside className="about-rail rail">
             <div className="about-brand">
-              <Image
-                src="/images/lotus-logo.png"
-                alt="Iris Wang logo"
-                width={26}
-                height={26}
-                className="h-[26px] w-[26px] shrink-0 object-contain"
-              />
-              <span className="about-name">iris wang</span>
+              <Link href="/" className="about-brand-link" aria-label="Iris Wang — design home">
+                <Image
+                  src="/images/lotus-logo.png"
+                  alt=""
+                  width={60}
+                  height={60}
+                  className="about-brand-logo shrink-0 object-contain"
+                  aria-hidden
+                />
+              </Link>
             </div>
 
             <nav className="toc" id="toc" aria-label="About page sections">
@@ -377,34 +379,33 @@ export default function AboutContent() {
         <div className="about-main">
           {/* ── HI SECTION ── */}
           <section id="hi" data-theme="hi" className="about-section">
-            {/* Photo + bio row */}
+            {/* Polaroid left, bio right — grouped intro block */}
             <div className="about-bio-row">
               <div className="about-photo-wrap">
                 <div className="about-photo-frame">
-                  <div className="relative h-[220px] w-full overflow-hidden rounded-[1px]">
+                  <div className="relative h-[260px] w-full overflow-hidden rounded-[1px]">
                     <Image
                       src="/images/about-iris.png"
                       alt="Iris Wang"
                       fill
-                      sizes="180px"
+                      sizes="210px"
                       className="object-cover"
                       priority
                     />
                   </div>
-                  <p className="about-photo-caption">nyc whenever i can visit :)</p>
+                  <p className="about-photo-caption">nyc · 2026</p>
                 </div>
               </div>
 
-              {/* Bio text */}
-              <div className="min-w-0 flex-1">
+              <div className="about-bio-copy">
                 <h2 className="about-intro-title">Hi, I&apos;m Iris!</h2>
 
-                <div className="mb-4 flex flex-col gap-1">
+                <div className="about-meta-row">
                   <span className="about-meta-line">📍 ATX · NYC · TPE</span>
                   <span className="about-meta-line">🎓 UT Austin · 2027</span>
                 </div>
 
-                <p className="about-bio-body">
+                <p className="about-bio-lede">
                   Across what I&apos;m doing currently, I lead with one desire:{" "}
                   <strong className="font-normal">
                     bridging complex systems to intuitive, high-fidelity human experiences
@@ -421,23 +422,22 @@ export default function AboutContent() {
                 </p>
 
                 <p className="about-bio-body">
-                  Beyond design, my background spans developing software tools, analyzing regulatory
-                  law, photographing race cars, and producing print illustrations. To me, each domain
-                  involves my core value of{" "}
-                  <em>presenting complex concepts as digestible content</em>.
+                  Beyond design, my background spans software tools, regulatory law, race cars, and
+                  print illustration — and I&apos;m exploring AI workflows while staying grounded in{" "}
+                  <em>human connection and community</em>.
                 </p>
 
-                <p className="about-bio-body">
-                  Currently, I&apos;m exploring novel AI workflows while keeping my work deeply
-                  grounded in human connection and community.
-                </p>
-
-                <a
-                  href="mailto:iriswang32@gmail.com"
-                  className="about-bio-cta text-gradient-ihwn transition-opacity hover:opacity-80"
-                >
-                  Working on something cool? Let&apos;s talk! →
-                </a>
+                <div className="about-bio-actions">
+                  <a
+                    href="mailto:iriswang32@gmail.com"
+                    className="about-bio-cta text-gradient-ihwn transition-opacity hover:opacity-80"
+                  >
+                    say hi →
+                  </a>
+                  <Link href="/" className="about-bio-work-link">
+                    see design work →
+                  </Link>
+                </div>
               </div>
             </div>
           </section>
