@@ -12,6 +12,7 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.iriswangportfolio.com"),
   title: {
     default: "iris wang",
     template: "%s",
@@ -27,11 +28,21 @@ export const metadata: Metadata = {
     description: "Creating intentional designs that bring ideas to reality.",
     siteName: "iris wang",
     type: "website",
+    url: "/",
+    images: [
+      {
+        url: "/images/og-preview.png",
+        width: 1200,
+        height: 630,
+        alt: "iris wang — product designer portfolio",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "iris wang",
     description: "Creating intentional designs that bring ideas to reality.",
+    images: ["/images/og-preview.png"],
   },
 };
 
