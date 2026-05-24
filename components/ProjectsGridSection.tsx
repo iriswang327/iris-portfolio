@@ -172,17 +172,6 @@ interface CardDef {
 
 const CARDS: CardDef[] = [
   {
-    id: "gemini",
-    gradient: "linear-gradient(148deg, #1E1030 0%, #0B0718 100%)",
-    logo: <GeminiLogo />,
-    pill: "Gemini · Product Design",
-    pillDark: true,
-    hoverDescription: GEMINI_HOVER,
-    videoUrl: "/videos/gemini-thumbnail.mp4",
-    frameClassName: "project-card-frame bg-gradient-to-tr from-sky-100/40 via-blue-50/20 to-slate-50/60 border border-blue-200/20 shadow-[0_15px_40px_rgba(0,0,0,0.02)] transition-all duration-500 hover:shadow-[0_20px_50px_rgba(14,165,233,0.05)]",
-    modal: GEMINI_MODAL,
-  },
-  {
     id: "tc",
     gradient: "linear-gradient(148deg, #0A1628 0%, #0D2E52 55%, #1155A0 100%)",
     logo: <TCLogo />,
@@ -192,6 +181,17 @@ const CARDS: CardDef[] = [
     videoUrl: "/videos/ripple-thumbnail.mp4",
     frameClassName: "project-card-frame bg-gradient-to-tr from-purple-950/20 via-indigo-500/5 to-slate-50 border border-black/[0.03] shadow-[0_15px_40px_rgba(0,0,0,0.03)]",
     modal: TC_MODAL,
+  },
+  {
+    id: "gemini",
+    gradient: "linear-gradient(148deg, #1E1030 0%, #0B0718 100%)",
+    logo: <GeminiLogo />,
+    pill: "Gemini · Product Design",
+    pillDark: true,
+    hoverDescription: GEMINI_HOVER,
+    videoUrl: "/videos/gemini-thumbnail.mp4",
+    frameClassName: "project-card-frame bg-gradient-to-tr from-sky-100/40 via-blue-50/20 to-slate-50/60 border border-blue-200/20 shadow-[0_15px_40px_rgba(0,0,0,0.02)] transition-all duration-500 hover:shadow-[0_20px_50px_rgba(14,165,233,0.05)]",
+    modal: GEMINI_MODAL,
   },
   {
     id: "apple",
