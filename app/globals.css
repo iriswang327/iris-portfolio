@@ -57,10 +57,10 @@
   --text-caption: 11px;
   --text-micro: 9px;
 
-  /* Layout */
+  /* Layout — one spine for nav + all pages (1400px balances alignment + presence) */
   --content-max: 960px;
   --layout-wide: 1600px;
-  --layout-standard: 1280px;
+  --layout-standard: 1400px;
   --pad-inline: clamp(24px, 5vw, 64px);
   --pad-desktop: 32px;
   --pad-mobile: 20px;
@@ -1245,7 +1245,7 @@ html[data-picker-active="1"] footer {
   padding: 0 var(--pad-inline);
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: clamp(20px, 3vw, 32px);
+  gap: clamp(24px, 2.5vw, 36px);
 }
 
 .project-card-frame {
