@@ -524,7 +524,7 @@ html[data-picker-active="1"] footer {
 
 @media (min-width: 881px) {
   .about-photo-wrap {
-    margin-left: -3.5rem;
+    margin-left: -2rem;
   }
 }
 
@@ -983,8 +983,8 @@ html[data-picker-active="1"] footer {
   padding: var(--gap-section-lg) var(--pad-inline) 52px;
   display: grid;
   grid-template-columns: 1fr 440px;
-  gap: 80px;
-  align-items: start;
+  gap: 64px;
+  align-items: center;
 }
 
 .experience-content {
@@ -1208,7 +1208,7 @@ html[data-picker-active="1"] footer {
 .design-hero,
 .design-section-label {
   width: 100%;
-  max-width: var(--layout-wide);
+  max-width: var(--layout-standard);
   margin-left: auto;
   margin-right: auto;
   padding-left: var(--pad-inline);
@@ -1240,7 +1240,7 @@ html[data-picker-active="1"] footer {
 
 .projects-grid {
   width: 100%;
-  max-width: var(--layout-wide);
+  max-width: var(--layout-standard);
   margin: 0 auto;
   padding: 0 var(--pad-inline);
   display: grid;
@@ -1313,7 +1313,7 @@ html[data-picker-active="1"] footer {
 
 .site-header-inner {
   width: 100%;
-  max-width: var(--layout-wide);
+  max-width: var(--layout-standard);
   height: 100%;
   margin: 0 auto;
   padding: 0 var(--pad-inline);
@@ -1379,7 +1379,7 @@ html[data-picker-active="1"] footer {
 
 .site-footer-inner {
   width: 100%;
-  max-width: var(--layout-wide);
+  max-width: var(--layout-standard);
   margin-left: auto;
   margin-right: auto;
   padding-left: var(--pad-inline);
