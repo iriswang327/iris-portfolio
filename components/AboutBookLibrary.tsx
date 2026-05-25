@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useMemo, useState } from "react";
+import BookSuggestionModal from "@/components/BookSuggestionModal";
 import {
   ABOUT_BOOKS,
   BOOK_FILTERS,
@@ -57,18 +58,52 @@ function BookCoverCard({ book }: { book: BookItem }) {
   );
 }
 
-function BookGrid({ books }: { books: BookItem[] }) {
+function AddBookCard({
+  label,
+  onClick,
+}: {
+  label: string;
+  onClick: () => void;
+}) {
   return (
-    <div className="about-library-grid" aria-label={`${books.length} books`}>
+    <button
+      type="button"
+      className="about-library-add-card"
+      aria-label={`Suggest a book for ${label}`}
+      onClick={onClick}
+    >
+      <div className="about-library-add-frame">
+        <span className="about-library-add-plus" aria-hidden="true">
+          +
+        </span>
+      </div>
+      <span className="about-library-add-label">Suggest</span>
+    </button>
+  );
+}
+
+function BookGrid({
+  books,
+  shelfLabel,
+  onSuggest,
+}: {
+  books: BookItem[];
+  shelfLabel: string;
+  onSuggest: () => void;
+}) {
+  return (
+    <div className="about-library-grid" aria-label={`${shelfLabel}, ${books.length} books`}>
       {books.map((book) => (
         <BookCoverCard key={`${book.title}-${book.author}`} book={book} />
       ))}
+      <AddBookCard label={shelfLabel} onClick={onSuggest} />
     </div>
   );
 }
 
 export default function AboutBookLibrary() {
   const [activeFilter, setActiveFilter] = useState<BookFilter>("currently-reading");
+  const [suggestionShelf, setSuggestionShelf] = useState<BookStatus | null>(null);
 
   const counts = useMemo(() => {
     const tally: Record<BookFilter, number> = {
@@ -100,49 +135,61 @@ export default function AboutBookLibrary() {
       id,
       label,
       books: ABOUT_BOOKS.filter((book) => book.status === id),
-    })).filter(({ books }) => books.length > 0);
+    }));
   }, [activeFilter]);
 
   const showSections = activeFilter === "all";
 
   return (
-    <div className="about-library">
-      <div className="about-library-filters" role="tablist" aria-label="Filter books">
-        {BOOK_FILTERS.map(({ id, label }) => {
-          const isActive = activeFilter === id;
-          return (
-            <button
+    <>
+      <div className="about-library">
+        <div className="about-library-filters" role="tablist" aria-label="Filter books">
+          {BOOK_FILTERS.map(({ id, label }) => {
+            const isActive = activeFilter === id;
+            return (
+              <button
+                key={id}
+                type="button"
+                role="tab"
+                aria-selected={isActive}
+                className={`about-library-filter${isActive ? " about-library-filter--active" : ""}`}
+                onClick={() => setActiveFilter(id)}
+              >
+                {label}
+                <span className="about-library-filter-count">{counts[id]}</span>
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="about-library-body">
+          {sections.map(({ id, label, books }) => (
+            <section
               key={id}
-              type="button"
-              role="tab"
-              aria-selected={isActive}
-              className={`about-library-filter${isActive ? " about-library-filter--active" : ""}`}
-              onClick={() => setActiveFilter(id)}
+              className="about-library-section"
+              aria-label={showSections ? label : undefined}
             >
-              {label}
-              <span className="about-library-filter-count">{counts[id]}</span>
-            </button>
-          );
-        })}
+              {showSections ? (
+                <h3 className="about-library-section-label">
+                  {label}
+                  <span className="about-library-section-count">{books.length}</span>
+                </h3>
+              ) : null}
+              <BookGrid
+                books={books}
+                shelfLabel={label}
+                onSuggest={() => setSuggestionShelf(id)}
+              />
+            </section>
+          ))}
+        </div>
       </div>
 
-      <div className="about-library-body">
-        {sections.map(({ id, label, books }) => (
-          <section
-            key={id}
-            className="about-library-section"
-            aria-label={showSections ? label : undefined}
-          >
-            {showSections ? (
-              <h3 className="about-library-section-label">
-                {label}
-                <span className="about-library-section-count">{books.length}</span>
-              </h3>
-            ) : null}
-            <BookGrid books={books} />
-          </section>
-        ))}
-      </div>
-    </div>
+      <BookSuggestionModal
+        isOpen={suggestionShelf !== null}
+        shelf={suggestionShelf}
+        onClose={() => setSuggestionShelf(null)}
+      />
+    </>
   );
 }

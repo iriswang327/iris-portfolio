@@ -31,6 +31,29 @@ export const BOOK_STATUS_SECTIONS: { id: BookStatus; label: string }[] = [
   { id: "pretty-good", label: "Favorites" },
 ];
 
+export const BOOK_SUGGESTION_COPY: Record<
+  BookStatus,
+  { title: string; lede: string; placeholder: string }
+> = {
+  "currently-reading": {
+    title: "What should I pick up next?",
+    lede: "Drop a title — I'll add it to my reading stack.",
+    placeholder: "Book title",
+  },
+  "to-be-read": {
+    title: "Add to my stack",
+    lede: "Something I should queue up? Tell me.",
+    placeholder: "Book title",
+  },
+  "pretty-good": {
+    title: "A favorite I should know?",
+    lede: "If you'd press this into someone's hands, I want to hear it.",
+    placeholder: "Book title",
+  },
+};
+
+export const BOOK_SUGGESTION_EMAIL = "iriswang32@gmail.com";
+
 export const ABOUT_BOOKS: BookItem[] = [
   {
     title: "Crime and Punishment",
