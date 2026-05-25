@@ -1,0 +1,20 @@
+Add JPGs to this folder (2:3 portrait, ~400×600px or larger).
+Exact filenames — drop in and refresh /about.
+
+YOUR COVERS (9):
+  crime-and-punishment.jpg
+  east-of-eden.jpg
+  a-tree-grows-in-brooklyn.jpg
+  normal-people.jpg
+  sunburn.jpg
+  yellowface.jpg
+  madonna-in-a-fur-coat.jpg
+  babel.jpg
+  i-want-you-to-be-happy.jpg
+
+AUTO via Open Library (3 — optional to replace later):
+  the-goldfinch.jpg
+  recursion.jpg
+  tomorrow-and-tomorrow-and-tomorrow.jpg
+
+Good sources: publisher site, Goodreads, Amazon product image (save locally — don't hotlink).

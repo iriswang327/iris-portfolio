@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import VinylPlayer from "@/components/VinylPlayer";
+import AboutBookLibrary from "@/components/AboutBookLibrary";
 import ParallaxHeroGradient from "@/components/ParallaxHeroGradient";
 
 // ─── Types ─────────────────────────────────────────────────────────────────
@@ -80,90 +81,6 @@ const COMMUNITY_ITEMS = [
   },
 ] as const;
 
-// ─── Books ──────────────────────────────────────────────────────────────────
-
-const BOOKS_CURRENT = [
-  {
-    title: "Crime and Punishment",
-    author: "Fyodor Dostoevsky",
-    wash: "#F5EBC8",
-    accent: "#E8D498",
-  },
-  {
-    title: "East of Eden",
-    author: "John Steinbeck",
-    wash: "#FFE0C8",
-    accent: "#FFBF94",
-  },
-  {
-    title: "A Tree Grows in Brooklyn",
-    author: "Betty Smith",
-    wash: "#D8E8D4",
-    accent: "#98C098",
-  },
-];
-
-const BOOKS_TBR = [
-  {
-    title: "Sunburn",
-    author: "Laura Lippman",
-    wash: "#F8D8C8",
-    accent: "#E8A888",
-  },
-  {
-    title: "Yellowface",
-    author: "R.F. Kuang",
-    wash: "#FFF8DC",
-    accent: "#F0E080",
-  },
-  {
-    title: "Madonna in a Fur Coat",
-    author: "Sabahattin Ali",
-    wash: "#E8E8EA",
-    accent: "#B0B0B8",
-  },
-  {
-    title: "I Want You to Be Happy",
-    author: "Jem Calber",
-    wash: "#F8D8E8",
-    accent: "#ECB8D4",
-  },
-  {
-    title: "Babel",
-    author: "R.F. Kuang",
-    wash: "#E8E8EA",
-    accent: "#B8B8BE",
-  },
-];
-
-const BOOKS_PRETTY_GOOD = [
-  {
-    title: "The Goldfinch",
-    author: "Donna Tartt",
-    wash: "#C8E4F0",
-    accent: "#90C8E0",
-  },
-  {
-    title: "Recursion",
-    author: "Blake Crouch",
-    wash: "#F5EAC8",
-    accent: "#E8D080",
-  },
-  {
-    title: "Tomorrow, and Tomorrow, and Tomorrow",
-    author: "Gabrielle Zevin",
-    wash:
-      "linear-gradient(120deg, #FADCE8 0%, #F5ECC8 22%, #D8F0D8 44%, #D8E8F8 66%, #E8D8F8 88%)",
-    accent: "linear-gradient(135deg, #F0ABFC, #A78BFA, #7DD3FC)",
-  },
-  {
-    title: "Normal People",
-    author: "Sally Rooney",
-    wash: "#D8E4D4",
-    accent: "#98B898",
-  },
-];
-
 // ─── Fun facts ──────────────────────────────────────────────────────────────
 
 const FUN_FACTS = [
@@ -175,58 +92,6 @@ const FUN_FACTS = [
   { emoji: "🏊🏼‍♀️", line: "lifeguard & water park safety certified!" },
   { emoji: "☕", line: "approximately 847 americanos w/ cinnamon since freshman year" },
 ] as const;
-
-// ─── Book ledger (text-first, no covers) ─────────────────────────────────────
-
-type BookEntry = {
-  title: string;
-  author: string;
-  wash: string;
-  accent: string;
-};
-
-function BookLedgerRow({ book }: { book: BookEntry }) {
-  return (
-    <div className="about-book-row" style={{ background: book.wash }}>
-      <span
-        className="about-book-dot"
-        style={{ background: book.accent }}
-        aria-hidden="true"
-      />
-      <div className="min-w-0 flex-1">
-        <p className="about-book-title">{book.title}</p>
-        <p className="about-book-author">{book.author}</p>
-      </div>
-    </div>
-  );
-}
-
-function BookShelf({
-  label,
-  books,
-  columns = 1,
-}: {
-  label: string;
-  books: BookEntry[];
-  columns?: 1 | 2;
-}) {
-  return (
-    <div>
-      <p className="section-label about-book-shelf-label">{label}</p>
-      <div
-        className={
-          columns === 2
-            ? "grid grid-cols-1 gap-1 sm:grid-cols-2"
-            : "flex flex-col gap-1"
-        }
-      >
-        {books.map((book) => (
-          <BookLedgerRow key={book.title} book={book} />
-        ))}
-      </div>
-    </div>
-  );
-}
 
 // ─── Quote block component ──────────────────────────────────────────────────
 
@@ -524,13 +389,7 @@ export default function AboutContent() {
           </div>
 
           {activeTab === "books" ? (
-            <div className="about-book-shelves">
-              <div className="about-book-shelves-grid">
-                <BookShelf label="Currently Reading" books={BOOKS_CURRENT} />
-                <BookShelf label="To Be Read" books={BOOKS_TBR} />
-              </div>
-              <BookShelf label="Pretty Good Reads" books={BOOKS_PRETTY_GOOD} columns={2} />
-            </div>
+            <AboutBookLibrary />
           ) : (
             <div className="about-entertainment-music">
               <VinylPlayer />
