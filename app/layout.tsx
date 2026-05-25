@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Caveat, Geist } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import { EmotionProvider } from "@/context/EmotionContext";
 import Nav from "@/components/Nav";
@@ -75,6 +76,7 @@ export default function RootLayout({
             </div>
           </div>
         </EmotionProvider>
+        <Analytics />
       </body>
     </html>
   );
