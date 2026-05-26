@@ -2120,6 +2120,25 @@ html[data-picker-active="1"] footer {
   padding: 12px;
 }
 
+.project-card-pill {
+  max-width: calc(100% - 24px);
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.52);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 0.5px solid rgba(255, 255, 255, 0.78);
+  box-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: -0.005em;
+  color: var(--foreground);
+  white-space: normal;
+}
+
 @media (max-width: 768px) {
   .projects-grid {
     grid-template-columns: 1fr;
@@ -2130,6 +2149,7 @@ html[data-picker-active="1"] footer {
   display: flex;
   flex-direction: column;
   gap: clamp(48px, 6vw, 72px);
+  overflow: visible;
 }
 
 .projects-in-progress {
@@ -2145,11 +2165,516 @@ html[data-picker-active="1"] footer {
 
 .projects-in-progress-lede {
   margin: 10px 0 0;
-  max-width: 42ch;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 300;
-  line-height: 1.55;
+  line-height: 1.4;
   color: var(--text-subtle);
+  white-space: nowrap;
+}
+
+.projects-grid--fan {
+  overflow: visible;
+}
+
+/* Apple in-progress — fan deck on hover */
+.apple-fan-root {
+  position: relative;
+  overflow: visible;
+  outline: none;
+  grid-column: 1 / -1;
+}
+
+.apple-fan-root:focus-visible .apple-fan-deck {
+  border-radius: 20px;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--gradient-mid) 45%, transparent);
+}
+
+.apple-fan-deck {
+  --apple-main-h: 400px;
+  --apple-gap: clamp(16px, 2vw, 28px);
+  --apple-main-w: calc((100% - var(--apple-gap)) / 2);
+  --apple-mini-w: 28%;
+  --apple-hover-bridge: clamp(16px, 2vw, 28px);
+
+  position: relative;
+  min-height: var(--apple-main-h);
+  overflow: visible;
+  outline: none;
+}
+
+.apple-fan-stack {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: calc(var(--apple-main-w) + var(--apple-gap) - var(--apple-hover-bridge));
+  height: var(--apple-main-h);
+  padding-left: var(--apple-hover-bridge);
+  overflow: visible;
+  pointer-events: none;
+}
+
+.apple-fan-stack--open {
+  pointer-events: auto;
+}
+
+.apple-fan-slot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--apple-mini-w);
+  height: 100%;
+  transform-origin: top left;
+}
+
+.apple-fan-stack--flow {
+  --apple-mini-w: 23%;
+}
+
+.apple-fan-slot--front .apple-fan-note-card,
+.apple-fan-slot--front .apple-fan-questions-card {
+  transform: translateY(-6px) scale(1.015);
+}
+
+.apple-fan-note-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: clamp(22px, 2.2vw, 28px) clamp(18px, 1.8vw, 24px) clamp(24px, 2.4vw, 32px);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.97);
+  border: 0.5px solid color-mix(in srgb, var(--foreground) 7%, transparent);
+  box-shadow:
+    0 20px 50px -12px rgba(0, 0, 0, 0.05),
+    0 0 1px rgba(0, 0, 0, 0.08);
+  transition:
+    border-color 0.22s ease,
+    box-shadow 0.22s ease,
+    background 0.22s ease,
+    transform 0.22s ease;
+}
+
+.apple-fan-slot--front .apple-fan-note-card {
+  background: #fff;
+  border-color: color-mix(in srgb, var(--foreground) 14%, transparent);
+  box-shadow:
+    0 28px 60px -14px rgba(26, 22, 37, 0.12),
+    0 0 0 0.5px rgba(0, 0, 0, 0.04);
+}
+
+.apple-fan-note-head {
+  flex-shrink: 0;
+  padding-bottom: clamp(14px, 1.4vw, 18px);
+  margin-bottom: clamp(14px, 1.4vw, 18px);
+  border-bottom: 0.5px solid color-mix(in srgb, var(--border) 85%, transparent);
+}
+
+.apple-fan-note-eyebrow {
+  margin: 0 0 6px;
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.apple-fan-note-title {
+  margin: 0;
+  font-size: clamp(14px, 1.05vw, 16px);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  color: var(--foreground);
+  overflow-wrap: anywhere;
+}
+
+.apple-fan-note-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 0;
+  margin: 0;
+  padding-top: 2px;
+}
+
+.apple-fan-note-list {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(10px, 1.1vw, 13px);
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.apple-fan-note-line {
+  position: relative;
+  margin: 0;
+  padding-left: 14px;
+  font-size: clamp(11px, 0.85vw, 12px);
+  font-weight: 300;
+  line-height: 1.45;
+  letter-spacing: 0.005em;
+  color: var(--text-subtle);
+  overflow-wrap: anywhere;
+}
+
+.apple-fan-note-line::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.58em;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--foreground);
+}
+
+.apple-fan-questions-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: clamp(22px, 2.2vw, 28px) clamp(18px, 1.8vw, 24px) clamp(24px, 2.4vw, 32px);
+  border-radius: 20px;
+  border: 0.5px solid color-mix(in srgb, var(--gradient-mid) 22%, transparent);
+  background: linear-gradient(
+    165deg,
+    rgba(255, 255, 255, 0.98) 0%,
+    rgba(250, 249, 255, 0.94) 55%,
+    color-mix(in srgb, var(--gradient-start) 6%, #fff) 100%
+  );
+  box-shadow:
+    0 20px 50px -12px rgba(167, 139, 250, 0.08),
+    0 0 1px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  text-align: left;
+  transition:
+    border-color 0.22s ease,
+    box-shadow 0.22s ease,
+    background 0.22s ease,
+    transform 0.22s ease;
+}
+
+.apple-fan-questions-card:hover {
+  border-color: color-mix(in srgb, var(--gradient-mid) 38%, transparent);
+}
+
+.apple-fan-questions-card:focus-visible {
+  outline: 2px solid var(--gradient-mid);
+  outline-offset: 2px;
+}
+
+.apple-fan-slot--front .apple-fan-questions-card {
+  border-color: color-mix(in srgb, var(--gradient-mid) 42%, transparent);
+  box-shadow:
+    0 28px 60px -14px rgba(167, 139, 250, 0.14),
+    0 0 0 0.5px rgba(167, 139, 250, 0.12);
+}
+
+.apple-fan-questions-eyebrow {
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.apple-fan-questions-emoji {
+  display: block;
+  margin: clamp(12px, 1.2vw, 16px) 0 clamp(8px, 0.8vw, 12px);
+  font-size: clamp(22px, 1.8vw, 26px);
+  line-height: 1;
+}
+
+.apple-fan-questions-title {
+  font-size: clamp(15px, 1.1vw, 17px);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  color: var(--foreground);
+}
+
+.apple-fan-questions-lede {
+  margin-top: clamp(8px, 0.8vw, 10px);
+  font-size: clamp(10.5px, 0.82vw, 11.5px);
+  font-weight: 300;
+  line-height: 1.5;
+  letter-spacing: 0.005em;
+  color: var(--text-subtle);
+}
+
+.apple-fan-questions-action {
+  margin-top: auto;
+  padding-top: clamp(16px, 1.6vw, 22px);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: color-mix(in srgb, var(--gradient-mid) 85%, var(--foreground));
+  transition: color 0.2s ease;
+}
+
+.apple-fan-questions-card:hover .apple-fan-questions-action {
+  color: var(--foreground);
+}
+
+.apple-fan-main {
+  position: relative;
+  z-index: 2;
+  width: var(--apple-main-w);
+  height: var(--apple-main-h);
+}
+
+.apple-fan-main-trigger {
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  text-align: inherit;
+  cursor: default;
+}
+
+.apple-fan-main-trigger--interactive {
+  cursor: pointer;
+}
+
+.apple-fan-main-trigger--interactive:focus-visible {
+  outline: none;
+}
+
+.apple-fan-main-trigger--interactive:focus-visible .apple-fan-main-inner {
+  box-shadow:
+    0 20px 50px -12px rgba(0, 0, 0, 0.04),
+    0 0 0 2px color-mix(in srgb, var(--gradient-mid) 45%, transparent);
+}
+
+.apple-fan-main::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: calc(var(--apple-hover-bridge) * -1);
+  width: var(--apple-hover-bridge);
+  height: 100%;
+}
+
+.apple-fan-main-inner {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #fff;
+  border: 0.5px solid rgba(0, 0, 0, 0.03);
+  box-shadow:
+    0 20px 50px -12px rgba(0, 0, 0, 0.04),
+    0 0 1px rgba(0, 0, 0, 0.12);
+}
+
+.apple-fan-main-media {
+  position: absolute;
+  inset: 0;
+  transition: filter 0.35s ease, transform 0.35s ease;
+}
+
+.apple-fan-main-inner--hover .apple-fan-main-media {
+  filter: blur(10px);
+  transform: scale(1.04);
+}
+
+.apple-fan-main-frame {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    148deg,
+    rgba(180, 177, 253, 0.35) 0%,
+    rgba(144, 155, 230, 0.22) 48%,
+    rgba(248, 249, 255, 0.9) 100%
+  );
+  border: none;
+  box-shadow: none;
+}
+
+.apple-fan-main-logo {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.apple-fan-main-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 24px;
+  pointer-events: none;
+}
+
+.apple-fan-main-lock {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.apple-fan-main-overlay-text {
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+  color: var(--foreground);
+  text-align: center;
+}
+
+.apple-fan-main-arrow {
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--text-subtle);
+}
+
+.apple-fan-pill {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  z-index: 4;
+}
+
+.apple-fan-tap-hint {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.apple-fan-swipe-hint {
+  display: none;
+  margin: 10px 0 0;
+  font-size: 11px;
+  font-weight: 300;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+  color: var(--text-faint);
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .projects-in-progress-lede {
+    font-size: 11px;
+    white-space: normal;
+  }
+
+  .apple-fan-tap-hint {
+    right: auto;
+    left: 50%;
+    bottom: 56px;
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+
+  .apple-fan-deck {
+    --apple-main-w: 100%;
+    --apple-main-h: 320px;
+    --apple-mobile-strip-h: 300px;
+  }
+
+  .apple-fan-main {
+    width: 100%;
+  }
+
+  .apple-fan-main::after {
+    display: none;
+  }
+
+  .apple-fan-stack {
+    position: relative;
+    top: auto;
+    right: auto;
+    left: auto;
+    display: flex;
+    gap: 12px;
+    height: 0;
+    margin-top: 0;
+    padding: 0;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    transition:
+      height 0.32s ease,
+      opacity 0.24s ease,
+      margin-top 0.32s ease;
+  }
+
+  .apple-fan-stack--open {
+    height: var(--apple-mobile-strip-h);
+    margin-top: 14px;
+    padding: 2px 0 8px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .apple-fan-slot {
+    position: relative;
+    left: auto !important;
+    flex: 0 0 min(78vw, 272px);
+    width: min(78vw, 272px);
+    height: 100%;
+    scroll-snap-align: start;
+  }
+
+  .apple-fan-root--expanded .apple-fan-main-inner {
+    filter: none;
+  }
+
+  .apple-fan-swipe-hint {
+    display: block;
+  }
+
+  .apple-fan-note-card,
+  .apple-fan-questions-card {
+    padding: 22px 20px 26px;
+  }
+
+  .apple-fan-note-head {
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+  }
+
+  .apple-fan-questions-emoji {
+    margin: 12px 0 10px;
+    font-size: 24px;
+  }
+
+  .apple-fan-main-overlay-text {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 520px) {
+  .apple-fan-main-overlay {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .apple-fan-main-overlay-text {
+    flex: 1 1 100%;
+  }
 }
 
 .fun-cards-preview-wrap {

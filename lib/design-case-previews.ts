@@ -1,6 +1,8 @@
+import { GEMINI_CARD_LABELS, RIPPLE_CARD_LABELS } from "@/lib/project-card-labels";
+
 /** Shared card preview config — matches homepage project grid */
 export const RIPPLE_CARD_PREVIEW = {
-  pill: "Convergent Build Team Project",
+  ...RIPPLE_CARD_LABELS,
   gradient: "linear-gradient(148deg, #0A1628 0%, #0D2E52 55%, #1155A0 100%)",
   videoUrl: "/videos/ripple-thumbnail.mp4",
   frameClassName:
@@ -9,7 +11,7 @@ export const RIPPLE_CARD_PREVIEW = {
 };
 
 export const GEMINI_CARD_PREVIEW = {
-  pill: "Speculative Product Design Case Study",
+  ...GEMINI_CARD_LABELS,
   gradient: "linear-gradient(148deg, #1E1030 0%, #0B0718 100%)",
   videoUrl: "/videos/gemini-thumbnail.mp4",
   frameClassName:

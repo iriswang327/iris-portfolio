@@ -2,27 +2,13 @@
 
 import { useState, type ReactNode } from "react";
 import ProjectCard from "@/components/ProjectCard";
+import AppleFanCard from "@/components/AppleFanCard";
 import CompanyModal, { type ModalProject } from "@/components/CompanyModal";
-import { APPLE_HOVER, APPLE_PILL } from "@/lib/apple-copy";
 import { GEMINI_HOVER, GEMINI_MODAL_SUMMARY } from "@/lib/gemini-copy";
+import { GEMINI_CARD_LABELS, RIPPLE_CARD_LABELS } from "@/lib/project-card-labels";
 import { RIPPLE_HOVER, RIPPLE_MODAL_ROLE, RIPPLE_MODAL_SUMMARY } from "@/lib/ripple-copy";
 
 // ─── Logo SVGs ────────────────────────────────────────────────────────────────
-
-function AppleLogo() {
-  return (
-    <svg
-      width="52"
-      height="62"
-      viewBox="0 0 52 62"
-      fill="white"
-      style={{ opacity: 0.08 }}
-      aria-hidden="true"
-    >
-      <path d="M38.4 15.8c-2.2 2.7-5.8 4.8-9.3 4.5-.4-3.5 1.4-7.2 3.5-9.6 2.4-2.8 6.4-4.8 9.7-4.8.4 3.7-1.2 7.4-3.9 9.9zM41.6 21.5c-5.3-.3-9.9 3-12.4 3s-6.4-2.8-10.7-2.8c-5.4.1-10.4 3.1-13.2 8-5.6 9.6-1.4 23.8 4 31.9 2.6 3.8 5.8 8.1 9.9 7.9 4-.2 5.5-2.5 10.3-2.5 4.8 0 6.2 2.5 10.4 2.4 4.3-.1 7-3.8 9.6-7.6 3-4.4 4.2-8.6 4.3-8.8-.1 0-8.3-3.2-8.3-12.8 0-8 6.4-11.9 6.7-12.1-3.7-5.4-9.4-5.7-10.6-5.6z" />
-    </svg>
-  );
-}
 
 function GeminiLogo() {
   return (
@@ -113,8 +99,8 @@ interface CardDef {
   id: string;
   gradient: string;
   logo?: ReactNode;
-  pill: string;
-  pillDark?: boolean;
+  company: string;
+  projectLabel: string;
   hoverDescription: string;
   videoUrl?: string;
   imageUrl?: string;
@@ -128,8 +114,7 @@ const FEATURED_CARDS: CardDef[] = [
     id: "tc",
     gradient: "linear-gradient(148deg, #0A1628 0%, #0D2E52 55%, #1155A0 100%)",
     logo: <TCLogo />,
-    pill: "Convergent Build Team Project",
-    pillDark: true,
+    ...RIPPLE_CARD_LABELS,
     hoverDescription: RIPPLE_HOVER,
     videoUrl: "/videos/ripple-thumbnail.mp4",
     frameClassName:
@@ -140,8 +125,7 @@ const FEATURED_CARDS: CardDef[] = [
     id: "gemini",
     gradient: "linear-gradient(148deg, #1E1030 0%, #0B0718 100%)",
     logo: <GeminiLogo />,
-    pill: "Speculative Product Design Case Study",
-    pillDark: true,
+    ...GEMINI_CARD_LABELS,
     hoverDescription: GEMINI_HOVER,
     videoUrl: "/videos/gemini-thumbnail.mp4",
     frameClassName:
@@ -149,17 +133,6 @@ const FEATURED_CARDS: CardDef[] = [
     modal: GEMINI_MODAL,
   },
 ];
-
-const IN_PROGRESS_APPLE: CardDef = {
-  id: "apple",
-  gradient: "linear-gradient(148deg, #B4B1FD 0%, #909BE6 48%, #748ADB 100%)",
-  logo: <AppleLogo />,
-  pill: APPLE_PILL,
-  hoverDescription: APPLE_HOVER,
-  imageUrl: "/images/apple-thumbnail.png",
-  frameClassName:
-    "project-card-frame bg-gradient-to-tr from-indigo-100/50 via-violet-50/30 to-slate-50/80 border border-indigo-200/25 shadow-[0_15px_40px_rgba(0,0,0,0.03)]",
-};
 
 function ProjectCardSlot({
   card,
@@ -185,8 +158,8 @@ function ProjectCardSlot({
       <ProjectCard
         gradient={card.gradient}
         logo={card.logo}
-        pill={card.pill}
-        pillDark={card.pillDark}
+        company={card.company}
+        projectLabel={card.projectLabel}
         hoverDescription={card.hoverDescription}
         videoUrl={card.videoUrl}
         imageUrl={card.imageUrl}
@@ -226,8 +199,8 @@ export default function ProjectsGridSection() {
             </p>
           </div>
 
-          <div className="projects-grid">
-            <ProjectCardSlot card={IN_PROGRESS_APPLE} />
+          <div className="projects-grid projects-grid--fan">
+            <AppleFanCard />
           </div>
         </div>
       </div>

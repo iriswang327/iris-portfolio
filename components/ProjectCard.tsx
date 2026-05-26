@@ -16,10 +16,10 @@ export interface ProjectCardProps {
   gradient: string;
   /** Optional center logo / icon — ReactNode for flexibility */
   logo?: ReactNode;
-  /** Frosted pill label */
-  pill: string;
-  /** True → dark pill variant (rgba(0,0,0,0.55)), default false → light frosted */
-  pillDark?: boolean;
+  /** Organization or company */
+  company: string;
+  /** Role, project name, or program */
+  projectLabel: string;
   /** Text that fades in BELOW the card on hover (not overlaid) */
   hoverDescription: string;
   /** If provided, a looping muted autoplay video fills the card instead of the gradient */
@@ -37,8 +37,8 @@ export default function ProjectCard({
   locked = false,
   gradient,
   logo,
-  pill,
-  pillDark = false,
+  company,
+  projectLabel,
   hoverDescription,
   videoUrl,
   imageUrl,
@@ -46,6 +46,7 @@ export default function ProjectCard({
   lockedHoverDescription,
 }: ProjectCardProps) {
   const [hovered, setHovered] = useState(false);
+  const pillText = `${company} · ${projectLabel}`;
 
   const cardInner = (
       <motion.div
@@ -53,7 +54,7 @@ export default function ProjectCard({
       style={{ height: 400, cursor: onClick || (!locked && href) ? "pointer" : "default" }}
       animate={{ scale: hovered && !locked ? 0.97 : 1 }}
       transition={{ duration: 0.3, ease: [0.34, 1.56, 0.64, 1] }}
-      aria-label={pill}
+      aria-label={pillText}
     >
       {/* ── Background: framed, video, image, or gradient ── */}
       {frameClassName ? (
@@ -154,22 +155,8 @@ export default function ProjectCard({
       )}
 
       {/* ── Pill — bottom-left ── */}
-      <div
-        className="absolute bottom-3 left-3"
-        style={{
-          background: pillDark ? "rgba(0,0,0,0.72)" : "rgba(255,255,255,0.9)",
-          borderRadius: 999,
-          padding: "6px 14px",
-          fontSize: 11,
-          fontWeight: 400,
-          color: pillDark ? "#ffffff" : "#1A1625",
-          maxWidth: "calc(100% - 24px)",
-          whiteSpace: "normal",
-          lineHeight: 1.35,
-          boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-        }}
-      >
-        {pill}
+      <div className="project-card-pill absolute bottom-3 left-3">
+        {pillText}
       </div>
     </motion.div>
   );
@@ -185,7 +172,7 @@ export default function ProjectCard({
         <button
           onClick={onClick}
           className="block w-full text-left bg-transparent border-0 p-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A78BFA] rounded-[20px]"
-          aria-label={pill}
+          aria-label={pillText}
         >
           {cardInner}
         </button>

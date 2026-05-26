@@ -7,6 +7,11 @@ import ProjectCard from "@/components/ProjectCard";
 import ExperienceModal, {
   type ExperienceAccentTheme,
 } from "@/components/ExperienceModal";
+import {
+  INTEGRATED_DESIGN_CARD_LABELS,
+  RISK_RADAR_CARD_LABELS,
+  TOWER_BRIDGE_CARD_LABELS,
+} from "@/lib/project-card-labels";
 import ParallaxHeroGradient from "@/components/ParallaxHeroGradient";
 
 const GLASS_FRAME_BASE =
@@ -33,8 +38,8 @@ interface ModalConfig {
 interface ImpactCardDef {
   id: string;
   gradient: string;
-  pill: string;
-  pillDark?: boolean;
+  company: string;
+  projectLabel: string;
   hoverDescription: string;
   videoUrl?: string;
   imageUrl?: string;
@@ -96,8 +101,7 @@ const STRATEGIC_IMPACT_CARDS: ImpactCardDef[] = [
     id: "tower-bridge",
     gradient:
       "linear-gradient(148deg, #F7F4EC 0%, #D4E2CC 42%, #E8DFD0 72%, #EDD5C4 100%)",
-    pill: "Student-Run Advertising Agency",
-    pillDark: false,
+    ...TOWER_BRIDGE_CARD_LABELS,
     hoverDescription: "Real clients, real strategy, real stakes.",
     videoUrl: "/videos/tower-thumbnail.mp4",
     frameClassName: `${GLASS_FRAME_BASE} backdrop-blur-md bg-gradient-to-br from-stone-50/85 via-emerald-100/70 to-amber-100/65 border border-emerald-300/35 shadow-[0_15px_40px_rgba(0,0,0,0.04),inset_0_1px_0_rgba(255,255,255,0.5)] hover:shadow-[0_22px_50px_rgba(74,124,89,0.14),0_16px_36px_-12px_rgba(191,87,0,0.12)] ring-1 ring-[#BF5700]/10`,
@@ -109,8 +113,7 @@ const STRATEGIC_IMPACT_CARDS: ImpactCardDef[] = [
     id: "integrated-design-thinking",
     gradient:
       "linear-gradient(148deg, #FAF0E6 0%, #E8D5C4 42%, #D4B896 100%)",
-    pill: "Integrated Design · UX Research",
-    pillDark: false,
+    ...INTEGRATED_DESIGN_CARD_LABELS,
     hoverDescription: "Full UX research cycle for unhoused community advocacy.",
     videoUrl: "/videos/integrated-design-thumbnail.mp4",
     frameClassName: `${GLASS_FRAME_BASE} backdrop-blur-md bg-gradient-to-br from-orange-100/70 via-[#BF5700]/12 to-stone-300/50 border border-[#BF5700]/20 shadow-[0_15px_40px_rgba(0,0,0,0.04)] hover:shadow-[0_22px_50px_rgba(191,87,0,0.14)]`,
@@ -121,8 +124,7 @@ const STRATEGIC_IMPACT_CARDS: ImpactCardDef[] = [
   {
     id: "risk-radar",
     gradient: "linear-gradient(148deg, #0D0D14 0%, #1A1A2E 55%, #243B5A 100%)",
-    pill: "McCombs Final Project",
-    pillDark: true,
+    ...RISK_RADAR_CARD_LABELS,
     hoverDescription: "AI brand crisis prediction — BERT, RAG, Spring 2026.",
     videoUrl: "/videos/risk-radar-thumbnail.mp4",
     frameClassName: `${GLASS_FRAME_BASE} bg-gradient-to-tr from-slate-900/50 via-indigo-950/35 to-slate-800/30 border border-white/[0.08] shadow-[0_15px_40px_rgba(0,0,0,0.2)] hover:shadow-[0_22px_50px_rgba(99,102,241,0.15)]`,
@@ -478,8 +480,8 @@ export default function ExperiencePage() {
                   )}
                   <ProjectCard
                     gradient={card.gradient}
-                    pill={card.pill}
-                    pillDark={card.pillDark}
+                    company={card.company}
+                    projectLabel={card.projectLabel}
                     hoverDescription={card.hoverDescription}
                     videoUrl={card.videoUrl}
                     imageUrl={card.imageUrl}
