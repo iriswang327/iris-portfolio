@@ -26,8 +26,9 @@ export interface ProjectCardProps {
   videoUrl?: string;
   /** If provided, a static image fills the card instead of the gradient */
   imageUrl?: string;
-  /** If provided, renders the video/image inside a styled backdrop frame instead of full-bleed */
   frameClassName?: string;
+  /** When locked, optional hover line instead of the default “currently building” */
+  lockedHoverDescription?: string;
 }
 
 export default function ProjectCard({
@@ -42,6 +43,7 @@ export default function ProjectCard({
   videoUrl,
   imageUrl,
   frameClassName,
+  lockedHoverDescription,
 }: ProjectCardProps) {
   const [hovered, setHovered] = useState(false);
 
@@ -211,7 +213,7 @@ export default function ProjectCard({
         transition={{ duration: 0.2, ease: "easeOut" }}
         aria-hidden={!hovered}
       >
-        {locked ? "currently building 🔒" : hoverDescription}
+        {locked ? (lockedHoverDescription ?? "currently building 🔒") : hoverDescription}
       </motion.p>
     </div>
   );

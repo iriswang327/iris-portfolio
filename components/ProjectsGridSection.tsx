@@ -3,6 +3,7 @@
 import { useState, type ReactNode } from "react";
 import ProjectCard from "@/components/ProjectCard";
 import CompanyModal, { type ModalProject } from "@/components/CompanyModal";
+import { APPLE_HOVER, APPLE_PILL } from "@/lib/apple-copy";
 import { GEMINI_HOVER, GEMINI_MODAL_SUMMARY } from "@/lib/gemini-copy";
 import { RIPPLE_HOVER, RIPPLE_MODAL_ROLE, RIPPLE_MODAL_SUMMARY } from "@/lib/ripple-copy";
 
@@ -22,25 +23,6 @@ function AppleLogo() {
     </svg>
   );
 }
-
-function SpotifyLogo() {
-  return (
-    <svg
-      width="52"
-      height="52"
-      viewBox="0 0 100 100"
-      fill="none"
-      style={{ opacity: 0.08 }}
-      aria-hidden="true"
-    >
-      <circle cx="50" cy="50" r="48" fill="white" />
-      <path d="M26 38 Q50 27 74 36" stroke="#1E5537" strokeWidth="7" strokeLinecap="round" />
-      <path d="M28 51 Q50 41 72 49" stroke="#1E5537" strokeWidth="7" strokeLinecap="round" />
-      <path d="M31 64 Q50 56 69 62" stroke="#1E5537" strokeWidth="7" strokeLinecap="round" />
-    </svg>
-  );
-}
-
 
 function GeminiLogo() {
   return (
@@ -99,6 +81,7 @@ const GEMINI_MODAL: ModalConfig = {
   companyName: "Gemini",
   companyLogo: "G",
   companyLogoImage: "/images/gemini-logo.png",
+  roleLabel: "Speculative Product Design Case Study",
   whyCompanyText: GEMINI_MODAL_SUMMARY,
   projects: [
     {
@@ -124,36 +107,6 @@ const TC_MODAL: ModalConfig = {
   ],
 };
 
-const APPLE_MODAL: ModalConfig = {
-  companyName: "Apple",
-  companyLogo: "⌘",
-  whyCompanyText:
-    "Apple sits at the intersection of technology and human experience better than anyone. This upcoming project explores transforming maps from a generic utility into an editorial companion that guides you through context, not just coordinates.",
-  projects: [
-    {
-      title: "PROJECT 01 / Maps Redesign",
-      subtitle: "Context-aware spatial navigation systems.",
-      route: "#",
-      locked: true,
-    },
-  ],
-};
-
-const SPOTIFY_MODAL: ModalConfig = {
-  companyName: "Spotify",
-  companyLogo: "♪",
-  whyCompanyText:
-    "Exploring high-density visual storytelling inside audio streaming architectures to bridge the gap between niche audio subcultures and mainstream social curation features.",
-  projects: [
-    {
-      title: "PROJECT 01 / Social Curation Layer",
-      subtitle: "Designing collaborative music ecosystems.",
-      route: "#",
-      locked: true,
-    },
-  ],
-};
-
 // ─── Card definitions ─────────────────────────────────────────────────────────
 
 interface CardDef {
@@ -170,7 +123,7 @@ interface CardDef {
   modal?: ModalConfig;
 }
 
-const CARDS: CardDef[] = [
+const FEATURED_CARDS: CardDef[] = [
   {
     id: "tc",
     gradient: "linear-gradient(148deg, #0A1628 0%, #0D2E52 55%, #1155A0 100%)",
@@ -179,7 +132,8 @@ const CARDS: CardDef[] = [
     pillDark: true,
     hoverDescription: RIPPLE_HOVER,
     videoUrl: "/videos/ripple-thumbnail.mp4",
-    frameClassName: "project-card-frame bg-gradient-to-tr from-purple-950/20 via-indigo-500/5 to-slate-50 border border-black/[0.03] shadow-[0_15px_40px_rgba(0,0,0,0.03)]",
+    frameClassName:
+      "project-card-frame bg-gradient-to-tr from-purple-950/20 via-indigo-500/5 to-slate-50 border border-black/[0.03] shadow-[0_15px_40px_rgba(0,0,0,0.03)]",
     modal: TC_MODAL,
   },
   {
@@ -190,30 +144,59 @@ const CARDS: CardDef[] = [
     pillDark: true,
     hoverDescription: GEMINI_HOVER,
     videoUrl: "/videos/gemini-thumbnail.mp4",
-    frameClassName: "project-card-frame bg-gradient-to-tr from-sky-100/40 via-blue-50/20 to-slate-50/60 border border-blue-200/20 shadow-[0_15px_40px_rgba(0,0,0,0.02)] transition-all duration-500 hover:shadow-[0_20px_50px_rgba(14,165,233,0.05)]",
+    frameClassName:
+      "project-card-frame bg-gradient-to-tr from-sky-100/40 via-blue-50/20 to-slate-50/60 border border-blue-200/20 shadow-[0_15px_40px_rgba(0,0,0,0.02)] transition-all duration-500 hover:shadow-[0_20px_50px_rgba(14,165,233,0.05)]",
     modal: GEMINI_MODAL,
   },
-  {
-    id: "apple",
-    gradient: "linear-gradient(148deg, #B4B1FD 0%, #909BE6 48%, #748ADB 100%)",
-    logo: <AppleLogo />,
-    pill: "Apple · Product Design",
-    hoverDescription: "Rethinking how Maps connects people to context.",
-    imageUrl: "/images/apple-thumbnail.png",
-    locked: true,
-    modal: APPLE_MODAL,
-  },
-  {
-    id: "spotify",
-    gradient: "linear-gradient(148deg, #1E5537 0%, #0C2C1B 100%)",
-    logo: <SpotifyLogo />,
-    pill: "Spotify · Product Design",
-    hoverDescription: "Discover what local businesses are listening to.",
-    imageUrl: "/images/spotify-thumbnail.png",
-    locked: true,
-    modal: SPOTIFY_MODAL,
-  },
 ];
+
+const IN_PROGRESS_APPLE: CardDef = {
+  id: "apple",
+  gradient: "linear-gradient(148deg, #B4B1FD 0%, #909BE6 48%, #748ADB 100%)",
+  logo: <AppleLogo />,
+  pill: APPLE_PILL,
+  hoverDescription: APPLE_HOVER,
+  imageUrl: "/images/apple-thumbnail.png",
+  frameClassName:
+    "project-card-frame bg-gradient-to-tr from-indigo-100/50 via-violet-50/30 to-slate-50/80 border border-indigo-200/25 shadow-[0_15px_40px_rgba(0,0,0,0.03)]",
+};
+
+function ProjectCardSlot({
+  card,
+  onOpen,
+}: {
+  card: CardDef;
+  onOpen?: () => void;
+}) {
+  return (
+    <div className="group relative overflow-visible">
+      {card.id === "gemini" && (
+        <div
+          className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 to-blue-600/0 rounded-2xl blur-xl opacity-0 group-hover:opacity-40 group-hover:from-cyan-500/10 group-hover:to-blue-600/10 transition-all duration-500 -z-10"
+          aria-hidden="true"
+        />
+      )}
+      {card.id === "tc" && (
+        <div
+          className="absolute inset-0 bg-gradient-to-r from-purple-500/0 to-indigo-600/0 rounded-2xl blur-xl opacity-0 group-hover:opacity-40 group-hover:from-purple-500/10 group-hover:to-indigo-600/10 transition-all duration-500 -z-10"
+          aria-hidden="true"
+        />
+      )}
+      <ProjectCard
+        gradient={card.gradient}
+        logo={card.logo}
+        pill={card.pill}
+        pillDark={card.pillDark}
+        hoverDescription={card.hoverDescription}
+        videoUrl={card.videoUrl}
+        imageUrl={card.imageUrl}
+        frameClassName={card.frameClassName}
+        locked={card.locked}
+        onClick={onOpen}
+      />
+    </div>
+  );
+}
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
@@ -222,37 +205,31 @@ export default function ProjectsGridSection() {
 
   return (
     <>
-      <div className="relative z-10">
-        {/* Ambient gradient hum behind the grid */}
+      <div className="relative z-10 projects-grid-section">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[600px] bg-gradient-to-tr from-purple-500/5 via-indigo-400/5 to-transparent rounded-full blur-[120px] pointer-events-none -z-10" />
 
         <div className="projects-grid">
-          {CARDS.map((card) => (
-            <div key={card.id} className="group relative overflow-visible">
-              {/* Chromatic ambient glow — Gemini */}
-              {card.id === "gemini" && (
-                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 to-blue-600/0 rounded-2xl blur-xl opacity-0 group-hover:opacity-40 group-hover:from-cyan-500/10 group-hover:to-blue-600/10 transition-all duration-500 -z-10" aria-hidden="true" />
-              )}
-              {/* Chromatic ambient glow — Ripple (TC) */}
-              {card.id === "tc" && (
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/0 to-indigo-600/0 rounded-2xl blur-xl opacity-0 group-hover:opacity-40 group-hover:from-purple-500/10 group-hover:to-indigo-600/10 transition-all duration-500 -z-10" aria-hidden="true" />
-              )}
-              <ProjectCard
-                gradient={card.gradient}
-                logo={card.logo}
-                pill={card.pill}
-                pillDark={card.pillDark}
-                hoverDescription={card.hoverDescription}
-                videoUrl={card.videoUrl}
-                imageUrl={card.imageUrl}
-                frameClassName={card.frameClassName}
-                locked={card.locked}
-                onClick={card.modal ? () => setActiveModal(card.modal!) : undefined}
-              />
-            </div>
+          {FEATURED_CARDS.map((card) => (
+            <ProjectCardSlot
+              key={card.id}
+              card={card}
+              onOpen={() => setActiveModal(card.modal!)}
+            />
           ))}
         </div>
 
+        <div className="projects-in-progress">
+          <div className="projects-in-progress-header">
+            <p className="section-label">IN PROGRESS</p>
+            <p className="projects-in-progress-lede">
+              Self-directed concept explorations — not affiliated with Apple Inc.
+            </p>
+          </div>
+
+          <div className="projects-grid">
+            <ProjectCardSlot card={IN_PROGRESS_APPLE} />
+          </div>
+        </div>
       </div>
 
       <CompanyModal

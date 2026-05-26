@@ -17,6 +17,7 @@
 # misc
 .DS_Store
 *.pem
+.wip/
 
 # internal docs (local only — not for public repo)
 CLAUDE.md

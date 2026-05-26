@@ -2126,6 +2126,32 @@ html[data-picker-active="1"] footer {
   }
 }
 
+.projects-grid-section {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(48px, 6vw, 72px);
+}
+
+.projects-in-progress {
+  width: 100%;
+}
+
+.projects-in-progress-header {
+  width: 100%;
+  max-width: var(--layout-standard);
+  margin: 0 auto clamp(20px, 2.5vw, 28px);
+  padding: 0 var(--pad-inline);
+}
+
+.projects-in-progress-lede {
+  margin: 10px 0 0;
+  max-width: 42ch;
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.55;
+  color: var(--text-subtle);
+}
+
 .fun-cards-preview-wrap {
   position: relative;
 }
