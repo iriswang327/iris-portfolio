@@ -96,7 +96,7 @@ const STRATEGIC_IMPACT_CARDS: ImpactCardDef[] = [
     id: "tower-bridge",
     gradient:
       "linear-gradient(148deg, #F7F4EC 0%, #D4E2CC 42%, #E8DFD0 72%, #EDD5C4 100%)",
-    pill: "Tower & Bridge · Analytics Manager",
+    pill: "Student-Run Advertising Agency",
     pillDark: false,
     hoverDescription: "Real clients, real strategy, real stakes.",
     videoUrl: "/videos/tower-thumbnail.mp4",
@@ -121,7 +121,7 @@ const STRATEGIC_IMPACT_CARDS: ImpactCardDef[] = [
   {
     id: "risk-radar",
     gradient: "linear-gradient(148deg, #0D0D14 0%, #1A1A2E 55%, #243B5A 100%)",
-    pill: "Risk Radar · AI Product",
+    pill: "McCombs Final Project",
     pillDark: true,
     hoverDescription: "AI brand crisis prediction — BERT, RAG, Spring 2026.",
     videoUrl: "/videos/risk-radar-thumbnail.mp4",

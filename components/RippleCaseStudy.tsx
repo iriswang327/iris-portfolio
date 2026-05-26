@@ -8,7 +8,7 @@ const METADATA = [
   { label: "Timeline", value: "Fall 2024" },
   { label: "Role", value: "Product Designer" },
   { label: "Focus", value: "User Research & Product Design" },
-  { label: "Program", value: "Texas Convergent · Build Team" },
+  { label: "Program", value: "Convergent Build Team Project" },
 ] as const;
 
 const PROBLEM_CARDS = [

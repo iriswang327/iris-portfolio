@@ -161,8 +161,9 @@ export default function ProjectCard({
           fontSize: 11,
           fontWeight: 400,
           color: pillDark ? "#ffffff" : "#1A1625",
-          whiteSpace: "nowrap",
-          lineHeight: 1,
+          maxWidth: "calc(100% - 24px)",
+          whiteSpace: "normal",
+          lineHeight: 1.35,
           boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
         }}
       >

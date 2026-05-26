@@ -4,8 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import VinylPlayer from "@/components/VinylPlayer";
 import AboutBookLibrary from "@/components/AboutBookLibrary";
+// import AboutMusicLibrary from "@/components/AboutMusicLibrary";
 import ParallaxHeroGradient from "@/components/ParallaxHeroGradient";
 
 // ─── Types ─────────────────────────────────────────────────────────────────
@@ -141,7 +141,7 @@ function CurrentlyRow({
 
 export default function AboutContent() {
   const [activeSection, setActiveSection] = useState<(typeof NAV_ITEMS)[number]["id"]>("hi");
-  const [activeTab, setActiveTab] = useState<"books" | "music">("books");
+  // const [activeTab, setActiveTab] = useState<"books" | "music">("books");
   const pageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -374,7 +374,8 @@ export default function AboutContent() {
         <section id="entertainment" data-theme="entertainment" className="about-section">
           <h2 className="about-heading about-heading--loose font-[300]">Entertainment</h2>
 
-          {/* Tabs */}
+          {/* Tabs — music commented out for now */}
+          {/*
           <div className="about-tabs">
             {(["books", "music"] as const).map((tab) => (
               <button
@@ -391,10 +392,11 @@ export default function AboutContent() {
           {activeTab === "books" ? (
             <AboutBookLibrary />
           ) : (
-            <div className="about-entertainment-music">
-              <VinylPlayer />
-            </div>
+            <AboutMusicLibrary />
           )}
+          */}
+
+          <AboutBookLibrary />
         </section>
 
         {/* ── FUN FACTS SECTION ── */}
