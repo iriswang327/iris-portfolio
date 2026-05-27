@@ -2401,12 +2401,12 @@ html[data-picker-active="1"] footer {
 }
 
 .apple-fan-questions-lede {
-  margin-top: clamp(8px, 0.8vw, 10px);
-  font-size: clamp(10.5px, 0.82vw, 11.5px);
-  font-weight: 300;
-  line-height: 1.5;
-  letter-spacing: 0.005em;
-  color: var(--text-subtle);
+  margin-top: clamp(10px, 1vw, 14px);
+  font-size: clamp(13px, 1.15vw, 15px);
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  color: color-mix(in srgb, var(--foreground) 72%, var(--text-subtle));
 }
 
 .apple-fan-questions-action {
@@ -2659,6 +2659,10 @@ html[data-picker-active="1"] footer {
   .apple-fan-questions-emoji {
     margin: 12px 0 10px;
     font-size: 24px;
+  }
+
+  .apple-fan-questions-lede {
+    font-size: 14px;
   }
 
   .apple-fan-main-overlay-text {
