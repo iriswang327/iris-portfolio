@@ -1,4 +1,4 @@
-export default function ReviewALayout({ children }: { children: React.ReactNode }) {
+export default function AitherLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <link
@@ -9,7 +9,7 @@ export default function ReviewALayout({ children }: { children: React.ReactNode 
         rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&display=swap"
       />
-      <div className="review-a-route-shell">{children}</div>
+      <div className="aither-route-shell">{children}</div>
     </>
   );
 }
