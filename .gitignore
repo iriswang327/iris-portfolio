@@ -28,6 +28,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# private application pages (never commit HTML content)
+private/applications/*.html
+
 # env files
 .env
 .env.local

@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "app/api/private/content/[slug]/route.ts": {
+      "includeFiles": "private/applications/**"
+    }
+  }
+}
