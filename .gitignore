@@ -31,6 +31,9 @@ yarn-error.log*
 # private application pages (never commit HTML content)
 private/applications/*.html
 
+# local history rewrite tooling
+.tools/
+
 # env files
 .env
 .env.local

@@ -6,8 +6,8 @@ export default function AitherGate() {
       slug="aither"
       frameClassName="aither-frame"
       gateClassPrefix="aither-gate"
-      frameTitle="Iris Wang — AITHER Application"
-      hint="For AITHER review — Iris Wang · 2026"
+      frameTitle="Iris Wang — Private Application"
+      hint="For review — Iris Wang · 2026"
     />
   );
 }

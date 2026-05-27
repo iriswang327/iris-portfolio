@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import NytimesGate from "@/components/NytimesGate";
 
 export const metadata: Metadata = {
-  title: "Iris Wang — New York Times Advertising",
+  title: "Private Review — Iris Wang",
   robots: {
     index: false,
     follow: false,
