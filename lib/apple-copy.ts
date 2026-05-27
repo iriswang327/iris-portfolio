@@ -54,11 +54,12 @@ export const APPLE_QUESTION_EMAIL = "iriswang32@gmail.com";
 export const APPLE_QUESTION_COPY = {
   cardEyebrow: "Open to chat",
   cardTitle: "Questions?",
-  cardLede: "Walk through any exploration — process and thinking, not polish.",
+  cardLede:
+    "These are in-progress concepts, not Apple work. Happy to talk through my design process & ideations, if interested!",
   cardAction: "Ask →",
   modalTitle: "Questions about these explorations?",
   modalLede:
-    "These are in-progress concepts — not Apple work. Happy to talk through scope, research, or a direction that caught your eye.",
+    "These are in-progress concepts, not Apple work. Happy to talk through my design process & ideations, if interested!",
   placeholder: "What's on your mind?",
   successTitle: "Thanks — one sec.",
   successLede: "Your email app should open with your note ready to send.",
