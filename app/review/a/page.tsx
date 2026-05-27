@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import NytimesGate from "@/components/NytimesGate";
+import ReviewAGate from "@/components/ReviewAGate";
 
 export const metadata: Metadata = {
   title: "Private Review — Iris Wang",
@@ -9,6 +9,6 @@ export const metadata: Metadata = {
   },
 };
 
-export default function NytimesPage() {
-  return <NytimesGate />;
+export default function ReviewAPage() {
+  return <ReviewAGate />;
 }

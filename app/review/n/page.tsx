@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import AitherGate from "@/components/AitherGate";
+import ReviewNGate from "@/components/ReviewNGate";
 
 export const metadata: Metadata = {
   title: "Private Review — Iris Wang",
@@ -9,6 +9,6 @@ export const metadata: Metadata = {
   },
 };
 
-export default function AitherPage() {
-  return <AitherGate />;
+export default function ReviewNPage() {
+  return <ReviewNGate />;
 }

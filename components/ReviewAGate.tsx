@@ -1,11 +1,11 @@
 import PrivateGate from "@/components/PrivateGate";
 
-export default function NytimesGate() {
+export default function ReviewAGate() {
   return (
     <PrivateGate
-      slug="nytimes"
-      frameClassName="nytimes-frame"
-      gateClassPrefix="nytimes-gate"
+      slug="a"
+      frameClassName="review-a-frame"
+      gateClassPrefix="review-a-gate"
       frameTitle="Iris Wang — Private Application"
       hint="For review — Iris Wang · 2026"
     />

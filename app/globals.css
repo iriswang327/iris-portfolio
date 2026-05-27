@@ -5258,25 +5258,25 @@ html[data-picker-active="1"] footer {
   color: transparent;
 }
 
-/* ── AITHER password-gated application ── */
+/* ── Private review routes ── */
 
-.aither-route-shell {
+.review-a-route-shell {
   position: fixed;
   inset: 0;
   z-index: 200;
   background: #07090f;
 }
 
-.aither-frame {
+.review-a-frame {
   position: fixed;
   inset: 0;
   width: 100vw;
   height: 100vh;
   border: 0;
-  animation: aitherFadeIn 0.5s ease;
+  animation: reviewAFadeIn 0.5s ease;
 }
 
-.aither-gate {
+.review-a-gate {
   position: fixed;
   inset: 0;
   display: flex;
@@ -5285,16 +5285,16 @@ html[data-picker-active="1"] footer {
   background: #07090f;
   color: rgba(255, 255, 255, 0.9);
   font-family: "General Sans", system-ui, sans-serif;
-  animation: aitherFadeIn 0.6s ease;
+  animation: reviewAFadeIn 0.6s ease;
   transition: opacity 0.42s ease;
 }
 
-.aither-gate--exit {
+.review-a-gate--exit {
   opacity: 0;
   pointer-events: none;
 }
 
-.aither-gate-card {
+.review-a-gate-card {
   width: min(420px, 88vw);
   display: flex;
   flex-direction: column;
@@ -5302,7 +5302,7 @@ html[data-picker-active="1"] footer {
   padding: 2.5rem;
 }
 
-.aither-gate-label {
+.review-a-gate-label {
   font-family: "DM Mono", monospace;
   font-size: 0.6rem;
   letter-spacing: 0.2em;
@@ -5310,7 +5310,7 @@ html[data-picker-active="1"] footer {
   text-transform: uppercase;
 }
 
-.aither-gate-title {
+.review-a-gate-title {
   margin: 0;
   font-family: "General Sans", sans-serif;
   font-style: italic;
@@ -5321,19 +5321,19 @@ html[data-picker-active="1"] footer {
   color: #fff;
 }
 
-.aither-gate-title em {
+.review-a-gate-title em {
   color: #f5c5bc;
   font-style: italic;
 }
 
-.aither-gate-form {
+.review-a-gate-form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   margin-top: 0.5rem;
 }
 
-.aither-gate-input {
+.review-a-gate-input {
   background: transparent;
   border: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.18);
@@ -5346,16 +5346,16 @@ html[data-picker-active="1"] footer {
   transition: border-color 0.3s;
 }
 
-.aither-gate-input:focus {
+.review-a-gate-input:focus {
   border-color: #f5c5bc;
 }
 
-.aither-gate-input--error {
+.review-a-gate-input--error {
   border-color: #e89890;
-  animation: aitherShake 0.4s;
+  animation: reviewAShake 0.4s;
 }
 
-.aither-gate-button {
+.review-a-gate-button {
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: rgba(255, 255, 255, 0.7);
@@ -5368,14 +5368,14 @@ html[data-picker-active="1"] footer {
   transition: all 0.3s;
 }
 
-.aither-gate-button:hover {
+.review-a-gate-button:hover {
   background: rgba(232, 152, 144, 0.06);
   border-color: #f5c5bc;
   color: #fff;
   letter-spacing: 0.26em;
 }
 
-.aither-gate-error {
+.review-a-gate-error {
   min-height: 0.9rem;
   font-family: "DM Mono", monospace;
   font-size: 0.6rem;
@@ -5386,11 +5386,11 @@ html[data-picker-active="1"] footer {
   transition: opacity 0.3s;
 }
 
-.aither-gate-error--show {
+.review-a-gate-error--show {
   opacity: 1;
 }
 
-.aither-gate-hint {
+.review-a-gate-hint {
   font-family: "DM Mono", monospace;
   font-size: 0.55rem;
   letter-spacing: 0.15em;
@@ -5398,7 +5398,7 @@ html[data-picker-active="1"] footer {
   text-transform: uppercase;
 }
 
-@keyframes aitherFadeIn {
+@keyframes reviewAFadeIn {
   from {
     opacity: 0;
   }
@@ -5408,7 +5408,7 @@ html[data-picker-active="1"] footer {
   }
 }
 
-@keyframes aitherShake {
+@keyframes reviewAShake {
   0%,
   100% {
     transform: translateX(0);
@@ -5423,25 +5423,25 @@ html[data-picker-active="1"] footer {
   }
 }
 
-/* ── NYT Advertising password-gated application ── */
+/* ── Private review routes (continued) ── */
 
-.nytimes-route-shell {
+.review-n-route-shell {
   position: fixed;
   inset: 0;
   z-index: 200;
   background: #080808;
 }
 
-.nytimes-frame {
+.review-n-frame {
   position: fixed;
   inset: 0;
   width: 100vw;
   height: 100vh;
   border: 0;
-  animation: nytimesFadeIn 0.5s ease;
+  animation: reviewNFadeIn 0.5s ease;
 }
 
-.nytimes-gate {
+.review-n-gate {
   position: fixed;
   inset: 0;
   display: flex;
@@ -5451,16 +5451,16 @@ html[data-picker-active="1"] footer {
   color: #f2ede4;
   font-family: "Geist", system-ui, sans-serif;
   font-weight: 300;
-  animation: nytimesFadeIn 0.6s ease;
+  animation: reviewNFadeIn 0.6s ease;
   transition: opacity 0.42s ease;
 }
 
-.nytimes-gate--exit {
+.review-n-gate--exit {
   opacity: 0;
   pointer-events: none;
 }
 
-.nytimes-gate-card {
+.review-n-gate-card {
   width: min(420px, 88vw);
   display: flex;
   flex-direction: column;
@@ -5468,7 +5468,7 @@ html[data-picker-active="1"] footer {
   padding: 2.5rem;
 }
 
-.nytimes-gate-label {
+.review-n-gate-label {
   font-family: "Geist Mono", monospace;
   font-size: 0.6rem;
   font-weight: 500;
@@ -5477,7 +5477,7 @@ html[data-picker-active="1"] footer {
   text-transform: uppercase;
 }
 
-.nytimes-gate-title {
+.review-n-gate-title {
   margin: 0;
   font-family: "DM Serif Display", Georgia, serif;
   font-weight: 400;
@@ -5487,19 +5487,19 @@ html[data-picker-active="1"] footer {
   color: #f2ede4;
 }
 
-.nytimes-gate-title em {
+.review-n-gate-title em {
   color: #f7d000;
   font-style: italic;
 }
 
-.nytimes-gate-form {
+.review-n-gate-form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   margin-top: 0.5rem;
 }
 
-.nytimes-gate-input {
+.review-n-gate-input {
   background: transparent;
   border: none;
   border-bottom: 1px solid rgba(242, 237, 228, 0.18);
@@ -5513,16 +5513,16 @@ html[data-picker-active="1"] footer {
   transition: border-color 0.3s;
 }
 
-.nytimes-gate-input:focus {
+.review-n-gate-input:focus {
   border-color: #f7d000;
 }
 
-.nytimes-gate-input--error {
+.review-n-gate-input--error {
   border-color: #f7d000;
-  animation: nytimesShake 0.4s;
+  animation: reviewNShake 0.4s;
 }
 
-.nytimes-gate-button {
+.review-n-gate-button {
   background: transparent;
   border: 1px solid rgba(242, 237, 228, 0.2);
   color: rgba(242, 237, 228, 0.7);
@@ -5536,13 +5536,13 @@ html[data-picker-active="1"] footer {
   transition: all 0.2s;
 }
 
-.nytimes-gate-button:hover {
+.review-n-gate-button:hover {
   background: #f7d000;
   border-color: #f7d000;
   color: #080808;
 }
 
-.nytimes-gate-error {
+.review-n-gate-error {
   min-height: 0.9rem;
   font-family: "Geist Mono", monospace;
   font-size: 0.55rem;
@@ -5554,11 +5554,11 @@ html[data-picker-active="1"] footer {
   transition: opacity 0.3s;
 }
 
-.nytimes-gate-error--show {
+.review-n-gate-error--show {
   opacity: 1;
 }
 
-.nytimes-gate-hint {
+.review-n-gate-hint {
   font-family: "Geist Mono", monospace;
   font-size: 0.55rem;
   font-weight: 500;
@@ -5567,7 +5567,7 @@ html[data-picker-active="1"] footer {
   text-transform: uppercase;
 }
 
-@keyframes nytimesFadeIn {
+@keyframes reviewNFadeIn {
   from {
     opacity: 0;
   }
@@ -5577,7 +5577,7 @@ html[data-picker-active="1"] footer {
   }
 }
 
-@keyframes nytimesShake {
+@keyframes reviewNShake {
   0%,
   100% {
     transform: translateX(0);

@@ -1,7 +1,7 @@
 import { createHmac, timingSafeEqual } from "crypto";
 import { cookies } from "next/headers";
 
-export const PRIVATE_SLUGS = ["aither", "nytimes"] as const;
+export const PRIVATE_SLUGS = ["a", "n"] as const;
 
 export type PrivateSlug = (typeof PRIVATE_SLUGS)[number];
 
@@ -20,11 +20,11 @@ export function isPrivateSlug(value: string): value is PrivateSlug {
 }
 
 export function getPrivatePassword(slug: PrivateSlug): string | undefined {
-  if (slug === "aither") {
-    return process.env.AITHER_PASSWORD;
+  if (slug === "a") {
+    return process.env.REVIEW_A_PASSWORD;
   }
 
-  return process.env.NYTIMES_PASSWORD;
+  return process.env.REVIEW_N_PASSWORD;
 }
 
 export function createAccessToken(slug: PrivateSlug): string {
