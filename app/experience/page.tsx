@@ -56,7 +56,7 @@ const TOWER_BRIDGE_MODAL: ModalConfig = {
   companyLogoImage: "/images/tower-bridge-logo.png",
   tagline: "Real clients, real strategy, real stakes.",
   timeline: "2025 – Present",
-  role: "Analytics Manager",
+  role: "Analytics Strategy Manager",
   orgType: "Student Agency · UT Austin",
   collaborators: "Trinity CDC · Heartening",
   summary:
@@ -66,13 +66,13 @@ const TOWER_BRIDGE_MODAL: ModalConfig = {
 };
 
 const INTEGRATED_DESIGN_MODAL: ModalConfig = {
-  companyName: "Giving Back",
+  companyName: "Giving Back · Integrated Design Project",
   companyLogo: "GB",
   companyLogoImage: "/images/integrated-design-logo.png",
   tagline: "Full UX research cycle for unhoused community advocacy.",
   timeline: "Fall 2025",
   role: "UX Researcher",
-  orgType: "Integrated Design · UT Austin",
+  orgType: "Integrated Design Project · UT Austin",
   collaborators: "Emily Araiza · Frida Balderas · Manay Divatia",
   summary:
     "Empathy interviews and two prototype-test cycles — Jumbotron campaign for West Campus.",
@@ -87,7 +87,7 @@ const RISK_RADAR_MODAL: ModalConfig = {
   tagline: "AI brand crisis prediction — BERT, RAG, Spring 2026.",
   timeline: "Spring 2026",
   role: "Head of AI",
-  orgType: "B2B SaaS · Cross-functional",
+  orgType: "McCombs Class Project · UT Austin",
   collaborators:
     "Brooke Mikell · Joesh Nayak · Nikhil Sehgal · Hayden King · Varun Vedala",
   summary:

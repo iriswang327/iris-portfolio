@@ -16,7 +16,7 @@ export default function TowerAndBridgeCaseStudyPage() {
       subtitle="Real clients, real deliverables, real pressure — turning brand strategy and analytics into measurable nonprofit and small-business growth at UT Austin's student-run agency."
       metadata={[
         { label: "Timeline", value: "2025 – Present" },
-        { label: "Role", value: "Analytics Manager" },
+        { label: "Role", value: "Analytics Strategy Manager" },
         { label: "Focus", value: "Brand Strategy & Analytics" },
         { label: "Method", value: "Agency-Style Client Work" },
       ]}

@@ -16,12 +16,12 @@ export const GEMINI_CARD_LABELS = {
 
 export const TOWER_BRIDGE_CARD_LABELS = {
   company: "Tower & Bridge",
-  projectLabel: "Analytics Manager",
+  projectLabel: "Analytics Strategy Manager",
 } as const;
 
 export const INTEGRATED_DESIGN_CARD_LABELS = {
   company: "UT Austin Integrated Design Thinking",
-  projectLabel: "UX Research",
+  projectLabel: "UX Research Project",
 } as const;
 
 export const RISK_RADAR_CARD_LABELS = {

@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     template: "%s",
   },
   description:
-    "Creating intentional designs that bring ideas to reality. — Iris Wang, UT Austin · Advertising + CS · 2027",
+    "Creating intentional designs that bring ideas to reality. — Iris Wang, UT Austin · 2027",
   icons: {
     icon: [{ url: "/images/lotus-logo.png", type: "image/png" }],
     apple: [{ url: "/images/lotus-logo.png", type: "image/png" }],

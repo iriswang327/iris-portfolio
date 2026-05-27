@@ -53,6 +53,10 @@ function TCLogo() {
 }
 
 // ─── Modal configurations ─────────────────────────────────────────────────────
+//
+// Future modal expand (not built yet — intercepting routes + full pages):
+//   expandHref: "/design/ripple/full"
+//   expandHref: "/design/gemini/full"
 
 interface ModalConfig {
   companyName: string;

@@ -26,7 +26,7 @@ const FUN_CARDS = [
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
-export default function DreamsPage() {
+export default function HomePage() {
   return (
     <>
       {/* ══════════════════════════════════════════
