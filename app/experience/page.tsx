@@ -242,7 +242,7 @@ function Hairline() {
 // ─── Section label ────────────────────────────────────────────────────────────
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
-  return <p className="section-label mb-7 text-[var(--text-faint)]">{children}</p>;
+  return <p className="section-label mb-8">{children}</p>;
 }
 
 // ─── Shared badge ─────────────────────────────────────────────────────────────
@@ -297,13 +297,11 @@ function OperationalArchiveRow({
       <div className="flex items-center gap-4">
         <LedgerBadge icon={icon} logoSrc={logoSrc} logoAlt={logoAlt} />
         <div className="flex flex-col gap-0.5">
-          <p className="text-[14px] font-normal tracking-normal text-[var(--foreground)]">
-            {companyName}
-          </p>
-          <p className="text-[12px] font-light experience-muted">{roleTitle}</p>
+          <p className="experience-ledger-name">{companyName}</p>
+          <p className="experience-ledger-role">{roleTitle}</p>
         </div>
       </div>
-      <span className="text-[12px] font-light experience-muted tracking-normal tabular-nums text-right select-none">
+      <span className="experience-ledger-date text-right select-none">
         {dateRange}
       </span>
     </div>
@@ -325,11 +323,11 @@ function ExperienceHero() {
 
       <div className="experience-hero relative z-10">
         <div className="hero-left">
-          <h1 className="name-splash experience-hero-title font-[200]">
+          <h1 className="name-splash experience-hero-title">
             experience
           </h1>
 
-          <p className="subtitle font-[300] text-[18px] leading-snug">
+          <p className="experience-hero-subline">
             <span className="text-[var(--foreground)]">Advertising</span>
             <span className="text-[#A78BFA]/55"> + </span>
             <span className="text-[var(--foreground)]">Business</span>
@@ -339,12 +337,12 @@ function ExperienceHero() {
             <span className="text-[var(--foreground)]">Law.</span>
           </p>
 
-          <p className="experience-hero-lede font-[300]">
+          <p className="experience-hero-lede">
             All with the goal of making complex things human.
           </p>
 
           <div className="toolkit mt-10">
-            <p className="section-label text-[var(--text-faint)]">Toolkit</p>
+            <p className="section-label">Toolkit</p>
             <div className="experience-toolkit mt-3 flex flex-col gap-2">
               <div className="flex flex-wrap gap-2">
                 {TOOLKIT_PRIMARY.map((tool) => (
@@ -422,10 +420,8 @@ function AnalyticalColumnHeader({
     <div className="flex items-center">
       <LedgerBadge icon={icon} logoSrc={logoSrc} logoAlt={logoAlt} />
       <div className="ml-4 flex flex-col">
-        <p className="text-[14px] font-normal tracking-normal text-[var(--foreground)]">
-          {organizationName}
-        </p>
-        <p className="mt-0.5 text-[12px] font-light experience-muted">
+        <p className="experience-ledger-header-name">{organizationName}</p>
+        <p className="experience-ledger-header-meta">
           {roleName} &middot; {timeline}
         </p>
       </div>

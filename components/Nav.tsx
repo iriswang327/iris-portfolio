@@ -25,6 +25,9 @@ export default function Nav() {
     return pathname.startsWith(href);
   };
 
+  const isCaseStudy =
+    pathname.startsWith("/design/") && pathname !== "/design";
+
   return (
     <header
       className={`site-header${scrolled ? " site-header--scrolled" : ""}`}
@@ -34,7 +37,9 @@ export default function Nav() {
           "background 300ms ease, backdrop-filter 300ms ease, -webkit-backdrop-filter 300ms ease",
       }}
     >
-      <div className="site-header-inner">
+      <div
+        className={`site-header-inner${isCaseStudy ? " site-header-inner--wide" : ""}`}
+      >
         <nav className="site-nav" aria-label="Main navigation">
           {NAV_LINKS.map(({ href, label }) => {
             const active = isActive(href);

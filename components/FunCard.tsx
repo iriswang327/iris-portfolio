@@ -30,9 +30,9 @@ export default function FunCard({
 
   const cardContent = (
     <>
-      <span className="text-[13px] font-normal text-[var(--foreground)]">{title}</span>
-      <span className="mt-1 text-[11px] font-light text-[#BBBBBB]">{description}</span>
-      <span className="text-gradient-ihwn mt-3 text-[11px] font-light">{tag}</span>
+      <span className="fun-card-title">{title}</span>
+      <span className="fun-card-description">{description}</span>
+      <span className="text-gradient-ihwn fun-card-tag">{tag}</span>
     </>
   );
 

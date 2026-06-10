@@ -1,28 +1,64 @@
-/** Gemini case study — section copy (human tone, fact-checked) */
+/** Gemini case study — Confido-style IA */
 
-export const GEMINI_CASE_SECTIONS = [
-  { id: "problem", num: "01", title: "The Problem" },
-  { id: "what", num: "02", title: "What I Did" },
-  { id: "why", num: "03", title: "Why I Did It" },
-  { id: "solutions", num: "04", title: "Solutions" },
-  { id: "iterations", num: "05", title: "Iterations" },
-  { id: "next", num: "06", title: "What's Next" },
+export const GEMINI_NAV_SECTIONS = [
+  { id: "problem", title: "Problem" },
+  { id: "what", title: "What I Did" },
+  { id: "why", title: "Why" },
+  { id: "solutions", title: "Solutions" },
+  { id: "iterations", title: "Iterations" },
+  { id: "next", title: "What's Next" },
 ] as const;
+
+export const GEMINI_HERO_TITLE_LINES = ["Gemini", "News", "Integration"] as const;
+
+export const GEMINI_HERO_LEDE =
+  "Self-directed case study on bringing news into the exchange without breaking trading flow — not affiliated with Gemini.";
+
+export const GEMINI_HERO_TAGS = [
+  "Product Design",
+  "Crypto UX",
+  "Self-Directed",
+] as const;
+
+export const GEMINI_PROBLEM_PUNCH =
+  "The blog created friction <em>faster than I could read a headline</em>.";
+
+export const GEMINI_WHAT_PUNCH =
+  "I reorganized the blog — <em>featured stories, filters, consistent pills</em>.";
+
+export const GEMINI_WHY_PUNCH = "Strategy questions came before <em>polish</em>.";
+
+export const GEMINI_SOLUTIONS_PUNCH =
+  "Three surfaces — <em>banner, card, tags</em>.";
+
+export const GEMINI_ITERATIONS_PUNCH =
+  "Feedback from an ex–senior product designer <em>at Gemini</em>.";
+
+export const GEMINI_NEXT_PUNCH = "Two tests before I'd call this <em>real</em>.";
+
+/** @deprecated use GEMINI_NAV_SECTIONS */
+export const GEMINI_CASE_SECTIONS = GEMINI_NAV_SECTIONS.map((section, index) => ({
+  ...section,
+  num: String(index + 1).padStart(2, "0"),
+}));
 
 export const GEMINI_PROBLEM_INTRO =
   "I wanted to understand Gemini more without a finance background. However, the marketing blog created a friction as a user that led me to leave the page as fast as I clicked on it.";
 
 export const GEMINI_PAIN_POINTS = [
   {
-    title: "Nothing reads urgent.",
+    num: "01",
+    claim: "Nothing reads urgent.",
     body: "As a writer and illustrator for UT Austin's Law Journal and school paper, I couldn't tell what mattered today from the blog.",
   },
   {
-    title: "The layout is missing organization.",
+    num: "02",
+    claim: "The layout is missing organization.",
     body: "It felt like a pile of posts, I saw an opportunity to organize.",
   },
   {
-    title: "Inconsistent shaping across pills.",
+    num: "03",
+    claim: "Inconsistent shaping across pills.",
     body: "Some boxes had rounder corners, some did not.",
   },
 ] as const;
@@ -63,16 +99,22 @@ export const GEMINI_SYSTEM_STEPS = [
 
 export const GEMINI_SOLUTION_SURFACES = [
   {
-    kicker: "01 · alert",
+    num: "01",
+    kicker: "Alert",
     title: "Homepage banner for breaking news.",
+    payoff: "Breaking headlines surface <strong>without staying always open</strong> on the trading screen.",
   },
   {
-    kicker: "02 · context",
+    num: "02",
+    kicker: "Context",
     title: "Expandable card on the asset page.",
+    payoff: "News lives where users already watch price — <strong>collapsed by default</strong>.",
   },
   {
-    kicker: "03 · hierarchy",
+    num: "03",
+    kicker: "Hierarchy",
     title: "Tags and icons separate news from action.",
+    payoff: "Category pills and icons so headlines <strong>don't read like trade CTAs</strong>.",
   },
 ] as const;
 

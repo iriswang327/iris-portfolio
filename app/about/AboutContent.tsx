@@ -309,7 +309,7 @@ export default function AboutContent() {
 
         {/* ── CURRENTLY SECTION ── */}
         <section id="currently" data-theme="currently" className="about-section">
-          <h2 className="about-heading font-[300]">Currently</h2>
+          <h2 className="about-heading">Currently</h2>
 
           <div className="experience-glass-panel experience-glass-panel--wide experience-glass-panel--compact-y">
             <div className="flex w-full flex-col">
@@ -333,7 +333,7 @@ export default function AboutContent() {
 
         {/* ── COMMUNITY SECTION ── */}
         <section id="community" data-theme="community" className="about-section">
-          <h2 className="about-heading font-[300]">My Communities 🤍</h2>
+          <h2 className="about-heading">My Communities 🤍</h2>
 
           <div className="about-community-grid">
             {COMMUNITY_ITEMS.map((item) => (
@@ -353,7 +353,7 @@ export default function AboutContent() {
 
         {/* ── PHILOSOPHY SECTION ── */}
         <section id="philosophy" data-theme="philosophy" className="about-section">
-          <h2 className="about-heading about-heading--tight font-[300]">My Philosophy</h2>
+          <h2 className="about-heading about-heading--tight">My Philosophy</h2>
 
           <p className="about-lede">
             Kaizen (改善) — every day is an opportunity to improve. Even if it&apos;s just 1%.
@@ -372,7 +372,7 @@ export default function AboutContent() {
 
         {/* ── ENTERTAINMENT SECTION ── */}
         <section id="entertainment" data-theme="entertainment" className="about-section">
-          <h2 className="about-heading about-heading--loose font-[300]">Entertainment</h2>
+          <h2 className="about-heading about-heading--loose">Entertainment</h2>
 
           <div className="about-tabs">
             {(["books", "music"] as const).map((tab) => (
@@ -392,7 +392,7 @@ export default function AboutContent() {
 
         {/* ── FUN FACTS SECTION ── */}
         <section id="fun" data-theme="fun" className="about-section about-section--last">
-          <h2 className="about-heading about-heading--tight font-[300]">Fun Facts ✦</h2>
+          <h2 className="about-heading about-heading--tight">Fun Facts ✦</h2>
           <p className="about-fun-lede">things that don&apos;t fit anywhere else</p>
 
           <div className="flex flex-col gap-3.5">

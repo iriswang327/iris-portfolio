@@ -49,12 +49,12 @@ export default function HomePage() {
           </div>
 
           {/* Row 2: Name */}
-          <h1 className="name-splash design-hero-name mt-4 mb-3.5 font-[200] text-[var(--foreground)]">
+          <h1 className="name-splash design-hero-name mt-4 mb-3.5 type-hero-display">
             iris wang
           </h1>
 
           {/* Row 3: Product [role] for [audience] */}
-          <div className="design-hero-line flex flex-wrap items-baseline gap-[7px] font-[300] text-[var(--foreground)]">
+          <div className="design-hero-line type-hero-subline flex flex-wrap items-baseline gap-[7px] font-[300]">
             <span>Product</span>
             <RotatingWords
               words={["designer", "thinker", "strategist", "builder"]}
@@ -68,7 +68,7 @@ export default function HomePage() {
           </div>
 
           {/* Row 4: Tagline */}
-          <p className="design-hero-tagline mt-3 font-[300] leading-[1.7] text-[var(--muted)]">
+          <p className="design-hero-tagline mt-4 font-[300]">
             Creating intentional designs that bring ideas to reality.
           </p>
         </div>
@@ -79,7 +79,7 @@ export default function HomePage() {
           ══════════════════════════════════════════ */}
       <section className="pb-4">
         <div className="design-section-label">
-          <p className="section-label mb-3.5">DESIGN PROJECTS</p>
+          <p className="section-label mb-4">DESIGN PROJECTS</p>
         </div>
 
         <ProjectsGridSection />
@@ -89,7 +89,7 @@ export default function HomePage() {
           FOR FUN
           ══════════════════════════════════════════ */}
       <section className="design-section-label mt-[var(--gap-section)] pb-20">
-        <p className="section-label mb-3.5">FOR FUN</p>
+        <p className="section-label mb-4">FOR FUN</p>
 
         <div className="fun-cards-preview-wrap">
           <div className="fun-cards-preview grid grid-cols-1 gap-6 md:grid-cols-3">
