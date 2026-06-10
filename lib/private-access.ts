@@ -1,9 +1,18 @@
 import { createHmac, timingSafeEqual } from "crypto";
 import { cookies } from "next/headers";
 
-export const PRIVATE_SLUGS = ["aither", "nytimes"] as const;
+export const PRIVATE_SLUGS = ["aither", "nytimes", "partiful"] as const;
 
 export type PrivateSlug = (typeof PRIVATE_SLUGS)[number];
+
+/** Application pages served without a password gate */
+export const PUBLIC_APPLICATION_SLUGS = ["partiful"] as const;
+
+export type PublicApplicationSlug = (typeof PUBLIC_APPLICATION_SLUGS)[number];
+
+export function isPublicApplicationSlug(slug: string): slug is PublicApplicationSlug {
+  return PUBLIC_APPLICATION_SLUGS.includes(slug as PublicApplicationSlug);
+}
 
 const COOKIE_PREFIX = "private_access_";
 

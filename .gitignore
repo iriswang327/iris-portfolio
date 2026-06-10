@@ -30,6 +30,7 @@ yarn-error.log*
 
 # private application pages (never commit HTML content)
 private/applications/*.html
+!private/applications/partiful.html
 
 # local history rewrite tooling
 .tools/
@@ -43,6 +44,11 @@ private/applications/*.html
 
 # vercel
 .vercel
+
+# partiful raw uploads (committed as compressed mp4 / jpg)
+public/partiful/videos/*.mov
+public/partiful/videos/*.MOV
+public/partiful/images/*.HEIC
 
 # typescript
 *.tsbuildinfo

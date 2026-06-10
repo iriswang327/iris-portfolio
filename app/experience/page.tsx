@@ -221,7 +221,7 @@ const TOOLKIT_SECONDARY = [
 ] as const;
 
 const INTERNSHIP_TAGS = [
-  "product design",
+  "product or design",
   "0-1",
   "AI",
   "research",
@@ -373,7 +373,7 @@ function ExperienceHero() {
             <span className="looking-card-eyebrow">looking for next</span>
           </div>
 
-          <h2 className="looking-card-title">Product Design internship · Summer 2026</h2>
+          <h2 className="looking-card-title">Product or design · Summer 2026</h2>
 
           <p className="looking-card-body">
             Teams prioritizing real product experiences, cross-functional

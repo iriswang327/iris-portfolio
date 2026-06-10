@@ -1,0 +1,12 @@
+node_modules
+.next
+.git
+.tools
+.DS_Store
+*.tsbuildinfo
+coverage
+.wip
+
+# Local duplicate assets (not part of the site)
+public/images/**/* 2.png
+app/experience/layout 2.tsx

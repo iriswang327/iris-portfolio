@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<base href="/partiful/" />
+<title>Iris Wang × Partiful</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Inter:wght@300;400;500;600;700;800;900&family=Space+Mono&display=swap" rel="stylesheet" />
+<!--
+  CURSOR SETUP
+  /images/
+    hero.jpg
+    polaroid-1-1 … polaroid-1-4   21st tailgate brunch (jpg/JPG/png ok)
+    polaroid-2-1 … polaroid-2-4   galentines dinner
+    polaroid-3-1 … polaroid-3-4   friendsgiving
+    polaroid-4-1 … polaroid-4-4   birthday nights out
+  /videos/
+    valentines.mov|.mp4  coachella.mov|.mp4  home.mov|.mp4  colorado.mov|.mp4
+    (either extension works — drop files as-is)
+
+  TO SWAP POLAROIDS: drop polaroid-N-1 … polaroid-N-4 into /images/
+-->
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #eeeaf8; --bg2: #e4dff5; --purple: #7c5cbf;
+  --purple-light: #c4b0f0; --purple-pale: #f0ecfc;
+  --ink: #111; --ink-soft: #555; --white: #fff; --card: #fff;
+  --font-head: 'Inter', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+  --radius: 18px; --radius-sm: 10px;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--ink); overflow-x: hidden; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1.25rem;
+  padding: 0.85rem 2.5rem;
+  background: rgba(255,255,255,0.94); backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.nav-wordmark {
+  font-family: var(--font-head); font-size: 0.95rem; font-weight: 700;
+  color: var(--ink); letter-spacing: -0.01em; text-decoration: none; flex-shrink: 0;
+}
+.nav-wordmark span { color: var(--purple); }
+.nav-links {
+  display: flex; align-items: center; justify-content: center;
+  gap: clamp(0.85rem, 2vw, 1.65rem);
+  list-style: none; flex: 1; padding: 0 0.5rem;
+}
+.nav-links a {
+  font-size: 0.78rem; font-weight: 500; color: var(--ink-soft);
+  text-decoration: none; letter-spacing: -0.01em;
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+.nav-links a:hover { color: var(--purple); }
+.nav-cta {
+  flex-shrink: 0;
+  display: inline-flex; align-items: center;
+  padding: 0.48rem 1.05rem; border-radius: 100px;
+  background: var(--ink); color: #fff;
+  font-family: var(--font-head); font-size: 0.78rem; font-weight: 600;
+  text-decoration: none; letter-spacing: -0.01em;
+  transition: background 0.2s, transform 0.2s;
+}
+.nav-cta:hover { background: #2d2640; transform: translateY(-1px); }
+
+/* HERO — split top/bottom copy, faces pushed down */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 680px;
+  max-height: 960px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  padding:
+    clamp(5.75rem, 14vh, 8.5rem)
+    clamp(1.5rem, 4vw, 3rem)
+    clamp(3.25rem, 9vh, 5.5rem);
+  overflow: hidden;
+  background: linear-gradient(180deg, #8fa3b0 0%, #6a8088 22%, #1a1520 48%);
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('images/hero.jpg');
+  background-size: 97% auto;
+  background-position: center calc(100% + 1.25rem);
+  background-repeat: no-repeat;
+  transform: translateY(3.5vh);
+  transform-origin: center bottom;
+  opacity: 1;
+}
+.hero-bg-placeholder {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #5a3c93 0%, #3a2a63 45%, #7d4fb8 100%);
+  display: none;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 2.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.28);
+  text-transform: uppercase;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(to bottom,
+      rgba(0,0,0,0.78) 0%,
+      rgba(0,0,0,0.58) 14%,
+      rgba(0,0,0,0.22) 32%,
+      rgba(0,0,0,0.04) 52%,
+      rgba(0,0,0,0.18) 72%,
+      rgba(0,0,0,0.62) 100%);
+}
+.hero-grain { display: none; }
+.hero-top,
+.hero-bottom {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 820px;
+  padding: 0 0.5rem;
+}
+.hero-top {
+  flex-shrink: 0;
+}
+.hero-bottom {
+  flex-shrink: 0;
+  margin-top: auto;
+  transform: translateY(0.35rem);
+}
+.hero-tagline {
+  font-size: clamp(1rem, 2vw, 1.35rem);
+  font-weight: 400;
+  color: rgba(255,255,255,0.92);
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  text-shadow: 0 2px 24px rgba(0,0,0,0.35);
+  opacity: 0;
+  animation: fadeUp 0.7s ease forwards 0.2s;
+  max-width: 520px;
+  margin: 0 auto;
+}
+.hero-headline {
+  font-family: var(--font-head);
+  font-size: clamp(1.95rem, 5.2vw, 3.85rem);
+  font-weight: 800;
+  line-height: 1.02;
+  color: #fff;
+  letter-spacing: -0.035em;
+  text-shadow: 0 4px 32px rgba(0,0,0,0.45);
+  opacity: 0;
+  animation: fadeUp 0.7s ease forwards 0.4s;
+}
+.hero-headline em { font-style: normal; color: #fff; }
+.hero-pill { display: none; }
+.float-emoji { display: none; }
+
+/* SHARED */
+.section { padding: 7rem 4rem; max-width: 1200px; margin: 0 auto; }
+.section-narrow { max-width: 960px; }
+.eyebrow { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--purple); margin-bottom: 0.75rem; display: flex; align-items: center; }
+.eyebrow::before { content: '\2726'; display: inline-block; margin-right: 0.5rem; color: currentColor; animation: twinkle 3.2s ease-in-out infinite; }
+.section-title { font-family: var(--font-head); font-size: clamp(1.9rem, 3.8vw, 2.9rem); font-weight: 900; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 1rem; }
+.section-body { font-size: 1rem; font-weight: 300; line-height: 1.8; color: var(--ink-soft); }
+.divider { width: 100vw; position: relative; left: 50%; transform: translateX(-50%); height: 1px; background: linear-gradient(to right, transparent, rgba(196,176,240,0.4), transparent); }
+
+/* WHO I AM */
+.who-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 3rem; align-items: center; margin-top: 3.5rem; }
+.who-text p { font-size: 1.02rem; font-weight: 300; line-height: 1.8; color: var(--ink-soft); margin-bottom: 1.35rem; }
+.who-text p:first-child { font-size: 1.2rem; line-height: 1.65; color: var(--ink); margin-bottom: 1.6rem; }
+.who-text p:last-child { margin-bottom: 0; }
+.who-text p strong { font-weight: 700; color: var(--ink); }
+.polaroid-cluster { position: relative; height: 440px; width: 100%; max-width: 520px; margin-left: auto; overflow: visible; }
+.polaroid {
+  position: absolute;
+  background: #fff;
+  padding: 0.7rem 0.7rem 2.8rem;
+  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  cursor: pointer;
+}
+.polaroid:hover {
+  transform: rotate(0deg) !important;
+  box-shadow: 0 20px 52px rgba(0,0,0,0.18);
+  z-index: 30;
+}
+.polaroid-frame {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  overflow: hidden;
+  background: var(--bg2);
+  transition: width 0.38s cubic-bezier(0.34, 1.05, 0.64, 1), height 0.38s cubic-bezier(0.34, 1.05, 0.64, 1);
+}
+.polaroid.has-photos:hover .polaroid-frame {
+  width: 320px;
+  height: 320px;
+}
+.polaroid-stack {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  width: 100%;
+  height: 100%;
+  gap: 0;
+}
+.polaroid.has-photos:hover .polaroid-stack {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  background: #fff;
+}
+.polaroid-cell {
+  grid-column: 1;
+  grid-row: 1;
+  overflow: hidden;
+  min-width: 0;
+  min-height: 0;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.polaroid-cell:first-child { opacity: 1; }
+.polaroid.has-photos:hover .polaroid-cell { opacity: 1; }
+.polaroid.has-photos:hover .polaroid-cell:nth-child(1) { grid-column: 1; grid-row: 1; }
+.polaroid.has-photos:hover .polaroid-cell:nth-child(2) { grid-column: 2; grid-row: 1; }
+.polaroid.has-photos:hover .polaroid-cell:nth-child(3) { grid-column: 1; grid-row: 2; }
+.polaroid.has-photos:hover .polaroid-cell:nth-child(4) { grid-column: 2; grid-row: 2; }
+.polaroid-cell img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  background: var(--bg2);
+}
+.polaroid-fallback {
+  position: absolute; inset: 0; z-index: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 3rem; background: var(--bg2);
+}
+.polaroid.has-photos .polaroid-fallback { display: none; }
+.polaroid-cap {
+  position: absolute;
+  bottom: 0.7rem;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: 'Caveat', cursive;
+  font-size: 1.22rem;
+  font-weight: 600;
+  line-height: 1.15;
+  color: #3a3a3a;
+  pointer-events: none;
+}
+.p1 { top: 0; left: 20px; transform: rotate(-4deg); }
+.p2 { top: 20px; right: 0; transform: rotate(3deg); }
+.p3 { top: 200px; left: 0; transform: rotate(2deg); }
+.p4 { top: 210px; right: 20px; transform: rotate(-3deg); }
+.emoji-accent { position: absolute; font-size: 2rem; pointer-events: none; user-select: none; }
+.ea1 { top: 168px; left: -8px; } .ea2 { bottom: 16px; right: -8px; }
+
+/* VLOGS */
+.vlogs-bg { width: 100vw; position: relative; left: 50%; transform: translateX(-50%); background: #0e0c18; padding: 5rem 0 4rem; }
+.vlogs-inner { max-width: 1200px; margin: 0 auto; padding: 0 4rem; }
+.vlogs-header { margin-bottom: 2.5rem; }
+.vlogs-header .eyebrow { color: rgba(196,176,240,0.75); }
+.vlogs-header .eyebrow::before { color: rgba(196,176,240,0.75); }
+.vlogs-header .section-title { color: #fff; }
+.vlogs-lede { font-size: 0.95rem; font-weight: 300; line-height: 1.7; color: rgba(255,255,255,0.5); max-width: 480px; margin-top: 0.6rem; }
+.vlogs-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+.vlog-card { position: relative; border-radius: var(--radius-sm); overflow: hidden; background: #1a1520; aspect-ratio: 16/9; cursor: default; }
+.vlog-card.is-ready { cursor: default; }
+.vlog-card.is-ready.is-user-paused video { opacity: 0.72; }
+.vlog-pause-btn {
+  position: absolute; top: 50%; left: 50%; z-index: 3;
+  transform: translate(-50%, -50%) scale(0.92);
+  width: 48px; height: 48px; border-radius: 50%;
+  background: rgba(0,0,0,0.58); backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.28);
+  color: #fff; font-size: 1.05rem;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none; cursor: pointer;
+  transition: opacity 0.25s ease, transform 0.25s ease, background 0.2s;
+}
+.vlog-pause-btn:hover { background: rgba(0,0,0,0.72); }
+.vlog-card.is-ready:hover .vlog-pause-btn,
+.vlog-card.is-user-paused .vlog-pause-btn {
+  opacity: 1; pointer-events: auto; transform: translate(-50%, -50%) scale(1);
+}
+.vlog-card video { width: 100%; height: 100%; object-fit: cover; opacity: 0; display: block; transition: opacity 0.4s ease; }
+.vlog-card.is-ready video { opacity: 0.88; }
+.vlog-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.78) 0%, transparent 55%); display: flex; flex-direction: column; justify-content: flex-end; padding: 1rem; pointer-events: none; }
+.vlog-label { font-family: var(--font-mono); font-size: 0.56rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 0.3rem; }
+.vlog-title { font-family: var(--font-head); font-size: 1rem; font-weight: 700; color: #fff; line-height: 1.2; }
+.vlog-vol { position: absolute; top: 0.75rem; right: 0.75rem; width: 30px; height: 30px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.25); background: rgba(255,255,255,0.1); backdrop-filter: blur(6px); color: #fff; font-size: 0.8rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; z-index: 2; }
+.vlog-vol:hover { background: rgba(255,255,255,0.28); }
+.vlog-placeholder { position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.75rem; font-family: var(--font-mono); font-size: 0.62rem; color: rgba(255,255,255,0.35); letter-spacing: 0.1em; text-align: center; padding: 1rem; background: #1a1520; }
+.vlog-load-msg { animation: vlogPulse 1.4s ease-in-out infinite; }
+@keyframes vlogPulse { 0%, 100% { opacity: 0.35; } 50% { opacity: 0.85; } }
+
+/* ── EVENT IDEAS: white cards, unchanged ── */
+.ideas-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; margin-top: 3rem; }
+.idea-card { background: var(--card); border-radius: var(--radius); padding: 1.75rem; border: 1px solid rgba(196,176,240,0.22); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.idea-card:hover { transform: translateY(-5px); box-shadow: 0 20px 56px rgba(124,92,191,0.11); }
+.idea-emoji { font-size: 2.5rem; display: block; margin-bottom: 1rem; }
+.idea-tag { display: inline-block; font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.28rem 0.7rem; border-radius: 100px; background: var(--purple-pale); color: var(--purple); margin-bottom: 0.85rem; }
+.idea-title { font-family: var(--font-head); font-size: 1.2rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 0.65rem; line-height: 1.2; }
+.idea-body { font-size: 0.86rem; font-weight: 300; line-height: 1.7; color: var(--ink-soft); }
+.idea-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.1rem; padding-top: 1rem; border-top: 1px solid rgba(196,176,240,0.18); }
+.idea-pill { font-size: 0.7rem; font-weight: 500; padding: 0.25rem 0.65rem; border-radius: 100px; background: var(--bg); color: var(--purple); }
+
+/* ── ON MY RADAR: feed/timeline layout ── */
+.radar-bg { width: 100vw; position: relative; left: 50%; transform: translateX(-50%); background: var(--white); padding: 6rem 0; }
+.radar-inner { max-width: 860px; margin: 0 auto; padding: 0 4rem; }
+.radar-inner .eyebrow { color: var(--purple); }
+.radar-inner .section-title { color: var(--ink); margin-bottom: 0.5rem; }
+.radar-lede { font-size: 0.95rem; font-weight: 300; color: var(--ink-soft); max-width: 480px; line-height: 1.7; margin-bottom: 3.5rem; }
+.radar-feed { position: relative; padding-left: 2rem; }
+.radar-feed::before {
+  content: ''; position: absolute; left: 0; top: 0.5rem; bottom: 0.5rem;
+  width: 2px; background: linear-gradient(to bottom, var(--purple-light), rgba(196,176,240,0.15));
+  border-radius: 2px;
+}
+.radar-post { position: relative; padding: 0 0 2.5rem 2rem; }
+.radar-post:last-child { padding-bottom: 0; }
+.radar-dot {
+  position: absolute; left: -2.45rem; top: 0.35rem;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--purple); border: 2px solid var(--white);
+  box-shadow: 0 0 0 2px var(--purple-light);
+}
+.radar-post-head { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem; flex-wrap: wrap; }
+.radar-timestamp { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--purple); background: var(--purple-pale); padding: 0.2rem 0.6rem; border-radius: 100px; }
+.radar-post-emoji { font-size: 1.1rem; }
+.radar-post-title { font-family: var(--font-head); font-size: 1.05rem; font-weight: 800; color: var(--ink); letter-spacing: -0.025em; }
+.radar-post-body { font-size: 0.92rem; font-weight: 300; line-height: 1.75; color: var(--ink-soft); max-width: 580px; }
+.radar-post-body strong { font-weight: 600; color: var(--ink); }
+
+/* ── BONUS POINTS: horizontal list, resume-style ── */
+.creds-bg { width: 100vw; position: relative; left: 50%; transform: translateX(-50%); background: var(--bg); padding: 6rem 0; }
+.creds-inner { max-width: 1100px; margin: 0 auto; padding: 0 4rem; }
+.creds-inner .section-title { margin-bottom: 0.5rem; }
+.creds-sub { font-size: 0.95rem; font-weight: 300; color: var(--ink-soft); margin-bottom: 3.5rem; }
+.creds-list { display: flex; flex-direction: column; gap: 0; }
+.cred-row {
+  display: grid; grid-template-columns: 2.25rem 1fr;
+  gap: 0 1.35rem; align-items: start;
+  padding: 1.35rem 0;
+  border-top: 1px solid rgba(196,176,240,0.25);
+}
+.cred-row:last-child { border-bottom: 1px solid rgba(196,176,240,0.25); }
+.cred-icon { font-size: 1.2rem; padding-top: 0.1rem; line-height: 1; }
+.cred-title {
+  font-family: var(--font-head);
+  font-size: 1.05rem; font-weight: 800;
+  color: var(--ink); letter-spacing: -0.03em;
+  margin-bottom: 0.35rem;
+}
+.cred-proof { font-size: 0.9rem; font-weight: 300; color: var(--ink-soft); line-height: 1.62; max-width: 620px; }
+.cred-star { display: inline-block; font-size: 0.62rem; margin-left: 0.35rem; vertical-align: middle; opacity: 0.85; }
+
+/* TASTE */
+.taste-bg { width: 100vw; position: relative; left: 50%; transform: translateX(-50%); background: var(--white); padding: 6rem 0; }
+.taste-inner { max-width: 960px; margin: 0 auto; padding: 0 4rem; }
+.taste-card { background: var(--bg); border-radius: var(--radius); padding: 2.5rem; margin-top: 2.5rem; text-align: center; border: 1px solid rgba(196,176,240,0.2); }
+.taste-board-preview { margin: 1.25rem auto 0; max-width: 680px; border-radius: 14px; overflow: hidden; border: 1px solid rgba(196,176,240,0.28); box-shadow: 0 12px 40px rgba(124,92,191,0.1); }
+.taste-board-preview a { display: block; line-height: 0; }
+.taste-board-preview img { width: 100%; height: auto; display: block; }
+
+/* CTA */
+.cta-bg { width: 100vw; position: relative; left: 50%; transform: translateX(-50%); background: linear-gradient(155deg, #4a2d7a 0%, #2a1d4d 42%, #1b1233 100%); padding: 7rem 4rem; text-align: center; }
+.cta-emoji-row { font-size: 1.65rem; letter-spacing: 0.45rem; margin-bottom: 1.15rem; line-height: 1; }
+.cta-bg .section-title { color: #fff; max-width: 600px; margin: 0 auto 1rem; }
+.cta-line { font-size: 1.05rem; font-weight: 400; color: rgba(255,255,255,0.72); max-width: 440px; margin: 0 auto 2.25rem; line-height: 1.55; letter-spacing: -0.01em; }
+.cta-buttons { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.85rem 2rem; border-radius: 100px; font-family: var(--font-head); font-size: 0.95rem; font-weight: 700; text-decoration: none; letter-spacing: -0.01em; transition: transform 0.2s, background 0.2s; }
+.btn:hover { transform: translateY(-2px); }
+.btn-white { background: #fff; color: var(--ink); }
+.btn-white:hover { background: var(--purple-pale); }
+.btn-outline { background: transparent; border: 1.5px solid rgba(255,255,255,0.28); color: #fff; }
+.btn-outline:hover { border-color: rgba(255,255,255,0.65); }
+
+footer { text-align: center; padding: 1.75rem; background: #1b1233; border-top: 1px solid rgba(255,255,255,0.06); font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; color: rgba(255,255,255,0.3); }
+
+/* ANIMATIONS */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes floatDrift { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-14px) rotate(5deg); } }
+@keyframes twinkle { 0%, 100% { opacity: 0.4; transform: scale(0.82) rotate(0deg); } 50% { opacity: 1; transform: scale(1.08) rotate(90deg); } }
+@media (prefers-reduced-motion: reduce) { .eyebrow::before, .float-emoji { animation: none !important; } }
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-d1 { transition-delay: 0.1s; } .reveal-d2 { transition-delay: 0.2s; } .reveal-d3 { transition-delay: 0.3s; }
+
+@media (max-width: 960px) {
+  .who-grid { grid-template-columns: 1fr; }
+  .polaroid-cluster { margin: 0 auto; max-width: 100%; height: 440px; transform: scale(0.9); transform-origin: top center; }
+  .polaroid.has-photos:hover .polaroid-frame { width: min(320px, 72vw); height: min(320px, 72vw); }
+  .ideas-grid { grid-template-columns: 1fr 1fr; }
+  .radar-feed { padding-left: 1.5rem; }
+  .radar-dot { left: -1.9rem; }
+  .section { padding: 4rem 1.5rem; }
+  nav { padding: 0.85rem 1.25rem; }
+  .nav-links { display: none; }
+  .nav-cta { font-size: 0.72rem; padding: 0.42rem 0.85rem; }
+  .vlogs-inner, .radar-inner, .creds-inner, .taste-inner { padding: 0 1.5rem; }
+  .vlogs-row { grid-template-columns: 1fr; }
+  .hero {
+    min-height: 82vh;
+    max-height: none;
+    padding:
+      5.5rem 1.25rem
+      clamp(2rem, 5vh, 3rem);
+  }
+  .hero-bg {
+    background-size: 98% auto;
+    background-position: center calc(100% + 0.75rem);
+    transform: translateY(2.75vh);
+  }
+  .hero-tagline { font-size: clamp(0.95rem, 3.8vw, 1.1rem); }
+  .hero-headline { font-size: clamp(1.75rem, 7.5vw, 2.35rem); }
+  .cta-bg { padding: 5rem 1.5rem; }
+}
+@media (max-width: 600px) {
+  .ideas-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav aria-label="Page sections">
+  <a class="nav-wordmark" href="#">iris wang <span>× partiful</span></a>
+  <ul class="nav-links">
+    <li><a href="#who">About</a></li>
+    <li><a href="#vlogs">Lifestyle</a></li>
+    <li><a href="#ideas">Event Ideas</a></li>
+    <li><a href="#radar">Trends</a></li>
+    <li><a href="#creds">What I Bring</a></li>
+    <li><a href="#taste">Taste</a></li>
+  </ul>
+  <a class="nav-cta" href="#cta">Say hi 👋</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg-placeholder">drop images/hero.jpg here (your best party photo)</div>
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-top">
+    <p class="hero-tagline">Make fun happen. Have fun doing it.</p>
+  </div>
+  <div class="hero-bottom">
+    <h1 class="hero-headline">Culturally immersed.<br />Ready to show up.</h1>
+  </div>
+</div>
+
+<!-- WHO I AM -->
+<div id="who">
+<div class="section">
+  <div class="reveal">
+    <p class="eyebrow">Who I am</p>
+    <h2 class="section-title">Iris Wang</h2>
+  </div>
+  <div class="who-grid">
+    <div class="who-text reveal">
+      <p>I'm a junior at UT Austin studying Advertising with minors and certificates in <strong>Design Strategies, Entrepreneurship, and Computer Science</strong>, spending my summer in New York.</p>
+      <p>In a world of AI and technology, I'm passionate about creating spaces and experiences that connect communities. I shoot on an <strong>iPhone 16 Pro</strong> and disposable film, make beat-matched vlogs, and have a mini mic ready for on-street content. I care deeply about what things look, feel, and sound like.</p>
+      <p>And I believe that at the center of everything happening in tech right now, the most important thing we can build is <strong>reasons for people to show up for each other in person.</strong></p>
+    </div>
+    <div class="polaroid-cluster reveal reveal-d2">
+      <div class="polaroid p1" data-polaroid="1">
+        <div class="polaroid-frame">
+          <div class="polaroid-stack" aria-label="21st tailgate brunch photos">
+            <div class="polaroid-cell"><img data-polaroid-src="polaroid-1-1" alt="21st tailgate brunch" loading="lazy" /></div>
+            <div class="polaroid-cell"><img data-polaroid-src="polaroid-1-2" alt="" loading="lazy" /></div>
+            <div class="polaroid-cell"><img data-polaroid-src="polaroid-1-3" alt="" loading="lazy" /></div>
+            <div class="polaroid-cell"><img data-polaroid-src="polaroid-1-4" alt="" loading="lazy" /></div>
+          </div>
+          <div class="polaroid-fallback" aria-hidden="true">🎂</div>
+        </div>
+        <p class="polaroid-cap">🎂 21st tailgate brunch</p>
+      </div>
+      <div class="polaroid p2" data-polaroid="2">
+        <div class="polaroid-frame">
+          <div class="polaroid-stack" aria-label="Galentines dinner photos">
+            <div class="polaroid-cell"><img data-polaroid-src="polaroid-2-1" alt="Galentines dinner" loading="lazy" /></div>
+            <div class="polaroid-cell"><img data-polaroid-src="polaroid-2-2" alt="" loading="lazy" /></div>
+            <div class="polaroid-cell"><img data-polaroid-src="polaroid-2-3" alt="" loading="lazy" /></div>
+            <div class="polaroid-cell"><img data-polaroid-src="polaroid-2-4" alt="" loading="lazy" /></div>
+          </div>
+          <div class="polaroid-fallback" aria-hidden="true">💝</div>
+        </div>
+        <p class="polaroid-cap">💝 galentines dinner</p>
+      </div>
+      <div class="polaroid p3" data-polaroid="3">
+        <div class="polaroid-frame">
+          <div class="polaroid-stack" aria-label="Friendsgiving photos">
+            <div class="polaroid-cell"><img data-polaroid-src="polaroid-3-1" alt="Friendsgiving" loading="lazy" /></div>
+            <div class="polaroid-cell"><img data-polaroid-src="polaroid-3-2" alt="" loading="lazy" /></div>
+            <div class="polaroid-cell"><img data-polaroid-src="polaroid-3-3" alt="" loading="lazy" /></div>
+            <div class="polaroid-cell"><img data-polaroid-src="polaroid-3-4" alt="" loading="lazy" /></div>
+          </div>
+          <div class="polaroid-fallback" aria-hidden="true">🦃</div>
+        </div>
+        <p class="polaroid-cap">🦃 friendsgiving</p>
+      </div>
+      <div class="polaroid p4" data-polaroid="4">
+        <div class="polaroid-frame">
+          <div class="polaroid-stack" aria-label="Birthday nights out photos">
+            <div class="polaroid-cell"><img data-polaroid-src="polaroid-4-1" alt="Birthday nights out" loading="lazy" /></div>
+            <div class="polaroid-cell"><img data-polaroid-src="polaroid-4-2" alt="" loading="lazy" /></div>
+            <div class="polaroid-cell"><img data-polaroid-src="polaroid-4-3" alt="" loading="lazy" /></div>
+            <div class="polaroid-cell"><img data-polaroid-src="polaroid-4-4" alt="" loading="lazy" /></div>
+          </div>
+          <div class="polaroid-fallback" aria-hidden="true">👑</div>
+        </div>
+        <p class="polaroid-cap">👑 birthday nights out</p>
+      </div>
+      <span class="emoji-accent ea1">🎉</span>
+      <span class="emoji-accent ea2">🥳</span>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- VLOGS -->
+<div class="vlogs-bg" id="vlogs">
+  <div class="vlogs-inner">
+    <div class="vlogs-header reveal">
+      <p class="eyebrow">Lifestyle</p>
+      <h2 class="section-title">Lifestyle Content</h2>
+      <p class="vlogs-lede">Beat-matched and scenic, shot on iPhone 16 Pro.</p>
+    </div>
+    <div class="vlogs-row reveal">
+      <div class="vlog-card">
+        <video id="v1" data-video="colorado" autoplay muted loop playsinline preload="none"></video>
+        <button type="button" class="vlog-pause-btn" aria-label="Pause video">⏸</button>
+        <div class="vlog-placeholder"><span style="font-size:2rem;">🏔️</span><span class="vlog-load-msg">Loading…</span></div>
+        <div class="vlog-overlay"><p class="vlog-label">June · Colorado</p><p class="vlog-title">Colorado Trip</p></div>
+        <button class="vlog-vol" onclick="toggleVol('v1',this)">🔇</button>
+      </div>
+      <div class="vlog-card">
+        <video id="v2" data-video="coachella" autoplay muted loop playsinline preload="none"></video>
+        <button type="button" class="vlog-pause-btn" aria-label="Pause video">⏸</button>
+        <div class="vlog-placeholder"><span style="font-size:2rem;">🌵</span><span class="vlog-load-msg">Loading…</span></div>
+        <div class="vlog-overlay"><p class="vlog-label">April · Indio CA</p><p class="vlog-title">Coachella</p></div>
+        <button class="vlog-vol" onclick="toggleVol('v2',this)">🔇</button>
+      </div>
+      <div class="vlog-card">
+        <video id="v3" data-video="valentines" autoplay muted loop playsinline preload="none"></video>
+        <button type="button" class="vlog-pause-btn" aria-label="Pause video">⏸</button>
+        <div class="vlog-placeholder"><span style="font-size:2rem;">💌</span><span class="vlog-load-msg">Loading…</span></div>
+        <div class="vlog-overlay"><p class="vlog-label">Feb · Austin TX</p><p class="vlog-title">Valentine's Weekend</p></div>
+        <button class="vlog-vol" onclick="toggleVol('v3',this)">🔇</button>
+      </div>
+      <div class="vlog-card">
+        <video id="v4" data-video="home" autoplay muted loop playsinline preload="none"></video>
+        <button type="button" class="vlog-pause-btn" aria-label="Pause video">⏸</button>
+        <div class="vlog-placeholder"><span style="font-size:2rem;">🏡</span><span class="vlog-load-msg">Loading…</span></div>
+        <div class="vlog-overlay"><p class="vlog-label">March · Dallas TX</p><p class="vlog-title">Home Vlog</p></div>
+        <button class="vlog-vol" onclick="toggleVol('v4',this)">🔇</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EVENT IDEAS -->
+<div id="ideas">
+<div class="section">
+  <div class="reveal">
+    <p class="eyebrow">Event Ideas</p>
+    <h2 class="section-title">Partiful Event Ideas</h2>
+  </div>
+  <div class="ideas-grid">
+
+    <div class="idea-card reveal">
+      <span class="idea-emoji">🌸</span>
+      <span class="idea-tag">Community · Growth</span>
+      <h3 class="idea-title">Strangers in the City</h3>
+      <p class="idea-body">Blind social mixers for NYC summer interns and new grads — not dating, not networking, just meeting people. RSVP, show up, leave knowing three people you'd never have met otherwise.</p>
+      <div class="idea-pills">
+        <span class="idea-pill">Summer interns</span>
+        <span class="idea-pill">New grads</span>
+        <span class="idea-pill">Friend-of-friend</span>
+        <span class="idea-pill">Central Park</span>
+      </div>
+    </div>
+
+    <div class="idea-card reveal reveal-d1">
+      <span class="idea-emoji">🕺</span>
+      <span class="idea-tag">Culture · Viral</span>
+      <h3 class="idea-title">Nothing But… Nostalgia</h3>
+      <p class="idea-body">A Dallas club's MJ night went so viral they ran it again the next week. Nostalgia gives people permission to be unironic together. Y2K, 2000s pop, early-2010s throwback where the invite page is the content.</p>
+      <div class="idea-pills">
+        <span class="idea-pill">Y2K nights</span>
+        <span class="idea-pill">2000s pop</span>
+        <span class="idea-pill">Recurring series</span>
+        <span class="idea-pill">Viral format</span>
+      </div>
+    </div>
+
+    <div class="idea-card reveal reveal-d2">
+      <span class="idea-emoji">🌴</span>
+      <span class="idea-tag">Pop Culture · Timely</span>
+      <h3 class="idea-title">The Villa Mixer</h3>
+      <p class="idea-body">Show up, meet strangers, watch strangers meet strangers on TV. Each episode is a new event, each event builds a community. Co-brand with Poppi, who already ran a Love Island collab this season.</p>
+      <div class="idea-pills">
+        <span class="idea-pill">Love Island</span>
+        <span class="idea-pill">Poppi collab</span>
+        <span class="idea-pill">Recurring</span>
+        <span class="idea-pill">Gen Z</span>
+      </div>
+    </div>
+
+    <div class="idea-card reveal reveal-d3">
+      <span class="idea-emoji">📖</span>
+      <span class="idea-tag">Culture · Literary</span>
+      <h3 class="idea-title">Taiwan Travelogue Reading Night</h3>
+      <p class="idea-body">Yáng Shuāng-zǐ's <em>Taiwan Travelogue</em> just won the 2026 International Booker Prize — the first novel translated from Mandarin to take the award. Structured as a 1930s culinary tour through Japanese-occupied Taiwan, it's the perfect anchor for a reading club: small group, assigned chapters, Taiwanese bites that mirror scenes in the book, and guided conversation on language, colonial history, and the love story at the center.</p>
+      <div class="idea-pills">
+        <span class="idea-pill">International Booker 2026</span>
+        <span class="idea-pill">Reading club</span>
+        <span class="idea-pill">Taiwanese food</span>
+        <span class="idea-pill">Cultural night</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- ON MY RADAR: feed/timeline -->
+<div class="radar-bg" id="radar">
+  <div class="radar-inner">
+    <div class="reveal">
+      <p class="eyebrow">Current Trends</p>
+      <h2 class="section-title">Twists on Current Trends</h2>
+      <p class="radar-lede">Six things I'd onboard this summer.</p>
+    </div>
+    <div class="radar-feed reveal">
+
+      <div class="radar-post">
+        <div class="radar-dot"></div>
+        <div class="radar-post-head">
+          <span class="radar-timestamp">Right now</span>
+          <span class="radar-post-emoji">🏀</span>
+          <span class="radar-post-title">Knicks Watch Parties</span>
+        </div>
+        <p class="radar-post-body">The whole city is in Knicks fever. I keep ending up in rooms full of strangers yelling at one screen. <strong>Sports has quietly become the easiest reason to get people together this year</strong> and Partiful should be where those rooms get planned.</p>
+      </div>
+
+      <div class="radar-post">
+        <div class="radar-dot"></div>
+        <div class="radar-post-head">
+          <span class="radar-timestamp">June</span>
+          <span class="radar-post-emoji">🌈</span>
+          <span class="radar-post-title">Pride Month</span>
+        </div>
+        <p class="radar-post-body">Pride is everywhere in June, but the moments I love are the small brunches and community walks, not the brand floats. <strong>The best events feel personal instead of corporate</strong> — that's the lens I'd bring to Explore curation.</p>
+      </div>
+
+      <div class="radar-post">
+        <div class="radar-dot"></div>
+        <div class="radar-post-head">
+          <span class="radar-timestamp">Personal idea</span>
+          <span class="radar-post-emoji">🍷</span>
+          <span class="radar-post-title">Wine &amp; Art Night</span>
+        </div>
+        <p class="radar-post-body">A personal event I'd love to host — wine, art, and a slow night out in the city. The Noguchi Museum is free on first Fridays all summer, open until 8pm on <strong>June 5, July 3, August 7, and September 4</strong> — the kind of evening that deserves its own intimate Partiful invite.</p>
+      </div>
+
+      <div class="radar-post">
+        <div class="radar-dot"></div>
+        <div class="radar-post-head">
+          <span class="radar-timestamp">Brand moment</span>
+          <span class="radar-post-emoji">💄</span>
+          <span class="radar-post-title">Rhode Summer Launch</span>
+        </div>
+        <p class="radar-post-body">Every Rhode drop feels less like a product launch and more like an event people plan around. <strong>I keep noticing "get ready with me" group hangs forming around them</strong> — that's a Partiful event waiting to be made official.</p>
+      </div>
+
+      <div class="radar-post">
+        <div class="radar-dot"></div>
+        <div class="radar-post-head">
+          <span class="radar-timestamp">Collab ready</span>
+          <span class="radar-post-emoji">🍊</span>
+          <span class="radar-post-title">Poppi × Love Island</span>
+        </div>
+        <p class="radar-post-body">Poppi ran a Love Island collab this season and it was all over my feed. <strong>Watch parties are basically branded events waiting to happen</strong> and Villa Mixer watching parties co-sponsored with Poppi would be a natural extension.</p>
+      </div>
+
+      <div class="radar-post">
+        <div class="radar-dot"></div>
+        <div class="radar-post-head">
+          <span class="radar-timestamp">Sound · Community</span>
+          <span class="radar-post-emoji">🎧</span>
+          <span class="radar-post-title">Soul Ties &amp; Sound</span>
+        </div>
+        <p class="radar-post-body">NYC's underground music scene is having a moment: intimate sets, word-of-mouth venues, no headliners. <strong>Curating these onto Explore makes Partiful the discovery layer</strong> for the city's most culturally alive nights.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- CREDENTIALS: horizontal list -->
+<div class="creds-bg" id="creds">
+  <div class="creds-inner">
+    <div class="reveal">
+      <p class="eyebrow">What I Bring</p>
+      <h2 class="section-title">What I Bring to Partiful</h2>
+      <p class="creds-sub"></p>
+    </div>
+    <div class="creds-list reveal">
+
+      <div class="cred-row">
+        <span class="cred-icon">👁️</span>
+        <div class="cred-text">
+          <p class="cred-title">Culture <span class="cred-star">⭐</span></p>
+          <p class="cred-proof">Knew about Noguchi First Fridays, Poppi x Love Island, and Rhode drops before building this page. Pinterest boards run as strict edits. I know what to leave out.</p>
+        </div>
+      </div>
+
+      <div class="cred-row">
+        <span class="cred-icon">🎬</span>
+        <div class="cred-text">
+          <p class="cred-title">Content <span class="cred-star">⭐</span></p>
+          <p class="cred-proof">Grew a brand account to +333% engagement and +275% followers in 6 weeks. Beat-matched vlogs and event flyers, all edited in Premiere Pro.</p>
+        </div>
+      </div>
+
+      <div class="cred-row">
+        <span class="cred-icon">🤝</span>
+        <div class="cred-text">
+          <p class="cred-title">Leadership <span class="cred-star">⭐</span></p>
+          <p class="cred-proof">Director of Projects at Letters of Gold (hospitals and veterans nonprofit). Ran Texas Darlin recruitment events. Promoted ASUCI cultural nights including Armenian Movie Night, Bollywood Social, and Lunar New Year to thousands.</p>
+        </div>
+      </div>
+
+      <div class="cred-row">
+        <span class="cred-icon">📣</span>
+        <div class="cred-text">
+          <p class="cred-title">Outreach <span class="cred-star">⭐</span></p>
+          <p class="cred-proof">Cold outreach to PSA production teams, mayors, and members of Congress for Letters of Gold. Campus marketing for ASUCI food security and climate awareness campaigns.</p>
+        </div>
+      </div>
+
+      <div class="cred-row">
+        <span class="cred-icon">🚀</span>
+        <div class="cred-text">
+          <p class="cred-title">Startups <span class="cred-star">⭐</span></p>
+          <p class="cred-proof">Analytics Strategy Manager at Tower and Bridge (student-run agency). Head of AI on Risk Radar, pitched to McCombs faculty as a seed-stage startup.</p>
+        </div>
+      </div>
+
+      <div class="cred-row">
+        <span class="cred-icon">✂️</span>
+        <div class="cred-text">
+          <p class="cred-title">Adobe <span class="cred-star">⭐</span></p>
+          <p class="cred-proof">Every vlog and event recap cut in Premiere Pro. Adobe Creative Suite across flyers, graphics, and video. After Effects for motion work.</p>
+        </div>
+      </div>
+
+      <div class="cred-row">
+        <span class="cred-icon">📷</span>
+        <div class="cred-text">
+          <p class="cred-title">Gear <span class="cred-star">⭐</span></p>
+          <p class="cred-proof">iPhone 16 Pro and disposable film for the look I want. Mini mic for on-street interviews and event recaps.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- TASTE BOARD -->
+<div class="taste-bg" id="taste">
+  <div class="taste-inner">
+    <div class="reveal">
+      <p class="eyebrow">Taste Board</p>
+      <h2 class="section-title">Media that Inspires My Taste</h2>
+      <p class="section-body">Pinterest boards I treat as strict edits, not mood boards. I built one specifically for this application.</p>
+    </div>
+    <div class="taste-card reveal">
+      <p style="font-size:0.9rem; color:var(--ink-soft); margin-bottom:1rem;">
+        📌 <a href="https://pin.it/HaednahFf" target="_blank" rel="noopener noreferrer" style="color:var(--purple); font-weight:600;">View my Partiful board on Pinterest →</a>
+      </p>
+      <div class="taste-board-preview">
+        <a href="https://pin.it/HaednahFf" target="_blank" rel="noopener noreferrer">
+          <img src="images/pinterest-board.png" alt="Partiful NYC Summer — Iris Wang Pinterest board preview" loading="lazy" />
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-bg" id="cta">
+  <p class="cta-emoji-row" aria-hidden="true">🎉 ✨ 💜</p>
+  <h2 class="section-title">Thank you for your time!</h2>
+  <p class="cta-line">Let's make fun happen this summer — I'd love to hear from you.</p>
+  <div class="cta-buttons">
+    <a href="mailto:iriswang32@gmail.com" class="btn btn-white">Say hi 👋</a>
+    <a href="https://iriswangportfolio.com" target="_blank" rel="noopener" class="btn btn-outline">Full Portfolio →</a>
+  </div>
+</div>
+
+<footer>IRIS WANG · MADE FOR PARTIFUL · 2026 · 🎉</footer>
+
+<script>
+function toggleVol(id, btn) {
+  const v = document.getElementById(id);
+  if (!v) return;
+  v.muted = !v.muted;
+  btn.textContent = v.muted ? '🔇' : '🔊';
+}
+const VIDEO_FILES = {
+  valentines: ['VALENTINES.mp4', 'VALENTINES.MOV', 'valentines.mp4', 'valentines.mov'],
+  home: ['HOME.mp4', 'HOME.mov', 'home.mp4', 'home.mov'],
+  colorado: ['COLORADO.mp4', 'COLORADO.MOV', 'colorado.mp4', 'colorado.mov'],
+  coachella: ['COACHELLA.mp4', 'COACHELLA.mov', 'coachella.mp4', 'coachella.mov'],
+};
+
+function initVlogPauseControl() {
+  document.querySelectorAll('.vlog-card').forEach(card => {
+    const video = card.querySelector('video');
+    const btn = card.querySelector('.vlog-pause-btn');
+    if (!video || !btn) return;
+
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (!card.classList.contains('is-ready')) return;
+      if (video.paused) {
+        video.play().catch(() => {});
+        card.classList.remove('is-user-paused');
+        btn.textContent = '⏸';
+        btn.setAttribute('aria-label', 'Pause video');
+      } else {
+        video.pause();
+        card.classList.add('is-user-paused');
+        btn.textContent = '▶';
+        btn.setAttribute('aria-label', 'Play video');
+      }
+    });
+  });
+}
+
+function initPolaroidStacks() {
+  const IMAGE_EXTS = ['JPG', 'jpg', 'JPEG', 'jpeg', 'PNG', 'png', 'WEBP', 'webp'];
+
+  document.querySelectorAll('.polaroid').forEach(polaroid => {
+    const stack = polaroid.querySelector('.polaroid-stack');
+    if (!stack) return;
+
+    const markLoaded = () => {
+      if (stack.querySelectorAll('img[src]').length > 0) polaroid.classList.add('has-photos');
+      else polaroid.classList.remove('has-photos');
+    };
+
+    stack.querySelectorAll('img[data-polaroid-src]').forEach(img => {
+      const base = img.dataset.polaroidSrc;
+      if (!base) return;
+      let idx = 0;
+
+      const onError = () => {
+        if (idx >= IMAGE_EXTS.length) {
+          img.closest('.polaroid-cell')?.remove();
+          markLoaded();
+          return;
+        }
+        img.src = `images/${base}.${IMAGE_EXTS[idx++]}`;
+      };
+
+      img.addEventListener('load', markLoaded, { once: true });
+      img.addEventListener('error', onError);
+      onError();
+    });
+  });
+}
+
+function loadVideoSource(video) {
+  const base = video.dataset.video;
+  if (!base) return;
+  const candidates = VIDEO_FILES[base] || [`${base}.mov`, `${base}.mp4`];
+  const card = video.closest('.vlog-card');
+  const ph = card?.querySelector('.vlog-placeholder');
+  const msg = ph?.querySelector('.vlog-load-msg');
+  let idx = 0;
+
+  const markReady = () => {
+    if (ph) ph.style.display = 'none';
+    card?.classList.add('is-ready');
+    video.play().catch(() => {});
+  };
+
+  const onError = () => {
+    if (idx >= candidates.length) {
+      if (msg) msg.textContent = 'Coming soon';
+      return;
+    }
+    if (msg) msg.textContent = 'Loading video…';
+    video.src = `videos/${candidates[idx++]}`;
+    video.load();
+  };
+
+  video.addEventListener('loadeddata', markReady, { once: true });
+  video.addEventListener('canplay', markReady, { once: true });
+  video.addEventListener('error', onError);
+  onError();
+}
+
+function initLazyVideos() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const video = entry.target;
+      if (video.dataset.lazyLoaded) return;
+      video.dataset.lazyLoaded = 'true';
+      loadVideoSource(video);
+      observer.unobserve(video);
+    });
+  }, { rootMargin: '160px', threshold: 0.08 });
+  document.querySelectorAll('.vlog-card video').forEach(v => observer.observe(v));
+}
+
+initLazyVideos();
+initVlogPauseControl();
+initPolaroidStacks();
+const img = new Image();
+img.src = 'images/hero.jpg';
+img.onload = () => { const ph = document.querySelector('.hero-bg-placeholder'); if (ph) ph.style.display = 'none'; };
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+}, { threshold: 0.07 });
+document.querySelectorAll('.reveal').forEach(r => io.observe(r));
+</script>
+</body>
+</html>

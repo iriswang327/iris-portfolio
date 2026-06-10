@@ -44,7 +44,7 @@ export default function HomePage() {
               aria-hidden="true"
             />
             <span className="design-hero-status font-[300] text-[var(--muted)]">
-              open to summer 2026 internships · nyc preferred
+              open to product or design · summer 2026 · nyc preferred
             </span>
           </div>
 

@@ -1,7 +1,7 @@
 import { readFile } from "fs/promises";
 import path from "path";
 import { NextResponse } from "next/server";
-import { hasPrivateAccess, isPrivateSlug } from "@/lib/private-access";
+import { hasPrivateAccess, isPrivateSlug, isPublicApplicationSlug } from "@/lib/private-access";
 
 type RouteContext = {
   params: Promise<{ slug: string }>;
@@ -14,10 +14,12 @@ export async function GET(_request: Request, context: RouteContext) {
     return new NextResponse("Not found.", { status: 404 });
   }
 
-  const unlocked = await hasPrivateAccess(slug);
+  if (!isPublicApplicationSlug(slug)) {
+    const unlocked = await hasPrivateAccess(slug);
 
-  if (!unlocked) {
-    return new NextResponse("Unauthorized.", { status: 401 });
+    if (!unlocked) {
+      return new NextResponse("Unauthorized.", { status: 401 });
+    }
   }
 
   try {
