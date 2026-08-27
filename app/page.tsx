@@ -1,4 +1,3 @@
-import Link from "next/link";
 import RotatingWords from "@/components/RotatingWords";
 import FunCard from "@/components/FunCard";
 import ParallaxHeroGradient from "@/components/ParallaxHeroGradient";
@@ -45,7 +44,7 @@ export default function HomePage() {
               aria-hidden="true"
             />
             <span className="design-hero-status font-[300] text-[var(--muted)]">
-              open to graphic design or marketing · summer 2026 · downtown austin
+              open to product design · fall 2026 · austin, tx
             </span>
           </div>
 
@@ -54,23 +53,23 @@ export default function HomePage() {
             iris wang
           </h1>
 
-          {/* Row 3: Graphic [role] for [audience] */}
+          {/* Row 3: Product [role] for [audience] */}
           <div className="design-hero-line type-hero-subline flex flex-wrap items-baseline gap-[7px] font-[300]">
-            <span>Graphic</span>
+            <span>Product</span>
             <RotatingWords
-              words={["designer", "brand builder", "marketer", "visual storyteller"]}
+              words={["designer", "thinker", "strategist", "builder"]}
               interval={4000}
             />
             <span>for</span>
             <RotatingWords
-              words={["brands", "campaigns", "teams", "hospitality", "the future"]}
+              words={["humans", "AI startups", "teams", "founders", "the future"]}
               interval={2500}
             />
           </div>
 
           {/* Row 4: Tagline */}
           <p className="design-hero-tagline mt-4 font-[300]">
-            Branding, social, print, and digital — design with aesthetics and impact in mind.
+            Creating intentional designs that bring ideas to reality.
           </p>
         </div>
       </section>
@@ -80,18 +79,10 @@ export default function HomePage() {
           ══════════════════════════════════════════ */}
       <section className="pb-4">
         <div className="design-section-label">
-          <p className="section-label mb-4">BRAND &amp; DESIGN</p>
+          <p className="section-label mb-4">DESIGN PROJECTS</p>
         </div>
 
         <ProjectsGridSection />
-
-        <p className="design-section-label mt-6 text-[15px] font-[300] leading-relaxed text-[var(--muted)]">
-          Campaign work, social strategy, and client deliverables — see{" "}
-          <Link href="/experience" className="text-gradient-ihwn transition-opacity hover:opacity-80">
-            experience
-          </Link>
-          .
-        </p>
       </section>
 
       {/* ══════════════════════════════════════════

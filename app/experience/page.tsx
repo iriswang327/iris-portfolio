@@ -179,25 +179,25 @@ const OPERATIONAL_LEDGER = [
 ] as const;
 
 const TOOLKIT_PRIMARY = [
-  "Adobe Creative Cloud / Photoshop / Illustrator / InDesign",
-  "Canva",
   "Figma",
-  "Adobe CC Libraries",
+  "Cursor",
+  "Claude",
+  "AI workflows",
+  "Adobe Creative Cloud / Photoshop / Illustrator / InDesign",
 ] as const;
 
 const TOOLKIT_SECONDARY = [
-  "Microsoft Office",
   "HTML / JavaScript / CSS",
-  "Slack / Asana",
-  "Cursor",
+  "Python",
+  "Slack",
 ] as const;
 
 const INTERNSHIP_TAGS = [
-  "branding",
-  "social media",
-  "print & digital",
-  "email campaigns",
-  "merch",
+  "product design",
+  "0-1",
+  "AI",
+  "cross-functional",
+  "in-person · austin",
 ] as const;
 
 // ─── Hairline ─────────────────────────────────────────────────────────────────
@@ -302,16 +302,15 @@ function ExperienceHero() {
           <p className="experience-hero-subline">
             <span className="text-[var(--foreground)]">Advertising</span>
             <span className="text-[#A78BFA]/55"> + </span>
+            <span className="text-[var(--foreground)]">Business</span>
+            <span className="text-[#A78BFA]/55"> + </span>
             <span className="text-gradient-ihwn">Design</span>
             <span className="text-[#A78BFA]/55"> + </span>
-            <span className="text-[var(--foreground)]">Marketing</span>
-            <span className="text-[#A78BFA]/55"> + </span>
-            <span className="text-[var(--foreground)]">Brand.</span>
+            <span className="text-[var(--foreground)]">Law.</span>
           </p>
 
           <p className="experience-hero-lede">
-            Fast-paced creative work across social, print, email, and brand identity —
-            with an eye for aesthetics and detail.
+            All with the goal of making complex things human.
           </p>
 
           <div className="toolkit mt-10">
@@ -346,12 +345,13 @@ function ExperienceHero() {
             <span className="looking-card-eyebrow">looking for next</span>
           </div>
 
-          <h2 className="looking-card-title">Graphic design or marketing · Summer 2026 · Downtown Austin</h2>
+          <h2 className="looking-card-title">Product design · Fall 2026 · Austin, TX</h2>
 
           <p className="looking-card-body">
-            In-person creative teams building brand campaigns across social, print,
-            digital, and merch — where initiative, aesthetics, and production all
-            move together.
+            I design products that turn complex systems into intuitive experiences.
+            Looking for an in-person team in Austin where I can ship real work,
+            collaborate across design and engineering, and grow in a fast-paced
+            environment.
           </p>
 
           <div className="mt-4 flex flex-wrap gap-1.5">

@@ -86,11 +86,11 @@ const COMMUNITY_ITEMS = [
 const FUN_FACTS = [
   { emoji: "🎾", line: "played & coached competitive tennis in high school" },
   { emoji: "🌏", line: "love to travel across Asia and visit my family in Taiwan" },
-  { emoji: "🥾", line: "avg 12k steps a day, preferably outdoor walks" },
+  { emoji: "🥾", line: "big fan of long nature walks!" },
   { emoji: "🎨", line: "passionate about watercolor, oil painting, and learning physical art (ceramics next)" },
   { emoji: "🐾", line: "squirrel & otter lover" },
   { emoji: "🏊🏼‍♀️", line: "lifeguard & water park safety certified!" },
-  { emoji: "☕", line: "approximately 847 americanos w/ cinnamon since freshman year" },
+  { emoji: "☕", line: "go to coffee order: iced cortado with honey and cinnamon!" },
 ] as const;
 
 // ─── Quote block component ──────────────────────────────────────────────────
@@ -209,7 +209,7 @@ export default function AboutContent() {
         <div className="about-rail-column">
           <aside className="about-rail rail">
             <div className="about-brand">
-              <Link href="/" className="about-brand-link" aria-label="Iris Wang — design home">
+              <Link href="/" className="about-brand-link" aria-label="Iris Wang, design home">
                 <Image
                   src="/images/lotus-logo.png"
                   alt=""
@@ -244,7 +244,7 @@ export default function AboutContent() {
         <div className="about-main">
           {/* ── HI SECTION ── */}
           <section id="hi" data-theme="hi" className="about-section">
-            {/* Polaroid left, bio right — grouped intro block */}
+            {/* Polaroid left, bio right: grouped intro block */}
             <div className="about-bio-row">
               <div className="about-photo-wrap">
                 <div className="about-photo-frame">
@@ -271,27 +271,25 @@ export default function AboutContent() {
                 </div>
 
                 <p className="about-bio-lede">
-                  I&apos;m a graphic-minded designer studying{" "}
-                  <strong className="font-normal">
-                    Advertising at UT Austin
-                  </strong>
-                  , building brands across social, print, and digital.
+                  I&apos;m a senior studying Advertising at UT Austin focused on
+                  translating complex systems into designs that feel intuitive and
+                  human.
                 </p>
 
                 <p className="about-bio-body">
-                  Adobe Creative Suite and Canva are my daily tools — from social
-                  graphics and email campaigns to flyers, merch, and brand identity
-                  systems. Advertising has taught me to design with{" "}
-                  <em>human behavior and brand voice</em> in mind, and client work at
-                  Tower &amp; Bridge keeps that grounded in real campaigns and
-                  deadlines.
+                  Advertising has taught me to design with human behavior and brand
+                  voice in mind, and client work at Tower &amp; Bridge keeps that
+                  grounded in real campaigns and real deadlines. I care about
+                  creating experiences that feel genuine, whether that&apos;s a
+                  nonprofit&apos;s analytics report or a racing team&apos;s merch
+                  drop.
                 </p>
 
                 <p className="about-bio-body">
                   Beyond marketing, my background spans illustration, watercolor,
-                  event outreach, and community design — and I love a fast-paced
-                  environment where aesthetics, organization, and production all
-                  happen in the same week.
+                  event outreach, and community design. I am always eager to learn
+                  and love a fast-paced environment where aesthetics, organization,
+                  and production all happen in the same week.
                 </p>
 
                 <div className="about-bio-actions">
@@ -358,12 +356,12 @@ export default function AboutContent() {
           <h2 className="about-heading about-heading--tight">My Philosophy</h2>
 
           <p className="about-lede">
-            Kaizen (改善) — every day is an opportunity to improve. Even if it&apos;s just 1%.
+            Kaizen (改善). Every day is an opportunity to improve. Even if it&apos;s just 1%.
           </p>
 
           <QuoteBlock
             quote="The most powerful person in the world is the storyteller."
-            attribution="— Steve Jobs"
+            attribution="Steve Jobs"
           />
 
           <QuoteBlock

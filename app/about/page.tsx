@@ -4,7 +4,7 @@ import AboutContent from "./AboutContent";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Graphic design, branding, and marketing. Iris Wang — UT Austin · Advertising · 2027.",
+    "Design, strategy, and product. Iris Wang, UT Austin · Advertising · 2027.",
 };
 
 export default function AboutPage() {

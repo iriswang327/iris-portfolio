@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     template: "%s",
   },
   description:
-    "Graphic design, branding, and marketing — Iris Wang, UT Austin · Advertising · 2027",
+    "Creating intentional designs that bring ideas to reality. Iris Wang, UT Austin · 2027",
   icons: {
     icon: [{ url: "/images/lotus-logo.png", type: "image/png" }],
     apple: [{ url: "/images/lotus-logo.png", type: "image/png" }],
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
         url: "/images/og-preview.png",
         width: 1200,
         height: 630,
-        alt: "iris wang — graphic design portfolio",
+        alt: "iris wang product designer portfolio",
       },
     ],
   },
