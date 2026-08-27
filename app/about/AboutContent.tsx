@@ -46,18 +46,18 @@ const CURRENTLY_ITEMS = [
     date: "2025–Present",
   },
   {
-    logoSrc: "/images/tulj-logo.png",
-    logoAlt: "Texas Undergraduate Law Journal",
-    name: "Texas Undergraduate Law Journal",
-    role: "Staff Writer",
-    date: "2025–Present",
-  },
-  {
     logoSrc: "/images/letters-of-gold-logo.png",
     logoAlt: "Letters of Gold",
     name: "Letters of Gold",
     role: "Director of Special Projects",
     date: "2025–Present",
+  },
+  {
+    logoSrc: "/images/the-daily-texan-logo.png",
+    logoAlt: "The Daily Texan",
+    name: "The Daily Texan",
+    role: "Opinion Illustrator",
+    date: "2024–2025",
   },
 ] as const;
 
@@ -258,7 +258,7 @@ export default function AboutContent() {
                       priority
                     />
                   </div>
-                  <p className="about-photo-caption">nyc · 2026</p>
+                  <p className="about-photo-caption">atx · 2026</p>
                 </div>
               </div>
 
@@ -266,30 +266,32 @@ export default function AboutContent() {
                 <h2 className="about-intro-title">Hi, I&apos;m Iris!</h2>
 
                 <div className="about-meta-row">
-                  <span className="about-meta-line">📍 ATX · NYC · TPE</span>
+                  <span className="about-meta-line">📍 ATX · TPE</span>
                   <span className="about-meta-line">🎓 UT Austin · 2027</span>
                 </div>
 
                 <p className="about-bio-lede">
-                  Across what I&apos;m doing currently, I lead with one desire:{" "}
+                  I&apos;m a graphic-minded designer studying{" "}
                   <strong className="font-normal">
-                    bridging complex systems to intuitive, high-fidelity human experiences
+                    Advertising at UT Austin
                   </strong>
-                  .
+                  , building brands across social, print, and digital.
                 </p>
 
                 <p className="about-bio-body">
-                  I love building software interfaces, mapping technical workflows, and designing
-                  AI-native products. Advertising has taught me to design with{" "}
-                  <em>human behavior and brand voice</em> in mind, while Computer Science gives me
-                  the foundation to deploy those designs to reality. Merging these with business
-                  strategy allows me to execute as a truly multi-faceted designer.
+                  Adobe Creative Suite and Canva are my daily tools — from social
+                  graphics and email campaigns to flyers, merch, and brand identity
+                  systems. Advertising has taught me to design with{" "}
+                  <em>human behavior and brand voice</em> in mind, and client work at
+                  Tower &amp; Bridge keeps that grounded in real campaigns and
+                  deadlines.
                 </p>
 
                 <p className="about-bio-body">
-                  Beyond design, my background spans software tools, regulatory law, race cars, and
-                  print illustration — and I&apos;m exploring AI workflows while staying grounded in{" "}
-                  <em>human connection and community</em>.
+                  Beyond marketing, my background spans illustration, watercolor,
+                  event outreach, and community design — and I love a fast-paced
+                  environment where aesthetics, organization, and production all
+                  happen in the same week.
                 </p>
 
                 <div className="about-bio-actions">

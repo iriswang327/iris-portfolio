@@ -2,7 +2,6 @@
 
 import { useState, type ReactNode } from "react";
 import ProjectCard from "@/components/ProjectCard";
-import AppleFanCard from "@/components/AppleFanCard";
 import CompanyModal, { type ModalProject } from "@/components/CompanyModal";
 import { GEMINI_HOVER, GEMINI_MODAL_SUMMARY } from "@/lib/gemini-copy";
 import { GEMINI_CARD_LABELS, RIPPLE_CARD_LABELS } from "@/lib/project-card-labels";
@@ -193,19 +192,6 @@ export default function ProjectsGridSection() {
               onOpen={() => setActiveModal(card.modal!)}
             />
           ))}
-        </div>
-
-        <div className="projects-in-progress">
-          <div className="projects-in-progress-header">
-            <p className="section-label">IN PROGRESS</p>
-            <p className="projects-in-progress-lede">
-              Self-directed concept explorations — not affiliated with Apple Inc.
-            </p>
-          </div>
-
-          <div className="projects-grid projects-grid--fan">
-            <AppleFanCard />
-          </div>
         </div>
       </div>
 

@@ -9,7 +9,6 @@ import ExperienceModal, {
 } from "@/components/ExperienceModal";
 import {
   INTEGRATED_DESIGN_CARD_LABELS,
-  RISK_RADAR_CARD_LABELS,
   TOWER_BRIDGE_CARD_LABELS,
 } from "@/lib/project-card-labels";
 import ParallaxHeroGradient from "@/components/ParallaxHeroGradient";
@@ -60,7 +59,7 @@ const TOWER_BRIDGE_MODAL: ModalConfig = {
   orgType: "Student Agency · UT Austin",
   collaborators: "Trinity CDC · Heartening",
   summary:
-    "Brand analytics for Trinity CDC and Heartening — research, positioning, and client-ready deliverables.",
+    "Brand analytics, social strategy, and client-ready campaign deliverables for Trinity CDC and Heartening.",
   expandHref: "/experience/tower-and-bridge",
   accentTheme: "gold",
 };
@@ -78,22 +77,6 @@ const INTEGRATED_DESIGN_MODAL: ModalConfig = {
     "Empathy interviews and two prototype-test cycles — Jumbotron campaign for West Campus.",
   expandHref: "/experience/giving-back",
   accentTheme: "burnt",
-};
-
-const RISK_RADAR_MODAL: ModalConfig = {
-  companyName: "Risk Radar",
-  companyLogo: "RR",
-  companyLogoImage: "/images/risk-radar-logo.png",
-  tagline: "AI brand crisis prediction — BERT, RAG, Spring 2026.",
-  timeline: "Spring 2026",
-  role: "Head of AI",
-  orgType: "McCombs Class Project · UT Austin",
-  collaborators:
-    "Brooke Mikell · Joesh Nayak · Nikhil Sehgal · Hayden King · Varun Vedala",
-  summary:
-    "BERT + RAG crisis prediction — led architecture, demos, and semester pitch.",
-  expandHref: "/experience/risk-radar",
-  accentTheme: "navy",
 };
 
 const STRATEGIC_IMPACT_CARDS: ImpactCardDef[] = [
@@ -120,17 +103,6 @@ const STRATEGIC_IMPACT_CARDS: ImpactCardDef[] = [
     showChromaticGlow: true,
     glowVariant: "burnt",
     modal: INTEGRATED_DESIGN_MODAL,
-  },
-  {
-    id: "risk-radar",
-    gradient: "linear-gradient(148deg, #0D0D14 0%, #1A1A2E 55%, #243B5A 100%)",
-    ...RISK_RADAR_CARD_LABELS,
-    hoverDescription: "AI brand crisis prediction — BERT, RAG, Spring 2026.",
-    videoUrl: "/videos/risk-radar-thumbnail.mp4",
-    frameClassName: `${GLASS_FRAME_BASE} bg-gradient-to-tr from-slate-900/50 via-indigo-950/35 to-slate-800/30 border border-white/[0.08] shadow-[0_15px_40px_rgba(0,0,0,0.2)] hover:shadow-[0_22px_50px_rgba(99,102,241,0.15)]`,
-    showChromaticGlow: true,
-    glowVariant: "navy",
-    modal: RISK_RADAR_MODAL,
   },
 ];
 
@@ -173,12 +145,12 @@ const ANALYTICAL_LEDGER = [
 
 const OPERATIONAL_LEDGER = [
   {
-    id: "letters-of-gold",
-    companyName: "Letters of Gold",
-    roleTitle: "Director of Special Projects",
-    dateRange: "2025–Present",
-    logoSrc: "/images/letters-of-gold-logo.png",
-    logoAlt: "Letters of Gold",
+    id: "asuci",
+    companyName: "ASUCI Student Government",
+    roleTitle: "Design & Outreach Intern",
+    dateRange: "2023–2024",
+    logoSrc: "/images/asuci-logo.png",
+    logoAlt: "ASUCI Student Government",
   },
   {
     id: "longhorn-racing",
@@ -189,6 +161,14 @@ const OPERATIONAL_LEDGER = [
     logoAlt: "Longhorn Racing",
   },
   {
+    id: "letters-of-gold",
+    companyName: "Letters of Gold",
+    roleTitle: "Director of Special Projects",
+    dateRange: "2025–Present",
+    logoSrc: "/images/letters-of-gold-logo.png",
+    logoAlt: "Letters of Gold",
+  },
+  {
     id: "sparro",
     companyName: "SparroWriting Services",
     roleTitle: "Office Manager & Teaching Assistant",
@@ -196,36 +176,28 @@ const OPERATIONAL_LEDGER = [
     logoSrc: "/images/sparrowriting-logo.png",
     logoAlt: "SparroWriting Services",
   },
-  {
-    id: "asuci",
-    companyName: "ASUCI Student Government",
-    roleTitle: "Design & Outreach Intern",
-    dateRange: "2023–2024",
-    logoSrc: "/images/asuci-logo.png",
-    logoAlt: "ASUCI Student Government",
-  },
 ] as const;
 
 const TOOLKIT_PRIMARY = [
-  "Figma",
-  "Cursor",
-  "Claude",
-  "AI workflows",
   "Adobe Creative Cloud / Photoshop / Illustrator / InDesign",
+  "Canva",
+  "Figma",
+  "Adobe CC Libraries",
 ] as const;
 
 const TOOLKIT_SECONDARY = [
+  "Microsoft Office",
   "HTML / JavaScript / CSS",
-  "Python",
-  "Slack",
+  "Slack / Asana",
+  "Cursor",
 ] as const;
 
 const INTERNSHIP_TAGS = [
-  "product or design",
-  "0-1",
-  "AI",
-  "research",
-  "writing",
+  "branding",
+  "social media",
+  "print & digital",
+  "email campaigns",
+  "merch",
 ] as const;
 
 // ─── Hairline ─────────────────────────────────────────────────────────────────
@@ -330,15 +302,16 @@ function ExperienceHero() {
           <p className="experience-hero-subline">
             <span className="text-[var(--foreground)]">Advertising</span>
             <span className="text-[#A78BFA]/55"> + </span>
-            <span className="text-[var(--foreground)]">Business</span>
-            <span className="text-[#A78BFA]/55"> + </span>
             <span className="text-gradient-ihwn">Design</span>
             <span className="text-[#A78BFA]/55"> + </span>
-            <span className="text-[var(--foreground)]">Law.</span>
+            <span className="text-[var(--foreground)]">Marketing</span>
+            <span className="text-[#A78BFA]/55"> + </span>
+            <span className="text-[var(--foreground)]">Brand.</span>
           </p>
 
           <p className="experience-hero-lede">
-            All with the goal of making complex things human.
+            Fast-paced creative work across social, print, email, and brand identity —
+            with an eye for aesthetics and detail.
           </p>
 
           <div className="toolkit mt-10">
@@ -373,11 +346,12 @@ function ExperienceHero() {
             <span className="looking-card-eyebrow">looking for next</span>
           </div>
 
-          <h2 className="looking-card-title">Product or design · Summer 2026</h2>
+          <h2 className="looking-card-title">Graphic design or marketing · Summer 2026 · Downtown Austin</h2>
 
           <p className="looking-card-body">
-            Teams prioritizing real product experiences, cross-functional
-            collaborations, and growth in fast-paced environments.
+            In-person creative teams building brand campaigns across social, print,
+            digital, and merch — where initiative, aesthetics, and production all
+            move together.
           </p>
 
           <div className="mt-4 flex flex-wrap gap-1.5">
@@ -443,14 +417,14 @@ export default function ExperiencePage() {
 
         {/* ── Pillar 1: Strategic Impact Cases ────────────────────────── */}
         <section className="experience-section experience-section--lead">
-          <SectionLabel>Selected Projects</SectionLabel>
+          <SectionLabel>Brand &amp; Campaign Work</SectionLabel>
 
           <div className="relative mb-16">
             <div
               className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[480px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr from-purple-500/[0.06] via-indigo-400/[0.04] to-transparent blur-[100px]"
               aria-hidden="true"
             />
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
               {STRATEGIC_IMPACT_CARDS.map((card) => (
                 <div
                   key={card.id}
@@ -492,8 +466,30 @@ export default function ExperiencePage() {
 
         <Hairline />
 
-        {/* ── Pillar 2: Analytical & Publication Ledger ────────────────── */}
+        {/* ── Pillar 2: Marketing & Operations ─────────────────────────── */}
         <section className="experience-section experience-section--follow">
+          <SectionLabel>Marketing &amp; Operations</SectionLabel>
+
+          <div className="experience-glass-panel experience-glass-panel--wide">
+            <div className="flex w-full flex-col">
+              {OPERATIONAL_LEDGER.map((entry) => (
+                <OperationalArchiveRow
+                  key={entry.id}
+                  logoSrc={entry.logoSrc}
+                  logoAlt={entry.logoAlt}
+                  companyName={entry.companyName}
+                  roleTitle={entry.roleTitle}
+                  dateRange={entry.dateRange}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <Hairline />
+
+        {/* ── Pillar 3: Analytical & Publication Ledger ────────────────── */}
+        <section className="experience-section experience-section--follow !mb-0">
           <SectionLabel>Publications &amp; Illustrations</SectionLabel>
 
           <div className="experience-glass-panel experience-glass-panel--wide">
@@ -555,28 +551,6 @@ export default function ExperiencePage() {
                     </div>
                   )}
                 </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <Hairline />
-
-        {/* ── Pillar 3: Operational Archive ───────────────────────────── */}
-        <section className="experience-section experience-section--follow !mb-0">
-          <SectionLabel>Marketing &amp; Operations</SectionLabel>
-
-          <div className="experience-glass-panel experience-glass-panel--wide">
-            <div className="flex w-full flex-col">
-              {OPERATIONAL_LEDGER.map((entry) => (
-                <OperationalArchiveRow
-                  key={entry.id}
-                  logoSrc={entry.logoSrc}
-                  logoAlt={entry.logoAlt}
-                  companyName={entry.companyName}
-                  roleTitle={entry.roleTitle}
-                  dateRange={entry.dateRange}
-                />
               ))}
             </div>
           </div>

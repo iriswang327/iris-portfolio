@@ -28,7 +28,7 @@ export default function Footer() {
               />
               <span className="site-footer-brand-text">
                 <span className="site-footer-name">iris wang</span>
-                <span className="site-footer-subline">ATX · NYC · TPE</span>
+                <span className="site-footer-subline">ATX · TPE</span>
               </span>
             </Link>
             <p className="site-footer-credits">

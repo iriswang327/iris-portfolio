@@ -195,7 +195,7 @@ export default function RiskRadarCaseStudyPage() {
         ],
       }}
       cta={{
-        label: "Open to Summer 2026 internships",
+        label: "Open to Summer 2026 graphic design internships",
         heading: "Looking for a B2B SaaS team shipping AI workflows.",
         href: "mailto:iriswang32@gmail.com",
         linkText: "Get in touch →",
